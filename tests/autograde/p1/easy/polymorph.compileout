@@ -1,0 +1,266 @@
+--------------Original code----------------
+x = 42 if eval(input()) else [1,2,3]
+print(x)
+
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=IfExp(
+                    test=Call(
+                         func=Name(id='eval', ctx=Load()),
+                         args=[
+                              Call(
+                                   func=Name(id='input', ctx=Load()),
+                                   args=[],
+                                   keywords=[])],
+                         keywords=[]),
+                    body=Constant(value=42),
+                    orelse=List(
+                         elts=[
+                              Constant(value=1),
+                              Constant(value=2),
+                              Constant(value=3)],
+                         ctx=Load()))),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='x', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='new_temp0', ctx=Store())],
+               value=Call(
+                    func=Name(id='eval', ctx=Load()),
+                    args=[
+                         Call(
+                              func=Name(id='input', ctx=Load()),
+                              args=[],
+                              keywords=[])],
+                    keywords=[])),
+          If(
+               test=Name(id='new_temp0', ctx=Load()),
+               body=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp2', ctx=Store())],
+                         value=Constant(value=42))],
+               orelse=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp1', ctx=Store())],
+                         value=List(
+                              elts=[
+                                   Constant(value=1),
+                                   Constant(value=2),
+                                   Constant(value=3)],
+                              ctx=Load())),
+                    Assign(
+                         targets=[
+                              Name(id='new_temp2', ctx=Store())],
+                         value=Name(id='new_temp1', ctx=Load()))]),
+          Assign(
+               targets=[
+                    Name(id='new_temp3', ctx=Store())],
+               value=Name(id='new_temp2', ctx=Store())),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Name(id='new_temp3', ctx=Load())),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='x', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
+--------------Code after flattening-------
+new_temp0 = eval(input())
+if new_temp0:
+    new_temp2 = 42
+else:
+    new_temp1 = [1, 2, 3]
+    new_temp2 = new_temp1
+new_temp3 = new_temp2
+x = new_temp3
+print(x)
+eval(input())
+<ast.Constant object at 0x7fe822530ee0>
+<ast.List object at 0x7fe822530eb0>
+<ast.Name object at 0x7fe8225311e0>
+<ast.Name object at 0x7fe822531480>
+<ast.Name object at 0x7fe822530af0>
+
+new_temp0 = eval(input())
+if(is_true(new_temp0)):
+
+	new_temp2 = inject_int(42)
+else:
+
+	new_temp1 = inject_big(create_list(inject_int(3)))
+	set_subscript(new_temp1, inject_int(0), inject_int(1))
+	set_subscript(new_temp1, inject_int(1), inject_int(2))
+	set_subscript(new_temp1, inject_int(2), inject_int(3))
+	new_temp2 = new_temp1
+new_temp3 = new_temp2
+x = new_temp3
+print(x)
+--------------Explicate code-------
+new_temp0 = eval(input())
+if is_true(new_temp0):
+    new_temp2 = inject_int(42)
+else:
+    new_temp1 = inject_big(create_list(inject_int(3)))
+    set_subscript(new_temp1, inject_int(0), inject_int(1))
+    set_subscript(new_temp1, inject_int(1), inject_int(2))
+    set_subscript(new_temp1, inject_int(2), inject_int(3))
+    new_temp2 = new_temp1
+new_temp3 = new_temp2
+x = new_temp3
+print(x)
+
+
+--- explicated flattened python ---
+new_temp4 = eval(input())
+new_temp0 = new_temp4
+new_temp5 = is_true(new_temp0)
+if new_temp5:
+    new_temp6 = inject_int(42)
+    new_temp2 = new_temp6
+else:
+    new_temp7 = inject_int(3)
+    new_temp8 = create_list(new_temp7)
+    new_temp9 = inject_big(new_temp8)
+    new_temp1 = new_temp9
+    new_temp10 = inject_int(0)
+    new_temp11 = inject_int(1)
+    set_subscript(new_temp1, new_temp10, new_temp11)
+    new_temp12 = inject_int(1)
+    new_temp13 = inject_int(2)
+    set_subscript(new_temp1, new_temp12, new_temp13)
+    new_temp14 = inject_int(2)
+    new_temp15 = inject_int(3)
+    set_subscript(new_temp1, new_temp14, new_temp15)
+    new_temp2 = new_temp1
+new_temp3 = new_temp2
+x = new_temp3
+print(x)
+
+
+--- x86 IR ---
+call  eval None
+movl  eax ,  new_temp4
+movl  new_temp4 ,  new_temp0
+call  is_true new_temp0
+movl  eax ,  new_temp5
+if1
+cmp 0, new_temp5
+je else1
+then1
+call  inject_int 42
+movl  eax ,  new_temp6
+movl  new_temp6 ,  new_temp2
+else1
+call  inject_int 3
+movl  eax ,  new_temp7
+call  create_list new_temp7
+movl  eax ,  new_temp8
+call  inject_big new_temp8
+movl  eax ,  new_temp9
+movl  new_temp9 ,  new_temp1
+call  inject_int 0
+movl  eax ,  new_temp10
+call  inject_int 1
+movl  eax ,  new_temp11
+call  set_subscript new_temp1,new_temp10,new_temp11
+call  inject_int 1
+movl  eax ,  new_temp12
+call  inject_int 2
+movl  eax ,  new_temp13
+call  set_subscript new_temp1,new_temp12,new_temp13
+call  inject_int 2
+movl  eax ,  new_temp14
+call  inject_int 3
+movl  eax ,  new_temp15
+call  set_subscript new_temp1,new_temp14,new_temp15
+movl  new_temp1 ,  new_temp2
+end if1
+movl  new_temp2 ,  new_temp3
+movl  new_temp3 ,  x
+call  print x
+
+
+--- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp4': set(), 'new_temp0': set(), 'new_temp5': set(), 'eax': {'new_temp10', 'new_temp14', 'new_temp1', 'new_temp12'}, 'ecx': {'new_temp10', 'new_temp14', 'new_temp1', 'new_temp12'}, 'edx': {'new_temp10', 'new_temp14', 'new_temp1', 'new_temp12'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp6': set(), 'new_temp2': set(), 'new_temp7': set(), 'new_temp8': set(), 'new_temp9': set(), 'new_temp1': {'new_temp12', 'eax', 'new_temp11', 'new_temp13', 'edx', 'new_temp15', 'new_temp14', 'new_temp10', 'ecx'}, 'new_temp10': {'eax', 'new_temp11', 'edx', 'ecx', 'new_temp1'}, 'new_temp11': {'new_temp10', 'new_temp1'}, 'new_temp12': {'eax', 'new_temp13', 'edx', 'ecx', 'new_temp1'}, 'new_temp13': {'new_temp12', 'new_temp1'}, 'new_temp14': {'eax', 'edx', 'new_temp15', 'ecx', 'new_temp1'}, 'new_temp15': {'new_temp14', 'new_temp1'}, 'new_temp3': set(), 'x': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp1': 4, 'new_temp10': 5, 'new_temp14': 5, 'new_temp12': 5, 'new_temp15': 1, 'new_temp13': 1, 'new_temp11': 1, 'new_temp9': 1, 'new_temp3': 1, 'new_temp5': 1, 'x': 1, 'new_temp6': 1, 'new_temp7': 1, 'new_temp4': 1, 'new_temp8': 1, 'new_temp0': 1, 'new_temp2': 1}
+Spilled set:
+ set()
+
+
+--------------Spilling----------------
+unspillable_set
+ set()
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {'new_temp1': 'edi', 'new_temp10': 'ebx', 'new_temp14': 'ebx', 'new_temp12': 'ebx', 'new_temp15': 'eax', 'new_temp13': 'eax', 'new_temp11': 'eax', 'new_temp9': 'eax', 'new_temp3': 'eax', 'new_temp5': 'eax', 'x': 'eax', 'new_temp6': 'eax', 'new_temp7': 'eax', 'new_temp4': 'eax', 'new_temp8': 'eax', 'new_temp0': 'eax', 'new_temp2': 'eax'}
+new_temp4
+new_temp4
+new_temp0
+new_temp0
+new_temp5
+new_temp5
+new_temp6
+new_temp6
+new_temp2
+new_temp7
+new_temp7
+new_temp8
+new_temp8
+new_temp9
+new_temp9
+new_temp1
+new_temp10
+new_temp11
+new_temp11
+new_temp10
+new_temp1
+new_temp12
+new_temp13
+new_temp13
+new_temp12
+new_temp1
+new_temp14
+new_temp15
+new_temp15
+new_temp14
+new_temp1
+new_temp1
+new_temp2
+new_temp2
+new_temp3
+new_temp3
+x
+x

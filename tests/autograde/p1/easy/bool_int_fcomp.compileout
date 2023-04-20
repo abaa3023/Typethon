@@ -1,0 +1,172 @@
+--------------Original code----------------
+x = 1
+y = True
+print(x is y)
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Constant(value=1)),
+          Assign(
+               targets=[
+                    Name(id='y', ctx=Store())],
+               value=Constant(value=True)),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Compare(
+                              left=Name(id='x', ctx=Load()),
+                              ops=[
+                                   Is()],
+                              comparators=[
+                                   Name(id='y', ctx=Load())])],
+                    keywords=[]))],
+     type_ignores=[])
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Constant(value=1)),
+          Assign(
+               targets=[
+                    Name(id='y', ctx=Store())],
+               value=Constant(value=True)),
+          Assign(
+               targets=[
+                    Name(id='new_temp0', ctx=Store())],
+               value=Compare(
+                    left=Name(id='x', ctx=Load()),
+                    ops=[
+                         Is()],
+                    comparators=[
+                         Name(id='y', ctx=Load())])),
+          Assign(
+               targets=[
+                    Name(id='new_temp1', ctx=Store())],
+               value=Name(id='new_temp0', ctx=Store())),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='new_temp1', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
+--------------Code after flattening-------
+x = 1
+y = True
+new_temp0 = x is y
+new_temp1 = new_temp0
+print(new_temp1)
+<ast.Constant object at 0x7f1b696b8c10>
+<ast.Constant object at 0x7f1b696b8bb0>
+inject_bool(explicate_2==explicate_3)
+<ast.Name object at 0x7f1b696b91e0>
+
+x = inject_int(1)
+y = inject_bool(1)
+explicate_2 = x
+explicate_3 = y
+new_temp0 = inject_bool(explicate_2==explicate_3)
+new_temp1 = new_temp0
+print(new_temp1)
+--------------Explicate code-------
+x = inject_int(1)
+y = inject_bool(1)
+explicate_2 = x
+explicate_3 = y
+new_temp0 = inject_bool(explicate_2 == explicate_3)
+new_temp1 = new_temp0
+print(new_temp1)
+
+
+--- explicated flattened python ---
+new_temp4 = inject_int(1)
+x = new_temp4
+new_temp5 = inject_bool(1)
+y = new_temp5
+explicate_2 = x
+explicate_3 = y
+new_temp6 = explicate_2 == explicate_3
+new_temp7 = new_temp6
+new_temp8 = inject_bool(new_temp7)
+new_temp0 = new_temp8
+new_temp1 = new_temp0
+print(new_temp1)
+
+
+--- x86 IR ---
+call  inject_int 1
+movl  eax ,  new_temp4
+movl  new_temp4 ,  x
+call  inject_bool 1
+movl  eax ,  new_temp5
+movl  new_temp5 ,  y
+movl  x ,  explicate_2
+movl  y ,  explicate_3
+int_compare  explicate_2 Eq explicate_3 ,  new_temp6
+movl  new_temp6 ,  new_temp7
+call  inject_bool new_temp7
+movl  eax ,  new_temp8
+movl  new_temp8 ,  new_temp0
+movl  new_temp0 ,  new_temp1
+call  print new_temp1
+
+
+--- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp4': set(), 'x': {'new_temp5', 'y', 'ecx', 'eax', 'edx'}, 'eax': {'new_temp6', 'x'}, 'ecx': {'x'}, 'edx': {'x'}, 'new_temp5': {'x'}, 'y': {'x', 'explicate_2'}, 'explicate_2': {'explicate_3', 'y'}, 'explicate_3': {'explicate_2'}, 'new_temp6': {'eax'}, 'new_temp7': set(), 'new_temp8': set(), 'new_temp0': set(), 'new_temp1': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'x': 4, 'y': 1, 'explicate_2': 2, 'explicate_3': 1, 'new_temp6': 2, 'new_temp5': 1, 'new_temp7': 1, 'new_temp0': 1, 'new_temp1': 1, 'new_temp4': 1, 'new_temp8': 1}
+Spilled set:
+ set()
+
+
+--------------Spilling----------------
+unspillable_set
+ set()
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {'x': 'edi', 'y': 'eax', 'explicate_2': 'ecx', 'explicate_3': 'eax', 'new_temp6': 'ecx', 'new_temp5': 'eax', 'new_temp7': 'eax', 'new_temp0': 'eax', 'new_temp1': 'eax', 'new_temp4': 'eax', 'new_temp8': 'eax'}
+new_temp4
+new_temp4
+x
+new_temp5
+new_temp5
+y
+x
+explicate_2
+y
+explicate_3
+explicate_2
+explicate_3
+new_temp6
+new_temp6
+new_temp6
+new_temp6
+new_temp7
+new_temp7
+new_temp8
+new_temp8
+new_temp0
+new_temp0
+new_temp1
+new_temp1

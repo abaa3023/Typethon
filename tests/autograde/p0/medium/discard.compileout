@@ -1,0 +1,33 @@
+--------------Original code----------------
+1
+2
+Module(
+     body=[
+          Expr(
+               value=Constant(value=1)),
+          Expr(
+               value=Constant(value=2))],
+     type_ignores=[])
+Module(
+     body=[
+          Expr(
+               value=Constant(value=1)),
+          Expr(
+               value=Constant(value=2))],
+     type_ignores=[])
+--------------Code after flattening-------
+1
+2
+
+--------------Explicate code-------
+
+
+
+--- explicated flattened python ---
+
+
+
+--- x86 IR ---
+
+
+--- Control Flow Graph ---

@@ -1,0 +1,192 @@
+--------------Original code----------------
+x = [1, [2]]
+print(x)
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=List(
+                    elts=[
+                         Constant(value=1),
+                         List(
+                              elts=[
+                                   Constant(value=2)],
+                              ctx=Load())],
+                    ctx=Load())),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='x', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='new_temp0', ctx=Store())],
+               value=List(
+                    elts=[
+                         Constant(value=2)],
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp1', ctx=Store())],
+               value=List(
+                    elts=[
+                         Constant(value=1),
+                         Name(id='new_temp0', ctx=Load())],
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Name(id='new_temp1', ctx=Load())),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='x', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
+--------------Code after flattening-------
+new_temp0 = [2]
+new_temp1 = [1, new_temp0]
+x = new_temp1
+print(x)
+<ast.List object at 0x7f0d2237cb50>
+<ast.List object at 0x7f0d2237cbb0>
+<ast.Name object at 0x7f0d2237cee0>
+
+new_temp0 = inject_big(create_list(inject_int(1)))
+set_subscript(new_temp0, inject_int(0), inject_int(2))
+new_temp1 = inject_big(create_list(inject_int(2)))
+set_subscript(new_temp1, inject_int(0), inject_int(1))
+set_subscript(new_temp1, inject_int(1), new_temp0)
+x = new_temp1
+print(x)
+--------------Explicate code-------
+new_temp0 = inject_big(create_list(inject_int(1)))
+set_subscript(new_temp0, inject_int(0), inject_int(2))
+new_temp1 = inject_big(create_list(inject_int(2)))
+set_subscript(new_temp1, inject_int(0), inject_int(1))
+set_subscript(new_temp1, inject_int(1), new_temp0)
+x = new_temp1
+print(x)
+
+
+--- explicated flattened python ---
+new_temp2 = inject_int(1)
+new_temp3 = create_list(new_temp2)
+new_temp4 = inject_big(new_temp3)
+new_temp0 = new_temp4
+new_temp5 = inject_int(0)
+new_temp6 = inject_int(2)
+set_subscript(new_temp0, new_temp5, new_temp6)
+new_temp7 = inject_int(2)
+new_temp8 = create_list(new_temp7)
+new_temp9 = inject_big(new_temp8)
+new_temp1 = new_temp9
+new_temp10 = inject_int(0)
+new_temp11 = inject_int(1)
+set_subscript(new_temp1, new_temp10, new_temp11)
+new_temp12 = inject_int(1)
+set_subscript(new_temp1, new_temp12, new_temp0)
+x = new_temp1
+print(x)
+
+
+--- x86 IR ---
+call  inject_int 1
+movl  eax ,  new_temp2
+call  create_list new_temp2
+movl  eax ,  new_temp3
+call  inject_big new_temp3
+movl  eax ,  new_temp4
+movl  new_temp4 ,  new_temp0
+call  inject_int 0
+movl  eax ,  new_temp5
+call  inject_int 2
+movl  eax ,  new_temp6
+call  set_subscript new_temp0,new_temp5,new_temp6
+call  inject_int 2
+movl  eax ,  new_temp7
+call  create_list new_temp7
+movl  eax ,  new_temp8
+call  inject_big new_temp8
+movl  eax ,  new_temp9
+movl  new_temp9 ,  new_temp1
+call  inject_int 0
+movl  eax ,  new_temp10
+call  inject_int 1
+movl  eax ,  new_temp11
+call  set_subscript new_temp1,new_temp10,new_temp11
+call  inject_int 1
+movl  eax ,  new_temp12
+call  set_subscript new_temp1,new_temp12,new_temp0
+movl  new_temp1 ,  x
+call  print x
+
+
+--- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp2': set(), 'new_temp3': set(), 'new_temp4': set(), 'new_temp0': {'new_temp5', 'new_temp10', 'new_temp11', 'new_temp8', 'new_temp6', 'new_temp9', 'new_temp7', 'eax', 'new_temp1', 'ecx', 'edx', 'new_temp12'}, 'eax': {'new_temp0', 'new_temp1', 'new_temp5', 'new_temp10'}, 'ecx': {'new_temp0', 'new_temp1', 'new_temp5', 'new_temp10'}, 'edx': {'new_temp0', 'new_temp1', 'new_temp5', 'new_temp10'}, 'new_temp5': {'new_temp0', 'new_temp6', 'eax', 'ecx', 'edx'}, 'new_temp6': {'new_temp0', 'new_temp5'}, 'new_temp7': {'new_temp0'}, 'new_temp8': {'new_temp0'}, 'new_temp9': {'new_temp0'}, 'new_temp1': {'new_temp0', 'new_temp10', 'new_temp11', 'eax', 'ecx', 'edx', 'new_temp12'}, 'new_temp10': {'new_temp0', 'eax', 'new_temp1', 'new_temp11', 'ecx', 'edx'}, 'new_temp11': {'new_temp0', 'new_temp1', 'new_temp10'}, 'new_temp12': {'new_temp0', 'new_temp1'}, 'x': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp1': 4, 'new_temp10': 5, 'new_temp0': 6, 'new_temp5': 4, 'new_temp11': 1, 'new_temp12': 1, 'new_temp6': 1, 'new_temp7': 1, 'new_temp9': 1, 'new_temp8': 1, 'x': 1, 'new_temp4': 1, 'new_temp2': 1, 'new_temp3': 1}
+Spilled set:
+ set()
+
+
+--------------Spilling----------------
+unspillable_set
+ set()
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {'new_temp1': 'edi', 'new_temp10': 'ebx', 'new_temp0': 'esi', 'new_temp5': 'edi', 'new_temp11': 'eax', 'new_temp12': 'eax', 'new_temp6': 'eax', 'new_temp7': 'eax', 'new_temp9': 'eax', 'new_temp8': 'eax', 'x': 'eax', 'new_temp4': 'eax', 'new_temp2': 'eax', 'new_temp3': 'eax'}
+new_temp2
+new_temp2
+new_temp3
+new_temp3
+new_temp4
+new_temp4
+new_temp0
+new_temp5
+new_temp6
+new_temp6
+new_temp5
+new_temp0
+new_temp7
+new_temp7
+new_temp8
+new_temp8
+new_temp9
+new_temp9
+new_temp1
+new_temp10
+new_temp11
+new_temp11
+new_temp10
+new_temp1
+new_temp12
+new_temp0
+new_temp12
+new_temp1
+new_temp1
+x
+x

@@ -1,0 +1,299 @@
+--------------Original code----------------
+x = [[12, 13, 14], 2, 3]
+print(x[0][1])
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=List(
+                    elts=[
+                         List(
+                              elts=[
+                                   Constant(value=12),
+                                   Constant(value=13),
+                                   Constant(value=14)],
+                              ctx=Load()),
+                         Constant(value=2),
+                         Constant(value=3)],
+                    ctx=Load())),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Subscript(
+                              value=Subscript(
+                                   value=Name(id='x', ctx=Load()),
+                                   slice=Constant(value=0),
+                                   ctx=Load()),
+                              slice=Constant(value=1),
+                              ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='new_temp0', ctx=Store())],
+               value=List(
+                    elts=[
+                         Constant(value=12),
+                         Constant(value=13),
+                         Constant(value=14)],
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp1', ctx=Store())],
+               value=List(
+                    elts=[
+                         Name(id='new_temp0', ctx=Load()),
+                         Constant(value=2),
+                         Constant(value=3)],
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Name(id='new_temp1', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp2', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='x', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp3', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp2', ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='new_temp3', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
+--------------Code after flattening-------
+new_temp0 = [12, 13, 14]
+new_temp1 = [new_temp0, 2, 3]
+x = new_temp1
+new_temp2 = x[0]
+new_temp3 = new_temp2[1]
+print(new_temp3)
+<ast.List object at 0x7fcaf6248f70>
+<ast.List object at 0x7fcaf6248fa0>
+<ast.Name object at 0x7fcaf6248a00>
+<ast.Subscript object at 0x7fcaf6248d90>
+<ast.Subscript object at 0x7fcaf6248dc0>
+
+new_temp0 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp0, inject_int(0), inject_int(12))
+set_subscript(new_temp0, inject_int(1), inject_int(13))
+set_subscript(new_temp0, inject_int(2), inject_int(14))
+new_temp1 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp1, inject_int(0), new_temp0)
+set_subscript(new_temp1, inject_int(1), inject_int(2))
+set_subscript(new_temp1, inject_int(2), inject_int(3))
+x = new_temp1
+new_temp2 = get_subscript(x, inject_int(0))
+new_temp3 = get_subscript(new_temp2, inject_int(1))
+print(new_temp3)
+--------------Explicate code-------
+new_temp0 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp0, inject_int(0), inject_int(12))
+set_subscript(new_temp0, inject_int(1), inject_int(13))
+set_subscript(new_temp0, inject_int(2), inject_int(14))
+new_temp1 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp1, inject_int(0), new_temp0)
+set_subscript(new_temp1, inject_int(1), inject_int(2))
+set_subscript(new_temp1, inject_int(2), inject_int(3))
+x = new_temp1
+new_temp2 = get_subscript(x, inject_int(0))
+new_temp3 = get_subscript(new_temp2, inject_int(1))
+print(new_temp3)
+
+
+--- explicated flattened python ---
+new_temp4 = inject_int(3)
+new_temp5 = create_list(new_temp4)
+new_temp6 = inject_big(new_temp5)
+new_temp0 = new_temp6
+new_temp7 = inject_int(0)
+new_temp8 = inject_int(12)
+set_subscript(new_temp0, new_temp7, new_temp8)
+new_temp9 = inject_int(1)
+new_temp10 = inject_int(13)
+set_subscript(new_temp0, new_temp9, new_temp10)
+new_temp11 = inject_int(2)
+new_temp12 = inject_int(14)
+set_subscript(new_temp0, new_temp11, new_temp12)
+new_temp13 = inject_int(3)
+new_temp14 = create_list(new_temp13)
+new_temp15 = inject_big(new_temp14)
+new_temp1 = new_temp15
+new_temp16 = inject_int(0)
+set_subscript(new_temp1, new_temp16, new_temp0)
+new_temp17 = inject_int(1)
+new_temp18 = inject_int(2)
+set_subscript(new_temp1, new_temp17, new_temp18)
+new_temp19 = inject_int(2)
+new_temp20 = inject_int(3)
+set_subscript(new_temp1, new_temp19, new_temp20)
+x = new_temp1
+new_temp21 = inject_int(0)
+new_temp22 = get_subscript(x, new_temp21)
+new_temp2 = new_temp22
+new_temp23 = inject_int(1)
+new_temp24 = get_subscript(new_temp2, new_temp23)
+new_temp3 = new_temp24
+print(new_temp3)
+
+
+--- x86 IR ---
+call  inject_int 3
+movl  eax ,  new_temp4
+call  create_list new_temp4
+movl  eax ,  new_temp5
+call  inject_big new_temp5
+movl  eax ,  new_temp6
+movl  new_temp6 ,  new_temp0
+call  inject_int 0
+movl  eax ,  new_temp7
+call  inject_int 12
+movl  eax ,  new_temp8
+call  set_subscript new_temp0,new_temp7,new_temp8
+call  inject_int 1
+movl  eax ,  new_temp9
+call  inject_int 13
+movl  eax ,  new_temp10
+call  set_subscript new_temp0,new_temp9,new_temp10
+call  inject_int 2
+movl  eax ,  new_temp11
+call  inject_int 14
+movl  eax ,  new_temp12
+call  set_subscript new_temp0,new_temp11,new_temp12
+call  inject_int 3
+movl  eax ,  new_temp13
+call  create_list new_temp13
+movl  eax ,  new_temp14
+call  inject_big new_temp14
+movl  eax ,  new_temp15
+movl  new_temp15 ,  new_temp1
+call  inject_int 0
+movl  eax ,  new_temp16
+call  set_subscript new_temp1,new_temp16,new_temp0
+call  inject_int 1
+movl  eax ,  new_temp17
+call  inject_int 2
+movl  eax ,  new_temp18
+call  set_subscript new_temp1,new_temp17,new_temp18
+call  inject_int 2
+movl  eax ,  new_temp19
+call  inject_int 3
+movl  eax ,  new_temp20
+call  set_subscript new_temp1,new_temp19,new_temp20
+movl  new_temp1 ,  x
+call  inject_int 0
+movl  eax ,  new_temp21
+call  get_subscript x,new_temp21
+movl  eax ,  new_temp22
+movl  new_temp22 ,  new_temp2
+call  inject_int 1
+movl  eax ,  new_temp23
+call  get_subscript new_temp2,new_temp23
+movl  eax ,  new_temp24
+movl  new_temp24 ,  new_temp3
+call  print new_temp3
+
+
+--- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp4': set(), 'new_temp5': set(), 'new_temp6': set(), 'new_temp0': {'new_temp8', 'new_temp16', 'eax', 'new_temp7', 'ecx', 'new_temp9', 'new_temp12', 'edx', 'new_temp14', 'new_temp11', 'new_temp1', 'new_temp13', 'new_temp10', 'new_temp15'}, 'eax': {'x', 'new_temp2', 'new_temp7', 'new_temp9', 'new_temp0', 'new_temp11', 'new_temp1', 'new_temp17', 'new_temp19'}, 'ecx': {'x', 'new_temp2', 'new_temp7', 'new_temp9', 'new_temp0', 'new_temp11', 'new_temp1', 'new_temp17', 'new_temp19'}, 'edx': {'x', 'new_temp2', 'new_temp7', 'new_temp9', 'new_temp0', 'new_temp11', 'new_temp1', 'new_temp17', 'new_temp19'}, 'new_temp7': {'new_temp8', 'eax', 'ecx', 'new_temp0', 'edx'}, 'new_temp8': {'new_temp0', 'new_temp7'}, 'new_temp9': {'eax', 'ecx', 'new_temp0', 'edx', 'new_temp10'}, 'new_temp10': {'new_temp9', 'new_temp0'}, 'new_temp11': {'eax', 'ecx', 'new_temp12', 'new_temp0', 'edx'}, 'new_temp12': {'new_temp0', 'new_temp11'}, 'new_temp13': {'new_temp0'}, 'new_temp14': {'new_temp0'}, 'new_temp15': {'new_temp0'}, 'new_temp1': {'new_temp16', 'eax', 'ecx', 'new_temp0', 'edx', 'new_temp20', 'new_temp17', 'new_temp19', 'new_temp18'}, 'new_temp16': {'new_temp1', 'new_temp0'}, 'new_temp17': {'eax', 'ecx', 'edx', 'new_temp1', 'new_temp18'}, 'new_temp18': {'new_temp1', 'new_temp17'}, 'new_temp19': {'eax', 'ecx', 'edx', 'new_temp20', 'new_temp1'}, 'new_temp20': {'new_temp1', 'new_temp19'}, 'x': {'ecx', 'eax', 'edx', 'new_temp21'}, 'new_temp21': {'x'}, 'new_temp22': set(), 'new_temp2': {'ecx', 'eax', 'edx', 'new_temp23'}, 'new_temp23': {'new_temp2'}, 'new_temp24': set(), 'new_temp3': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp17': 4, 'new_temp1': 5, 'new_temp19': 4, 'new_temp0': 4, 'new_temp9': 5, 'new_temp11': 5, 'new_temp7': 5, 'x': 4, 'new_temp2': 4, 'new_temp18': 1, 'new_temp16': 1, 'new_temp8': 1, 'new_temp10': 1, 'new_temp20': 1, 'new_temp12': 1, 'new_temp15': 1, 'new_temp13': 1, 'new_temp21': 1, 'new_temp23': 1, 'new_temp14': 1, 'new_temp24': 1, 'new_temp4': 1, 'new_temp3': 1, 'new_temp6': 1, 'new_temp22': 1, 'new_temp5': 1}
+Spilled set:
+ set()
+
+
+--------------Spilling----------------
+unspillable_set
+ set()
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {'new_temp17': 'edi', 'new_temp1': 'ebx', 'new_temp19': 'edi', 'new_temp0': 'edi', 'new_temp9': 'ebx', 'new_temp11': 'ebx', 'new_temp7': 'ebx', 'x': 'edi', 'new_temp2': 'edi', 'new_temp18': 'eax', 'new_temp16': 'eax', 'new_temp8': 'eax', 'new_temp10': 'eax', 'new_temp20': 'eax', 'new_temp12': 'eax', 'new_temp15': 'eax', 'new_temp13': 'eax', 'new_temp21': 'eax', 'new_temp23': 'eax', 'new_temp14': 'eax', 'new_temp24': 'eax', 'new_temp4': 'eax', 'new_temp3': 'eax', 'new_temp6': 'eax', 'new_temp22': 'eax', 'new_temp5': 'eax'}
+new_temp4
+new_temp4
+new_temp5
+new_temp5
+new_temp6
+new_temp6
+new_temp0
+new_temp7
+new_temp8
+new_temp8
+new_temp7
+new_temp0
+new_temp9
+new_temp10
+new_temp10
+new_temp9
+new_temp0
+new_temp11
+new_temp12
+new_temp12
+new_temp11
+new_temp0
+new_temp13
+new_temp13
+new_temp14
+new_temp14
+new_temp15
+new_temp15
+new_temp1
+new_temp16
+new_temp0
+new_temp16
+new_temp1
+new_temp17
+new_temp18
+new_temp18
+new_temp17
+new_temp1
+new_temp19
+new_temp20
+new_temp20
+new_temp19
+new_temp1
+new_temp1
+x
+new_temp21
+new_temp21
+x
+new_temp22
+new_temp22
+new_temp2
+new_temp23
+new_temp23
+new_temp2
+new_temp24
+new_temp24
+new_temp3
+new_temp3

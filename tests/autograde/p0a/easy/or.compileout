@@ -1,0 +1,181 @@
+--------------Original code----------------
+x = 1 or 2
+print(x)
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=BoolOp(
+                    op=Or(),
+                    values=[
+                         Constant(value=1),
+                         Constant(value=2)])),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='x', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
+Module(
+     body=[
+          If(
+               test=Constant(value=1),
+               body=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp0', ctx=Store())],
+                         value=Constant(value=1))],
+               orelse=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp0', ctx=Store())],
+                         value=Constant(value=2))]),
+          Assign(
+               targets=[
+                    Name(id='new_temp1', ctx=Store())],
+               value=Name(id='new_temp0', ctx=Store())),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Name(id='new_temp1', ctx=Load())),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='x', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
+--------------Code after flattening-------
+if 1:
+    new_temp0 = 1
+else:
+    new_temp0 = 2
+new_temp1 = new_temp0
+x = new_temp1
+print(x)
+<ast.Constant object at 0x7fa8601a0bb0>
+<ast.Constant object at 0x7fa8601a0b80>
+<ast.Name object at 0x7fa8601a1150>
+<ast.Name object at 0x7fa8601a0eb0>
+
+if(1):
+
+	new_temp0 = inject_int(1)
+else:
+
+	new_temp0 = inject_int(2)
+new_temp1 = new_temp0
+x = new_temp1
+print(x)
+--------------Explicate code-------
+if 1:
+    new_temp0 = inject_int(1)
+else:
+    new_temp0 = inject_int(2)
+new_temp1 = new_temp0
+x = new_temp1
+print(x)
+
+
+--- explicated flattened python ---
+if 1:
+    new_temp2 = inject_int(1)
+    new_temp0 = new_temp2
+else:
+    new_temp3 = inject_int(2)
+    new_temp0 = new_temp3
+new_temp1 = new_temp0
+x = new_temp1
+print(x)
+
+
+--- x86 IR ---
+if1
+cmp 0, 1
+je else1
+then1
+call  inject_int 1
+movl  eax ,  new_temp2
+movl  new_temp2 ,  new_temp0
+else1
+call  inject_int 2
+movl  eax ,  new_temp3
+movl  new_temp3 ,  new_temp0
+end if1
+movl  new_temp0 ,  new_temp1
+movl  new_temp1 ,  x
+call  print x
+
+
+--- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp2': set(), 'new_temp0': set(), 'new_temp3': set(), 'new_temp1': set(), 'x': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp2': 1, 'new_temp3': 1, 'new_temp1': 1, 'x': 1, 'new_temp0': 1}
+Spilled set:
+ set()
+
+
+--------------Spilling----------------
+unspillable_set
+ {'unspillable_0'}
+continue_looping
+ True
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'unspillable_0': set(), 'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp2': set(), 'new_temp0': set(), 'new_temp3': set(), 'new_temp1': set(), 'x': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'unspillable_0': 1, 'new_temp2': 1, 'new_temp3': 1, 'new_temp1': 1, 'x': 1, 'new_temp0': 1}
+Spilled set:
+ set()
+
+
+--------------Spilling----------------
+unspillable_set
+ {'unspillable_0'}
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {'unspillable_0': 'eax', 'new_temp2': 'eax', 'new_temp3': 'eax', 'new_temp1': 'eax', 'x': 'eax', 'new_temp0': 'eax'}
+unspillable_0
+unspillable_0
+new_temp2
+new_temp2
+new_temp0
+new_temp3
+new_temp3
+new_temp0
+new_temp0
+new_temp1
+new_temp1
+x
+x

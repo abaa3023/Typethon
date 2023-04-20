@@ -1,0 +1,72 @@
+--------------Original code----------------
+print(1)
+Module(
+     body=[
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Constant(value=1)],
+                    keywords=[]))],
+     type_ignores=[])
+Module(
+     body=[
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Constant(value=1)],
+                    keywords=[]))],
+     type_ignores=[])
+--------------Code after flattening-------
+print(1)
+
+print(inject_int(1))
+--------------Explicate code-------
+print(inject_int(1))
+
+
+--- explicated flattened python ---
+new_temp0 = inject_int(1)
+print(new_temp0)
+
+
+--- x86 IR ---
+call  inject_int 1
+movl  eax ,  new_temp0
+call  print new_temp0
+
+
+--- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp0': set(), 'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 1}
+Spilled set:
+ set()
+
+
+--------------Spilling----------------
+unspillable_set
+ set()
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {'new_temp0': 'eax'}
+new_temp0
+new_temp0

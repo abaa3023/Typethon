@@ -1,0 +1,2503 @@
+--------------Original code----------------
+matrix2 = [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+
+matrix2_t2 = [[matrix2[2][0], matrix2[1][0], matrix2[0][0]],[matrix2[2][1], matrix2[1][1], matrix2[0][1]], [matrix2[2][2], matrix2[1][2], matrix2[0][2]]]
+
+
+tmp0 = matrix2[0][0]
+matrix2[0][0] = matrix2[2][0]
+tmp2 = matrix2[0][1]
+matrix2[0][1] = matrix2[1][0]
+tmp3 = matrix2[0][2]
+matrix2[0][2] = tmp0
+tmp4 = matrix2[1][0]
+matrix2[1][0] = matrix2[2][1]
+tmp5 = matrix2[1][2]
+matrix2[1][2] = tmp2
+tmp6 = matrix2[2][0]
+tmp7 = matrix2[2][2]
+matrix2[2][0] = tmp7
+matrix2[2][1] = tmp5
+matrix2[2][2] = tmp3
+
+print(matrix2 == matrix2_t2)
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='matrix2', ctx=Store())],
+               value=List(
+                    elts=[
+                         List(
+                              elts=[
+                                   Constant(value=1),
+                                   Constant(value=4),
+                                   Constant(value=7)],
+                              ctx=Load()),
+                         List(
+                              elts=[
+                                   Constant(value=2),
+                                   Constant(value=5),
+                                   Constant(value=8)],
+                              ctx=Load()),
+                         List(
+                              elts=[
+                                   Constant(value=3),
+                                   Constant(value=6),
+                                   Constant(value=9)],
+                              ctx=Load())],
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='matrix2_t2', ctx=Store())],
+               value=List(
+                    elts=[
+                         List(
+                              elts=[
+                                   Subscript(
+                                        value=Subscript(
+                                             value=Name(id='matrix2', ctx=Load()),
+                                             slice=Constant(value=2),
+                                             ctx=Load()),
+                                        slice=Constant(value=0),
+                                        ctx=Load()),
+                                   Subscript(
+                                        value=Subscript(
+                                             value=Name(id='matrix2', ctx=Load()),
+                                             slice=Constant(value=1),
+                                             ctx=Load()),
+                                        slice=Constant(value=0),
+                                        ctx=Load()),
+                                   Subscript(
+                                        value=Subscript(
+                                             value=Name(id='matrix2', ctx=Load()),
+                                             slice=Constant(value=0),
+                                             ctx=Load()),
+                                        slice=Constant(value=0),
+                                        ctx=Load())],
+                              ctx=Load()),
+                         List(
+                              elts=[
+                                   Subscript(
+                                        value=Subscript(
+                                             value=Name(id='matrix2', ctx=Load()),
+                                             slice=Constant(value=2),
+                                             ctx=Load()),
+                                        slice=Constant(value=1),
+                                        ctx=Load()),
+                                   Subscript(
+                                        value=Subscript(
+                                             value=Name(id='matrix2', ctx=Load()),
+                                             slice=Constant(value=1),
+                                             ctx=Load()),
+                                        slice=Constant(value=1),
+                                        ctx=Load()),
+                                   Subscript(
+                                        value=Subscript(
+                                             value=Name(id='matrix2', ctx=Load()),
+                                             slice=Constant(value=0),
+                                             ctx=Load()),
+                                        slice=Constant(value=1),
+                                        ctx=Load())],
+                              ctx=Load()),
+                         List(
+                              elts=[
+                                   Subscript(
+                                        value=Subscript(
+                                             value=Name(id='matrix2', ctx=Load()),
+                                             slice=Constant(value=2),
+                                             ctx=Load()),
+                                        slice=Constant(value=2),
+                                        ctx=Load()),
+                                   Subscript(
+                                        value=Subscript(
+                                             value=Name(id='matrix2', ctx=Load()),
+                                             slice=Constant(value=1),
+                                             ctx=Load()),
+                                        slice=Constant(value=2),
+                                        ctx=Load()),
+                                   Subscript(
+                                        value=Subscript(
+                                             value=Name(id='matrix2', ctx=Load()),
+                                             slice=Constant(value=0),
+                                             ctx=Load()),
+                                        slice=Constant(value=2),
+                                        ctx=Load())],
+                              ctx=Load())],
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='tmp0', ctx=Store())],
+               value=Subscript(
+                    value=Subscript(
+                         value=Name(id='matrix2', ctx=Load()),
+                         slice=Constant(value=0),
+                         ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Subscript(
+                              value=Name(id='matrix2', ctx=Load()),
+                              slice=Constant(value=0),
+                              ctx=Load()),
+                         slice=Constant(value=0),
+                         ctx=Store())],
+               value=Subscript(
+                    value=Subscript(
+                         value=Name(id='matrix2', ctx=Load()),
+                         slice=Constant(value=2),
+                         ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='tmp2', ctx=Store())],
+               value=Subscript(
+                    value=Subscript(
+                         value=Name(id='matrix2', ctx=Load()),
+                         slice=Constant(value=0),
+                         ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Subscript(
+                              value=Name(id='matrix2', ctx=Load()),
+                              slice=Constant(value=0),
+                              ctx=Load()),
+                         slice=Constant(value=1),
+                         ctx=Store())],
+               value=Subscript(
+                    value=Subscript(
+                         value=Name(id='matrix2', ctx=Load()),
+                         slice=Constant(value=1),
+                         ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='tmp3', ctx=Store())],
+               value=Subscript(
+                    value=Subscript(
+                         value=Name(id='matrix2', ctx=Load()),
+                         slice=Constant(value=0),
+                         ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Subscript(
+                              value=Name(id='matrix2', ctx=Load()),
+                              slice=Constant(value=0),
+                              ctx=Load()),
+                         slice=Constant(value=2),
+                         ctx=Store())],
+               value=Name(id='tmp0', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='tmp4', ctx=Store())],
+               value=Subscript(
+                    value=Subscript(
+                         value=Name(id='matrix2', ctx=Load()),
+                         slice=Constant(value=1),
+                         ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Subscript(
+                              value=Name(id='matrix2', ctx=Load()),
+                              slice=Constant(value=1),
+                              ctx=Load()),
+                         slice=Constant(value=0),
+                         ctx=Store())],
+               value=Subscript(
+                    value=Subscript(
+                         value=Name(id='matrix2', ctx=Load()),
+                         slice=Constant(value=2),
+                         ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='tmp5', ctx=Store())],
+               value=Subscript(
+                    value=Subscript(
+                         value=Name(id='matrix2', ctx=Load()),
+                         slice=Constant(value=1),
+                         ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Subscript(
+                              value=Name(id='matrix2', ctx=Load()),
+                              slice=Constant(value=1),
+                              ctx=Load()),
+                         slice=Constant(value=2),
+                         ctx=Store())],
+               value=Name(id='tmp2', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='tmp6', ctx=Store())],
+               value=Subscript(
+                    value=Subscript(
+                         value=Name(id='matrix2', ctx=Load()),
+                         slice=Constant(value=2),
+                         ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='tmp7', ctx=Store())],
+               value=Subscript(
+                    value=Subscript(
+                         value=Name(id='matrix2', ctx=Load()),
+                         slice=Constant(value=2),
+                         ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Subscript(
+                              value=Name(id='matrix2', ctx=Load()),
+                              slice=Constant(value=2),
+                              ctx=Load()),
+                         slice=Constant(value=0),
+                         ctx=Store())],
+               value=Name(id='tmp7', ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Subscript(
+                              value=Name(id='matrix2', ctx=Load()),
+                              slice=Constant(value=2),
+                              ctx=Load()),
+                         slice=Constant(value=1),
+                         ctx=Store())],
+               value=Name(id='tmp5', ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Subscript(
+                              value=Name(id='matrix2', ctx=Load()),
+                              slice=Constant(value=2),
+                              ctx=Load()),
+                         slice=Constant(value=2),
+                         ctx=Store())],
+               value=Name(id='tmp3', ctx=Load())),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Compare(
+                              left=Name(id='matrix2', ctx=Load()),
+                              ops=[
+                                   Eq()],
+                              comparators=[
+                                   Name(id='matrix2_t2', ctx=Load())])],
+                    keywords=[]))],
+     type_ignores=[])
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='new_temp0', ctx=Store())],
+               value=List(
+                    elts=[
+                         Constant(value=1),
+                         Constant(value=4),
+                         Constant(value=7)],
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp1', ctx=Store())],
+               value=List(
+                    elts=[
+                         Constant(value=2),
+                         Constant(value=5),
+                         Constant(value=8)],
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp2', ctx=Store())],
+               value=List(
+                    elts=[
+                         Constant(value=3),
+                         Constant(value=6),
+                         Constant(value=9)],
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp3', ctx=Store())],
+               value=List(
+                    elts=[
+                         Name(id='new_temp0', ctx=Load()),
+                         Name(id='new_temp1', ctx=Load()),
+                         Name(id='new_temp2', ctx=Load())],
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='matrix2', ctx=Store())],
+               value=Name(id='new_temp3', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp4', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp5', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp4', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp6', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp7', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp6', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp8', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp9', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp8', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp10', ctx=Store())],
+               value=List(
+                    elts=[
+                         Name(id='new_temp5', ctx=Load()),
+                         Name(id='new_temp7', ctx=Load()),
+                         Name(id='new_temp9', ctx=Load())],
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp11', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp12', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp11', ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp13', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp14', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp13', ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp15', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp16', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp15', ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp17', ctx=Store())],
+               value=List(
+                    elts=[
+                         Name(id='new_temp12', ctx=Load()),
+                         Name(id='new_temp14', ctx=Load()),
+                         Name(id='new_temp16', ctx=Load())],
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp18', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp19', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp18', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp20', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp21', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp20', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp22', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp23', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp22', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp24', ctx=Store())],
+               value=List(
+                    elts=[
+                         Name(id='new_temp19', ctx=Load()),
+                         Name(id='new_temp21', ctx=Load()),
+                         Name(id='new_temp23', ctx=Load())],
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp25', ctx=Store())],
+               value=List(
+                    elts=[
+                         Name(id='new_temp10', ctx=Load()),
+                         Name(id='new_temp17', ctx=Load()),
+                         Name(id='new_temp24', ctx=Load())],
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='matrix2_t2', ctx=Store())],
+               value=Name(id='new_temp25', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp26', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp27', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp26', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='tmp0', ctx=Store())],
+               value=Name(id='new_temp27', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp28', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp29', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp28', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp30', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Name(id='new_temp30', ctx=Load()),
+                         slice=Constant(value=0),
+                         ctx=Store())],
+               value=Name(id='new_temp29', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp31', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp32', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp31', ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='tmp2', ctx=Store())],
+               value=Name(id='new_temp32', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp33', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp34', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp33', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp35', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Name(id='new_temp35', ctx=Load()),
+                         slice=Constant(value=1),
+                         ctx=Store())],
+               value=Name(id='new_temp34', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp36', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp37', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp36', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='tmp3', ctx=Store())],
+               value=Name(id='new_temp37', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp38', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Name(id='new_temp38', ctx=Load()),
+                         slice=Constant(value=2),
+                         ctx=Store())],
+               value=Name(id='tmp0', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp39', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp40', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp39', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='tmp4', ctx=Store())],
+               value=Name(id='new_temp40', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp41', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp42', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp41', ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp43', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Name(id='new_temp43', ctx=Load()),
+                         slice=Constant(value=0),
+                         ctx=Store())],
+               value=Name(id='new_temp42', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp44', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp45', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp44', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='tmp5', ctx=Store())],
+               value=Name(id='new_temp45', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp46', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Name(id='new_temp46', ctx=Load()),
+                         slice=Constant(value=2),
+                         ctx=Store())],
+               value=Name(id='tmp2', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp47', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp48', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp47', ctx=Load()),
+                    slice=Constant(value=0),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='tmp6', ctx=Store())],
+               value=Name(id='new_temp48', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp49', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp50', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='new_temp49', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='tmp7', ctx=Store())],
+               value=Name(id='new_temp50', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp51', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Name(id='new_temp51', ctx=Load()),
+                         slice=Constant(value=0),
+                         ctx=Store())],
+               value=Name(id='tmp7', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp52', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Name(id='new_temp52', ctx=Load()),
+                         slice=Constant(value=1),
+                         ctx=Store())],
+               value=Name(id='tmp5', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp53', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='matrix2', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Name(id='new_temp53', ctx=Load()),
+                         slice=Constant(value=2),
+                         ctx=Store())],
+               value=Name(id='tmp3', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp54', ctx=Store())],
+               value=Compare(
+                    left=Name(id='matrix2', ctx=Load()),
+                    ops=[
+                         Eq()],
+                    comparators=[
+                         Name(id='matrix2_t2', ctx=Load())])),
+          Assign(
+               targets=[
+                    Name(id='new_temp55', ctx=Store())],
+               value=Name(id='new_temp54', ctx=Store())),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='new_temp55', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
+--------------Code after flattening-------
+new_temp0 = [1, 4, 7]
+new_temp1 = [2, 5, 8]
+new_temp2 = [3, 6, 9]
+new_temp3 = [new_temp0, new_temp1, new_temp2]
+matrix2 = new_temp3
+new_temp4 = matrix2[2]
+new_temp5 = new_temp4[0]
+new_temp6 = matrix2[1]
+new_temp7 = new_temp6[0]
+new_temp8 = matrix2[0]
+new_temp9 = new_temp8[0]
+new_temp10 = [new_temp5, new_temp7, new_temp9]
+new_temp11 = matrix2[2]
+new_temp12 = new_temp11[1]
+new_temp13 = matrix2[1]
+new_temp14 = new_temp13[1]
+new_temp15 = matrix2[0]
+new_temp16 = new_temp15[1]
+new_temp17 = [new_temp12, new_temp14, new_temp16]
+new_temp18 = matrix2[2]
+new_temp19 = new_temp18[2]
+new_temp20 = matrix2[1]
+new_temp21 = new_temp20[2]
+new_temp22 = matrix2[0]
+new_temp23 = new_temp22[2]
+new_temp24 = [new_temp19, new_temp21, new_temp23]
+new_temp25 = [new_temp10, new_temp17, new_temp24]
+matrix2_t2 = new_temp25
+new_temp26 = matrix2[0]
+new_temp27 = new_temp26[0]
+tmp0 = new_temp27
+new_temp28 = matrix2[2]
+new_temp29 = new_temp28[0]
+new_temp30 = matrix2[0]
+new_temp30[0] = new_temp29
+new_temp31 = matrix2[0]
+new_temp32 = new_temp31[1]
+tmp2 = new_temp32
+new_temp33 = matrix2[1]
+new_temp34 = new_temp33[0]
+new_temp35 = matrix2[0]
+new_temp35[1] = new_temp34
+new_temp36 = matrix2[0]
+new_temp37 = new_temp36[2]
+tmp3 = new_temp37
+new_temp38 = matrix2[0]
+new_temp38[2] = tmp0
+new_temp39 = matrix2[1]
+new_temp40 = new_temp39[0]
+tmp4 = new_temp40
+new_temp41 = matrix2[2]
+new_temp42 = new_temp41[1]
+new_temp43 = matrix2[1]
+new_temp43[0] = new_temp42
+new_temp44 = matrix2[1]
+new_temp45 = new_temp44[2]
+tmp5 = new_temp45
+new_temp46 = matrix2[1]
+new_temp46[2] = tmp2
+new_temp47 = matrix2[2]
+new_temp48 = new_temp47[0]
+tmp6 = new_temp48
+new_temp49 = matrix2[2]
+new_temp50 = new_temp49[2]
+tmp7 = new_temp50
+new_temp51 = matrix2[2]
+new_temp51[0] = tmp7
+new_temp52 = matrix2[2]
+new_temp52[1] = tmp5
+new_temp53 = matrix2[2]
+new_temp53[2] = tmp3
+new_temp54 = matrix2 == matrix2_t2
+new_temp55 = new_temp54
+print(new_temp55)
+<ast.List object at 0x7fe57e2b3be0>
+<ast.List object at 0x7fe57e2b3b20>
+<ast.List object at 0x7fe57e2b3a60>
+<ast.List object at 0x7fe57e2b3c10>
+<ast.Name object at 0x7fe57e2b3d30>
+<ast.Subscript object at 0x7fe57e2b38e0>
+<ast.Subscript object at 0x7fe57e2b3910>
+<ast.Subscript object at 0x7fe57e2b37f0>
+<ast.Subscript object at 0x7fe57e2b3820>
+<ast.Subscript object at 0x7fe57e2b3700>
+<ast.Subscript object at 0x7fe57e2b3730>
+<ast.List object at 0x7fe57e2b3940>
+<ast.Subscript object at 0x7fe57e2b35e0>
+<ast.Subscript object at 0x7fe57e2b3610>
+<ast.Subscript object at 0x7fe57e2b34f0>
+<ast.Subscript object at 0x7fe57e2b3520>
+<ast.Subscript object at 0x7fe57e2b3400>
+<ast.Subscript object at 0x7fe57e2b3430>
+<ast.List object at 0x7fe57e2b3640>
+<ast.Subscript object at 0x7fe57e2b32e0>
+<ast.Subscript object at 0x7fe57e2b3310>
+<ast.Subscript object at 0x7fe57e2b31f0>
+<ast.Subscript object at 0x7fe57e2b3220>
+<ast.Subscript object at 0x7fe57e2b3100>
+<ast.Subscript object at 0x7fe57e2b3130>
+<ast.List object at 0x7fe57e2b3340>
+<ast.List object at 0x7fe57e2b3970>
+<ast.Name object at 0x7fe57e2b1420>
+<ast.Subscript object at 0x7fe57e2b2fb0>
+<ast.Subscript object at 0x7fe57e2b2fe0>
+<ast.Name object at 0x7fe57e2be8f0>
+<ast.Subscript object at 0x7fe57e2b2da0>
+<ast.Subscript object at 0x7fe57e2b2dd0>
+<ast.Subscript object at 0x7fe57e2b2e90>
+<ast.Subscript object at 0x7fe57e2b2c50>
+<ast.Subscript object at 0x7fe57e2b2c80>
+<ast.Name object at 0x7fe57e2be530>
+<ast.Subscript object at 0x7fe57e2b2a40>
+<ast.Subscript object at 0x7fe57e2b2a70>
+<ast.Subscript object at 0x7fe57e2b2b30>
+<ast.Subscript object at 0x7fe57e2b28f0>
+<ast.Subscript object at 0x7fe57e2b2920>
+<ast.Name object at 0x7fe57e2be080>
+<ast.Subscript object at 0x7fe57e2b27d0>
+<ast.Subscript object at 0x7fe57e2b2650>
+<ast.Subscript object at 0x7fe57e2b2680>
+<ast.Name object at 0x7fe57e2bde70>
+<ast.Subscript object at 0x7fe57e2b22c0>
+<ast.Subscript object at 0x7fe57e2b22f0>
+<ast.Subscript object at 0x7fe57e2b2530>
+<ast.Subscript object at 0x7fe57e2b2170>
+<ast.Subscript object at 0x7fe57e2b21a0>
+<ast.Name object at 0x7fe57e2bd900>
+<ast.Subscript object at 0x7fe57e2b2050>
+<ast.Subscript object at 0x7fe57e2b1ed0>
+<ast.Subscript object at 0x7fe57e2b1f00>
+<ast.Name object at 0x7fe57e2bd6f0>
+<ast.Subscript object at 0x7fe57e2b1d80>
+<ast.Subscript object at 0x7fe57e2b1db0>
+<ast.Name object at 0x7fe57e2bd360>
+<ast.Subscript object at 0x7fe57e2b1c60>
+<ast.Subscript object at 0x7fe57e2b1b10>
+<ast.Subscript object at 0x7fe57e2b19c0>
+inject_bool(equal(project_big(explicate_56),project_big(explicate_57)))
+inject_bool(0)
+inject_bool(0)
+inject_bool(explicate_58==explicate_59)
+<ast.Name object at 0x7fe57e2bcd00>
+
+new_temp0 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp0, inject_int(0), inject_int(1))
+set_subscript(new_temp0, inject_int(1), inject_int(4))
+set_subscript(new_temp0, inject_int(2), inject_int(7))
+new_temp1 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp1, inject_int(0), inject_int(2))
+set_subscript(new_temp1, inject_int(1), inject_int(5))
+set_subscript(new_temp1, inject_int(2), inject_int(8))
+new_temp2 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp2, inject_int(0), inject_int(3))
+set_subscript(new_temp2, inject_int(1), inject_int(6))
+set_subscript(new_temp2, inject_int(2), inject_int(9))
+new_temp3 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp3, inject_int(0), new_temp0)
+set_subscript(new_temp3, inject_int(1), new_temp1)
+set_subscript(new_temp3, inject_int(2), new_temp2)
+matrix2 = new_temp3
+new_temp4 = get_subscript(matrix2, inject_int(2))
+new_temp5 = get_subscript(new_temp4, inject_int(0))
+new_temp6 = get_subscript(matrix2, inject_int(1))
+new_temp7 = get_subscript(new_temp6, inject_int(0))
+new_temp8 = get_subscript(matrix2, inject_int(0))
+new_temp9 = get_subscript(new_temp8, inject_int(0))
+new_temp10 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp10, inject_int(0), new_temp5)
+set_subscript(new_temp10, inject_int(1), new_temp7)
+set_subscript(new_temp10, inject_int(2), new_temp9)
+new_temp11 = get_subscript(matrix2, inject_int(2))
+new_temp12 = get_subscript(new_temp11, inject_int(1))
+new_temp13 = get_subscript(matrix2, inject_int(1))
+new_temp14 = get_subscript(new_temp13, inject_int(1))
+new_temp15 = get_subscript(matrix2, inject_int(0))
+new_temp16 = get_subscript(new_temp15, inject_int(1))
+new_temp17 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp17, inject_int(0), new_temp12)
+set_subscript(new_temp17, inject_int(1), new_temp14)
+set_subscript(new_temp17, inject_int(2), new_temp16)
+new_temp18 = get_subscript(matrix2, inject_int(2))
+new_temp19 = get_subscript(new_temp18, inject_int(2))
+new_temp20 = get_subscript(matrix2, inject_int(1))
+new_temp21 = get_subscript(new_temp20, inject_int(2))
+new_temp22 = get_subscript(matrix2, inject_int(0))
+new_temp23 = get_subscript(new_temp22, inject_int(2))
+new_temp24 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp24, inject_int(0), new_temp19)
+set_subscript(new_temp24, inject_int(1), new_temp21)
+set_subscript(new_temp24, inject_int(2), new_temp23)
+new_temp25 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp25, inject_int(0), new_temp10)
+set_subscript(new_temp25, inject_int(1), new_temp17)
+set_subscript(new_temp25, inject_int(2), new_temp24)
+matrix2_t2 = new_temp25
+new_temp26 = get_subscript(matrix2, inject_int(0))
+new_temp27 = get_subscript(new_temp26, inject_int(0))
+tmp0 = new_temp27
+new_temp28 = get_subscript(matrix2, inject_int(2))
+new_temp29 = get_subscript(new_temp28, inject_int(0))
+new_temp30 = get_subscript(matrix2, inject_int(0))
+set_subscript(new_temp30, inject_int(0), new_temp29)
+new_temp31 = get_subscript(matrix2, inject_int(0))
+new_temp32 = get_subscript(new_temp31, inject_int(1))
+tmp2 = new_temp32
+new_temp33 = get_subscript(matrix2, inject_int(1))
+new_temp34 = get_subscript(new_temp33, inject_int(0))
+new_temp35 = get_subscript(matrix2, inject_int(0))
+set_subscript(new_temp35, inject_int(1), new_temp34)
+new_temp36 = get_subscript(matrix2, inject_int(0))
+new_temp37 = get_subscript(new_temp36, inject_int(2))
+tmp3 = new_temp37
+new_temp38 = get_subscript(matrix2, inject_int(0))
+set_subscript(new_temp38, inject_int(2), tmp0)
+new_temp39 = get_subscript(matrix2, inject_int(1))
+new_temp40 = get_subscript(new_temp39, inject_int(0))
+tmp4 = new_temp40
+new_temp41 = get_subscript(matrix2, inject_int(2))
+new_temp42 = get_subscript(new_temp41, inject_int(1))
+new_temp43 = get_subscript(matrix2, inject_int(1))
+set_subscript(new_temp43, inject_int(0), new_temp42)
+new_temp44 = get_subscript(matrix2, inject_int(1))
+new_temp45 = get_subscript(new_temp44, inject_int(2))
+tmp5 = new_temp45
+new_temp46 = get_subscript(matrix2, inject_int(1))
+set_subscript(new_temp46, inject_int(2), tmp2)
+new_temp47 = get_subscript(matrix2, inject_int(2))
+new_temp48 = get_subscript(new_temp47, inject_int(0))
+tmp6 = new_temp48
+new_temp49 = get_subscript(matrix2, inject_int(2))
+new_temp50 = get_subscript(new_temp49, inject_int(2))
+tmp7 = new_temp50
+new_temp51 = get_subscript(matrix2, inject_int(2))
+set_subscript(new_temp51, inject_int(0), tmp7)
+new_temp52 = get_subscript(matrix2, inject_int(2))
+set_subscript(new_temp52, inject_int(1), tmp5)
+new_temp53 = get_subscript(matrix2, inject_int(2))
+set_subscript(new_temp53, inject_int(2), tmp3)
+explicate_56 = matrix2
+explicate_57 = matrix2_t2
+if(is_big(explicate_56)):
+	if(is_big(explicate_57)):
+		new_temp54 = inject_bool(equal(project_big(explicate_56),project_big(explicate_57)))
+	else:
+		new_temp54 = inject_bool(0)
+else:
+	if(is_big(explicate_57)):
+		new_temp54 = inject_bool(0)
+	else:
+		if(is_int(explicate_56)):
+			explicate_58 = project_int(explicate_56)
+		else:
+			explicate_58 = project_bool(explicate_56)
+		if(is_int(explicate_57)):
+			explicate_59 = project_int(explicate_57)
+		else:
+			explicate_59 = project_bool(explicate_57)
+		new_temp54 = inject_bool(explicate_58==explicate_59)
+new_temp55 = new_temp54
+print(new_temp55)
+--------------Explicate code-------
+new_temp0 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp0, inject_int(0), inject_int(1))
+set_subscript(new_temp0, inject_int(1), inject_int(4))
+set_subscript(new_temp0, inject_int(2), inject_int(7))
+new_temp1 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp1, inject_int(0), inject_int(2))
+set_subscript(new_temp1, inject_int(1), inject_int(5))
+set_subscript(new_temp1, inject_int(2), inject_int(8))
+new_temp2 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp2, inject_int(0), inject_int(3))
+set_subscript(new_temp2, inject_int(1), inject_int(6))
+set_subscript(new_temp2, inject_int(2), inject_int(9))
+new_temp3 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp3, inject_int(0), new_temp0)
+set_subscript(new_temp3, inject_int(1), new_temp1)
+set_subscript(new_temp3, inject_int(2), new_temp2)
+matrix2 = new_temp3
+new_temp4 = get_subscript(matrix2, inject_int(2))
+new_temp5 = get_subscript(new_temp4, inject_int(0))
+new_temp6 = get_subscript(matrix2, inject_int(1))
+new_temp7 = get_subscript(new_temp6, inject_int(0))
+new_temp8 = get_subscript(matrix2, inject_int(0))
+new_temp9 = get_subscript(new_temp8, inject_int(0))
+new_temp10 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp10, inject_int(0), new_temp5)
+set_subscript(new_temp10, inject_int(1), new_temp7)
+set_subscript(new_temp10, inject_int(2), new_temp9)
+new_temp11 = get_subscript(matrix2, inject_int(2))
+new_temp12 = get_subscript(new_temp11, inject_int(1))
+new_temp13 = get_subscript(matrix2, inject_int(1))
+new_temp14 = get_subscript(new_temp13, inject_int(1))
+new_temp15 = get_subscript(matrix2, inject_int(0))
+new_temp16 = get_subscript(new_temp15, inject_int(1))
+new_temp17 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp17, inject_int(0), new_temp12)
+set_subscript(new_temp17, inject_int(1), new_temp14)
+set_subscript(new_temp17, inject_int(2), new_temp16)
+new_temp18 = get_subscript(matrix2, inject_int(2))
+new_temp19 = get_subscript(new_temp18, inject_int(2))
+new_temp20 = get_subscript(matrix2, inject_int(1))
+new_temp21 = get_subscript(new_temp20, inject_int(2))
+new_temp22 = get_subscript(matrix2, inject_int(0))
+new_temp23 = get_subscript(new_temp22, inject_int(2))
+new_temp24 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp24, inject_int(0), new_temp19)
+set_subscript(new_temp24, inject_int(1), new_temp21)
+set_subscript(new_temp24, inject_int(2), new_temp23)
+new_temp25 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp25, inject_int(0), new_temp10)
+set_subscript(new_temp25, inject_int(1), new_temp17)
+set_subscript(new_temp25, inject_int(2), new_temp24)
+matrix2_t2 = new_temp25
+new_temp26 = get_subscript(matrix2, inject_int(0))
+new_temp27 = get_subscript(new_temp26, inject_int(0))
+tmp0 = new_temp27
+new_temp28 = get_subscript(matrix2, inject_int(2))
+new_temp29 = get_subscript(new_temp28, inject_int(0))
+new_temp30 = get_subscript(matrix2, inject_int(0))
+set_subscript(new_temp30, inject_int(0), new_temp29)
+new_temp31 = get_subscript(matrix2, inject_int(0))
+new_temp32 = get_subscript(new_temp31, inject_int(1))
+tmp2 = new_temp32
+new_temp33 = get_subscript(matrix2, inject_int(1))
+new_temp34 = get_subscript(new_temp33, inject_int(0))
+new_temp35 = get_subscript(matrix2, inject_int(0))
+set_subscript(new_temp35, inject_int(1), new_temp34)
+new_temp36 = get_subscript(matrix2, inject_int(0))
+new_temp37 = get_subscript(new_temp36, inject_int(2))
+tmp3 = new_temp37
+new_temp38 = get_subscript(matrix2, inject_int(0))
+set_subscript(new_temp38, inject_int(2), tmp0)
+new_temp39 = get_subscript(matrix2, inject_int(1))
+new_temp40 = get_subscript(new_temp39, inject_int(0))
+tmp4 = new_temp40
+new_temp41 = get_subscript(matrix2, inject_int(2))
+new_temp42 = get_subscript(new_temp41, inject_int(1))
+new_temp43 = get_subscript(matrix2, inject_int(1))
+set_subscript(new_temp43, inject_int(0), new_temp42)
+new_temp44 = get_subscript(matrix2, inject_int(1))
+new_temp45 = get_subscript(new_temp44, inject_int(2))
+tmp5 = new_temp45
+new_temp46 = get_subscript(matrix2, inject_int(1))
+set_subscript(new_temp46, inject_int(2), tmp2)
+new_temp47 = get_subscript(matrix2, inject_int(2))
+new_temp48 = get_subscript(new_temp47, inject_int(0))
+tmp6 = new_temp48
+new_temp49 = get_subscript(matrix2, inject_int(2))
+new_temp50 = get_subscript(new_temp49, inject_int(2))
+tmp7 = new_temp50
+new_temp51 = get_subscript(matrix2, inject_int(2))
+set_subscript(new_temp51, inject_int(0), tmp7)
+new_temp52 = get_subscript(matrix2, inject_int(2))
+set_subscript(new_temp52, inject_int(1), tmp5)
+new_temp53 = get_subscript(matrix2, inject_int(2))
+set_subscript(new_temp53, inject_int(2), tmp3)
+explicate_56 = matrix2
+explicate_57 = matrix2_t2
+if is_big(explicate_56):
+    if is_big(explicate_57):
+        new_temp54 = inject_bool(equal(project_big(explicate_56), project_big(explicate_57)))
+    else:
+        new_temp54 = inject_bool(0)
+elif is_big(explicate_57):
+    new_temp54 = inject_bool(0)
+else:
+    if is_int(explicate_56):
+        explicate_58 = project_int(explicate_56)
+    else:
+        explicate_58 = project_bool(explicate_56)
+    if is_int(explicate_57):
+        explicate_59 = project_int(explicate_57)
+    else:
+        explicate_59 = project_bool(explicate_57)
+    new_temp54 = inject_bool(explicate_58 == explicate_59)
+new_temp55 = new_temp54
+print(new_temp55)
+
+
+--- explicated flattened python ---
+new_temp60 = inject_int(3)
+new_temp61 = create_list(new_temp60)
+new_temp62 = inject_big(new_temp61)
+new_temp0 = new_temp62
+new_temp63 = inject_int(0)
+new_temp64 = inject_int(1)
+set_subscript(new_temp0, new_temp63, new_temp64)
+new_temp65 = inject_int(1)
+new_temp66 = inject_int(4)
+set_subscript(new_temp0, new_temp65, new_temp66)
+new_temp67 = inject_int(2)
+new_temp68 = inject_int(7)
+set_subscript(new_temp0, new_temp67, new_temp68)
+new_temp69 = inject_int(3)
+new_temp70 = create_list(new_temp69)
+new_temp71 = inject_big(new_temp70)
+new_temp1 = new_temp71
+new_temp72 = inject_int(0)
+new_temp73 = inject_int(2)
+set_subscript(new_temp1, new_temp72, new_temp73)
+new_temp74 = inject_int(1)
+new_temp75 = inject_int(5)
+set_subscript(new_temp1, new_temp74, new_temp75)
+new_temp76 = inject_int(2)
+new_temp77 = inject_int(8)
+set_subscript(new_temp1, new_temp76, new_temp77)
+new_temp78 = inject_int(3)
+new_temp79 = create_list(new_temp78)
+new_temp80 = inject_big(new_temp79)
+new_temp2 = new_temp80
+new_temp81 = inject_int(0)
+new_temp82 = inject_int(3)
+set_subscript(new_temp2, new_temp81, new_temp82)
+new_temp83 = inject_int(1)
+new_temp84 = inject_int(6)
+set_subscript(new_temp2, new_temp83, new_temp84)
+new_temp85 = inject_int(2)
+new_temp86 = inject_int(9)
+set_subscript(new_temp2, new_temp85, new_temp86)
+new_temp87 = inject_int(3)
+new_temp88 = create_list(new_temp87)
+new_temp89 = inject_big(new_temp88)
+new_temp3 = new_temp89
+new_temp90 = inject_int(0)
+set_subscript(new_temp3, new_temp90, new_temp0)
+new_temp91 = inject_int(1)
+set_subscript(new_temp3, new_temp91, new_temp1)
+new_temp92 = inject_int(2)
+set_subscript(new_temp3, new_temp92, new_temp2)
+matrix2 = new_temp3
+new_temp93 = inject_int(2)
+new_temp94 = get_subscript(matrix2, new_temp93)
+new_temp4 = new_temp94
+new_temp95 = inject_int(0)
+new_temp96 = get_subscript(new_temp4, new_temp95)
+new_temp5 = new_temp96
+new_temp97 = inject_int(1)
+new_temp98 = get_subscript(matrix2, new_temp97)
+new_temp6 = new_temp98
+new_temp99 = inject_int(0)
+new_temp100 = get_subscript(new_temp6, new_temp99)
+new_temp7 = new_temp100
+new_temp101 = inject_int(0)
+new_temp102 = get_subscript(matrix2, new_temp101)
+new_temp8 = new_temp102
+new_temp103 = inject_int(0)
+new_temp104 = get_subscript(new_temp8, new_temp103)
+new_temp9 = new_temp104
+new_temp105 = inject_int(3)
+new_temp106 = create_list(new_temp105)
+new_temp107 = inject_big(new_temp106)
+new_temp10 = new_temp107
+new_temp108 = inject_int(0)
+set_subscript(new_temp10, new_temp108, new_temp5)
+new_temp109 = inject_int(1)
+set_subscript(new_temp10, new_temp109, new_temp7)
+new_temp110 = inject_int(2)
+set_subscript(new_temp10, new_temp110, new_temp9)
+new_temp111 = inject_int(2)
+new_temp112 = get_subscript(matrix2, new_temp111)
+new_temp11 = new_temp112
+new_temp113 = inject_int(1)
+new_temp114 = get_subscript(new_temp11, new_temp113)
+new_temp12 = new_temp114
+new_temp115 = inject_int(1)
+new_temp116 = get_subscript(matrix2, new_temp115)
+new_temp13 = new_temp116
+new_temp117 = inject_int(1)
+new_temp118 = get_subscript(new_temp13, new_temp117)
+new_temp14 = new_temp118
+new_temp119 = inject_int(0)
+new_temp120 = get_subscript(matrix2, new_temp119)
+new_temp15 = new_temp120
+new_temp121 = inject_int(1)
+new_temp122 = get_subscript(new_temp15, new_temp121)
+new_temp16 = new_temp122
+new_temp123 = inject_int(3)
+new_temp124 = create_list(new_temp123)
+new_temp125 = inject_big(new_temp124)
+new_temp17 = new_temp125
+new_temp126 = inject_int(0)
+set_subscript(new_temp17, new_temp126, new_temp12)
+new_temp127 = inject_int(1)
+set_subscript(new_temp17, new_temp127, new_temp14)
+new_temp128 = inject_int(2)
+set_subscript(new_temp17, new_temp128, new_temp16)
+new_temp129 = inject_int(2)
+new_temp130 = get_subscript(matrix2, new_temp129)
+new_temp18 = new_temp130
+new_temp131 = inject_int(2)
+new_temp132 = get_subscript(new_temp18, new_temp131)
+new_temp19 = new_temp132
+new_temp133 = inject_int(1)
+new_temp134 = get_subscript(matrix2, new_temp133)
+new_temp20 = new_temp134
+new_temp135 = inject_int(2)
+new_temp136 = get_subscript(new_temp20, new_temp135)
+new_temp21 = new_temp136
+new_temp137 = inject_int(0)
+new_temp138 = get_subscript(matrix2, new_temp137)
+new_temp22 = new_temp138
+new_temp139 = inject_int(2)
+new_temp140 = get_subscript(new_temp22, new_temp139)
+new_temp23 = new_temp140
+new_temp141 = inject_int(3)
+new_temp142 = create_list(new_temp141)
+new_temp143 = inject_big(new_temp142)
+new_temp24 = new_temp143
+new_temp144 = inject_int(0)
+set_subscript(new_temp24, new_temp144, new_temp19)
+new_temp145 = inject_int(1)
+set_subscript(new_temp24, new_temp145, new_temp21)
+new_temp146 = inject_int(2)
+set_subscript(new_temp24, new_temp146, new_temp23)
+new_temp147 = inject_int(3)
+new_temp148 = create_list(new_temp147)
+new_temp149 = inject_big(new_temp148)
+new_temp25 = new_temp149
+new_temp150 = inject_int(0)
+set_subscript(new_temp25, new_temp150, new_temp10)
+new_temp151 = inject_int(1)
+set_subscript(new_temp25, new_temp151, new_temp17)
+new_temp152 = inject_int(2)
+set_subscript(new_temp25, new_temp152, new_temp24)
+matrix2_t2 = new_temp25
+new_temp153 = inject_int(0)
+new_temp154 = get_subscript(matrix2, new_temp153)
+new_temp26 = new_temp154
+new_temp155 = inject_int(0)
+new_temp156 = get_subscript(new_temp26, new_temp155)
+new_temp27 = new_temp156
+tmp0 = new_temp27
+new_temp157 = inject_int(2)
+new_temp158 = get_subscript(matrix2, new_temp157)
+new_temp28 = new_temp158
+new_temp159 = inject_int(0)
+new_temp160 = get_subscript(new_temp28, new_temp159)
+new_temp29 = new_temp160
+new_temp161 = inject_int(0)
+new_temp162 = get_subscript(matrix2, new_temp161)
+new_temp30 = new_temp162
+new_temp163 = inject_int(0)
+set_subscript(new_temp30, new_temp163, new_temp29)
+new_temp164 = inject_int(0)
+new_temp165 = get_subscript(matrix2, new_temp164)
+new_temp31 = new_temp165
+new_temp166 = inject_int(1)
+new_temp167 = get_subscript(new_temp31, new_temp166)
+new_temp32 = new_temp167
+tmp2 = new_temp32
+new_temp168 = inject_int(1)
+new_temp169 = get_subscript(matrix2, new_temp168)
+new_temp33 = new_temp169
+new_temp170 = inject_int(0)
+new_temp171 = get_subscript(new_temp33, new_temp170)
+new_temp34 = new_temp171
+new_temp172 = inject_int(0)
+new_temp173 = get_subscript(matrix2, new_temp172)
+new_temp35 = new_temp173
+new_temp174 = inject_int(1)
+set_subscript(new_temp35, new_temp174, new_temp34)
+new_temp175 = inject_int(0)
+new_temp176 = get_subscript(matrix2, new_temp175)
+new_temp36 = new_temp176
+new_temp177 = inject_int(2)
+new_temp178 = get_subscript(new_temp36, new_temp177)
+new_temp37 = new_temp178
+tmp3 = new_temp37
+new_temp179 = inject_int(0)
+new_temp180 = get_subscript(matrix2, new_temp179)
+new_temp38 = new_temp180
+new_temp181 = inject_int(2)
+set_subscript(new_temp38, new_temp181, tmp0)
+new_temp182 = inject_int(1)
+new_temp183 = get_subscript(matrix2, new_temp182)
+new_temp39 = new_temp183
+new_temp184 = inject_int(0)
+new_temp185 = get_subscript(new_temp39, new_temp184)
+new_temp40 = new_temp185
+tmp4 = new_temp40
+new_temp186 = inject_int(2)
+new_temp187 = get_subscript(matrix2, new_temp186)
+new_temp41 = new_temp187
+new_temp188 = inject_int(1)
+new_temp189 = get_subscript(new_temp41, new_temp188)
+new_temp42 = new_temp189
+new_temp190 = inject_int(1)
+new_temp191 = get_subscript(matrix2, new_temp190)
+new_temp43 = new_temp191
+new_temp192 = inject_int(0)
+set_subscript(new_temp43, new_temp192, new_temp42)
+new_temp193 = inject_int(1)
+new_temp194 = get_subscript(matrix2, new_temp193)
+new_temp44 = new_temp194
+new_temp195 = inject_int(2)
+new_temp196 = get_subscript(new_temp44, new_temp195)
+new_temp45 = new_temp196
+tmp5 = new_temp45
+new_temp197 = inject_int(1)
+new_temp198 = get_subscript(matrix2, new_temp197)
+new_temp46 = new_temp198
+new_temp199 = inject_int(2)
+set_subscript(new_temp46, new_temp199, tmp2)
+new_temp200 = inject_int(2)
+new_temp201 = get_subscript(matrix2, new_temp200)
+new_temp47 = new_temp201
+new_temp202 = inject_int(0)
+new_temp203 = get_subscript(new_temp47, new_temp202)
+new_temp48 = new_temp203
+tmp6 = new_temp48
+new_temp204 = inject_int(2)
+new_temp205 = get_subscript(matrix2, new_temp204)
+new_temp49 = new_temp205
+new_temp206 = inject_int(2)
+new_temp207 = get_subscript(new_temp49, new_temp206)
+new_temp50 = new_temp207
+tmp7 = new_temp50
+new_temp208 = inject_int(2)
+new_temp209 = get_subscript(matrix2, new_temp208)
+new_temp51 = new_temp209
+new_temp210 = inject_int(0)
+set_subscript(new_temp51, new_temp210, tmp7)
+new_temp211 = inject_int(2)
+new_temp212 = get_subscript(matrix2, new_temp211)
+new_temp52 = new_temp212
+new_temp213 = inject_int(1)
+set_subscript(new_temp52, new_temp213, tmp5)
+new_temp214 = inject_int(2)
+new_temp215 = get_subscript(matrix2, new_temp214)
+new_temp53 = new_temp215
+new_temp216 = inject_int(2)
+set_subscript(new_temp53, new_temp216, tmp3)
+explicate_56 = matrix2
+explicate_57 = matrix2_t2
+new_temp217 = is_big(explicate_56)
+if new_temp217:
+    new_temp218 = is_big(explicate_57)
+    if new_temp218:
+        new_temp219 = project_big(explicate_56)
+        new_temp220 = project_big(explicate_57)
+        new_temp221 = equal(new_temp219, new_temp220)
+        new_temp222 = inject_bool(new_temp221)
+        new_temp54 = new_temp222
+    else:
+        new_temp223 = inject_bool(0)
+        new_temp54 = new_temp223
+else:
+    new_temp224 = is_big(explicate_57)
+    if new_temp224:
+        new_temp225 = inject_bool(0)
+        new_temp54 = new_temp225
+    else:
+        new_temp226 = is_int(explicate_56)
+        if new_temp226:
+            new_temp227 = project_int(explicate_56)
+            explicate_58 = new_temp227
+        else:
+            new_temp228 = project_bool(explicate_56)
+            explicate_58 = new_temp228
+        new_temp229 = is_int(explicate_57)
+        if new_temp229:
+            new_temp230 = project_int(explicate_57)
+            explicate_59 = new_temp230
+        else:
+            new_temp231 = project_bool(explicate_57)
+            explicate_59 = new_temp231
+        new_temp232 = explicate_58 == explicate_59
+        new_temp233 = new_temp232
+        new_temp234 = inject_bool(new_temp233)
+        new_temp54 = new_temp234
+new_temp55 = new_temp54
+print(new_temp55)
+
+
+--- x86 IR ---
+call  inject_int 3
+movl  eax ,  new_temp60
+call  create_list new_temp60
+movl  eax ,  new_temp61
+call  inject_big new_temp61
+movl  eax ,  new_temp62
+movl  new_temp62 ,  new_temp0
+call  inject_int 0
+movl  eax ,  new_temp63
+call  inject_int 1
+movl  eax ,  new_temp64
+call  set_subscript new_temp0,new_temp63,new_temp64
+call  inject_int 1
+movl  eax ,  new_temp65
+call  inject_int 4
+movl  eax ,  new_temp66
+call  set_subscript new_temp0,new_temp65,new_temp66
+call  inject_int 2
+movl  eax ,  new_temp67
+call  inject_int 7
+movl  eax ,  new_temp68
+call  set_subscript new_temp0,new_temp67,new_temp68
+call  inject_int 3
+movl  eax ,  new_temp69
+call  create_list new_temp69
+movl  eax ,  new_temp70
+call  inject_big new_temp70
+movl  eax ,  new_temp71
+movl  new_temp71 ,  new_temp1
+call  inject_int 0
+movl  eax ,  new_temp72
+call  inject_int 2
+movl  eax ,  new_temp73
+call  set_subscript new_temp1,new_temp72,new_temp73
+call  inject_int 1
+movl  eax ,  new_temp74
+call  inject_int 5
+movl  eax ,  new_temp75
+call  set_subscript new_temp1,new_temp74,new_temp75
+call  inject_int 2
+movl  eax ,  new_temp76
+call  inject_int 8
+movl  eax ,  new_temp77
+call  set_subscript new_temp1,new_temp76,new_temp77
+call  inject_int 3
+movl  eax ,  new_temp78
+call  create_list new_temp78
+movl  eax ,  new_temp79
+call  inject_big new_temp79
+movl  eax ,  new_temp80
+movl  new_temp80 ,  new_temp2
+call  inject_int 0
+movl  eax ,  new_temp81
+call  inject_int 3
+movl  eax ,  new_temp82
+call  set_subscript new_temp2,new_temp81,new_temp82
+call  inject_int 1
+movl  eax ,  new_temp83
+call  inject_int 6
+movl  eax ,  new_temp84
+call  set_subscript new_temp2,new_temp83,new_temp84
+call  inject_int 2
+movl  eax ,  new_temp85
+call  inject_int 9
+movl  eax ,  new_temp86
+call  set_subscript new_temp2,new_temp85,new_temp86
+call  inject_int 3
+movl  eax ,  new_temp87
+call  create_list new_temp87
+movl  eax ,  new_temp88
+call  inject_big new_temp88
+movl  eax ,  new_temp89
+movl  new_temp89 ,  new_temp3
+call  inject_int 0
+movl  eax ,  new_temp90
+call  set_subscript new_temp3,new_temp90,new_temp0
+call  inject_int 1
+movl  eax ,  new_temp91
+call  set_subscript new_temp3,new_temp91,new_temp1
+call  inject_int 2
+movl  eax ,  new_temp92
+call  set_subscript new_temp3,new_temp92,new_temp2
+movl  new_temp3 ,  matrix2
+call  inject_int 2
+movl  eax ,  new_temp93
+call  get_subscript matrix2,new_temp93
+movl  eax ,  new_temp94
+movl  new_temp94 ,  new_temp4
+call  inject_int 0
+movl  eax ,  new_temp95
+call  get_subscript new_temp4,new_temp95
+movl  eax ,  new_temp96
+movl  new_temp96 ,  new_temp5
+call  inject_int 1
+movl  eax ,  new_temp97
+call  get_subscript matrix2,new_temp97
+movl  eax ,  new_temp98
+movl  new_temp98 ,  new_temp6
+call  inject_int 0
+movl  eax ,  new_temp99
+call  get_subscript new_temp6,new_temp99
+movl  eax ,  new_temp100
+movl  new_temp100 ,  new_temp7
+call  inject_int 0
+movl  eax ,  new_temp101
+call  get_subscript matrix2,new_temp101
+movl  eax ,  new_temp102
+movl  new_temp102 ,  new_temp8
+call  inject_int 0
+movl  eax ,  new_temp103
+call  get_subscript new_temp8,new_temp103
+movl  eax ,  new_temp104
+movl  new_temp104 ,  new_temp9
+call  inject_int 3
+movl  eax ,  new_temp105
+call  create_list new_temp105
+movl  eax ,  new_temp106
+call  inject_big new_temp106
+movl  eax ,  new_temp107
+movl  new_temp107 ,  new_temp10
+call  inject_int 0
+movl  eax ,  new_temp108
+call  set_subscript new_temp10,new_temp108,new_temp5
+call  inject_int 1
+movl  eax ,  new_temp109
+call  set_subscript new_temp10,new_temp109,new_temp7
+call  inject_int 2
+movl  eax ,  new_temp110
+call  set_subscript new_temp10,new_temp110,new_temp9
+call  inject_int 2
+movl  eax ,  new_temp111
+call  get_subscript matrix2,new_temp111
+movl  eax ,  new_temp112
+movl  new_temp112 ,  new_temp11
+call  inject_int 1
+movl  eax ,  new_temp113
+call  get_subscript new_temp11,new_temp113
+movl  eax ,  new_temp114
+movl  new_temp114 ,  new_temp12
+call  inject_int 1
+movl  eax ,  new_temp115
+call  get_subscript matrix2,new_temp115
+movl  eax ,  new_temp116
+movl  new_temp116 ,  new_temp13
+call  inject_int 1
+movl  eax ,  new_temp117
+call  get_subscript new_temp13,new_temp117
+movl  eax ,  new_temp118
+movl  new_temp118 ,  new_temp14
+call  inject_int 0
+movl  eax ,  new_temp119
+call  get_subscript matrix2,new_temp119
+movl  eax ,  new_temp120
+movl  new_temp120 ,  new_temp15
+call  inject_int 1
+movl  eax ,  new_temp121
+call  get_subscript new_temp15,new_temp121
+movl  eax ,  new_temp122
+movl  new_temp122 ,  new_temp16
+call  inject_int 3
+movl  eax ,  new_temp123
+call  create_list new_temp123
+movl  eax ,  new_temp124
+call  inject_big new_temp124
+movl  eax ,  new_temp125
+movl  new_temp125 ,  new_temp17
+call  inject_int 0
+movl  eax ,  new_temp126
+call  set_subscript new_temp17,new_temp126,new_temp12
+call  inject_int 1
+movl  eax ,  new_temp127
+call  set_subscript new_temp17,new_temp127,new_temp14
+call  inject_int 2
+movl  eax ,  new_temp128
+call  set_subscript new_temp17,new_temp128,new_temp16
+call  inject_int 2
+movl  eax ,  new_temp129
+call  get_subscript matrix2,new_temp129
+movl  eax ,  new_temp130
+movl  new_temp130 ,  new_temp18
+call  inject_int 2
+movl  eax ,  new_temp131
+call  get_subscript new_temp18,new_temp131
+movl  eax ,  new_temp132
+movl  new_temp132 ,  new_temp19
+call  inject_int 1
+movl  eax ,  new_temp133
+call  get_subscript matrix2,new_temp133
+movl  eax ,  new_temp134
+movl  new_temp134 ,  new_temp20
+call  inject_int 2
+movl  eax ,  new_temp135
+call  get_subscript new_temp20,new_temp135
+movl  eax ,  new_temp136
+movl  new_temp136 ,  new_temp21
+call  inject_int 0
+movl  eax ,  new_temp137
+call  get_subscript matrix2,new_temp137
+movl  eax ,  new_temp138
+movl  new_temp138 ,  new_temp22
+call  inject_int 2
+movl  eax ,  new_temp139
+call  get_subscript new_temp22,new_temp139
+movl  eax ,  new_temp140
+movl  new_temp140 ,  new_temp23
+call  inject_int 3
+movl  eax ,  new_temp141
+call  create_list new_temp141
+movl  eax ,  new_temp142
+call  inject_big new_temp142
+movl  eax ,  new_temp143
+movl  new_temp143 ,  new_temp24
+call  inject_int 0
+movl  eax ,  new_temp144
+call  set_subscript new_temp24,new_temp144,new_temp19
+call  inject_int 1
+movl  eax ,  new_temp145
+call  set_subscript new_temp24,new_temp145,new_temp21
+call  inject_int 2
+movl  eax ,  new_temp146
+call  set_subscript new_temp24,new_temp146,new_temp23
+call  inject_int 3
+movl  eax ,  new_temp147
+call  create_list new_temp147
+movl  eax ,  new_temp148
+call  inject_big new_temp148
+movl  eax ,  new_temp149
+movl  new_temp149 ,  new_temp25
+call  inject_int 0
+movl  eax ,  new_temp150
+call  set_subscript new_temp25,new_temp150,new_temp10
+call  inject_int 1
+movl  eax ,  new_temp151
+call  set_subscript new_temp25,new_temp151,new_temp17
+call  inject_int 2
+movl  eax ,  new_temp152
+call  set_subscript new_temp25,new_temp152,new_temp24
+movl  new_temp25 ,  matrix2_t2
+call  inject_int 0
+movl  eax ,  new_temp153
+call  get_subscript matrix2,new_temp153
+movl  eax ,  new_temp154
+movl  new_temp154 ,  new_temp26
+call  inject_int 0
+movl  eax ,  new_temp155
+call  get_subscript new_temp26,new_temp155
+movl  eax ,  new_temp156
+movl  new_temp156 ,  new_temp27
+movl  new_temp27 ,  tmp0
+call  inject_int 2
+movl  eax ,  new_temp157
+call  get_subscript matrix2,new_temp157
+movl  eax ,  new_temp158
+movl  new_temp158 ,  new_temp28
+call  inject_int 0
+movl  eax ,  new_temp159
+call  get_subscript new_temp28,new_temp159
+movl  eax ,  new_temp160
+movl  new_temp160 ,  new_temp29
+call  inject_int 0
+movl  eax ,  new_temp161
+call  get_subscript matrix2,new_temp161
+movl  eax ,  new_temp162
+movl  new_temp162 ,  new_temp30
+call  inject_int 0
+movl  eax ,  new_temp163
+call  set_subscript new_temp30,new_temp163,new_temp29
+call  inject_int 0
+movl  eax ,  new_temp164
+call  get_subscript matrix2,new_temp164
+movl  eax ,  new_temp165
+movl  new_temp165 ,  new_temp31
+call  inject_int 1
+movl  eax ,  new_temp166
+call  get_subscript new_temp31,new_temp166
+movl  eax ,  new_temp167
+movl  new_temp167 ,  new_temp32
+movl  new_temp32 ,  tmp2
+call  inject_int 1
+movl  eax ,  new_temp168
+call  get_subscript matrix2,new_temp168
+movl  eax ,  new_temp169
+movl  new_temp169 ,  new_temp33
+call  inject_int 0
+movl  eax ,  new_temp170
+call  get_subscript new_temp33,new_temp170
+movl  eax ,  new_temp171
+movl  new_temp171 ,  new_temp34
+call  inject_int 0
+movl  eax ,  new_temp172
+call  get_subscript matrix2,new_temp172
+movl  eax ,  new_temp173
+movl  new_temp173 ,  new_temp35
+call  inject_int 1
+movl  eax ,  new_temp174
+call  set_subscript new_temp35,new_temp174,new_temp34
+call  inject_int 0
+movl  eax ,  new_temp175
+call  get_subscript matrix2,new_temp175
+movl  eax ,  new_temp176
+movl  new_temp176 ,  new_temp36
+call  inject_int 2
+movl  eax ,  new_temp177
+call  get_subscript new_temp36,new_temp177
+movl  eax ,  new_temp178
+movl  new_temp178 ,  new_temp37
+movl  new_temp37 ,  tmp3
+call  inject_int 0
+movl  eax ,  new_temp179
+call  get_subscript matrix2,new_temp179
+movl  eax ,  new_temp180
+movl  new_temp180 ,  new_temp38
+call  inject_int 2
+movl  eax ,  new_temp181
+call  set_subscript new_temp38,new_temp181,tmp0
+call  inject_int 1
+movl  eax ,  new_temp182
+call  get_subscript matrix2,new_temp182
+movl  eax ,  new_temp183
+movl  new_temp183 ,  new_temp39
+call  inject_int 0
+movl  eax ,  new_temp184
+call  get_subscript new_temp39,new_temp184
+movl  eax ,  new_temp185
+movl  new_temp185 ,  new_temp40
+movl  new_temp40 ,  tmp4
+call  inject_int 2
+movl  eax ,  new_temp186
+call  get_subscript matrix2,new_temp186
+movl  eax ,  new_temp187
+movl  new_temp187 ,  new_temp41
+call  inject_int 1
+movl  eax ,  new_temp188
+call  get_subscript new_temp41,new_temp188
+movl  eax ,  new_temp189
+movl  new_temp189 ,  new_temp42
+call  inject_int 1
+movl  eax ,  new_temp190
+call  get_subscript matrix2,new_temp190
+movl  eax ,  new_temp191
+movl  new_temp191 ,  new_temp43
+call  inject_int 0
+movl  eax ,  new_temp192
+call  set_subscript new_temp43,new_temp192,new_temp42
+call  inject_int 1
+movl  eax ,  new_temp193
+call  get_subscript matrix2,new_temp193
+movl  eax ,  new_temp194
+movl  new_temp194 ,  new_temp44
+call  inject_int 2
+movl  eax ,  new_temp195
+call  get_subscript new_temp44,new_temp195
+movl  eax ,  new_temp196
+movl  new_temp196 ,  new_temp45
+movl  new_temp45 ,  tmp5
+call  inject_int 1
+movl  eax ,  new_temp197
+call  get_subscript matrix2,new_temp197
+movl  eax ,  new_temp198
+movl  new_temp198 ,  new_temp46
+call  inject_int 2
+movl  eax ,  new_temp199
+call  set_subscript new_temp46,new_temp199,tmp2
+call  inject_int 2
+movl  eax ,  new_temp200
+call  get_subscript matrix2,new_temp200
+movl  eax ,  new_temp201
+movl  new_temp201 ,  new_temp47
+call  inject_int 0
+movl  eax ,  new_temp202
+call  get_subscript new_temp47,new_temp202
+movl  eax ,  new_temp203
+movl  new_temp203 ,  new_temp48
+movl  new_temp48 ,  tmp6
+call  inject_int 2
+movl  eax ,  new_temp204
+call  get_subscript matrix2,new_temp204
+movl  eax ,  new_temp205
+movl  new_temp205 ,  new_temp49
+call  inject_int 2
+movl  eax ,  new_temp206
+call  get_subscript new_temp49,new_temp206
+movl  eax ,  new_temp207
+movl  new_temp207 ,  new_temp50
+movl  new_temp50 ,  tmp7
+call  inject_int 2
+movl  eax ,  new_temp208
+call  get_subscript matrix2,new_temp208
+movl  eax ,  new_temp209
+movl  new_temp209 ,  new_temp51
+call  inject_int 0
+movl  eax ,  new_temp210
+call  set_subscript new_temp51,new_temp210,tmp7
+call  inject_int 2
+movl  eax ,  new_temp211
+call  get_subscript matrix2,new_temp211
+movl  eax ,  new_temp212
+movl  new_temp212 ,  new_temp52
+call  inject_int 1
+movl  eax ,  new_temp213
+call  set_subscript new_temp52,new_temp213,tmp5
+call  inject_int 2
+movl  eax ,  new_temp214
+call  get_subscript matrix2,new_temp214
+movl  eax ,  new_temp215
+movl  new_temp215 ,  new_temp53
+call  inject_int 2
+movl  eax ,  new_temp216
+call  set_subscript new_temp53,new_temp216,tmp3
+movl  matrix2 ,  explicate_56
+movl  matrix2_t2 ,  explicate_57
+call  is_big explicate_56
+movl  eax ,  new_temp217
+if1
+cmp 0, new_temp217
+je else1
+then1
+call  is_big explicate_57
+movl  eax ,  new_temp218
+if2
+cmp 0, new_temp218
+je else2
+then2
+call  project_big explicate_56
+movl  eax ,  new_temp219
+call  project_big explicate_57
+movl  eax ,  new_temp220
+call  equal new_temp219,new_temp220
+movl  eax ,  new_temp221
+call  inject_bool new_temp221
+movl  eax ,  new_temp222
+movl  new_temp222 ,  new_temp54
+else2
+call  inject_bool 0
+movl  eax ,  new_temp223
+movl  new_temp223 ,  new_temp54
+end if2
+else1
+call  is_big explicate_57
+movl  eax ,  new_temp224
+if2
+cmp 0, new_temp224
+je else2
+then2
+call  inject_bool 0
+movl  eax ,  new_temp225
+movl  new_temp225 ,  new_temp54
+else2
+call  is_int explicate_56
+movl  eax ,  new_temp226
+if3
+cmp 0, new_temp226
+je else3
+then3
+call  project_int explicate_56
+movl  eax ,  new_temp227
+movl  new_temp227 ,  explicate_58
+else3
+call  project_bool explicate_56
+movl  eax ,  new_temp228
+movl  new_temp228 ,  explicate_58
+end if3
+call  is_int explicate_57
+movl  eax ,  new_temp229
+if4
+cmp 0, new_temp229
+je else4
+then4
+call  project_int explicate_57
+movl  eax ,  new_temp230
+movl  new_temp230 ,  explicate_59
+else4
+call  project_bool explicate_57
+movl  eax ,  new_temp231
+movl  new_temp231 ,  explicate_59
+end if4
+int_compare  explicate_58 Eq explicate_59 ,  new_temp232
+movl  new_temp232 ,  new_temp233
+call  inject_bool new_temp233
+movl  eax ,  new_temp234
+movl  new_temp234 ,  new_temp54
+end if2
+end if1
+movl  new_temp54 ,  new_temp55
+call  print new_temp55
+
+
+--- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp60': set(), 'new_temp61': set(), 'new_temp62': set(), 'new_temp0': {'edx', 'new_temp3', 'new_temp88', 'new_temp71', 'new_temp63', 'new_temp66', 'new_temp79', 'new_temp77', 'ecx', 'new_temp75', 'new_temp90', 'new_temp89', 'new_temp82', 'new_temp85', 'new_temp78', 'new_temp2', 'new_temp74', 'new_temp70', 'new_temp68', 'new_temp83', 'new_temp69', 'new_temp80', 'new_temp76', 'new_temp84', 'new_temp81', 'new_temp64', 'new_temp1', 'new_temp72', 'eax', 'new_temp65', 'new_temp73', 'new_temp86', 'new_temp67', 'new_temp87'}, 'eax': {'new_temp33', 'new_temp38', 'new_temp49', 'new_temp15', 'new_temp19', 'new_temp63', 'new_temp39', 'new_temp6', 'new_temp8', 'new_temp24', 'new_temp14', 'new_temp5', 'new_temp0', 'new_temp43', 'new_temp30', 'new_temp22', 'new_temp85', 'new_temp2', 'new_temp74', 'new_temp81', 'new_temp26', 'new_temp1', 'new_temp21', 'new_temp72', 'new_temp67', 'new_temp16', 'new_temp65', 'matrix2', 'new_temp12', 'new_temp18', 'tmp7', 'new_temp10', 'new_temp3', 'new_temp9', 'new_temp232', 'new_temp17', 'new_temp34', 'new_temp4', 'new_temp41', 'new_temp7', 'tmp3', 'new_temp11', 'new_temp13', 'new_temp23', 'new_temp46', 'matrix2_t2', 'new_temp47', 'new_temp51', 'new_temp83', 'new_temp219', 'new_temp76', 'new_temp20', 'new_temp29', 'tmp5', 'new_temp42', 'explicate_56', 'new_temp28', 'tmp0', 'new_temp36', 'new_temp44', 'explicate_57', 'new_temp35', 'new_temp31', 'explicate_58', 'new_temp25', 'new_temp52', 'tmp2', 'new_temp53'}, 'ecx': {'new_temp25', 'new_temp3', 'new_temp33', 'new_temp9', 'new_temp38', 'new_temp49', 'new_temp15', 'new_temp19', 'new_temp63', 'new_temp39', 'new_temp6', 'new_temp17', 'new_temp8', 'new_temp24', 'new_temp14', 'new_temp34', 'new_temp5', 'new_temp4', 'new_temp41', 'new_temp0', 'new_temp43', 'new_temp7', 'new_temp30', 'tmp3', 'new_temp11', 'new_temp22', 'new_temp13', 'new_temp23', 'new_temp46', 'new_temp85', 'new_temp2', 'new_temp74', 'matrix2_t2', 'new_temp47', 'new_temp51', 'new_temp83', 'new_temp219', 'new_temp76', 'new_temp20', 'new_temp81', 'new_temp29', 'new_temp26', 'tmp5', 'new_temp42', 'new_temp1', 'explicate_56', 'new_temp21', 'new_temp28', 'tmp0', 'new_temp72', 'new_temp36', 'new_temp44', 'explicate_57', 'new_temp16', 'new_temp35', 'new_temp65', 'new_temp31', 'matrix2', 'new_temp12', 'new_temp18', 'tmp7', 'new_temp52', 'explicate_58', 'new_temp10', 'new_temp67', 'tmp2', 'new_temp53'}, 'edx': {'new_temp25', 'new_temp3', 'new_temp33', 'new_temp9', 'new_temp38', 'new_temp49', 'new_temp15', 'new_temp19', 'new_temp63', 'new_temp39', 'new_temp6', 'new_temp17', 'new_temp8', 'new_temp24', 'new_temp14', 'new_temp34', 'new_temp5', 'new_temp4', 'new_temp41', 'new_temp0', 'new_temp43', 'new_temp7', 'new_temp30', 'tmp3', 'new_temp11', 'new_temp22', 'new_temp13', 'new_temp23', 'new_temp46', 'new_temp85', 'new_temp2', 'new_temp74', 'matrix2_t2', 'new_temp47', 'new_temp51', 'new_temp83', 'new_temp219', 'new_temp76', 'new_temp20', 'new_temp81', 'new_temp29', 'new_temp26', 'tmp5', 'new_temp42', 'new_temp1', 'explicate_56', 'new_temp21', 'new_temp28', 'tmp0', 'new_temp72', 'new_temp36', 'new_temp44', 'explicate_57', 'new_temp16', 'new_temp35', 'new_temp65', 'new_temp31', 'matrix2', 'new_temp12', 'new_temp18', 'tmp7', 'new_temp52', 'explicate_58', 'new_temp10', 'new_temp67', 'tmp2', 'new_temp53'}, 'new_temp63': {'edx', 'new_temp0', 'ecx', 'eax', 'new_temp64'}, 'new_temp64': {'new_temp63', 'new_temp0'}, 'new_temp65': {'edx', 'new_temp0', 'ecx', 'eax', 'new_temp66'}, 'new_temp66': {'new_temp65', 'new_temp0'}, 'new_temp67': {'edx', 'new_temp0', 'ecx', 'eax', 'new_temp68'}, 'new_temp68': {'new_temp0', 'new_temp67'}, 'new_temp69': {'new_temp0'}, 'new_temp70': {'new_temp0'}, 'new_temp71': {'new_temp0'}, 'new_temp1': {'new_temp82', 'edx', 'new_temp78', 'new_temp2', 'new_temp74', 'new_temp85', 'new_temp88', 'new_temp3', 'new_temp83', 'new_temp80', 'new_temp76', 'new_temp84', 'new_temp81', 'new_temp79', 'new_temp91', 'new_temp77', 'new_temp72', 'new_temp0', 'ecx', 'eax', 'new_temp73', 'new_temp86', 'new_temp75', 'new_temp90', 'new_temp89', 'new_temp87'}, 'new_temp72': {'eax', 'new_temp1', 'new_temp73', 'edx', 'new_temp0', 'ecx'}, 'new_temp73': {'new_temp72', 'new_temp1', 'new_temp0'}, 'new_temp74': {'eax', 'new_temp1', 'new_temp75', 'edx', 'new_temp0', 'ecx'}, 'new_temp75': {'new_temp74', 'new_temp1', 'new_temp0'}, 'new_temp76': {'eax', 'new_temp1', 'new_temp77', 'edx', 'new_temp0', 'ecx'}, 'new_temp77': {'new_temp1', 'new_temp0', 'new_temp76'}, 'new_temp78': {'new_temp1', 'new_temp0'}, 'new_temp79': {'new_temp1', 'new_temp0'}, 'new_temp80': {'new_temp1', 'new_temp0'}, 'new_temp2': {'new_temp82', 'edx', 'new_temp85', 'new_temp3', 'new_temp88', 'new_temp83', 'new_temp84', 'new_temp81', 'new_temp91', 'new_temp1', 'new_temp92', 'new_temp0', 'ecx', 'eax', 'new_temp86', 'new_temp90', 'new_temp89', 'new_temp87'}, 'new_temp81': {'eax', 'new_temp1', 'new_temp82', 'edx', 'new_temp2', 'new_temp0', 'ecx'}, 'new_temp82': {'new_temp1', 'new_temp81', 'new_temp0', 'new_temp2'}, 'new_temp83': {'eax', 'new_temp1', 'edx', 'new_temp2', 'new_temp84', 'new_temp0', 'ecx'}, 'new_temp84': {'new_temp83', 'new_temp1', 'new_temp0', 'new_temp2'}, 'new_temp85': {'eax', 'new_temp1', 'new_temp86', 'edx', 'new_temp2', 'new_temp0', 'ecx'}, 'new_temp86': {'new_temp1', 'new_temp0', 'new_temp85', 'new_temp2'}, 'new_temp87': {'new_temp1', 'new_temp0', 'new_temp2'}, 'new_temp88': {'new_temp1', 'new_temp0', 'new_temp2'}, 'new_temp89': {'new_temp1', 'new_temp0', 'new_temp2'}, 'new_temp3': {'new_temp91', 'new_temp1', 'new_temp92', 'edx', 'new_temp2', 'new_temp0', 'ecx', 'eax', 'new_temp90'}, 'new_temp90': {'new_temp1', 'new_temp0', 'new_temp3', 'new_temp2'}, 'new_temp91': {'new_temp1', 'new_temp3', 'new_temp2'}, 'new_temp92': {'new_temp3', 'new_temp2'}, 'matrix2': {'new_temp180', 'new_temp33', 'new_temp110', 'new_temp49', 'new_temp19', 'new_temp157', 'new_temp39', 'new_temp205', 'new_temp24', 'new_temp118', 'new_temp199', 'new_temp14', 'new_temp96', 'new_temp5', 'new_temp123', 'new_temp173', 'new_temp43', 'new_temp127', 'new_temp167', 'new_temp30', 'new_temp102', 'new_temp154', 'new_temp196', 'new_temp144', 'new_temp147', 'new_temp179', 'new_temp198', 'new_temp113', 'new_temp150', 'new_temp182', 'new_temp32', 'new_temp214', 'new_temp209', 'new_temp111', 'new_temp21', 'new_temp125', 'new_temp152', 'new_temp12', 'new_temp18', 'tmp7', 'new_temp191', 'new_temp115', 'edx', 'new_temp177', 'new_temp195', 'new_temp17', 'new_temp153', 'new_temp184', 'new_temp104', 'new_temp34', 'new_temp41', 'new_temp7', 'new_temp95', 'new_temp194', 'new_temp200', 'new_temp40', 'new_temp203', 'new_temp13', 'new_temp135', 'new_temp23', 'new_temp151', 'new_temp94', 'new_temp103', 'new_temp188', 'new_temp48', 'new_temp112', 'new_temp100', 'new_temp165', 'matrix2_t2', 'new_temp51', 'new_temp159', 'new_temp216', 'tmp4', 'new_temp29', 'new_temp161', 'tmp5', 'new_temp42', 'new_temp170', 'new_temp28', 'new_temp108', 'tmp0', 'new_temp160', 'new_temp201', 'new_temp31', 'new_temp134', 'new_temp164', 'new_temp183', 'new_temp25', 'new_temp52', 'new_temp53', 'new_temp146', 'new_temp38', 'new_temp166', 'new_temp15', 'new_temp213', 'new_temp119', 'new_temp6', 'new_temp117', 'new_temp129', 'new_temp8', 'new_temp124', 'new_temp207', 'new_temp137', 'new_temp211', 'new_temp145', 'new_temp148', 'new_temp106', 'ecx', 'new_temp187', 'new_temp215', 'new_temp107', 'new_temp155', 'new_temp105', 'new_temp22', 'new_temp158', 'new_temp97', 'new_temp37', 'new_temp133', 'new_temp169', 'new_temp26', 'new_temp178', 'new_temp99', 'new_temp16', 'new_temp141', 'new_temp168', 'new_temp185', 'new_temp204', 'new_temp189', 'tmp6', 'new_temp126', 'new_temp193', 'new_temp10', 'new_temp210', 'new_temp190', 'new_temp121', 'new_temp131', 'new_temp9', 'new_temp162', 'new_temp98', 'new_temp139', 'new_temp172', 'new_temp120', 'new_temp142', 'new_temp156', 'new_temp197', 'new_temp140', 'new_temp4', 'new_temp130', 'new_temp122', 'new_temp143', 'new_temp11', 'tmp3', 'new_temp174', 'new_temp132', 'new_temp192', 'new_temp46', 'new_temp93', 'new_temp101', 'new_temp163', 'new_temp47', 'new_temp149', 'new_temp136', 'new_temp20', 'new_temp176', 'new_temp114', 'new_temp128', 'new_temp181', 'new_temp27', 'new_temp50', 'new_temp36', 'new_temp44', 'new_temp212', 'new_temp109', 'new_temp208', 'eax', 'new_temp171', 'new_temp35', 'new_temp202', 'new_temp175', 'new_temp206', 'new_temp138', 'new_temp45', 'new_temp186', 'new_temp116', 'tmp2'}, 'new_temp93': {'matrix2'}, 'new_temp94': {'matrix2'}, 'new_temp4': {'edx', 'ecx', 'eax', 'new_temp95', 'matrix2'}, 'new_temp95': {'matrix2', 'new_temp4'}, 'new_temp96': {'matrix2'}, 'new_temp5': {'new_temp103', 'new_temp101', 'edx', 'new_temp100', 'new_temp9', 'new_temp98', 'new_temp6', 'new_temp8', 'new_temp104', 'new_temp108', 'new_temp106', 'ecx', 'new_temp99', 'new_temp7', 'eax', 'new_temp107', 'new_temp105', 'matrix2', 'new_temp102', 'new_temp10', 'new_temp97'}, 'new_temp97': {'matrix2', 'new_temp5'}, 'new_temp98': {'matrix2', 'new_temp5'}, 'new_temp6': {'eax', 'matrix2', 'edx', 'new_temp5', 'ecx', 'new_temp99'}, 'new_temp99': {'matrix2', 'new_temp6', 'new_temp5'}, 'new_temp100': {'matrix2', 'new_temp5'}, 'new_temp7': {'new_temp103', 'new_temp101', 'edx', 'new_temp9', 'new_temp8', 'new_temp104', 'new_temp5', 'new_temp108', 'new_temp106', 'ecx', 'new_temp109', 'eax', 'new_temp107', 'new_temp105', 'matrix2', 'new_temp102', 'new_temp10'}, 'new_temp101': {'matrix2', 'new_temp5', 'new_temp7'}, 'new_temp102': {'matrix2', 'new_temp5', 'new_temp7'}, 'new_temp8': {'eax', 'new_temp103', 'matrix2', 'edx', 'new_temp5', 'ecx', 'new_temp7'}, 'new_temp103': {'new_temp8', 'matrix2', 'new_temp5', 'new_temp7'}, 'new_temp104': {'matrix2', 'new_temp5', 'new_temp7'}, 'new_temp9': {'edx', 'new_temp5', 'new_temp108', 'new_temp110', 'new_temp106', 'ecx', 'new_temp109', 'new_temp7', 'eax', 'new_temp107', 'new_temp105', 'matrix2', 'new_temp10'}, 'new_temp105': {'new_temp7', 'matrix2', 'new_temp5', 'new_temp9'}, 'new_temp106': {'new_temp7', 'matrix2', 'new_temp5', 'new_temp9'}, 'new_temp107': {'new_temp7', 'matrix2', 'new_temp5', 'new_temp9'}, 'new_temp10': {'new_temp146', 'new_temp110', 'new_temp15', 'new_temp19', 'new_temp119', 'new_temp129', 'new_temp117', 'new_temp24', 'new_temp118', 'new_temp124', 'new_temp14', 'new_temp137', 'new_temp5', 'new_temp123', 'new_temp145', 'new_temp148', 'ecx', 'new_temp127', 'new_temp22', 'new_temp144', 'new_temp147', 'new_temp113', 'new_temp133', 'new_temp150', 'new_temp111', 'new_temp21', 'new_temp125', 'new_temp16', 'new_temp141', 'matrix2', 'new_temp12', 'new_temp18', 'new_temp126', 'new_temp115', 'new_temp121', 'edx', 'new_temp131', 'new_temp9', 'new_temp139', 'new_temp17', 'new_temp120', 'new_temp142', 'new_temp140', 'new_temp130', 'new_temp122', 'new_temp7', 'new_temp143', 'new_temp11', 'new_temp13', 'new_temp135', 'new_temp23', 'new_temp132', 'new_temp112', 'new_temp149', 'new_temp136', 'new_temp20', 'new_temp114', 'new_temp128', 'new_temp108', 'new_temp109', 'eax', 'new_temp134', 'new_temp138', 'new_temp25', 'new_temp116'}, 'new_temp108': {'matrix2', 'new_temp5', 'new_temp9', 'new_temp10', 'new_temp7'}, 'new_temp109': {'new_temp10', 'new_temp7', 'matrix2', 'new_temp9'}, 'new_temp110': {'new_temp10', 'matrix2', 'new_temp9'}, 'new_temp111': {'matrix2', 'new_temp10'}, 'new_temp112': {'matrix2', 'new_temp10'}, 'new_temp11': {'eax', 'matrix2', 'edx', 'ecx', 'new_temp113', 'new_temp10'}, 'new_temp113': {'new_temp10', 'new_temp11', 'matrix2'}, 'new_temp114': {'new_temp10', 'matrix2'}, 'new_temp12': {'new_temp121', 'edx', 'new_temp15', 'new_temp117', 'new_temp17', 'new_temp118', 'new_temp124', 'new_temp116', 'new_temp120', 'new_temp14', 'new_temp125', 'new_temp123', 'ecx', 'new_temp122', 'new_temp16', 'eax', 'matrix2', 'new_temp13', 'new_temp126', 'new_temp115', 'new_temp10', 'new_temp119'}, 'new_temp115': {'new_temp12', 'new_temp10', 'matrix2'}, 'new_temp116': {'matrix2', 'new_temp10', 'new_temp12'}, 'new_temp13': {'eax', 'matrix2', 'new_temp12', 'ecx', 'edx', 'new_temp117', 'new_temp10'}, 'new_temp117': {'new_temp12', 'new_temp10', 'matrix2', 'new_temp13'}, 'new_temp118': {'matrix2', 'new_temp10', 'new_temp12'}, 'new_temp14': {'new_temp121', 'edx', 'new_temp15', 'new_temp17', 'new_temp124', 'new_temp120', 'new_temp125', 'new_temp123', 'ecx', 'new_temp122', 'new_temp16', 'eax', 'new_temp127', 'matrix2', 'new_temp12', 'new_temp126', 'new_temp10', 'new_temp119'}, 'new_temp119': {'new_temp12', 'new_temp10', 'new_temp14', 'matrix2'}, 'new_temp120': {'new_temp12', 'new_temp10', 'new_temp14', 'matrix2'}, 'new_temp15': {'eax', 'new_temp121', 'new_temp14', 'matrix2', 'new_temp12', 'ecx', 'edx', 'new_temp10'}, 'new_temp121': {'new_temp14', 'new_temp12', 'matrix2', 'new_temp10', 'new_temp15'}, 'new_temp122': {'new_temp12', 'new_temp10', 'new_temp14', 'matrix2'}, 'new_temp16': {'new_temp14', 'edx', 'new_temp125', 'new_temp123', 'ecx', 'new_temp127', 'eax', 'matrix2', 'new_temp12', 'new_temp128', 'new_temp17', 'new_temp126', 'new_temp10', 'new_temp124'}, 'new_temp123': {'new_temp14', 'new_temp12', 'matrix2', 'new_temp10', 'new_temp16'}, 'new_temp124': {'new_temp14', 'matrix2', 'new_temp12', 'new_temp10', 'new_temp16'}, 'new_temp125': {'new_temp14', 'new_temp12', 'matrix2', 'new_temp10', 'new_temp16'}, 'new_temp17': {'new_temp146', 'new_temp25', 'edx', 'new_temp131', 'new_temp19', 'new_temp139', 'new_temp129', 'new_temp24', 'new_temp142', 'new_temp14', 'new_temp137', 'new_temp126', 'new_temp140', 'new_temp145', 'new_temp148', 'ecx', 'new_temp130', 'new_temp127', 'new_temp143', 'new_temp22', 'new_temp23', 'new_temp135', 'new_temp151', 'new_temp132', 'new_temp144', 'new_temp147', 'new_temp133', 'new_temp149', 'new_temp150', 'new_temp136', 'new_temp20', 'new_temp128', 'new_temp21', 'new_temp16', 'new_temp141', 'eax', 'matrix2', 'new_temp12', 'new_temp18', 'new_temp138', 'new_temp134', 'new_temp10'}, 'new_temp126': {'new_temp14', 'new_temp12', 'matrix2', 'new_temp17', 'new_temp10', 'new_temp16'}, 'new_temp127': {'new_temp14', 'matrix2', 'new_temp17', 'new_temp10', 'new_temp16'}, 'new_temp128': {'new_temp10', 'matrix2', 'new_temp16', 'new_temp17'}, 'new_temp129': {'new_temp10', 'matrix2', 'new_temp17'}, 'new_temp130': {'new_temp10', 'matrix2', 'new_temp17'}, 'new_temp18': {'eax', 'matrix2', 'edx', 'ecx', 'new_temp17', 'new_temp131', 'new_temp10'}, 'new_temp131': {'new_temp10', 'matrix2', 'new_temp18', 'new_temp17'}, 'new_temp132': {'new_temp10', 'matrix2', 'new_temp17'}, 'new_temp19': {'edx', 'new_temp23', 'new_temp133', 'new_temp139', 'new_temp136', 'new_temp17', 'new_temp20', 'new_temp24', 'new_temp142', 'new_temp21', 'new_temp137', 'new_temp140', 'ecx', 'new_temp141', 'eax', 'new_temp143', 'matrix2', 'new_temp134', 'new_temp22', 'new_temp138', 'new_temp135', 'new_temp10', 'new_temp144'}, 'new_temp133': {'new_temp19', 'new_temp10', 'matrix2', 'new_temp17'}, 'new_temp134': {'new_temp19', 'new_temp10', 'matrix2', 'new_temp17'}, 'new_temp20': {'new_temp19', 'eax', 'matrix2', 'edx', 'ecx', 'new_temp17', 'new_temp135', 'new_temp10'}, 'new_temp135': {'new_temp19', 'matrix2', 'new_temp17', 'new_temp20', 'new_temp10'}, 'new_temp136': {'new_temp19', 'new_temp10', 'matrix2', 'new_temp17'}, 'new_temp21': {'edx', 'new_temp23', 'new_temp19', 'new_temp139', 'new_temp17', 'new_temp24', 'new_temp142', 'new_temp137', 'new_temp140', 'new_temp145', 'ecx', 'new_temp141', 'eax', 'new_temp143', 'matrix2', 'new_temp22', 'new_temp138', 'new_temp10', 'new_temp144'}, 'new_temp137': {'new_temp19', 'new_temp21', 'matrix2', 'new_temp17', 'new_temp10'}, 'new_temp138': {'new_temp19', 'new_temp21', 'matrix2', 'new_temp17', 'new_temp10'}, 'new_temp22': {'edx', 'new_temp19', 'new_temp139', 'new_temp17', 'new_temp21', 'ecx', 'eax', 'matrix2', 'new_temp10'}, 'new_temp139': {'new_temp19', 'new_temp21', 'matrix2', 'new_temp22', 'new_temp17', 'new_temp10'}, 'new_temp140': {'new_temp19', 'new_temp21', 'matrix2', 'new_temp17', 'new_temp10'}, 'new_temp23': {'new_temp146', 'new_temp142', 'new_temp21', 'edx', 'new_temp145', 'ecx', 'new_temp141', 'new_temp19', 'eax', 'new_temp143', 'matrix2', 'new_temp17', 'new_temp24', 'new_temp10', 'new_temp144'}, 'new_temp141': {'new_temp19', 'new_temp21', 'matrix2', 'new_temp23', 'new_temp17', 'new_temp10'}, 'new_temp142': {'new_temp19', 'new_temp21', 'matrix2', 'new_temp23', 'new_temp17', 'new_temp10'}, 'new_temp143': {'new_temp19', 'new_temp21', 'matrix2', 'new_temp23', 'new_temp17', 'new_temp10'}, 'new_temp24': {'new_temp147', 'new_temp146', 'edx', 'new_temp149', 'new_temp19', 'new_temp150', 'new_temp17', 'new_temp151', 'new_temp21', 'new_temp145', 'new_temp10', 'new_temp148', 'ecx', 'eax', 'new_temp152', 'matrix2', 'new_temp23', 'new_temp25', 'new_temp144'}, 'new_temp144': {'new_temp19', 'new_temp21', 'matrix2', 'new_temp23', 'new_temp17', 'new_temp24', 'new_temp10'}, 'new_temp145': {'new_temp21', 'matrix2', 'new_temp17', 'new_temp23', 'new_temp10', 'new_temp24'}, 'new_temp146': {'matrix2', 'new_temp17', 'new_temp23', 'new_temp10', 'new_temp24'}, 'new_temp147': {'new_temp10', 'new_temp24', 'matrix2', 'new_temp17'}, 'new_temp148': {'new_temp10', 'new_temp24', 'matrix2', 'new_temp17'}, 'new_temp149': {'new_temp10', 'new_temp24', 'matrix2', 'new_temp17'}, 'new_temp25': {'new_temp151', 'edx', 'ecx', 'eax', 'new_temp152', 'matrix2', 'new_temp150', 'new_temp17', 'new_temp24', 'new_temp10'}, 'new_temp150': {'matrix2', 'new_temp17', 'new_temp10', 'new_temp24', 'new_temp25'}, 'new_temp151': {'new_temp24', 'matrix2', 'new_temp25', 'new_temp17'}, 'new_temp152': {'new_temp24', 'matrix2', 'new_temp25'}, 'matrix2_t2': {'new_temp180', 'new_temp33', 'new_temp38', 'new_temp49', 'new_temp166', 'new_temp213', 'new_temp157', 'new_temp39', 'new_temp205', 'new_temp207', 'new_temp199', 'new_temp211', 'new_temp173', 'new_temp187', 'new_temp215', 'ecx', 'new_temp43', 'new_temp167', 'new_temp155', 'new_temp30', 'new_temp158', 'new_temp154', 'new_temp196', 'new_temp179', 'new_temp37', 'new_temp198', 'new_temp169', 'new_temp182', 'new_temp26', 'new_temp32', 'new_temp214', 'new_temp209', 'new_temp178', 'new_temp168', 'new_temp204', 'matrix2', 'new_temp189', 'tmp7', 'tmp6', 'new_temp191', 'new_temp52', 'new_temp193', 'new_temp210', 'new_temp190', 'edx', 'new_temp162', 'new_temp177', 'new_temp195', 'new_temp172', 'new_temp153', 'new_temp184', 'new_temp156', 'new_temp197', 'new_temp34', 'new_temp41', 'new_temp194', 'tmp3', 'new_temp200', 'new_temp40', 'new_temp203', 'new_temp174', 'new_temp188', 'new_temp192', 'new_temp46', 'new_temp48', 'new_temp165', 'new_temp163', 'new_temp47', 'new_temp51', 'new_temp159', 'new_temp216', 'tmp4', 'new_temp29', 'new_temp161', 'new_temp176', 'tmp5', 'new_temp42', 'explicate_56', 'new_temp170', 'new_temp28', 'new_temp27', 'tmp0', 'new_temp160', 'new_temp36', 'new_temp181', 'new_temp44', 'new_temp50', 'new_temp212', 'new_temp201', 'new_temp208', 'eax', 'new_temp31', 'new_temp171', 'new_temp35', 'new_temp175', 'new_temp202', 'new_temp206', 'new_temp164', 'new_temp183', 'new_temp45', 'new_temp186', 'new_temp185', 'tmp2', 'new_temp53'}, 'new_temp153': {'matrix2_t2', 'matrix2'}, 'new_temp154': {'matrix2_t2', 'matrix2'}, 'new_temp26': {'eax', 'new_temp155', 'matrix2', 'edx', 'matrix2_t2', 'ecx'}, 'new_temp155': {'matrix2_t2', 'matrix2', 'new_temp26'}, 'new_temp156': {'matrix2_t2', 'matrix2'}, 'new_temp27': {'matrix2_t2', 'matrix2'}, 'tmp0': {'new_temp180', 'new_temp33', 'edx', 'new_temp38', 'new_temp166', 'new_temp162', 'new_temp157', 'new_temp177', 'new_temp172', 'new_temp34', 'new_temp173', 'ecx', 'new_temp167', 'new_temp30', 'tmp3', 'new_temp158', 'new_temp174', 'new_temp179', 'new_temp37', 'new_temp165', 'new_temp163', 'matrix2_t2', 'new_temp159', 'new_temp169', 'new_temp29', 'new_temp161', 'new_temp32', 'new_temp176', 'new_temp170', 'new_temp28', 'new_temp181', 'new_temp160', 'new_temp36', 'new_temp178', 'new_temp168', 'eax', 'new_temp31', 'new_temp171', 'new_temp35', 'matrix2', 'new_temp175', 'new_temp164', 'tmp2'}, 'new_temp157': {'matrix2_t2', 'matrix2', 'tmp0'}, 'new_temp158': {'matrix2_t2', 'matrix2', 'tmp0'}, 'new_temp28': {'eax', 'new_temp159', 'matrix2', 'edx', 'tmp0', 'matrix2_t2', 'ecx'}, 'new_temp159': {'matrix2_t2', 'matrix2', 'new_temp28', 'tmp0'}, 'new_temp160': {'matrix2_t2', 'matrix2', 'tmp0'}, 'new_temp29': {'edx', 'new_temp163', 'tmp0', 'matrix2_t2', 'ecx', 'new_temp162', 'eax', 'new_temp30', 'matrix2', 'new_temp161'}, 'new_temp161': {'new_temp29', 'matrix2_t2', 'matrix2', 'tmp0'}, 'new_temp162': {'new_temp29', 'matrix2_t2', 'matrix2', 'tmp0'}, 'new_temp30': {'eax', 'matrix2', 'edx', 'new_temp163', 'tmp0', 'matrix2_t2', 'new_temp29', 'ecx'}, 'new_temp163': {'new_temp30', 'matrix2', 'tmp0', 'new_temp29', 'matrix2_t2'}, 'new_temp164': {'matrix2_t2', 'matrix2', 'tmp0'}, 'new_temp165': {'matrix2_t2', 'matrix2', 'tmp0'}, 'new_temp31': {'eax', 'matrix2', 'edx', 'tmp0', 'matrix2_t2', 'new_temp166', 'ecx'}, 'new_temp166': {'new_temp31', 'matrix2_t2', 'matrix2', 'tmp0'}, 'new_temp167': {'matrix2_t2', 'matrix2', 'tmp0'}, 'new_temp32': {'matrix2_t2', 'matrix2', 'tmp0'}, 'tmp2': {'new_temp180', 'new_temp190', 'new_temp33', 'edx', 'new_temp38', 'new_temp177', 'new_temp39', 'new_temp195', 'new_temp191', 'new_temp172', 'new_temp184', 'new_temp199', 'new_temp197', 'new_temp34', 'new_temp173', 'new_temp41', 'new_temp187', 'ecx', 'new_temp43', 'new_temp194', 'tmp3', 'new_temp40', 'new_temp196', 'new_temp174', 'new_temp188', 'new_temp179', 'new_temp192', 'new_temp46', 'new_temp37', 'new_temp198', 'new_temp45', 'matrix2_t2', 'new_temp169', 'tmp4', 'new_temp182', 'new_temp176', 'tmp5', 'new_temp42', 'new_temp170', 'new_temp181', 'tmp0', 'new_temp36', 'new_temp178', 'new_temp44', 'new_temp168', 'eax', 'new_temp171', 'new_temp35', 'matrix2', 'new_temp175', 'new_temp189', 'new_temp183', 'new_temp193', 'new_temp186', 'new_temp185'}, 'new_temp168': {'matrix2_t2', 'matrix2', 'tmp2', 'tmp0'}, 'new_temp169': {'matrix2_t2', 'matrix2', 'tmp2', 'tmp0'}, 'new_temp33': {'eax', 'new_temp170', 'matrix2', 'edx', 'tmp0', 'matrix2_t2', 'ecx', 'tmp2'}, 'new_temp170': {'new_temp33', 'matrix2', 'tmp0', 'matrix2_t2', 'tmp2'}, 'new_temp171': {'matrix2_t2', 'matrix2', 'tmp2', 'tmp0'}, 'new_temp34': {'edx', 'tmp0', 'new_temp173', 'matrix2_t2', 'ecx', 'eax', 'new_temp35', 'matrix2', 'new_temp174', 'new_temp172', 'tmp2'}, 'new_temp172': {'new_temp34', 'matrix2', 'tmp0', 'matrix2_t2', 'tmp2'}, 'new_temp173': {'new_temp34', 'matrix2', 'tmp0', 'matrix2_t2', 'tmp2'}, 'new_temp35': {'edx', 'matrix2_t2', 'new_temp34', 'tmp0', 'ecx', 'eax', 'matrix2', 'new_temp174', 'tmp2'}, 'new_temp174': {'new_temp35', 'new_temp34', 'matrix2', 'tmp0', 'matrix2_t2', 'tmp2'}, 'new_temp175': {'matrix2_t2', 'matrix2', 'tmp2', 'tmp0'}, 'new_temp176': {'matrix2_t2', 'matrix2', 'tmp2', 'tmp0'}, 'new_temp36': {'eax', 'new_temp177', 'matrix2', 'edx', 'tmp0', 'matrix2_t2', 'ecx', 'tmp2'}, 'new_temp177': {'matrix2', 'tmp0', 'new_temp36', 'matrix2_t2', 'tmp2'}, 'new_temp178': {'matrix2_t2', 'matrix2', 'tmp2', 'tmp0'}, 'new_temp37': {'matrix2_t2', 'matrix2', 'tmp2', 'tmp0'}, 'tmp3': {'new_temp180', 'new_temp38', 'new_temp49', 'new_temp213', 'new_temp39', 'new_temp205', 'new_temp207', 'new_temp199', 'new_temp211', 'new_temp187', 'new_temp215', 'ecx', 'new_temp43', 'new_temp196', 'new_temp179', 'new_temp198', 'new_temp182', 'new_temp214', 'new_temp209', 'new_temp204', 'new_temp185', 'matrix2', 'new_temp189', 'tmp7', 'tmp6', 'new_temp191', 'new_temp210', 'new_temp193', 'new_temp190', 'edx', 'new_temp195', 'new_temp184', 'new_temp197', 'new_temp41', 'new_temp194', 'new_temp200', 'new_temp40', 'new_temp203', 'new_temp192', 'new_temp188', 'new_temp46', 'new_temp48', 'matrix2_t2', 'new_temp47', 'new_temp51', 'new_temp216', 'tmp4', 'tmp5', 'new_temp42', 'new_temp181', 'new_temp50', 'tmp0', 'new_temp44', 'new_temp212', 'new_temp201', 'new_temp208', 'eax', 'new_temp202', 'new_temp206', 'new_temp183', 'new_temp45', 'new_temp186', 'new_temp52', 'tmp2', 'new_temp53'}, 'new_temp179': {'tmp3', 'matrix2', 'tmp0', 'matrix2_t2', 'tmp2'}, 'new_temp180': {'tmp3', 'matrix2', 'tmp0', 'matrix2_t2', 'tmp2'}, 'new_temp38': {'edx', 'matrix2_t2', 'new_temp181', 'tmp0', 'ecx', 'eax', 'tmp3', 'matrix2', 'tmp2'}, 'new_temp181': {'tmp3', 'matrix2', 'new_temp38', 'tmp0', 'matrix2_t2', 'tmp2'}, 'new_temp182': {'tmp3', 'matrix2_t2', 'matrix2', 'tmp2'}, 'new_temp183': {'tmp3', 'matrix2_t2', 'matrix2', 'tmp2'}, 'new_temp39': {'eax', 'tmp3', 'new_temp184', 'matrix2', 'edx', 'matrix2_t2', 'ecx', 'tmp2'}, 'new_temp184': {'tmp3', 'new_temp39', 'matrix2', 'matrix2_t2', 'tmp2'}, 'new_temp185': {'tmp3', 'matrix2_t2', 'matrix2', 'tmp2'}, 'new_temp40': {'tmp3', 'matrix2_t2', 'matrix2', 'tmp2'}, 'tmp4': {'tmp3', 'matrix2_t2', 'matrix2', 'tmp2'}, 'new_temp186': {'tmp3', 'matrix2_t2', 'matrix2', 'tmp2'}, 'new_temp187': {'tmp3', 'matrix2_t2', 'matrix2', 'tmp2'}, 'new_temp41': {'eax', 'tmp3', 'matrix2', 'edx', 'matrix2_t2', 'ecx', 'tmp2', 'new_temp188'}, 'new_temp188': {'tmp3', 'matrix2', 'new_temp41', 'matrix2_t2', 'tmp2'}, 'new_temp189': {'tmp3', 'matrix2_t2', 'matrix2', 'tmp2'}, 'new_temp42': {'new_temp190', 'edx', 'matrix2_t2', 'ecx', 'new_temp43', 'eax', 'tmp3', 'matrix2', 'new_temp191', 'tmp2', 'new_temp192'}, 'new_temp190': {'tmp3', 'matrix2', 'matrix2_t2', 'tmp2', 'new_temp42'}, 'new_temp191': {'tmp3', 'matrix2', 'matrix2_t2', 'tmp2', 'new_temp42'}, 'new_temp43': {'edx', 'matrix2_t2', 'new_temp42', 'ecx', 'eax', 'tmp3', 'matrix2', 'tmp2', 'new_temp192'}, 'new_temp192': {'tmp3', 'matrix2', 'matrix2_t2', 'new_temp43', 'tmp2', 'new_temp42'}, 'new_temp193': {'tmp3', 'matrix2_t2', 'matrix2', 'tmp2'}, 'new_temp194': {'tmp3', 'matrix2_t2', 'matrix2', 'tmp2'}, 'new_temp44': {'eax', 'tmp3', 'matrix2', 'edx', 'new_temp195', 'matrix2_t2', 'ecx', 'tmp2'}, 'new_temp195': {'tmp3', 'matrix2', 'new_temp44', 'matrix2_t2', 'tmp2'}, 'new_temp196': {'tmp3', 'matrix2_t2', 'matrix2', 'tmp2'}, 'new_temp45': {'tmp3', 'matrix2_t2', 'matrix2', 'tmp2'}, 'tmp5': {'edx', 'new_temp49', 'new_temp213', 'new_temp205', 'new_temp207', 'new_temp199', 'new_temp197', 'new_temp211', 'ecx', 'tmp3', 'new_temp200', 'new_temp203', 'new_temp46', 'new_temp48', 'new_temp198', 'matrix2_t2', 'new_temp47', 'new_temp51', 'new_temp209', 'new_temp50', 'new_temp212', 'new_temp201', 'new_temp208', 'eax', 'new_temp202', 'new_temp204', 'matrix2', 'new_temp206', 'tmp7', 'tmp6', 'new_temp210', 'new_temp52', 'tmp2'}, 'new_temp197': {'tmp3', 'matrix2', 'matrix2_t2', 'tmp5', 'tmp2'}, 'new_temp198': {'tmp3', 'matrix2', 'matrix2_t2', 'tmp5', 'tmp2'}, 'new_temp46': {'edx', 'matrix2_t2', 'tmp5', 'new_temp199', 'ecx', 'eax', 'tmp3', 'matrix2', 'tmp2'}, 'new_temp199': {'tmp3', 'new_temp46', 'matrix2', 'matrix2_t2', 'tmp5', 'tmp2'}, 'new_temp200': {'tmp3', 'matrix2_t2', 'tmp5', 'matrix2'}, 'new_temp201': {'tmp3', 'matrix2_t2', 'tmp5', 'matrix2'}, 'new_temp47': {'eax', 'tmp3', 'new_temp202', 'matrix2', 'edx', 'ecx', 'matrix2_t2', 'tmp5'}, 'new_temp202': {'tmp3', 'matrix2', 'matrix2_t2', 'new_temp47', 'tmp5'}, 'new_temp203': {'tmp3', 'matrix2_t2', 'tmp5', 'matrix2'}, 'new_temp48': {'tmp3', 'matrix2_t2', 'tmp5', 'matrix2'}, 'tmp6': {'matrix2', 'tmp3', 'matrix2_t2', 'tmp5'}, 'new_temp204': {'tmp3', 'matrix2_t2', 'tmp5', 'matrix2'}, 'new_temp205': {'tmp3', 'matrix2_t2', 'tmp5', 'matrix2'}, 'new_temp49': {'eax', 'tmp3', 'matrix2', 'edx', 'ecx', 'new_temp206', 'matrix2_t2', 'tmp5'}, 'new_temp206': {'tmp3', 'matrix2', 'new_temp49', 'matrix2_t2', 'tmp5'}, 'new_temp207': {'tmp3', 'matrix2_t2', 'tmp5', 'matrix2'}, 'new_temp50': {'tmp3', 'matrix2_t2', 'tmp5', 'matrix2'}, 'tmp7': {'new_temp209', 'edx', 'matrix2_t2', 'new_temp51', 'ecx', 'new_temp208', 'eax', 'tmp3', 'matrix2', 'new_temp210', 'tmp5'}, 'new_temp208': {'tmp3', 'matrix2', 'tmp7', 'matrix2_t2', 'tmp5'}, 'new_temp209': {'tmp3', 'tmp7', 'matrix2', 'matrix2_t2', 'tmp5'}, 'new_temp51': {'edx', 'matrix2_t2', 'tmp5', 'ecx', 'eax', 'tmp3', 'matrix2', 'tmp7', 'new_temp210'}, 'new_temp210': {'tmp3', 'tmp7', 'matrix2', 'matrix2_t2', 'new_temp51', 'tmp5'}, 'new_temp211': {'tmp3', 'matrix2_t2', 'tmp5', 'matrix2'}, 'new_temp212': {'tmp3', 'matrix2_t2', 'tmp5', 'matrix2'}, 'new_temp52': {'eax', 'tmp3', 'matrix2', 'edx', 'ecx', 'matrix2_t2', 'tmp5', 'new_temp213'}, 'new_temp213': {'tmp3', 'matrix2', 'matrix2_t2', 'tmp5', 'new_temp52'}, 'new_temp214': {'tmp3', 'matrix2_t2', 'matrix2'}, 'new_temp215': {'tmp3', 'matrix2_t2', 'matrix2'}, 'new_temp53': {'eax', 'tmp3', 'matrix2', 'edx', 'new_temp216', 'matrix2_t2', 'ecx'}, 'new_temp216': {'tmp3', 'matrix2_t2', 'matrix2', 'new_temp53'}, 'explicate_56': {'edx', 'new_temp218', 'new_temp224', 'explicate_57', 'new_temp217', 'matrix2_t2', 'ecx', 'eax', 'new_temp226'}, 'explicate_57': {'explicate_56', 'edx', 'new_temp218', 'new_temp224', 'new_temp217', 'new_temp229', 'ecx', 'new_temp227', 'eax', 'new_temp219', 'new_temp226', 'explicate_58', 'new_temp228'}, 'new_temp217': {'explicate_57', 'explicate_56'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp218': {'explicate_57', 'explicate_56'}, 'new_temp224': {'explicate_57', 'explicate_56'}, 'new_temp219': {'edx', 'explicate_57', 'ecx', 'eax', 'new_temp220'}, 'new_temp220': {'new_temp219'}, 'new_temp221': set(), 'new_temp222': set(), 'new_temp54': set(), 'new_temp223': set(), 'new_temp225': set(), 'new_temp226': {'explicate_57', 'explicate_56'}, 'new_temp55': set(), 'new_temp227': {'explicate_57'}, 'explicate_58': {'new_temp231', 'new_temp229', 'edx', 'explicate_57', 'new_temp230', 'ecx', 'eax', 'explicate_59'}, 'new_temp228': {'explicate_57'}, 'new_temp229': {'explicate_57', 'explicate_58'}, 'new_temp230': {'explicate_58'}, 'explicate_59': {'explicate_58'}, 'new_temp231': {'explicate_58'}, 'new_temp232': {'eax'}, 'new_temp233': set(), 'new_temp234': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'tmp2': 4, 'new_temp35': 5, 'tmp0': 6, 'matrix2_t2': 7, 'new_temp34': 7, 'matrix2': 7, 'new_temp36': 5, 'tmp3': 5, 'new_temp38': 7, 'new_temp44': 6, 'new_temp46': 6, 'tmp5': 7, 'new_temp42': 6, 'new_temp43': 7, 'new_temp41': 6, 'new_temp39': 6, 'new_temp33': 5, 'new_temp47': 4, 'new_temp53': 4, 'new_temp52': 4, 'new_temp31': 4, 'new_temp28': 4, 'new_temp29': 4, 'new_temp30': 5, 'new_temp51': 4, 'tmp7': 6, 'new_temp49': 4, 'explicate_57': 4, 'new_temp219': 5, 'explicate_58': 5, 'explicate_56': 5, 'new_temp181': 1, 'new_temp20': 4, 'new_temp10': 5, 'new_temp17': 6, 'new_temp19': 7, 'new_temp16': 4, 'new_temp12': 7, 'new_temp14': 7, 'new_temp22': 4, 'new_temp21': 7, 'new_temp25': 4, 'new_temp24': 7, 'new_temp23': 4, 'new_temp18': 4, 'new_temp11': 4, 'new_temp9': 4, 'new_temp7': 6, 'new_temp5': 7, 'new_temp8': 4, 'new_temp15': 4, 'new_temp13': 4, 'new_temp109': 1, 'new_temp128': 1, 'new_temp76': 4, 'new_temp0': 5, 'new_temp1': 6, 'new_temp72': 4, 'new_temp81': 4, 'new_temp2': 7, 'new_temp83': 4, 'new_temp3': 4, 'new_temp74': 4, 'new_temp85': 4, 'new_temp67': 4, 'new_temp65': 4, 'new_temp63': 4, 'new_temp163': 1, 'new_temp192': 1, 'new_temp174': 1, 'new_temp75': 1, 'new_temp143': 1, 'new_temp4': 4, 'new_temp142': 1, 'new_temp139': 1, 'new_temp131': 1, 'new_temp190': 1, 'new_temp210': 1, 'new_temp126': 1, 'new_temp73': 1, 'new_temp141': 1, 'new_temp26': 4, 'new_temp84': 1, 'new_temp145': 1, 'new_temp6': 4, 'new_temp146': 1, 'new_temp86': 1, 'new_temp108': 1, 'new_temp170': 1, 'new_temp82': 1, 'new_temp188': 1, 'new_temp90': 1, 'new_temp135': 1, 'new_temp77': 1, 'new_temp184': 1, 'new_temp195': 1, 'new_temp177': 1, 'new_temp191': 1, 'new_temp150': 1, 'new_temp179': 1, 'new_temp144': 1, 'new_temp127': 1, 'new_temp199': 1, 'new_temp180': 1, 'new_temp186': 1, 'new_temp45': 1, 'new_temp138': 1, 'new_temp206': 1, 'new_temp175': 1, 'new_temp202': 1, 'new_temp171': 1, 'new_temp208': 1, 'new_temp176': 1, 'new_temp64': 1, 'new_temp136': 1, 'new_temp80': 1, 'new_temp149': 1, 'new_temp132': 1, 'new_temp87': 1, 'new_temp183': 1, 'new_temp226': 1, 'new_temp134': 1, 'new_temp161': 1, 'tmp4': 1, 'new_temp159': 1, 'new_temp216': 1, 'new_temp229': 1, 'new_temp78': 1, 'new_temp103': 1, 'new_temp151': 1, 'new_temp40': 1, 'new_temp194': 1, 'new_temp130': 1, 'new_temp217': 1, 'new_temp140': 1, 'new_temp197': 1, 'new_temp172': 1, 'new_temp79': 1, 'new_temp66': 1, 'new_temp162': 1, 'new_temp121': 1, 'new_temp193': 1, 'new_temp189': 1, 'new_temp185': 1, 'new_temp168': 1, 'new_temp178': 1, 'new_temp125': 1, 'new_temp209': 1, 'new_temp91': 1, 'new_temp182': 1, 'new_temp169': 1, 'new_temp68': 1, 'new_temp133': 1, 'new_temp224': 1, 'new_temp113': 1, 'new_temp198': 1, 'new_temp37': 1, 'new_temp147': 1, 'new_temp89': 1, 'new_temp196': 1, 'new_temp105': 1, 'new_temp107': 1, 'new_temp187': 1, 'new_temp106': 1, 'new_temp148': 1, 'new_temp173': 1, 'new_temp123': 1, 'new_temp218': 1, 'new_temp137': 1, 'new_temp124': 1, 'new_temp117': 1, 'new_temp129': 1, 'new_temp213': 1, 'new_temp166': 1, 'new_temp88': 1, 'new_temp110': 1, 'new_temp116': 1, 'new_temp119': 1, 'new_temp164': 1, 'new_temp201': 1, 'new_temp212': 1, 'new_temp50': 1, 'new_temp115': 1, 'tmp6': 1, 'new_temp152': 1, 'new_temp204': 1, 'new_temp99': 1, 'new_temp227': 1, 'new_temp160': 1, 'new_temp111': 1, 'new_temp214': 1, 'new_temp114': 1, 'new_temp32': 1, 'new_temp220': 1, 'new_temp69': 1, 'new_temp70': 1, 'new_temp101': 1, 'new_temp165': 1, 'new_temp112': 1, 'new_temp48': 1, 'new_temp158': 1, 'new_temp102': 1, 'new_temp203': 1, 'new_temp200': 1, 'new_temp95': 1, 'new_temp155': 1, 'new_temp122': 1, 'new_temp167': 1, 'new_temp230': 1, 'new_temp215': 1, 'new_temp104': 1, 'new_temp211': 1, 'new_temp120': 1, 'new_temp92': 1, 'new_temp207': 1, 'new_temp228': 1, 'new_temp118': 1, 'new_temp205': 1, 'new_temp232': 2, 'new_temp71': 1, 'explicate_59': 1, 'new_temp157': 1, 'new_temp231': 1, 'new_temp94': 1, 'new_temp97': 1, 'new_temp154': 1, 'new_temp221': 1, 'new_temp233': 1, 'new_temp27': 1, 'new_temp96': 1, 'new_temp62': 1, 'new_temp55': 1, 'new_temp54': 1, 'new_temp234': 1, 'new_temp98': 1, 'new_temp225': 1, 'new_temp223': 1, 'new_temp100': 1, 'new_temp156': 1, 'new_temp60': 1, 'new_temp153': 1, 'new_temp93': 1, 'new_temp222': 1, 'new_temp61': 1}
+Spilled set:
+ {'new_temp14', 'new_temp34', 'new_temp21', 'new_temp38', 'new_temp5', 'new_temp2', 'matrix2_t2', 'new_temp43', 'new_temp19', 'matrix2', 'new_temp12', 'new_temp24', 'tmp5'}
+
+
+--------------Spilling----------------
+unspillable_set
+ set()
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {'new_temp14': -4, 'new_temp34': -8, 'new_temp21': -12, 'new_temp38': -16, 'new_temp5': -20, 'new_temp2': -24, 'matrix2_t2': -28, 'new_temp43': -32, 'new_temp19': -36, 'matrix2': -40, 'new_temp12': -44, 'new_temp24': -48, 'tmp5': -52, 'tmp2': 'edi', 'new_temp35': 'ebx', 'tmp0': 'esi', 'new_temp36': 'ebx', 'tmp3': 'ebx', 'new_temp44': 'esi', 'new_temp46': 'esi', 'new_temp42': 'esi', 'new_temp41': 'esi', 'new_temp39': 'esi', 'new_temp33': 'ebx', 'new_temp47': 'edi', 'new_temp53': 'edi', 'new_temp52': 'edi', 'new_temp31': 'edi', 'new_temp28': 'edi', 'new_temp29': 'edi', 'new_temp30': 'ebx', 'new_temp51': 'edi', 'tmp7': 'esi', 'new_temp49': 'edi', 'explicate_57': 'edi', 'new_temp219': 'ebx', 'explicate_58': 'ebx', 'explicate_56': 'ebx', 'new_temp181': 'eax', 'new_temp20': 'edi', 'new_temp10': 'ebx', 'new_temp17': 'esi', 'new_temp16': 'edi', 'new_temp22': 'edi', 'new_temp25': 'edi', 'new_temp23': 'edi', 'new_temp18': 'edi', 'new_temp11': 'edi', 'new_temp9': 'edi', 'new_temp7': 'esi', 'new_temp8': 'edi', 'new_temp15': 'edi', 'new_temp13': 'edi', 'new_temp109': 'eax', 'new_temp128': 'eax', 'new_temp76': 'edi', 'new_temp0': 'ebx', 'new_temp1': 'esi', 'new_temp72': 'edi', 'new_temp81': 'edi', 'new_temp83': 'edi', 'new_temp3': 'edi', 'new_temp74': 'edi', 'new_temp85': 'edi', 'new_temp67': 'edi', 'new_temp65': 'edi', 'new_temp63': 'edi', 'new_temp163': 'eax', 'new_temp192': 'eax', 'new_temp174': 'eax', 'new_temp75': 'eax', 'new_temp143': 'eax', 'new_temp4': 'edi', 'new_temp142': 'eax', 'new_temp139': 'eax', 'new_temp131': 'eax', 'new_temp190': 'eax', 'new_temp210': 'eax', 'new_temp126': 'eax', 'new_temp73': 'eax', 'new_temp141': 'eax', 'new_temp26': 'edi', 'new_temp84': 'eax', 'new_temp145': 'eax', 'new_temp6': 'edi', 'new_temp146': 'eax', 'new_temp86': 'eax', 'new_temp108': 'eax', 'new_temp170': 'eax', 'new_temp82': 'eax', 'new_temp188': 'eax', 'new_temp90': 'eax', 'new_temp135': 'eax', 'new_temp77': 'eax', 'new_temp184': 'eax', 'new_temp195': 'eax', 'new_temp177': 'eax', 'new_temp191': 'eax', 'new_temp150': 'eax', 'new_temp179': 'eax', 'new_temp144': 'eax', 'new_temp127': 'eax', 'new_temp199': 'eax', 'new_temp180': 'eax', 'new_temp186': 'eax', 'new_temp45': 'eax', 'new_temp138': 'eax', 'new_temp206': 'eax', 'new_temp175': 'eax', 'new_temp202': 'eax', 'new_temp171': 'eax', 'new_temp208': 'eax', 'new_temp176': 'eax', 'new_temp64': 'eax', 'new_temp136': 'eax', 'new_temp80': 'eax', 'new_temp149': 'eax', 'new_temp132': 'eax', 'new_temp87': 'eax', 'new_temp183': 'eax', 'new_temp226': 'eax', 'new_temp134': 'eax', 'new_temp161': 'eax', 'tmp4': 'eax', 'new_temp159': 'eax', 'new_temp216': 'eax', 'new_temp229': 'eax', 'new_temp78': 'eax', 'new_temp103': 'eax', 'new_temp151': 'eax', 'new_temp40': 'eax', 'new_temp194': 'eax', 'new_temp130': 'eax', 'new_temp217': 'eax', 'new_temp140': 'eax', 'new_temp197': 'eax', 'new_temp172': 'eax', 'new_temp79': 'eax', 'new_temp66': 'eax', 'new_temp162': 'eax', 'new_temp121': 'eax', 'new_temp193': 'eax', 'new_temp189': 'eax', 'new_temp185': 'eax', 'new_temp168': 'eax', 'new_temp178': 'eax', 'new_temp125': 'eax', 'new_temp209': 'eax', 'new_temp91': 'eax', 'new_temp182': 'eax', 'new_temp169': 'eax', 'new_temp68': 'eax', 'new_temp133': 'eax', 'new_temp224': 'eax', 'new_temp113': 'eax', 'new_temp198': 'eax', 'new_temp37': 'eax', 'new_temp147': 'eax', 'new_temp89': 'eax', 'new_temp196': 'eax', 'new_temp105': 'eax', 'new_temp107': 'eax', 'new_temp187': 'eax', 'new_temp106': 'eax', 'new_temp148': 'eax', 'new_temp173': 'eax', 'new_temp123': 'eax', 'new_temp218': 'eax', 'new_temp137': 'eax', 'new_temp124': 'eax', 'new_temp117': 'eax', 'new_temp129': 'eax', 'new_temp213': 'eax', 'new_temp166': 'eax', 'new_temp88': 'eax', 'new_temp110': 'eax', 'new_temp116': 'eax', 'new_temp119': 'eax', 'new_temp164': 'eax', 'new_temp201': 'eax', 'new_temp212': 'eax', 'new_temp50': 'eax', 'new_temp115': 'eax', 'tmp6': 'eax', 'new_temp152': 'eax', 'new_temp204': 'eax', 'new_temp99': 'eax', 'new_temp227': 'eax', 'new_temp160': 'eax', 'new_temp111': 'eax', 'new_temp214': 'eax', 'new_temp114': 'eax', 'new_temp32': 'eax', 'new_temp220': 'eax', 'new_temp69': 'eax', 'new_temp70': 'eax', 'new_temp101': 'eax', 'new_temp165': 'eax', 'new_temp112': 'eax', 'new_temp48': 'eax', 'new_temp158': 'eax', 'new_temp102': 'eax', 'new_temp203': 'eax', 'new_temp200': 'eax', 'new_temp95': 'eax', 'new_temp155': 'eax', 'new_temp122': 'eax', 'new_temp167': 'eax', 'new_temp230': 'eax', 'new_temp215': 'eax', 'new_temp104': 'eax', 'new_temp211': 'eax', 'new_temp120': 'eax', 'new_temp92': 'eax', 'new_temp207': 'eax', 'new_temp228': 'eax', 'new_temp118': 'eax', 'new_temp205': 'eax', 'new_temp232': 'ecx', 'new_temp71': 'eax', 'explicate_59': 'eax', 'new_temp157': 'eax', 'new_temp231': 'eax', 'new_temp94': 'eax', 'new_temp97': 'eax', 'new_temp154': 'eax', 'new_temp221': 'eax', 'new_temp233': 'eax', 'new_temp27': 'eax', 'new_temp96': 'eax', 'new_temp62': 'eax', 'new_temp55': 'eax', 'new_temp54': 'eax', 'new_temp234': 'eax', 'new_temp98': 'eax', 'new_temp225': 'eax', 'new_temp223': 'eax', 'new_temp100': 'eax', 'new_temp156': 'eax', 'new_temp60': 'eax', 'new_temp153': 'eax', 'new_temp93': 'eax', 'new_temp222': 'eax', 'new_temp61': 'eax'}
+new_temp60
+new_temp60
+new_temp61
+new_temp61
+new_temp62
+new_temp62
+new_temp0
+new_temp63
+new_temp64
+new_temp64
+new_temp63
+new_temp0
+new_temp65
+new_temp66
+new_temp66
+new_temp65
+new_temp0
+new_temp67
+new_temp68
+new_temp68
+new_temp67
+new_temp0
+new_temp69
+new_temp69
+new_temp70
+new_temp70
+new_temp71
+new_temp71
+new_temp1
+new_temp72
+new_temp73
+new_temp73
+new_temp72
+new_temp1
+new_temp74
+new_temp75
+new_temp75
+new_temp74
+new_temp1
+new_temp76
+new_temp77
+new_temp77
+new_temp76
+new_temp1
+new_temp78
+new_temp78
+new_temp79
+new_temp79
+new_temp80
+new_temp80
+new_temp81
+new_temp82
+new_temp82
+new_temp81
+new_temp83
+new_temp84
+new_temp84
+new_temp83
+new_temp85
+new_temp86
+new_temp86
+new_temp85
+new_temp87
+new_temp87
+new_temp88
+new_temp88
+new_temp89
+new_temp89
+new_temp3
+new_temp90
+new_temp0
+new_temp90
+new_temp3
+new_temp91
+new_temp1
+new_temp91
+new_temp3
+new_temp92
+new_temp92
+new_temp3
+new_temp3
+new_temp93
+new_temp93
+new_temp94
+new_temp94
+new_temp4
+new_temp95
+new_temp95
+new_temp4
+new_temp96
+new_temp96
+new_temp97
+new_temp97
+new_temp98
+new_temp98
+new_temp6
+new_temp99
+new_temp99
+new_temp6
+new_temp100
+new_temp100
+new_temp7
+new_temp101
+new_temp101
+new_temp102
+new_temp102
+new_temp8
+new_temp103
+new_temp103
+new_temp8
+new_temp104
+new_temp104
+new_temp9
+new_temp105
+new_temp105
+new_temp106
+new_temp106
+new_temp107
+new_temp107
+new_temp10
+new_temp108
+new_temp108
+new_temp10
+new_temp109
+new_temp7
+new_temp109
+new_temp10
+new_temp110
+new_temp9
+new_temp110
+new_temp10
+new_temp111
+new_temp111
+new_temp112
+new_temp112
+new_temp11
+new_temp113
+new_temp113
+new_temp11
+new_temp114
+new_temp114
+new_temp115
+new_temp115
+new_temp116
+new_temp116
+new_temp13
+new_temp117
+new_temp117
+new_temp13
+new_temp118
+new_temp118
+new_temp119
+new_temp119
+new_temp120
+new_temp120
+new_temp15
+new_temp121
+new_temp121
+new_temp15
+new_temp122
+new_temp122
+new_temp16
+new_temp123
+new_temp123
+new_temp124
+new_temp124
+new_temp125
+new_temp125
+new_temp17
+new_temp126
+new_temp126
+new_temp17
+new_temp127
+new_temp127
+new_temp17
+new_temp128
+new_temp16
+new_temp128
+new_temp17
+new_temp129
+new_temp129
+new_temp130
+new_temp130
+new_temp18
+new_temp131
+new_temp131
+new_temp18
+new_temp132
+new_temp132
+new_temp133
+new_temp133
+new_temp134
+new_temp134
+new_temp20
+new_temp135
+new_temp135
+new_temp20
+new_temp136
+new_temp136
+new_temp137
+new_temp137
+new_temp138
+new_temp138
+new_temp22
+new_temp139
+new_temp139
+new_temp22
+new_temp140
+new_temp140
+new_temp23
+new_temp141
+new_temp141
+new_temp142
+new_temp142
+new_temp143
+new_temp143
+new_temp144
+new_temp144
+new_temp145
+new_temp145
+new_temp146
+new_temp23
+new_temp146
+new_temp147
+new_temp147
+new_temp148
+new_temp148
+new_temp149
+new_temp149
+new_temp25
+new_temp150
+new_temp10
+new_temp150
+new_temp25
+new_temp151
+new_temp17
+new_temp151
+new_temp25
+new_temp152
+new_temp152
+new_temp25
+new_temp25
+new_temp153
+new_temp153
+new_temp154
+new_temp154
+new_temp26
+new_temp155
+new_temp155
+new_temp26
+new_temp156
+new_temp156
+new_temp27
+new_temp27
+tmp0
+new_temp157
+new_temp157
+new_temp158
+new_temp158
+new_temp28
+new_temp159
+new_temp159
+new_temp28
+new_temp160
+new_temp160
+new_temp29
+new_temp161
+new_temp161
+new_temp162
+new_temp162
+new_temp30
+new_temp163
+new_temp29
+new_temp163
+new_temp30
+new_temp164
+new_temp164
+new_temp165
+new_temp165
+new_temp31
+new_temp166
+new_temp166
+new_temp31
+new_temp167
+new_temp167
+new_temp32
+new_temp32
+tmp2
+new_temp168
+new_temp168
+new_temp169
+new_temp169
+new_temp33
+new_temp170
+new_temp170
+new_temp33
+new_temp171
+new_temp171
+new_temp172
+new_temp172
+new_temp173
+new_temp173
+new_temp35
+new_temp174
+new_temp174
+new_temp35
+new_temp175
+new_temp175
+new_temp176
+new_temp176
+new_temp36
+new_temp177
+new_temp177
+new_temp36
+new_temp178
+new_temp178
+new_temp37
+new_temp37
+tmp3
+new_temp179
+new_temp179
+new_temp180
+new_temp180
+new_temp181
+tmp0
+new_temp181
+new_temp182
+new_temp182
+new_temp183
+new_temp183
+new_temp39
+new_temp184
+new_temp184
+new_temp39
+new_temp185
+new_temp185
+new_temp40
+new_temp40
+tmp4
+new_temp186
+new_temp186
+new_temp187
+new_temp187
+new_temp41
+new_temp188
+new_temp188
+new_temp41
+new_temp189
+new_temp189
+new_temp42
+new_temp190
+new_temp190
+new_temp191
+new_temp191
+new_temp192
+new_temp42
+new_temp192
+new_temp193
+new_temp193
+new_temp194
+new_temp194
+new_temp44
+new_temp195
+new_temp195
+new_temp44
+new_temp196
+new_temp196
+new_temp45
+new_temp45
+new_temp197
+new_temp197
+new_temp198
+new_temp198
+new_temp46
+new_temp199
+tmp2
+new_temp199
+new_temp46
+new_temp200
+new_temp200
+new_temp201
+new_temp201
+new_temp47
+new_temp202
+new_temp202
+new_temp47
+new_temp203
+new_temp203
+new_temp48
+new_temp48
+tmp6
+new_temp204
+new_temp204
+new_temp205
+new_temp205
+new_temp49
+new_temp206
+new_temp206
+new_temp49
+new_temp207
+new_temp207
+new_temp50
+new_temp50
+tmp7
+new_temp208
+new_temp208
+new_temp209
+new_temp209
+new_temp51
+new_temp210
+tmp7
+new_temp210
+new_temp51
+new_temp211
+new_temp211
+new_temp212
+new_temp212
+new_temp52
+new_temp213
+new_temp213
+new_temp52
+new_temp214
+new_temp214
+new_temp215
+new_temp215
+new_temp53
+new_temp216
+tmp3
+new_temp216
+new_temp53
+explicate_56
+explicate_57
+explicate_56
+new_temp217
+new_temp217
+explicate_57
+new_temp218
+new_temp218
+explicate_56
+new_temp219
+explicate_57
+new_temp220
+new_temp220
+new_temp219
+new_temp221
+new_temp221
+new_temp222
+new_temp222
+new_temp54
+new_temp223
+new_temp223
+new_temp54
+explicate_57
+new_temp224
+new_temp224
+new_temp225
+new_temp225
+new_temp54
+explicate_56
+new_temp226
+new_temp226
+explicate_56
+new_temp227
+new_temp227
+explicate_58
+explicate_56
+new_temp228
+new_temp228
+explicate_58
+explicate_57
+new_temp229
+new_temp229
+explicate_57
+new_temp230
+new_temp230
+explicate_59
+explicate_57
+new_temp231
+new_temp231
+explicate_59
+explicate_58
+explicate_59
+new_temp232
+new_temp232
+new_temp232
+new_temp232
+new_temp233
+new_temp233
+new_temp234
+new_temp234
+new_temp54
+new_temp54
+new_temp55
+new_temp55

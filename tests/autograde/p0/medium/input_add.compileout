@@ -1,0 +1,1686 @@
+--------------Original code----------------
+x = eval(input())
+y = eval(input()) + x
+z = eval(input()) + y
+w = eval(input()) + z
+print(x + y + z + w + eval(input()))
+
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Call(
+                    func=Name(id='eval', ctx=Load()),
+                    args=[
+                         Call(
+                              func=Name(id='input', ctx=Load()),
+                              args=[],
+                              keywords=[])],
+                    keywords=[])),
+          Assign(
+               targets=[
+                    Name(id='y', ctx=Store())],
+               value=BinOp(
+                    left=Call(
+                         func=Name(id='eval', ctx=Load()),
+                         args=[
+                              Call(
+                                   func=Name(id='input', ctx=Load()),
+                                   args=[],
+                                   keywords=[])],
+                         keywords=[]),
+                    op=Add(),
+                    right=Name(id='x', ctx=Load()))),
+          Assign(
+               targets=[
+                    Name(id='z', ctx=Store())],
+               value=BinOp(
+                    left=Call(
+                         func=Name(id='eval', ctx=Load()),
+                         args=[
+                              Call(
+                                   func=Name(id='input', ctx=Load()),
+                                   args=[],
+                                   keywords=[])],
+                         keywords=[]),
+                    op=Add(),
+                    right=Name(id='y', ctx=Load()))),
+          Assign(
+               targets=[
+                    Name(id='w', ctx=Store())],
+               value=BinOp(
+                    left=Call(
+                         func=Name(id='eval', ctx=Load()),
+                         args=[
+                              Call(
+                                   func=Name(id='input', ctx=Load()),
+                                   args=[],
+                                   keywords=[])],
+                         keywords=[]),
+                    op=Add(),
+                    right=Name(id='z', ctx=Load()))),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         BinOp(
+                              left=BinOp(
+                                   left=BinOp(
+                                        left=BinOp(
+                                             left=Name(id='x', ctx=Load()),
+                                             op=Add(),
+                                             right=Name(id='y', ctx=Load())),
+                                        op=Add(),
+                                        right=Name(id='z', ctx=Load())),
+                                   op=Add(),
+                                   right=Name(id='w', ctx=Load())),
+                              op=Add(),
+                              right=Call(
+                                   func=Name(id='eval', ctx=Load()),
+                                   args=[
+                                        Call(
+                                             func=Name(id='input', ctx=Load()),
+                                             args=[],
+                                             keywords=[])],
+                                   keywords=[]))],
+                    keywords=[]))],
+     type_ignores=[])
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='new_temp0', ctx=Store())],
+               value=Call(
+                    func=Name(id='eval', ctx=Load()),
+                    args=[
+                         Call(
+                              func=Name(id='input', ctx=Load()),
+                              args=[],
+                              keywords=[])],
+                    keywords=[])),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Name(id='new_temp0', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp1', ctx=Store())],
+               value=Call(
+                    func=Name(id='eval', ctx=Load()),
+                    args=[
+                         Call(
+                              func=Name(id='input', ctx=Load()),
+                              args=[],
+                              keywords=[])],
+                    keywords=[])),
+          Assign(
+               targets=[
+                    Name(id='new_temp2', ctx=Store())],
+               value=BinOp(
+                    left=Name(id='new_temp1', ctx=Load()),
+                    op=Add(),
+                    right=Name(id='x', ctx=Load()))),
+          Assign(
+               targets=[
+                    Name(id='y', ctx=Store())],
+               value=Name(id='new_temp2', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp3', ctx=Store())],
+               value=Call(
+                    func=Name(id='eval', ctx=Load()),
+                    args=[
+                         Call(
+                              func=Name(id='input', ctx=Load()),
+                              args=[],
+                              keywords=[])],
+                    keywords=[])),
+          Assign(
+               targets=[
+                    Name(id='new_temp4', ctx=Store())],
+               value=BinOp(
+                    left=Name(id='new_temp3', ctx=Load()),
+                    op=Add(),
+                    right=Name(id='y', ctx=Load()))),
+          Assign(
+               targets=[
+                    Name(id='z', ctx=Store())],
+               value=Name(id='new_temp4', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp5', ctx=Store())],
+               value=Call(
+                    func=Name(id='eval', ctx=Load()),
+                    args=[
+                         Call(
+                              func=Name(id='input', ctx=Load()),
+                              args=[],
+                              keywords=[])],
+                    keywords=[])),
+          Assign(
+               targets=[
+                    Name(id='new_temp6', ctx=Store())],
+               value=BinOp(
+                    left=Name(id='new_temp5', ctx=Load()),
+                    op=Add(),
+                    right=Name(id='z', ctx=Load()))),
+          Assign(
+               targets=[
+                    Name(id='w', ctx=Store())],
+               value=Name(id='new_temp6', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp7', ctx=Store())],
+               value=BinOp(
+                    left=Name(id='x', ctx=Load()),
+                    op=Add(),
+                    right=Name(id='y', ctx=Load()))),
+          Assign(
+               targets=[
+                    Name(id='new_temp8', ctx=Store())],
+               value=BinOp(
+                    left=Name(id='new_temp7', ctx=Load()),
+                    op=Add(),
+                    right=Name(id='z', ctx=Load()))),
+          Assign(
+               targets=[
+                    Name(id='new_temp9', ctx=Store())],
+               value=BinOp(
+                    left=Name(id='new_temp8', ctx=Load()),
+                    op=Add(),
+                    right=Name(id='w', ctx=Load()))),
+          Assign(
+               targets=[
+                    Name(id='new_temp10', ctx=Store())],
+               value=Call(
+                    func=Name(id='eval', ctx=Load()),
+                    args=[
+                         Call(
+                              func=Name(id='input', ctx=Load()),
+                              args=[],
+                              keywords=[])],
+                    keywords=[])),
+          Assign(
+               targets=[
+                    Name(id='new_temp11', ctx=Store())],
+               value=BinOp(
+                    left=Name(id='new_temp9', ctx=Load()),
+                    op=Add(),
+                    right=Name(id='new_temp10', ctx=Load()))),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='new_temp11', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
+--------------Code after flattening-------
+new_temp0 = eval(input())
+x = new_temp0
+new_temp1 = eval(input())
+new_temp2 = new_temp1 + x
+y = new_temp2
+new_temp3 = eval(input())
+new_temp4 = new_temp3 + y
+z = new_temp4
+new_temp5 = eval(input())
+new_temp6 = new_temp5 + z
+w = new_temp6
+new_temp7 = x + y
+new_temp8 = new_temp7 + z
+new_temp9 = new_temp8 + w
+new_temp10 = eval(input())
+new_temp11 = new_temp9 + new_temp10
+print(new_temp11)
+eval(input())
+<ast.Name object at 0x7f11aa048be0>
+eval(input())
+inject_big(add(project_big(explicate_12),project_big(explicate_13)))
+inject_int(explicate_14+explicate_15)
+<ast.Name object at 0x7f11aa0489d0>
+eval(input())
+inject_big(add(project_big(explicate_16),project_big(explicate_17)))
+inject_int(explicate_18+explicate_19)
+<ast.Name object at 0x7f11aa0499c0>
+eval(input())
+inject_big(add(project_big(explicate_20),project_big(explicate_21)))
+inject_int(explicate_22+explicate_23)
+<ast.Name object at 0x7f11aa049ba0>
+inject_big(add(project_big(explicate_24),project_big(explicate_25)))
+inject_int(explicate_26+explicate_27)
+inject_big(add(project_big(explicate_28),project_big(explicate_29)))
+inject_int(explicate_30+explicate_31)
+inject_big(add(project_big(explicate_32),project_big(explicate_33)))
+inject_int(explicate_34+explicate_35)
+eval(input())
+inject_big(add(project_big(explicate_36),project_big(explicate_37)))
+inject_int(explicate_38+explicate_39)
+
+new_temp0 = eval(input())
+x = new_temp0
+new_temp1 = eval(input())
+explicate_12 = new_temp1
+explicate_13 = x
+if(is_big(explicate_12)):
+	if(is_big(explicate_13)):
+		new_temp2 = inject_big(add(project_big(explicate_12),project_big(explicate_13)))
+else:
+	if(is_big(explicate_13)):
+		error_pyobj(0)
+	else:
+		if(is_int(explicate_12)):
+			explicate_14 = project_int(explicate_12)
+		else:
+			explicate_14 = project_bool(explicate_12)
+		if(is_int(explicate_13)):
+			explicate_15 = project_int(explicate_13)
+		else:
+			explicate_15 = project_bool(explicate_13)
+		new_temp2 = inject_int(explicate_14+explicate_15)
+y = new_temp2
+new_temp3 = eval(input())
+explicate_16 = new_temp3
+explicate_17 = y
+if(is_big(explicate_16)):
+	if(is_big(explicate_17)):
+		new_temp4 = inject_big(add(project_big(explicate_16),project_big(explicate_17)))
+else:
+	if(is_big(explicate_17)):
+		error_pyobj(0)
+	else:
+		if(is_int(explicate_16)):
+			explicate_18 = project_int(explicate_16)
+		else:
+			explicate_18 = project_bool(explicate_16)
+		if(is_int(explicate_17)):
+			explicate_19 = project_int(explicate_17)
+		else:
+			explicate_19 = project_bool(explicate_17)
+		new_temp4 = inject_int(explicate_18+explicate_19)
+z = new_temp4
+new_temp5 = eval(input())
+explicate_20 = new_temp5
+explicate_21 = z
+if(is_big(explicate_20)):
+	if(is_big(explicate_21)):
+		new_temp6 = inject_big(add(project_big(explicate_20),project_big(explicate_21)))
+else:
+	if(is_big(explicate_21)):
+		error_pyobj(0)
+	else:
+		if(is_int(explicate_20)):
+			explicate_22 = project_int(explicate_20)
+		else:
+			explicate_22 = project_bool(explicate_20)
+		if(is_int(explicate_21)):
+			explicate_23 = project_int(explicate_21)
+		else:
+			explicate_23 = project_bool(explicate_21)
+		new_temp6 = inject_int(explicate_22+explicate_23)
+w = new_temp6
+explicate_24 = x
+explicate_25 = y
+if(is_big(explicate_24)):
+	if(is_big(explicate_25)):
+		new_temp7 = inject_big(add(project_big(explicate_24),project_big(explicate_25)))
+else:
+	if(is_big(explicate_25)):
+		error_pyobj(0)
+	else:
+		if(is_int(explicate_24)):
+			explicate_26 = project_int(explicate_24)
+		else:
+			explicate_26 = project_bool(explicate_24)
+		if(is_int(explicate_25)):
+			explicate_27 = project_int(explicate_25)
+		else:
+			explicate_27 = project_bool(explicate_25)
+		new_temp7 = inject_int(explicate_26+explicate_27)
+explicate_28 = new_temp7
+explicate_29 = z
+if(is_big(explicate_28)):
+	if(is_big(explicate_29)):
+		new_temp8 = inject_big(add(project_big(explicate_28),project_big(explicate_29)))
+else:
+	if(is_big(explicate_29)):
+		error_pyobj(0)
+	else:
+		if(is_int(explicate_28)):
+			explicate_30 = project_int(explicate_28)
+		else:
+			explicate_30 = project_bool(explicate_28)
+		if(is_int(explicate_29)):
+			explicate_31 = project_int(explicate_29)
+		else:
+			explicate_31 = project_bool(explicate_29)
+		new_temp8 = inject_int(explicate_30+explicate_31)
+explicate_32 = new_temp8
+explicate_33 = w
+if(is_big(explicate_32)):
+	if(is_big(explicate_33)):
+		new_temp9 = inject_big(add(project_big(explicate_32),project_big(explicate_33)))
+else:
+	if(is_big(explicate_33)):
+		error_pyobj(0)
+	else:
+		if(is_int(explicate_32)):
+			explicate_34 = project_int(explicate_32)
+		else:
+			explicate_34 = project_bool(explicate_32)
+		if(is_int(explicate_33)):
+			explicate_35 = project_int(explicate_33)
+		else:
+			explicate_35 = project_bool(explicate_33)
+		new_temp9 = inject_int(explicate_34+explicate_35)
+new_temp10 = eval(input())
+explicate_36 = new_temp9
+explicate_37 = new_temp10
+if(is_big(explicate_36)):
+	if(is_big(explicate_37)):
+		new_temp11 = inject_big(add(project_big(explicate_36),project_big(explicate_37)))
+else:
+	if(is_big(explicate_37)):
+		error_pyobj(0)
+	else:
+		if(is_int(explicate_36)):
+			explicate_38 = project_int(explicate_36)
+		else:
+			explicate_38 = project_bool(explicate_36)
+		if(is_int(explicate_37)):
+			explicate_39 = project_int(explicate_37)
+		else:
+			explicate_39 = project_bool(explicate_37)
+		new_temp11 = inject_int(explicate_38+explicate_39)
+print(new_temp11)
+--------------Explicate code-------
+new_temp0 = eval(input())
+x = new_temp0
+new_temp1 = eval(input())
+explicate_12 = new_temp1
+explicate_13 = x
+if is_big(explicate_12):
+    if is_big(explicate_13):
+        new_temp2 = inject_big(add(project_big(explicate_12), project_big(explicate_13)))
+elif is_big(explicate_13):
+    error_pyobj(0)
+else:
+    if is_int(explicate_12):
+        explicate_14 = project_int(explicate_12)
+    else:
+        explicate_14 = project_bool(explicate_12)
+    if is_int(explicate_13):
+        explicate_15 = project_int(explicate_13)
+    else:
+        explicate_15 = project_bool(explicate_13)
+    new_temp2 = inject_int(explicate_14 + explicate_15)
+y = new_temp2
+new_temp3 = eval(input())
+explicate_16 = new_temp3
+explicate_17 = y
+if is_big(explicate_16):
+    if is_big(explicate_17):
+        new_temp4 = inject_big(add(project_big(explicate_16), project_big(explicate_17)))
+elif is_big(explicate_17):
+    error_pyobj(0)
+else:
+    if is_int(explicate_16):
+        explicate_18 = project_int(explicate_16)
+    else:
+        explicate_18 = project_bool(explicate_16)
+    if is_int(explicate_17):
+        explicate_19 = project_int(explicate_17)
+    else:
+        explicate_19 = project_bool(explicate_17)
+    new_temp4 = inject_int(explicate_18 + explicate_19)
+z = new_temp4
+new_temp5 = eval(input())
+explicate_20 = new_temp5
+explicate_21 = z
+if is_big(explicate_20):
+    if is_big(explicate_21):
+        new_temp6 = inject_big(add(project_big(explicate_20), project_big(explicate_21)))
+elif is_big(explicate_21):
+    error_pyobj(0)
+else:
+    if is_int(explicate_20):
+        explicate_22 = project_int(explicate_20)
+    else:
+        explicate_22 = project_bool(explicate_20)
+    if is_int(explicate_21):
+        explicate_23 = project_int(explicate_21)
+    else:
+        explicate_23 = project_bool(explicate_21)
+    new_temp6 = inject_int(explicate_22 + explicate_23)
+w = new_temp6
+explicate_24 = x
+explicate_25 = y
+if is_big(explicate_24):
+    if is_big(explicate_25):
+        new_temp7 = inject_big(add(project_big(explicate_24), project_big(explicate_25)))
+elif is_big(explicate_25):
+    error_pyobj(0)
+else:
+    if is_int(explicate_24):
+        explicate_26 = project_int(explicate_24)
+    else:
+        explicate_26 = project_bool(explicate_24)
+    if is_int(explicate_25):
+        explicate_27 = project_int(explicate_25)
+    else:
+        explicate_27 = project_bool(explicate_25)
+    new_temp7 = inject_int(explicate_26 + explicate_27)
+explicate_28 = new_temp7
+explicate_29 = z
+if is_big(explicate_28):
+    if is_big(explicate_29):
+        new_temp8 = inject_big(add(project_big(explicate_28), project_big(explicate_29)))
+elif is_big(explicate_29):
+    error_pyobj(0)
+else:
+    if is_int(explicate_28):
+        explicate_30 = project_int(explicate_28)
+    else:
+        explicate_30 = project_bool(explicate_28)
+    if is_int(explicate_29):
+        explicate_31 = project_int(explicate_29)
+    else:
+        explicate_31 = project_bool(explicate_29)
+    new_temp8 = inject_int(explicate_30 + explicate_31)
+explicate_32 = new_temp8
+explicate_33 = w
+if is_big(explicate_32):
+    if is_big(explicate_33):
+        new_temp9 = inject_big(add(project_big(explicate_32), project_big(explicate_33)))
+elif is_big(explicate_33):
+    error_pyobj(0)
+else:
+    if is_int(explicate_32):
+        explicate_34 = project_int(explicate_32)
+    else:
+        explicate_34 = project_bool(explicate_32)
+    if is_int(explicate_33):
+        explicate_35 = project_int(explicate_33)
+    else:
+        explicate_35 = project_bool(explicate_33)
+    new_temp9 = inject_int(explicate_34 + explicate_35)
+new_temp10 = eval(input())
+explicate_36 = new_temp9
+explicate_37 = new_temp10
+if is_big(explicate_36):
+    if is_big(explicate_37):
+        new_temp11 = inject_big(add(project_big(explicate_36), project_big(explicate_37)))
+elif is_big(explicate_37):
+    error_pyobj(0)
+else:
+    if is_int(explicate_36):
+        explicate_38 = project_int(explicate_36)
+    else:
+        explicate_38 = project_bool(explicate_36)
+    if is_int(explicate_37):
+        explicate_39 = project_int(explicate_37)
+    else:
+        explicate_39 = project_bool(explicate_37)
+    new_temp11 = inject_int(explicate_38 + explicate_39)
+print(new_temp11)
+
+
+--- explicated flattened python ---
+new_temp40 = eval(input())
+new_temp0 = new_temp40
+x = new_temp0
+new_temp41 = eval(input())
+new_temp1 = new_temp41
+explicate_12 = new_temp1
+explicate_13 = x
+new_temp42 = is_big(explicate_12)
+if new_temp42:
+    new_temp43 = is_big(explicate_13)
+    if new_temp43:
+        new_temp44 = project_big(explicate_12)
+        new_temp45 = project_big(explicate_13)
+        new_temp46 = add(new_temp44, new_temp45)
+        new_temp47 = inject_big(new_temp46)
+        new_temp2 = new_temp47
+else:
+    new_temp48 = is_big(explicate_13)
+    if new_temp48:
+        error_pyobj(0)
+    else:
+        new_temp49 = is_int(explicate_12)
+        if new_temp49:
+            new_temp50 = project_int(explicate_12)
+            explicate_14 = new_temp50
+        else:
+            new_temp51 = project_bool(explicate_12)
+            explicate_14 = new_temp51
+        new_temp52 = is_int(explicate_13)
+        if new_temp52:
+            new_temp53 = project_int(explicate_13)
+            explicate_15 = new_temp53
+        else:
+            new_temp54 = project_bool(explicate_13)
+            explicate_15 = new_temp54
+        new_temp55 = explicate_14 + explicate_15
+        new_temp56 = inject_int(new_temp55)
+        new_temp2 = new_temp56
+y = new_temp2
+new_temp57 = eval(input())
+new_temp3 = new_temp57
+explicate_16 = new_temp3
+explicate_17 = y
+new_temp58 = is_big(explicate_16)
+if new_temp58:
+    new_temp59 = is_big(explicate_17)
+    if new_temp59:
+        new_temp60 = project_big(explicate_16)
+        new_temp61 = project_big(explicate_17)
+        new_temp62 = add(new_temp60, new_temp61)
+        new_temp63 = inject_big(new_temp62)
+        new_temp4 = new_temp63
+else:
+    new_temp64 = is_big(explicate_17)
+    if new_temp64:
+        error_pyobj(0)
+    else:
+        new_temp65 = is_int(explicate_16)
+        if new_temp65:
+            new_temp66 = project_int(explicate_16)
+            explicate_18 = new_temp66
+        else:
+            new_temp67 = project_bool(explicate_16)
+            explicate_18 = new_temp67
+        new_temp68 = is_int(explicate_17)
+        if new_temp68:
+            new_temp69 = project_int(explicate_17)
+            explicate_19 = new_temp69
+        else:
+            new_temp70 = project_bool(explicate_17)
+            explicate_19 = new_temp70
+        new_temp71 = explicate_18 + explicate_19
+        new_temp72 = inject_int(new_temp71)
+        new_temp4 = new_temp72
+z = new_temp4
+new_temp73 = eval(input())
+new_temp5 = new_temp73
+explicate_20 = new_temp5
+explicate_21 = z
+new_temp74 = is_big(explicate_20)
+if new_temp74:
+    new_temp75 = is_big(explicate_21)
+    if new_temp75:
+        new_temp76 = project_big(explicate_20)
+        new_temp77 = project_big(explicate_21)
+        new_temp78 = add(new_temp76, new_temp77)
+        new_temp79 = inject_big(new_temp78)
+        new_temp6 = new_temp79
+else:
+    new_temp80 = is_big(explicate_21)
+    if new_temp80:
+        error_pyobj(0)
+    else:
+        new_temp81 = is_int(explicate_20)
+        if new_temp81:
+            new_temp82 = project_int(explicate_20)
+            explicate_22 = new_temp82
+        else:
+            new_temp83 = project_bool(explicate_20)
+            explicate_22 = new_temp83
+        new_temp84 = is_int(explicate_21)
+        if new_temp84:
+            new_temp85 = project_int(explicate_21)
+            explicate_23 = new_temp85
+        else:
+            new_temp86 = project_bool(explicate_21)
+            explicate_23 = new_temp86
+        new_temp87 = explicate_22 + explicate_23
+        new_temp88 = inject_int(new_temp87)
+        new_temp6 = new_temp88
+w = new_temp6
+explicate_24 = x
+explicate_25 = y
+new_temp89 = is_big(explicate_24)
+if new_temp89:
+    new_temp90 = is_big(explicate_25)
+    if new_temp90:
+        new_temp91 = project_big(explicate_24)
+        new_temp92 = project_big(explicate_25)
+        new_temp93 = add(new_temp91, new_temp92)
+        new_temp94 = inject_big(new_temp93)
+        new_temp7 = new_temp94
+else:
+    new_temp95 = is_big(explicate_25)
+    if new_temp95:
+        error_pyobj(0)
+    else:
+        new_temp96 = is_int(explicate_24)
+        if new_temp96:
+            new_temp97 = project_int(explicate_24)
+            explicate_26 = new_temp97
+        else:
+            new_temp98 = project_bool(explicate_24)
+            explicate_26 = new_temp98
+        new_temp99 = is_int(explicate_25)
+        if new_temp99:
+            new_temp100 = project_int(explicate_25)
+            explicate_27 = new_temp100
+        else:
+            new_temp101 = project_bool(explicate_25)
+            explicate_27 = new_temp101
+        new_temp102 = explicate_26 + explicate_27
+        new_temp103 = inject_int(new_temp102)
+        new_temp7 = new_temp103
+explicate_28 = new_temp7
+explicate_29 = z
+new_temp104 = is_big(explicate_28)
+if new_temp104:
+    new_temp105 = is_big(explicate_29)
+    if new_temp105:
+        new_temp106 = project_big(explicate_28)
+        new_temp107 = project_big(explicate_29)
+        new_temp108 = add(new_temp106, new_temp107)
+        new_temp109 = inject_big(new_temp108)
+        new_temp8 = new_temp109
+else:
+    new_temp110 = is_big(explicate_29)
+    if new_temp110:
+        error_pyobj(0)
+    else:
+        new_temp111 = is_int(explicate_28)
+        if new_temp111:
+            new_temp112 = project_int(explicate_28)
+            explicate_30 = new_temp112
+        else:
+            new_temp113 = project_bool(explicate_28)
+            explicate_30 = new_temp113
+        new_temp114 = is_int(explicate_29)
+        if new_temp114:
+            new_temp115 = project_int(explicate_29)
+            explicate_31 = new_temp115
+        else:
+            new_temp116 = project_bool(explicate_29)
+            explicate_31 = new_temp116
+        new_temp117 = explicate_30 + explicate_31
+        new_temp118 = inject_int(new_temp117)
+        new_temp8 = new_temp118
+explicate_32 = new_temp8
+explicate_33 = w
+new_temp119 = is_big(explicate_32)
+if new_temp119:
+    new_temp120 = is_big(explicate_33)
+    if new_temp120:
+        new_temp121 = project_big(explicate_32)
+        new_temp122 = project_big(explicate_33)
+        new_temp123 = add(new_temp121, new_temp122)
+        new_temp124 = inject_big(new_temp123)
+        new_temp9 = new_temp124
+else:
+    new_temp125 = is_big(explicate_33)
+    if new_temp125:
+        error_pyobj(0)
+    else:
+        new_temp126 = is_int(explicate_32)
+        if new_temp126:
+            new_temp127 = project_int(explicate_32)
+            explicate_34 = new_temp127
+        else:
+            new_temp128 = project_bool(explicate_32)
+            explicate_34 = new_temp128
+        new_temp129 = is_int(explicate_33)
+        if new_temp129:
+            new_temp130 = project_int(explicate_33)
+            explicate_35 = new_temp130
+        else:
+            new_temp131 = project_bool(explicate_33)
+            explicate_35 = new_temp131
+        new_temp132 = explicate_34 + explicate_35
+        new_temp133 = inject_int(new_temp132)
+        new_temp9 = new_temp133
+new_temp134 = eval(input())
+new_temp10 = new_temp134
+explicate_36 = new_temp9
+explicate_37 = new_temp10
+new_temp135 = is_big(explicate_36)
+if new_temp135:
+    new_temp136 = is_big(explicate_37)
+    if new_temp136:
+        new_temp137 = project_big(explicate_36)
+        new_temp138 = project_big(explicate_37)
+        new_temp139 = add(new_temp137, new_temp138)
+        new_temp140 = inject_big(new_temp139)
+        new_temp11 = new_temp140
+else:
+    new_temp141 = is_big(explicate_37)
+    if new_temp141:
+        error_pyobj(0)
+    else:
+        new_temp142 = is_int(explicate_36)
+        if new_temp142:
+            new_temp143 = project_int(explicate_36)
+            explicate_38 = new_temp143
+        else:
+            new_temp144 = project_bool(explicate_36)
+            explicate_38 = new_temp144
+        new_temp145 = is_int(explicate_37)
+        if new_temp145:
+            new_temp146 = project_int(explicate_37)
+            explicate_39 = new_temp146
+        else:
+            new_temp147 = project_bool(explicate_37)
+            explicate_39 = new_temp147
+        new_temp148 = explicate_38 + explicate_39
+        new_temp149 = inject_int(new_temp148)
+        new_temp11 = new_temp149
+print(new_temp11)
+
+
+--- x86 IR ---
+call  eval None
+movl  eax ,  new_temp40
+movl  new_temp40 ,  new_temp0
+movl  new_temp0 ,  x
+call  eval None
+movl  eax ,  new_temp41
+movl  new_temp41 ,  new_temp1
+movl  new_temp1 ,  explicate_12
+movl  x ,  explicate_13
+call  is_big explicate_12
+movl  eax ,  new_temp42
+if1
+cmp 0, new_temp42
+je else1
+then1
+call  is_big explicate_13
+movl  eax ,  new_temp43
+if2
+cmp 0, new_temp43
+je end if2
+then2
+call  project_big explicate_12
+movl  eax ,  new_temp44
+call  project_big explicate_13
+movl  eax ,  new_temp45
+call  add new_temp44,new_temp45
+movl  eax ,  new_temp46
+call  inject_big new_temp46
+movl  eax ,  new_temp47
+movl  new_temp47 ,  new_temp2
+end if2
+else1
+call  is_big explicate_13
+movl  eax ,  new_temp48
+if2
+cmp 0, new_temp48
+je else2
+then2
+call  error_pyobj 0
+else2
+call  is_int explicate_12
+movl  eax ,  new_temp49
+if3
+cmp 0, new_temp49
+je else3
+then3
+call  project_int explicate_12
+movl  eax ,  new_temp50
+movl  new_temp50 ,  explicate_14
+else3
+call  project_bool explicate_12
+movl  eax ,  new_temp51
+movl  new_temp51 ,  explicate_14
+end if3
+call  is_int explicate_13
+movl  eax ,  new_temp52
+if4
+cmp 0, new_temp52
+je else4
+then4
+call  project_int explicate_13
+movl  eax ,  new_temp53
+movl  new_temp53 ,  explicate_15
+else4
+call  project_bool explicate_13
+movl  eax ,  new_temp54
+movl  new_temp54 ,  explicate_15
+end if4
+movl  explicate_14 ,  new_temp55
+addl  explicate_15 ,  new_temp55
+call  inject_int new_temp55
+movl  eax ,  new_temp56
+movl  new_temp56 ,  new_temp2
+end if2
+end if1
+movl  new_temp2 ,  y
+call  eval None
+movl  eax ,  new_temp57
+movl  new_temp57 ,  new_temp3
+movl  new_temp3 ,  explicate_16
+movl  y ,  explicate_17
+call  is_big explicate_16
+movl  eax ,  new_temp58
+if2
+cmp 0, new_temp58
+je else2
+then2
+call  is_big explicate_17
+movl  eax ,  new_temp59
+if3
+cmp 0, new_temp59
+je end if3
+then3
+call  project_big explicate_16
+movl  eax ,  new_temp60
+call  project_big explicate_17
+movl  eax ,  new_temp61
+call  add new_temp60,new_temp61
+movl  eax ,  new_temp62
+call  inject_big new_temp62
+movl  eax ,  new_temp63
+movl  new_temp63 ,  new_temp4
+end if3
+else2
+call  is_big explicate_17
+movl  eax ,  new_temp64
+if3
+cmp 0, new_temp64
+je else3
+then3
+call  error_pyobj 0
+else3
+call  is_int explicate_16
+movl  eax ,  new_temp65
+if4
+cmp 0, new_temp65
+je else4
+then4
+call  project_int explicate_16
+movl  eax ,  new_temp66
+movl  new_temp66 ,  explicate_18
+else4
+call  project_bool explicate_16
+movl  eax ,  new_temp67
+movl  new_temp67 ,  explicate_18
+end if4
+call  is_int explicate_17
+movl  eax ,  new_temp68
+if5
+cmp 0, new_temp68
+je else5
+then5
+call  project_int explicate_17
+movl  eax ,  new_temp69
+movl  new_temp69 ,  explicate_19
+else5
+call  project_bool explicate_17
+movl  eax ,  new_temp70
+movl  new_temp70 ,  explicate_19
+end if5
+movl  explicate_18 ,  new_temp71
+addl  explicate_19 ,  new_temp71
+call  inject_int new_temp71
+movl  eax ,  new_temp72
+movl  new_temp72 ,  new_temp4
+end if3
+end if2
+movl  new_temp4 ,  z
+call  eval None
+movl  eax ,  new_temp73
+movl  new_temp73 ,  new_temp5
+movl  new_temp5 ,  explicate_20
+movl  z ,  explicate_21
+call  is_big explicate_20
+movl  eax ,  new_temp74
+if3
+cmp 0, new_temp74
+je else3
+then3
+call  is_big explicate_21
+movl  eax ,  new_temp75
+if4
+cmp 0, new_temp75
+je end if4
+then4
+call  project_big explicate_20
+movl  eax ,  new_temp76
+call  project_big explicate_21
+movl  eax ,  new_temp77
+call  add new_temp76,new_temp77
+movl  eax ,  new_temp78
+call  inject_big new_temp78
+movl  eax ,  new_temp79
+movl  new_temp79 ,  new_temp6
+end if4
+else3
+call  is_big explicate_21
+movl  eax ,  new_temp80
+if4
+cmp 0, new_temp80
+je else4
+then4
+call  error_pyobj 0
+else4
+call  is_int explicate_20
+movl  eax ,  new_temp81
+if5
+cmp 0, new_temp81
+je else5
+then5
+call  project_int explicate_20
+movl  eax ,  new_temp82
+movl  new_temp82 ,  explicate_22
+else5
+call  project_bool explicate_20
+movl  eax ,  new_temp83
+movl  new_temp83 ,  explicate_22
+end if5
+call  is_int explicate_21
+movl  eax ,  new_temp84
+if6
+cmp 0, new_temp84
+je else6
+then6
+call  project_int explicate_21
+movl  eax ,  new_temp85
+movl  new_temp85 ,  explicate_23
+else6
+call  project_bool explicate_21
+movl  eax ,  new_temp86
+movl  new_temp86 ,  explicate_23
+end if6
+movl  explicate_22 ,  new_temp87
+addl  explicate_23 ,  new_temp87
+call  inject_int new_temp87
+movl  eax ,  new_temp88
+movl  new_temp88 ,  new_temp6
+end if4
+end if3
+movl  new_temp6 ,  w
+movl  x ,  explicate_24
+movl  y ,  explicate_25
+call  is_big explicate_24
+movl  eax ,  new_temp89
+if4
+cmp 0, new_temp89
+je else4
+then4
+call  is_big explicate_25
+movl  eax ,  new_temp90
+if5
+cmp 0, new_temp90
+je end if5
+then5
+call  project_big explicate_24
+movl  eax ,  new_temp91
+call  project_big explicate_25
+movl  eax ,  new_temp92
+call  add new_temp91,new_temp92
+movl  eax ,  new_temp93
+call  inject_big new_temp93
+movl  eax ,  new_temp94
+movl  new_temp94 ,  new_temp7
+end if5
+else4
+call  is_big explicate_25
+movl  eax ,  new_temp95
+if5
+cmp 0, new_temp95
+je else5
+then5
+call  error_pyobj 0
+else5
+call  is_int explicate_24
+movl  eax ,  new_temp96
+if6
+cmp 0, new_temp96
+je else6
+then6
+call  project_int explicate_24
+movl  eax ,  new_temp97
+movl  new_temp97 ,  explicate_26
+else6
+call  project_bool explicate_24
+movl  eax ,  new_temp98
+movl  new_temp98 ,  explicate_26
+end if6
+call  is_int explicate_25
+movl  eax ,  new_temp99
+if7
+cmp 0, new_temp99
+je else7
+then7
+call  project_int explicate_25
+movl  eax ,  new_temp100
+movl  new_temp100 ,  explicate_27
+else7
+call  project_bool explicate_25
+movl  eax ,  new_temp101
+movl  new_temp101 ,  explicate_27
+end if7
+movl  explicate_26 ,  new_temp102
+addl  explicate_27 ,  new_temp102
+call  inject_int new_temp102
+movl  eax ,  new_temp103
+movl  new_temp103 ,  new_temp7
+end if5
+end if4
+movl  new_temp7 ,  explicate_28
+movl  z ,  explicate_29
+call  is_big explicate_28
+movl  eax ,  new_temp104
+if5
+cmp 0, new_temp104
+je else5
+then5
+call  is_big explicate_29
+movl  eax ,  new_temp105
+if6
+cmp 0, new_temp105
+je end if6
+then6
+call  project_big explicate_28
+movl  eax ,  new_temp106
+call  project_big explicate_29
+movl  eax ,  new_temp107
+call  add new_temp106,new_temp107
+movl  eax ,  new_temp108
+call  inject_big new_temp108
+movl  eax ,  new_temp109
+movl  new_temp109 ,  new_temp8
+end if6
+else5
+call  is_big explicate_29
+movl  eax ,  new_temp110
+if6
+cmp 0, new_temp110
+je else6
+then6
+call  error_pyobj 0
+else6
+call  is_int explicate_28
+movl  eax ,  new_temp111
+if7
+cmp 0, new_temp111
+je else7
+then7
+call  project_int explicate_28
+movl  eax ,  new_temp112
+movl  new_temp112 ,  explicate_30
+else7
+call  project_bool explicate_28
+movl  eax ,  new_temp113
+movl  new_temp113 ,  explicate_30
+end if7
+call  is_int explicate_29
+movl  eax ,  new_temp114
+if8
+cmp 0, new_temp114
+je else8
+then8
+call  project_int explicate_29
+movl  eax ,  new_temp115
+movl  new_temp115 ,  explicate_31
+else8
+call  project_bool explicate_29
+movl  eax ,  new_temp116
+movl  new_temp116 ,  explicate_31
+end if8
+movl  explicate_30 ,  new_temp117
+addl  explicate_31 ,  new_temp117
+call  inject_int new_temp117
+movl  eax ,  new_temp118
+movl  new_temp118 ,  new_temp8
+end if6
+end if5
+movl  new_temp8 ,  explicate_32
+movl  w ,  explicate_33
+call  is_big explicate_32
+movl  eax ,  new_temp119
+if6
+cmp 0, new_temp119
+je else6
+then6
+call  is_big explicate_33
+movl  eax ,  new_temp120
+if7
+cmp 0, new_temp120
+je end if7
+then7
+call  project_big explicate_32
+movl  eax ,  new_temp121
+call  project_big explicate_33
+movl  eax ,  new_temp122
+call  add new_temp121,new_temp122
+movl  eax ,  new_temp123
+call  inject_big new_temp123
+movl  eax ,  new_temp124
+movl  new_temp124 ,  new_temp9
+end if7
+else6
+call  is_big explicate_33
+movl  eax ,  new_temp125
+if7
+cmp 0, new_temp125
+je else7
+then7
+call  error_pyobj 0
+else7
+call  is_int explicate_32
+movl  eax ,  new_temp126
+if8
+cmp 0, new_temp126
+je else8
+then8
+call  project_int explicate_32
+movl  eax ,  new_temp127
+movl  new_temp127 ,  explicate_34
+else8
+call  project_bool explicate_32
+movl  eax ,  new_temp128
+movl  new_temp128 ,  explicate_34
+end if8
+call  is_int explicate_33
+movl  eax ,  new_temp129
+if9
+cmp 0, new_temp129
+je else9
+then9
+call  project_int explicate_33
+movl  eax ,  new_temp130
+movl  new_temp130 ,  explicate_35
+else9
+call  project_bool explicate_33
+movl  eax ,  new_temp131
+movl  new_temp131 ,  explicate_35
+end if9
+movl  explicate_34 ,  new_temp132
+addl  explicate_35 ,  new_temp132
+call  inject_int new_temp132
+movl  eax ,  new_temp133
+movl  new_temp133 ,  new_temp9
+end if7
+end if6
+call  eval None
+movl  eax ,  new_temp134
+movl  new_temp134 ,  new_temp10
+movl  new_temp9 ,  explicate_36
+movl  new_temp10 ,  explicate_37
+call  is_big explicate_36
+movl  eax ,  new_temp135
+if7
+cmp 0, new_temp135
+je else7
+then7
+call  is_big explicate_37
+movl  eax ,  new_temp136
+if8
+cmp 0, new_temp136
+je end if8
+then8
+call  project_big explicate_36
+movl  eax ,  new_temp137
+call  project_big explicate_37
+movl  eax ,  new_temp138
+call  add new_temp137,new_temp138
+movl  eax ,  new_temp139
+call  inject_big new_temp139
+movl  eax ,  new_temp140
+movl  new_temp140 ,  new_temp11
+end if8
+else7
+call  is_big explicate_37
+movl  eax ,  new_temp141
+if8
+cmp 0, new_temp141
+je else8
+then8
+call  error_pyobj 0
+else8
+call  is_int explicate_36
+movl  eax ,  new_temp142
+if9
+cmp 0, new_temp142
+je else9
+then9
+call  project_int explicate_36
+movl  eax ,  new_temp143
+movl  new_temp143 ,  explicate_38
+else9
+call  project_bool explicate_36
+movl  eax ,  new_temp144
+movl  new_temp144 ,  explicate_38
+end if9
+call  is_int explicate_37
+movl  eax ,  new_temp145
+if10
+cmp 0, new_temp145
+je else10
+then10
+call  project_int explicate_37
+movl  eax ,  new_temp146
+movl  new_temp146 ,  explicate_39
+else10
+call  project_bool explicate_37
+movl  eax ,  new_temp147
+movl  new_temp147 ,  explicate_39
+end if10
+movl  explicate_38 ,  new_temp148
+addl  explicate_39 ,  new_temp148
+call  inject_int new_temp148
+movl  eax ,  new_temp149
+movl  new_temp149 ,  new_temp11
+end if8
+end if7
+call  print new_temp11
+
+
+--- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp11': {'new_temp92', 'new_temp125', 'new_temp119', 'new_temp51', 'new_temp54', 'new_temp83', 'new_temp111', 'new_temp88', 'explicate_23', 'new_temp113', 'new_temp7', 'explicate_18', 'new_temp90', 'new_temp48', 'new_temp131', 'explicate_30', 'new_temp66', 'new_temp4', 'new_temp132', 'explicate_15', 'new_temp78', 'new_temp95', 'new_temp40', 'new_temp77', 'new_temp129', 'new_temp141', 'explicate_25', 'new_temp68', 'new_temp110', 'new_temp126', 'new_temp75', 'new_temp67', 'new_temp64', 'new_temp53', 'new_temp79', 'new_temp43', 'new_temp135', 'new_temp121', 'new_temp55', 'new_temp101', 'new_temp10', 'new_temp62', 'new_temp94', 'new_temp57', 'new_temp81', 'explicate_35', 'new_temp41', 'new_temp69', 'z', 'new_temp72', 'new_temp122', 'new_temp127', 'new_temp89', 'new_temp114', 'new_temp120', 'new_temp46', 'ecx', 'w', 'new_temp5', 'new_temp116', 'new_temp44', 'new_temp133', 'new_temp49', 'new_temp63', 'new_temp104', 'x', 'new_temp108', 'new_temp130', 'explicate_29', 'eax', 'new_temp52', 'new_temp128', 'new_temp59', 'explicate_22', 'new_temp105', 'explicate_13', 'new_temp71', 'explicate_34', 'new_temp1', 'explicate_32', 'new_temp96', 'new_temp85', 'new_temp115', 'new_temp123', 'new_temp3', 'new_temp86', 'new_temp93', 'new_temp50', 'explicate_24', 'explicate_36', 'explicate_33', 'explicate_27', 'new_temp9', 'explicate_28', 'explicate_37', 'new_temp134', 'explicate_21', 'explicate_14', 'new_temp91', 'new_temp102', 'new_temp2', 'explicate_20', 'new_temp65', 'new_temp0', 'new_temp42', 'new_temp103', 'new_temp99', 'new_temp97', 'new_temp47', 'new_temp80', 'new_temp109', 'new_temp118', 'new_temp106', 'new_temp136', 'explicate_16', 'explicate_19', 'new_temp82', 'new_temp45', 'explicate_12', 'new_temp70', 'y', 'new_temp117', 'new_temp58', 'new_temp76', 'new_temp74', 'new_temp56', 'new_temp60', 'explicate_26', 'new_temp107', 'explicate_17', 'new_temp98', 'new_temp124', 'edx', 'new_temp6', 'new_temp8', 'new_temp112', 'new_temp61', 'explicate_31', 'new_temp84', 'new_temp100', 'new_temp73', 'new_temp87'}, 'eax': {'explicate_22', 'explicate_13', 'explicate_34', 'new_temp121', 'explicate_32', 'new_temp106', 'explicate_16', 'new_temp7', 'explicate_12', 'explicate_18', 'explicate_24', 'explicate_36', 'y', 'z', 'new_temp76', 'explicate_30', 'new_temp137', 'explicate_33', 'new_temp11', 'new_temp9', 'new_temp4', 'new_temp60', 'explicate_28', 'explicate_26', 'w', 'explicate_37', 'explicate_38', 'new_temp44', 'explicate_17', 'new_temp6', 'explicate_21', 'explicate_14', 'new_temp8', 'new_temp91', 'new_temp2', 'x', 'explicate_20', 'explicate_25', 'explicate_29'}, 'ecx': {'explicate_22', 'explicate_13', 'explicate_34', 'new_temp121', 'explicate_32', 'new_temp106', 'explicate_16', 'new_temp7', 'explicate_12', 'explicate_18', 'explicate_24', 'explicate_36', 'y', 'z', 'new_temp76', 'explicate_30', 'new_temp137', 'explicate_33', 'new_temp11', 'new_temp9', 'new_temp4', 'new_temp60', 'explicate_28', 'explicate_26', 'w', 'explicate_37', 'explicate_38', 'new_temp44', 'explicate_17', 'new_temp6', 'explicate_21', 'explicate_14', 'new_temp8', 'new_temp91', 'new_temp2', 'x', 'explicate_20', 'explicate_25', 'explicate_29'}, 'edx': {'explicate_22', 'explicate_13', 'explicate_34', 'new_temp121', 'explicate_32', 'new_temp106', 'explicate_16', 'new_temp7', 'explicate_12', 'explicate_18', 'explicate_24', 'explicate_36', 'y', 'z', 'new_temp76', 'explicate_30', 'new_temp137', 'explicate_33', 'new_temp11', 'new_temp9', 'new_temp4', 'new_temp60', 'explicate_28', 'explicate_26', 'w', 'explicate_37', 'explicate_38', 'new_temp44', 'explicate_17', 'new_temp6', 'explicate_21', 'explicate_14', 'new_temp8', 'new_temp91', 'new_temp2', 'x', 'explicate_20', 'explicate_25', 'explicate_29'}, 'new_temp2': {'new_temp11', 'explicate_13', 'new_temp9', 'new_temp4', 'ecx', 'new_temp1', 'edx', 'new_temp40', 'new_temp6', 'new_temp8', 'x', 'new_temp7', 'explicate_12', 'new_temp0', 'new_temp48', 'new_temp41', 'eax', 'new_temp42', 'new_temp43'}, 'new_temp9': {'explicate_22', 'new_temp105', 'explicate_13', 'new_temp71', 'new_temp92', 'new_temp125', 'new_temp119', 'new_temp51', 'new_temp54', 'new_temp1', 'new_temp100', 'new_temp83', 'explicate_32', 'new_temp111', 'new_temp96', 'new_temp85', 'new_temp88', 'new_temp115', 'explicate_23', 'new_temp113', 'new_temp3', 'new_temp7', 'explicate_18', 'new_temp86', 'new_temp90', 'new_temp93', 'new_temp50', 'explicate_24', 'new_temp48', 'explicate_30', 'explicate_33', 'new_temp66', 'explicate_27', 'new_temp4', 'explicate_28', 'explicate_15', 'new_temp78', 'new_temp95', 'new_temp134', 'new_temp40', 'explicate_21', 'explicate_14', 'new_temp77', 'new_temp91', 'new_temp2', 'explicate_20', 'new_temp102', 'new_temp65', 'explicate_25', 'new_temp68', 'new_temp110', 'new_temp0', 'new_temp75', 'new_temp67', 'new_temp64', 'new_temp53', 'new_temp42', 'new_temp79', 'new_temp43', 'new_temp103', 'new_temp99', 'new_temp97', 'new_temp47', 'new_temp80', 'new_temp109', 'new_temp118', 'new_temp55', 'new_temp106', 'new_temp101', 'explicate_16', 'explicate_19', 'new_temp82', 'new_temp62', 'new_temp10', 'new_temp94', 'new_temp45', 'new_temp57', 'explicate_12', 'new_temp81', 'new_temp41', 'y', 'new_temp69', 'new_temp70', 'new_temp58', 'z', 'new_temp76', 'new_temp117', 'new_temp74', 'new_temp72', 'new_temp11', 'new_temp89', 'new_temp56', 'new_temp114', 'new_temp60', 'explicate_26', 'new_temp120', 'new_temp46', 'ecx', 'w', 'new_temp5', 'new_temp116', 'new_temp107', 'new_temp44', 'explicate_17', 'new_temp98', 'edx', 'new_temp6', 'new_temp49', 'new_temp8', 'new_temp63', 'new_temp104', 'x', 'new_temp112', 'new_temp61', 'new_temp108', 'explicate_31', 'explicate_29', 'new_temp84', 'eax', 'new_temp52', 'new_temp73', 'new_temp87', 'new_temp59'}, 'new_temp4': {'explicate_13', 'new_temp51', 'new_temp47', 'new_temp1', 'new_temp54', 'new_temp55', 'explicate_16', 'new_temp45', 'new_temp57', 'new_temp3', 'new_temp7', 'explicate_12', 'new_temp50', 'new_temp48', 'new_temp41', 'y', 'new_temp58', 'new_temp11', 'new_temp9', 'new_temp56', 'new_temp46', 'ecx', 'explicate_15', 'new_temp44', 'explicate_17', 'edx', 'new_temp40', 'new_temp6', 'new_temp49', 'explicate_14', 'new_temp8', 'new_temp2', 'x', 'new_temp0', 'new_temp64', 'eax', 'new_temp52', 'new_temp53', 'new_temp42', 'new_temp43', 'new_temp59'}, 'new_temp7': {'explicate_22', 'explicate_13', 'new_temp71', 'new_temp51', 'new_temp54', 'new_temp1', 'new_temp83', 'new_temp85', 'new_temp88', 'explicate_23', 'new_temp3', 'explicate_18', 'new_temp86', 'new_temp90', 'new_temp50', 'explicate_24', 'new_temp48', 'new_temp66', 'new_temp9', 'new_temp4', 'explicate_15', 'new_temp78', 'new_temp95', 'new_temp40', 'explicate_21', 'explicate_14', 'new_temp77', 'new_temp2', 'explicate_20', 'new_temp65', 'explicate_25', 'new_temp68', 'new_temp0', 'new_temp75', 'new_temp67', 'new_temp64', 'new_temp53', 'new_temp42', 'new_temp79', 'new_temp43', 'new_temp47', 'new_temp80', 'new_temp55', 'explicate_16', 'explicate_19', 'new_temp82', 'new_temp62', 'new_temp45', 'new_temp57', 'explicate_12', 'new_temp81', 'new_temp41', 'y', 'new_temp69', 'new_temp70', 'new_temp58', 'z', 'new_temp76', 'new_temp74', 'new_temp72', 'new_temp11', 'new_temp89', 'new_temp56', 'new_temp60', 'new_temp46', 'ecx', 'w', 'new_temp5', 'new_temp44', 'explicate_17', 'edx', 'new_temp6', 'new_temp49', 'new_temp8', 'new_temp63', 'x', 'new_temp61', 'new_temp84', 'eax', 'new_temp52', 'new_temp73', 'new_temp87', 'new_temp59'}, 'new_temp6': {'explicate_13', 'new_temp71', 'new_temp51', 'new_temp47', 'new_temp1', 'new_temp80', 'new_temp54', 'new_temp55', 'explicate_16', 'explicate_19', 'new_temp62', 'new_temp45', 'new_temp57', 'new_temp3', 'new_temp7', 'explicate_12', 'explicate_18', 'new_temp50', 'new_temp48', 'new_temp41', 'y', 'new_temp69', 'new_temp70', 'new_temp58', 'z', 'new_temp74', 'new_temp72', 'new_temp66', 'new_temp11', 'new_temp9', 'new_temp4', 'new_temp56', 'new_temp60', 'new_temp46', 'ecx', 'new_temp5', 'explicate_15', 'new_temp44', 'explicate_17', 'edx', 'new_temp40', 'new_temp49', 'explicate_21', 'explicate_14', 'new_temp63', 'new_temp8', 'new_temp2', 'x', 'explicate_20', 'new_temp65', 'new_temp61', 'new_temp68', 'new_temp0', 'new_temp75', 'new_temp67', 'new_temp64', 'eax', 'new_temp52', 'new_temp73', 'new_temp53', 'new_temp42', 'new_temp43', 'new_temp59'}, 'new_temp8': {'explicate_22', 'new_temp105', 'explicate_13', 'new_temp71', 'new_temp92', 'new_temp51', 'new_temp54', 'new_temp1', 'new_temp100', 'new_temp83', 'new_temp96', 'new_temp85', 'new_temp88', 'explicate_23', 'new_temp3', 'new_temp7', 'explicate_18', 'new_temp86', 'new_temp90', 'new_temp93', 'new_temp50', 'explicate_24', 'new_temp48', 'new_temp66', 'explicate_27', 'new_temp9', 'new_temp4', 'explicate_28', 'explicate_15', 'new_temp78', 'new_temp95', 'new_temp40', 'explicate_21', 'explicate_14', 'new_temp77', 'new_temp91', 'new_temp2', 'explicate_20', 'new_temp102', 'new_temp65', 'explicate_25', 'new_temp68', 'new_temp110', 'new_temp0', 'new_temp75', 'new_temp67', 'new_temp64', 'new_temp53', 'new_temp42', 'new_temp79', 'new_temp43', 'new_temp103', 'new_temp99', 'new_temp97', 'new_temp47', 'new_temp80', 'new_temp55', 'new_temp101', 'explicate_16', 'explicate_19', 'new_temp82', 'new_temp62', 'new_temp94', 'new_temp45', 'new_temp57', 'explicate_12', 'new_temp81', 'new_temp41', 'y', 'new_temp69', 'new_temp70', 'new_temp58', 'z', 'new_temp76', 'new_temp74', 'new_temp72', 'new_temp11', 'new_temp89', 'new_temp56', 'new_temp60', 'explicate_26', 'new_temp46', 'ecx', 'w', 'new_temp5', 'new_temp44', 'explicate_17', 'new_temp98', 'edx', 'new_temp6', 'new_temp49', 'new_temp63', 'new_temp104', 'x', 'new_temp61', 'explicate_29', 'new_temp84', 'eax', 'new_temp52', 'new_temp73', 'new_temp87', 'new_temp59'}, 'new_temp40': {'new_temp11', 'new_temp2', 'new_temp9', 'new_temp4', 'new_temp7', 'new_temp6', 'new_temp8'}, 'new_temp0': {'new_temp11', 'new_temp2', 'new_temp9', 'new_temp4', 'new_temp7', 'new_temp6', 'new_temp8'}, 'x': {'explicate_22', 'new_temp71', 'new_temp51', 'new_temp54', 'new_temp1', 'new_temp83', 'new_temp85', 'new_temp88', 'explicate_23', 'new_temp3', 'new_temp7', 'explicate_18', 'new_temp86', 'new_temp50', 'new_temp48', 'new_temp66', 'new_temp9', 'new_temp4', 'explicate_15', 'new_temp78', 'explicate_21', 'explicate_14', 'new_temp77', 'new_temp2', 'explicate_20', 'new_temp65', 'new_temp68', 'new_temp75', 'new_temp67', 'new_temp64', 'new_temp53', 'new_temp42', 'new_temp79', 'new_temp43', 'new_temp47', 'new_temp80', 'new_temp55', 'explicate_16', 'explicate_19', 'new_temp82', 'new_temp62', 'new_temp45', 'new_temp57', 'explicate_12', 'new_temp81', 'new_temp41', 'y', 'new_temp69', 'new_temp70', 'new_temp58', 'z', 'new_temp76', 'new_temp74', 'new_temp72', 'new_temp11', 'new_temp56', 'new_temp60', 'new_temp46', 'ecx', 'w', 'new_temp5', 'new_temp44', 'explicate_17', 'edx', 'new_temp6', 'new_temp49', 'new_temp8', 'new_temp63', 'new_temp61', 'new_temp84', 'eax', 'new_temp52', 'new_temp73', 'new_temp87', 'new_temp59'}, 'new_temp41': {'new_temp11', 'new_temp2', 'new_temp9', 'new_temp4', 'x', 'new_temp7', 'new_temp6', 'new_temp8'}, 'new_temp1': {'new_temp11', 'new_temp2', 'new_temp9', 'new_temp4', 'x', 'new_temp7', 'new_temp6', 'new_temp8'}, 'explicate_12': {'new_temp11', 'new_temp2', 'new_temp9', 'new_temp4', 'x', 'new_temp7', 'explicate_13', 'edx', 'ecx', 'new_temp48', 'new_temp6', 'eax', 'new_temp49', 'new_temp42', 'new_temp43', 'new_temp8'}, 'explicate_13': {'new_temp11', 'new_temp9', 'new_temp4', 'ecx', 'new_temp51', 'new_temp44', 'edx', 'new_temp6', 'new_temp49', 'new_temp8', 'explicate_14', 'new_temp2', 'new_temp7', 'explicate_12', 'new_temp50', 'new_temp48', 'eax', 'new_temp52', 'new_temp42', 'new_temp43'}, 'new_temp42': {'new_temp11', 'explicate_13', 'new_temp9', 'new_temp4', 'new_temp2', 'x', 'new_temp7', 'explicate_12', 'new_temp6', 'new_temp8'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp43': {'new_temp11', 'explicate_13', 'new_temp9', 'x', 'new_temp7', 'new_temp4', 'explicate_12', 'new_temp2', 'new_temp6', 'new_temp8'}, 'new_temp48': {'new_temp11', 'new_temp2', 'new_temp9', 'x', 'new_temp7', 'new_temp4', 'explicate_13', 'explicate_12', 'new_temp6', 'new_temp8'}, 'new_temp44': {'new_temp11', 'new_temp45', 'explicate_13', 'new_temp9', 'x', 'new_temp7', 'new_temp4', 'edx', 'ecx', 'new_temp6', 'eax', 'new_temp8'}, 'new_temp45': {'new_temp11', 'new_temp9', 'new_temp4', 'new_temp7', 'x', 'new_temp44', 'new_temp6', 'new_temp8'}, 'new_temp46': {'new_temp11', 'new_temp9', 'new_temp4', 'new_temp7', 'x', 'new_temp6', 'new_temp8'}, 'new_temp47': {'new_temp11', 'new_temp9', 'new_temp4', 'new_temp7', 'x', 'new_temp6', 'new_temp8'}, 'y': {'explicate_22', 'new_temp87', 'new_temp71', 'new_temp80', 'new_temp83', 'new_temp85', 'new_temp88', 'explicate_16', 'explicate_19', 'new_temp82', 'new_temp62', 'explicate_23', 'new_temp57', 'new_temp3', 'new_temp7', 'explicate_18', 'new_temp81', 'new_temp86', 'explicate_24', 'new_temp70', 'new_temp69', 'new_temp58', 'z', 'new_temp76', 'new_temp74', 'new_temp72', 'new_temp11', 'new_temp66', 'new_temp9', 'new_temp4', 'new_temp60', 'ecx', 'w', 'new_temp5', 'new_temp78', 'edx', 'new_temp6', 'explicate_21', 'new_temp8', 'new_temp63', 'new_temp77', 'x', 'explicate_20', 'new_temp65', 'new_temp61', 'new_temp68', 'new_temp84', 'new_temp75', 'new_temp67', 'new_temp64', 'eax', 'new_temp73', 'new_temp79', 'new_temp59'}, 'new_temp57': {'new_temp11', 'new_temp9', 'new_temp4', 'new_temp7', 'x', 'y', 'new_temp6', 'new_temp8'}, 'new_temp3': {'new_temp11', 'new_temp9', 'new_temp4', 'new_temp7', 'x', 'y', 'new_temp6', 'new_temp8'}, 'explicate_16': {'new_temp11', 'edx', 'new_temp9', 'new_temp4', 'new_temp7', 'x', 'new_temp65', 'ecx', 'new_temp58', 'explicate_17', 'y', 'new_temp64', 'new_temp6', 'eax', 'new_temp59', 'new_temp8'}, 'explicate_17': {'new_temp11', 'new_temp66', 'new_temp9', 'new_temp4', 'new_temp60', 'ecx', 'edx', 'new_temp6', 'explicate_16', 'new_temp8', 'x', 'new_temp7', 'explicate_18', 'new_temp65', 'new_temp68', 'new_temp67', 'new_temp64', 'new_temp58', 'eax', 'new_temp59'}, 'new_temp58': {'new_temp11', 'new_temp9', 'new_temp4', 'new_temp7', 'x', 'explicate_17', 'y', 'new_temp6', 'explicate_16', 'new_temp8'}, 'new_temp49': {'new_temp11', 'explicate_13', 'new_temp9', 'x', 'new_temp7', 'new_temp4', 'explicate_12', 'new_temp6', 'new_temp8'}, 'new_temp59': {'new_temp11', 'new_temp9', 'new_temp4', 'new_temp7', 'x', 'explicate_17', 'y', 'new_temp6', 'explicate_16', 'new_temp8'}, 'new_temp64': {'new_temp11', 'new_temp9', 'new_temp4', 'new_temp7', 'x', 'explicate_17', 'y', 'new_temp6', 'explicate_16', 'new_temp8'}, 'new_temp50': {'new_temp11', 'explicate_13', 'new_temp9', 'x', 'new_temp7', 'new_temp4', 'new_temp6', 'new_temp8'}, 'explicate_14': {'new_temp11', 'explicate_13', 'new_temp9', 'x', 'new_temp7', 'new_temp4', 'edx', 'ecx', 'new_temp54', 'explicate_15', 'new_temp6', 'eax', 'new_temp52', 'new_temp53', 'new_temp8'}, 'new_temp51': {'new_temp11', 'explicate_13', 'new_temp9', 'x', 'new_temp7', 'new_temp4', 'new_temp6', 'new_temp8'}, 'new_temp60': {'new_temp11', 'edx', 'new_temp9', 'x', 'new_temp7', 'ecx', 'new_temp61', 'explicate_17', 'y', 'new_temp6', 'eax', 'new_temp8'}, 'new_temp61': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'new_temp60', 'y', 'new_temp6', 'new_temp8'}, 'new_temp62': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'y', 'new_temp6', 'new_temp8'}, 'new_temp63': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'y', 'new_temp6', 'new_temp8'}, 'z': {'explicate_22', 'new_temp87', 'new_temp99', 'new_temp97', 'new_temp92', 'new_temp80', 'new_temp83', 'new_temp96', 'new_temp85', 'new_temp88', 'new_temp101', 'new_temp82', 'explicate_23', 'new_temp94', 'new_temp7', 'new_temp81', 'new_temp86', 'new_temp90', 'new_temp93', 'explicate_24', 'y', 'new_temp76', 'new_temp74', 'new_temp11', 'explicate_27', 'new_temp9', 'new_temp89', 'explicate_28', 'explicate_26', 'ecx', 'w', 'new_temp5', 'new_temp78', 'new_temp95', 'new_temp98', 'edx', 'new_temp6', 'new_temp8', 'new_temp77', 'new_temp91', 'new_temp102', 'x', 'explicate_20', 'explicate_25', 'new_temp84', 'new_temp75', 'eax', 'new_temp100', 'new_temp73', 'new_temp79', 'new_temp103'}, 'new_temp73': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'y', 'new_temp6', 'z', 'new_temp8'}, 'new_temp5': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'y', 'new_temp6', 'z', 'new_temp8'}, 'explicate_20': {'new_temp11', 'edx', 'new_temp9', 'x', 'new_temp7', 'new_temp81', 'ecx', 'new_temp80', 'new_temp75', 'y', 'new_temp6', 'eax', 'z', 'new_temp74', 'explicate_21', 'new_temp8'}, 'explicate_21': {'new_temp11', 'explicate_22', 'new_temp9', 'ecx', 'new_temp80', 'new_temp83', 'edx', 'new_temp6', 'new_temp82', 'new_temp8', 'explicate_20', 'x', 'new_temp7', 'new_temp81', 'new_temp84', 'new_temp75', 'y', 'new_temp76', 'eax', 'new_temp74'}, 'new_temp74': {'new_temp11', 'explicate_20', 'new_temp9', 'new_temp7', 'x', 'y', 'new_temp6', 'z', 'explicate_21', 'new_temp8'}, 'new_temp65': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'explicate_17', 'y', 'new_temp6', 'explicate_16', 'new_temp8'}, 'new_temp52': {'new_temp11', 'explicate_13', 'new_temp9', 'x', 'new_temp7', 'new_temp4', 'explicate_14', 'new_temp6', 'new_temp8'}, 'new_temp75': {'new_temp11', 'explicate_20', 'new_temp9', 'new_temp7', 'x', 'y', 'new_temp6', 'z', 'explicate_21', 'new_temp8'}, 'new_temp80': {'new_temp11', 'explicate_20', 'new_temp9', 'new_temp7', 'x', 'y', 'new_temp6', 'z', 'explicate_21', 'new_temp8'}, 'new_temp66': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'explicate_17', 'y', 'new_temp6', 'new_temp8'}, 'explicate_18': {'new_temp11', 'edx', 'new_temp9', 'x', 'new_temp7', 'explicate_19', 'ecx', 'new_temp68', 'explicate_17', 'y', 'new_temp69', 'new_temp70', 'new_temp6', 'eax', 'new_temp8'}, 'new_temp67': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'explicate_17', 'y', 'new_temp6', 'new_temp8'}, 'new_temp53': {'new_temp11', 'new_temp9', 'new_temp4', 'new_temp7', 'x', 'explicate_14', 'new_temp6', 'new_temp8'}, 'explicate_15': {'new_temp11', 'new_temp9', 'new_temp4', 'new_temp7', 'x', 'new_temp8', 'new_temp55', 'new_temp6', 'explicate_14'}, 'new_temp54': {'new_temp11', 'new_temp9', 'new_temp4', 'new_temp7', 'x', 'explicate_14', 'new_temp6', 'new_temp8'}, 'new_temp76': {'new_temp11', 'new_temp77', 'edx', 'new_temp9', 'x', 'new_temp7', 'ecx', 'y', 'z', 'eax', 'explicate_21', 'new_temp8'}, 'new_temp77': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'y', 'new_temp76', 'z', 'new_temp8'}, 'new_temp78': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'y', 'z', 'new_temp8'}, 'new_temp79': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'y', 'z', 'new_temp8'}, 'w': {'new_temp105', 'new_temp99', 'new_temp97', 'new_temp92', 'new_temp109', 'new_temp118', 'explicate_32', 'new_temp111', 'new_temp96', 'new_temp106', 'new_temp101', 'new_temp115', 'new_temp94', 'new_temp113', 'new_temp7', 'new_temp90', 'new_temp93', 'explicate_24', 'y', 'new_temp117', 'z', 'explicate_30', 'new_temp11', 'explicate_27', 'new_temp9', 'new_temp89', 'new_temp114', 'explicate_28', 'explicate_26', 'ecx', 'new_temp95', 'new_temp116', 'new_temp107', 'new_temp98', 'edx', 'new_temp8', 'new_temp91', 'new_temp102', 'new_temp104', 'x', 'new_temp112', 'new_temp108', 'explicate_31', 'explicate_25', 'new_temp110', 'explicate_29', 'eax', 'new_temp100', 'new_temp103'}, 'explicate_24': {'new_temp11', 'edx', 'new_temp9', 'new_temp89', 'new_temp7', 'new_temp90', 'ecx', 'w', 'explicate_25', 'new_temp95', 'y', 'new_temp96', 'z', 'eax', 'new_temp8'}, 'explicate_25': {'new_temp11', 'new_temp99', 'new_temp9', 'new_temp89', 'new_temp97', 'explicate_26', 'ecx', 'w', 'new_temp95', 'new_temp98', 'new_temp96', 'edx', 'new_temp8', 'new_temp91', 'new_temp7', 'new_temp90', 'explicate_24', 'z', 'eax'}, 'new_temp89': {'new_temp11', 'new_temp9', 'new_temp7', 'w', 'explicate_25', 'explicate_24', 'z', 'new_temp8'}, 'new_temp81': {'new_temp11', 'explicate_20', 'new_temp9', 'new_temp7', 'x', 'y', 'z', 'explicate_21', 'new_temp8'}, 'new_temp68': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'explicate_18', 'explicate_17', 'y', 'new_temp6', 'new_temp8'}, 'new_temp55': {'new_temp11', 'new_temp9', 'new_temp4', 'new_temp7', 'x', 'explicate_15', 'new_temp6', 'new_temp8'}, 'new_temp56': {'new_temp11', 'new_temp9', 'new_temp4', 'new_temp7', 'x', 'new_temp6', 'new_temp8'}, 'new_temp90': {'new_temp11', 'new_temp9', 'new_temp7', 'w', 'explicate_25', 'explicate_24', 'z', 'new_temp8'}, 'new_temp95': {'new_temp11', 'new_temp9', 'new_temp7', 'w', 'explicate_25', 'explicate_24', 'z', 'new_temp8'}, 'new_temp82': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'y', 'z', 'explicate_21', 'new_temp8'}, 'explicate_22': {'new_temp11', 'edx', 'new_temp9', 'x', 'new_temp7', 'new_temp86', 'ecx', 'new_temp84', 'y', 'new_temp85', 'z', 'eax', 'explicate_23', 'explicate_21', 'new_temp8'}, 'new_temp83': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'y', 'z', 'explicate_21', 'new_temp8'}, 'new_temp69': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'explicate_18', 'y', 'new_temp6', 'new_temp8'}, 'explicate_19': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'explicate_18', 'new_temp71', 'y', 'new_temp6', 'new_temp8'}, 'new_temp70': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'explicate_18', 'y', 'new_temp6', 'new_temp8'}, 'new_temp91': {'new_temp11', 'edx', 'new_temp9', 'new_temp92', 'ecx', 'w', 'explicate_25', 'z', 'eax', 'new_temp8'}, 'new_temp92': {'new_temp11', 'new_temp91', 'new_temp9', 'z', 'w', 'new_temp8'}, 'new_temp93': {'new_temp11', 'new_temp9', 'z', 'w', 'new_temp8'}, 'new_temp94': {'new_temp11', 'new_temp9', 'z', 'w', 'new_temp8'}, 'explicate_28': {'new_temp11', 'new_temp105', 'edx', 'new_temp9', 'new_temp104', 'ecx', 'w', 'new_temp110', 'explicate_29', 'new_temp111', 'z', 'eax', 'new_temp8'}, 'explicate_29': {'new_temp11', 'new_temp105', 'new_temp9', 'new_temp114', 'explicate_28', 'ecx', 'w', 'new_temp111', 'new_temp106', 'edx', 'new_temp113', 'new_temp8', 'new_temp104', 'new_temp112', 'new_temp110', 'eax', 'explicate_30'}, 'new_temp104': {'new_temp11', 'explicate_29', 'new_temp9', 'explicate_28', 'w', 'new_temp8'}, 'new_temp96': {'new_temp11', 'new_temp9', 'z', 'new_temp8', 'w', 'explicate_25', 'explicate_24'}, 'new_temp84': {'new_temp11', 'explicate_22', 'new_temp9', 'x', 'new_temp7', 'y', 'z', 'explicate_21', 'new_temp8'}, 'new_temp71': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'y', 'new_temp6', 'explicate_19', 'new_temp8'}, 'new_temp72': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'y', 'new_temp6', 'new_temp8'}, 'new_temp105': {'new_temp11', 'explicate_29', 'new_temp9', 'explicate_28', 'w', 'new_temp8'}, 'new_temp110': {'new_temp11', 'explicate_29', 'new_temp9', 'explicate_28', 'w', 'new_temp8'}, 'new_temp97': {'new_temp11', 'new_temp9', 'z', 'w', 'explicate_25', 'new_temp8'}, 'explicate_26': {'new_temp11', 'edx', 'new_temp9', 'new_temp99', 'explicate_27', 'ecx', 'w', 'explicate_25', 'new_temp101', 'z', 'eax', 'new_temp100', 'new_temp8'}, 'new_temp98': {'new_temp11', 'new_temp9', 'z', 'w', 'explicate_25', 'new_temp8'}, 'new_temp85': {'new_temp11', 'explicate_22', 'new_temp9', 'x', 'new_temp7', 'y', 'z', 'new_temp8'}, 'explicate_23': {'new_temp11', 'explicate_22', 'new_temp9', 'x', 'new_temp7', 'y', 'z', 'new_temp87', 'new_temp8'}, 'new_temp86': {'new_temp11', 'explicate_22', 'new_temp9', 'x', 'new_temp7', 'y', 'z', 'new_temp8'}, 'new_temp106': {'new_temp11', 'explicate_29', 'new_temp107', 'new_temp9', 'edx', 'eax', 'ecx', 'w'}, 'new_temp107': {'new_temp11', 'new_temp9', 'w', 'new_temp106'}, 'new_temp108': {'new_temp11', 'new_temp9', 'w'}, 'new_temp109': {'new_temp11', 'new_temp9', 'w'}, 'explicate_32': {'new_temp11', 'new_temp9', 'new_temp125', 'new_temp119', 'new_temp120', 'ecx', 'w', 'new_temp126', 'edx', 'eax', 'explicate_33'}, 'explicate_33': {'new_temp11', 'new_temp127', 'new_temp9', 'new_temp129', 'explicate_34', 'new_temp125', 'new_temp119', 'new_temp120', 'ecx', 'new_temp121', 'new_temp126', 'explicate_32', 'edx', 'eax', 'new_temp128'}, 'new_temp119': {'new_temp11', 'new_temp9', 'explicate_32', 'explicate_33'}, 'new_temp111': {'new_temp11', 'explicate_29', 'new_temp9', 'explicate_28', 'w'}, 'new_temp99': {'new_temp11', 'new_temp9', 'explicate_26', 'z', 'w', 'explicate_25', 'new_temp8'}, 'new_temp87': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'y', 'z', 'explicate_23', 'new_temp8'}, 'new_temp88': {'new_temp11', 'new_temp9', 'x', 'new_temp7', 'y', 'z', 'new_temp8'}, 'new_temp120': {'new_temp11', 'explicate_32', 'new_temp9', 'explicate_33'}, 'new_temp125': {'new_temp11', 'new_temp9', 'explicate_32', 'explicate_33'}, 'new_temp112': {'new_temp11', 'explicate_29', 'new_temp9', 'w'}, 'explicate_30': {'new_temp11', 'new_temp9', 'new_temp114', 'ecx', 'w', 'explicate_31', 'new_temp116', 'explicate_29', 'new_temp115', 'edx', 'eax'}, 'new_temp113': {'new_temp11', 'explicate_29', 'new_temp9', 'w'}, 'new_temp100': {'new_temp11', 'new_temp9', 'explicate_26', 'z', 'w', 'new_temp8'}, 'explicate_27': {'new_temp11', 'new_temp102', 'new_temp9', 'explicate_26', 'w', 'z', 'new_temp8'}, 'new_temp101': {'new_temp11', 'new_temp9', 'explicate_26', 'z', 'w', 'new_temp8'}, 'new_temp121': {'new_temp11', 'edx', 'eax', 'ecx', 'explicate_33', 'new_temp122'}, 'new_temp122': {'new_temp11', 'new_temp121'}, 'new_temp123': {'new_temp11'}, 'new_temp124': {'new_temp11'}, 'new_temp134': {'new_temp11', 'new_temp9'}, 'new_temp10': {'new_temp11', 'explicate_36', 'new_temp9'}, 'explicate_36': {'new_temp11', 'new_temp136', 'new_temp135', 'new_temp141', 'new_temp10', 'ecx', 'explicate_37', 'new_temp142', 'edx', 'eax'}, 'explicate_37': {'new_temp11', 'new_temp136', 'new_temp145', 'new_temp135', 'new_temp141', 'new_temp143', 'ecx', 'explicate_38', 'new_temp144', 'explicate_36', 'new_temp142', 'edx', 'eax', 'new_temp137'}, 'new_temp135': {'new_temp11', 'explicate_36', 'explicate_37'}, 'new_temp126': {'new_temp11', 'explicate_32', 'explicate_33'}, 'new_temp114': {'new_temp11', 'explicate_29', 'new_temp9', 'explicate_30', 'w'}, 'new_temp102': {'new_temp11', 'explicate_27', 'new_temp9', 'w', 'z', 'new_temp8'}, 'new_temp103': {'new_temp11', 'new_temp9', 'z', 'w', 'new_temp8'}, 'new_temp136': {'new_temp11', 'explicate_36', 'explicate_37'}, 'new_temp141': {'new_temp11', 'explicate_36', 'explicate_37'}, 'new_temp127': {'new_temp11', 'explicate_33'}, 'explicate_34': {'new_temp11', 'new_temp129', 'ecx', 'new_temp130', 'explicate_35', 'new_temp131', 'edx', 'eax', 'explicate_33'}, 'new_temp128': {'new_temp11', 'explicate_33'}, 'new_temp115': {'new_temp11', 'explicate_30', 'new_temp9', 'w'}, 'explicate_31': {'new_temp11', 'new_temp9', 'w', 'new_temp117', 'explicate_30'}, 'new_temp116': {'new_temp11', 'explicate_30', 'new_temp9', 'w'}, 'new_temp137': {'new_temp138', 'ecx', 'explicate_37', 'edx', 'eax'}, 'new_temp138': {'new_temp137'}, 'new_temp139': set(), 'new_temp140': set(), 'new_temp142': {'explicate_36', 'explicate_37'}, 'new_temp129': {'new_temp11', 'explicate_34', 'explicate_33'}, 'new_temp117': {'new_temp11', 'new_temp9', 'explicate_31', 'w'}, 'new_temp118': {'new_temp11', 'new_temp9', 'w'}, 'new_temp143': {'explicate_37'}, 'explicate_38': {'new_temp145', 'ecx', 'explicate_39', 'explicate_37', 'new_temp147', 'new_temp146', 'edx', 'eax'}, 'new_temp144': {'explicate_37'}, 'new_temp130': {'new_temp11', 'explicate_34'}, 'explicate_35': {'new_temp11', 'new_temp132', 'explicate_34'}, 'new_temp131': {'new_temp11', 'explicate_34'}, 'new_temp145': {'explicate_37', 'explicate_38'}, 'new_temp132': {'new_temp11', 'explicate_35'}, 'new_temp133': {'new_temp11'}, 'new_temp146': {'explicate_38'}, 'explicate_39': {'new_temp148', 'explicate_38'}, 'new_temp147': {'explicate_38'}, 'new_temp148': {'explicate_39'}, 'new_temp149': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp8': 4, 'new_temp6': 5, 'explicate_17': 6, 'new_temp60': 7, 'new_temp11': 7, 'explicate_16': 7, 'new_temp9': 7, 'x': 7, 'new_temp4': 7, 'explicate_18': 7, 'new_temp7': 7, 'y': 6, 'explicate_20': 7, 'explicate_21': 7, 'z': 7, 'new_temp76': 5, 'explicate_12': 6, 'new_temp2': 7, 'explicate_13': 7, 'explicate_14': 6, 'explicate_24': 5, 'w': 7, 'explicate_22': 5, 'new_temp44': 6, 'explicate_25': 6, 'explicate_26': 5, 'new_temp91': 5, 'explicate_28': 5, 'explicate_29': 6, 'new_temp106': 4, 'explicate_30': 4, 'new_temp59': 1, 'new_temp73': 1, 'new_temp84': 1, 'new_temp61': 1, 'new_temp104': 1, 'new_temp63': 1, 'new_temp49': 1, 'new_temp52': 1, 'explicate_38': 4, 'explicate_37': 5, 'new_temp137': 4, 'explicate_36': 4, 'new_temp5': 1, 'new_temp89': 1, 'new_temp74': 1, 'new_temp72': 1, 'new_temp58': 1, 'new_temp69': 1, 'new_temp70': 1, 'new_temp57': 1, 'new_temp45': 1, 'new_temp62': 1, 'explicate_19': 1, 'new_temp71': 2, 'new_temp80': 1, 'new_temp121': 4, 'explicate_33': 5, 'explicate_32': 4, 'explicate_34': 4, 'new_temp99': 1, 'new_temp43': 1, 'new_temp42': 1, 'new_temp53': 1, 'new_temp64': 1, 'new_temp67': 1, 'new_temp75': 1, 'new_temp110': 1, 'new_temp68': 1, 'new_temp65': 1, 'new_temp77': 1, 'new_temp95': 1, 'explicate_15': 1, 'new_temp55': 2, 'new_temp66': 1, 'new_temp48': 1, 'new_temp90': 1, 'new_temp86': 1, 'new_temp3': 1, 'explicate_23': 1, 'new_temp87': 2, 'new_temp85': 1, 'new_temp96': 1, 'new_temp54': 1, 'new_temp105': 1, 'new_temp100': 1, 'new_temp98': 1, 'new_temp46': 1, 'new_temp120': 1, 'new_temp56': 1, 'new_temp114': 1, 'new_temp41': 1, 'new_temp79': 1, 'new_temp0': 1, 'new_temp126': 1, 'new_temp141': 1, 'new_temp129': 1, 'new_temp40': 1, 'new_temp78': 1, 'explicate_27': 1, 'new_temp102': 2, 'new_temp142': 1, 'new_temp50': 1, 'new_temp81': 1, 'new_temp82': 1, 'new_temp136': 1, 'new_temp101': 1, 'new_temp88': 1, 'new_temp111': 1, 'new_temp83': 1, 'new_temp1': 1, 'new_temp47': 1, 'new_temp51': 1, 'new_temp119': 1, 'new_temp135': 1, 'new_temp125': 1, 'new_temp92': 1, 'new_temp97': 1, 'new_temp145': 1, 'new_temp103': 1, 'new_temp128': 1, 'explicate_31': 1, 'new_temp130': 1, 'new_temp112': 1, 'new_temp122': 1, 'new_temp131': 1, 'new_temp117': 2, 'new_temp146': 1, 'explicate_39': 1, 'new_temp148': 2, 'explicate_35': 1, 'new_temp93': 1, 'new_temp143': 1, 'new_temp94': 1, 'new_temp113': 1, 'new_temp10': 1, 'new_temp115': 1, 'new_temp107': 1, 'new_temp116': 1, 'new_temp144': 1, 'new_temp147': 1, 'new_temp132': 2, 'new_temp138': 1, 'new_temp127': 1, 'new_temp123': 1, 'new_temp133': 1, 'new_temp124': 1, 'new_temp140': 1, 'new_temp134': 1, 'new_temp139': 1, 'new_temp149': 1, 'new_temp118': 1, 'new_temp109': 1, 'new_temp108': 1}
+Spilled set:
+ {'new_temp11', 'new_temp2', 'x', 'new_temp9', 'new_temp4', 'explicate_18', 'new_temp60', 'new_temp7', 'explicate_20', 'explicate_13', 'w', 'z', 'explicate_16', 'explicate_21'}
+
+
+--------------Spilling----------------
+unspillable_set
+ {'unspillable_2', 'unspillable_0', 'unspillable_1'}
+continue_looping
+ True
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp6': {'explicate_13', 'new_temp71', 'new_temp51', 'new_temp47', 'new_temp1', 'new_temp80', 'new_temp54', 'new_temp55', 'explicate_16', 'explicate_19', 'new_temp62', 'new_temp45', 'new_temp57', 'new_temp3', 'explicate_12', 'explicate_18', 'new_temp50', 'new_temp48', 'new_temp41', 'y', 'new_temp69', 'new_temp70', 'new_temp58', 'z', 'unspillable_0', 'new_temp74', 'new_temp72', 'new_temp66', 'new_temp4', 'new_temp56', 'new_temp60', 'new_temp46', 'ecx', 'new_temp5', 'explicate_15', 'new_temp44', 'explicate_17', 'edx', 'new_temp40', 'new_temp49', 'explicate_21', 'explicate_14', 'new_temp63', 'new_temp8', 'new_temp2', 'x', 'explicate_20', 'new_temp65', 'new_temp61', 'new_temp68', 'unspillable_1', 'new_temp0', 'unspillable_2', 'new_temp75', 'new_temp67', 'new_temp64', 'eax', 'new_temp52', 'new_temp73', 'new_temp53', 'new_temp42', 'new_temp43', 'new_temp59'}, 'eax': {'explicate_22', 'explicate_34', 'new_temp121', 'explicate_32', 'new_temp106', 'explicate_12', 'explicate_24', 'explicate_36', 'y', 'new_temp76', 'explicate_30', 'new_temp137', 'explicate_33', 'explicate_28', 'explicate_26', 'explicate_37', 'explicate_38', 'new_temp44', 'explicate_17', 'new_temp6', 'explicate_14', 'new_temp91', 'new_temp8', 'explicate_25', 'explicate_29'}, 'ecx': {'explicate_22', 'explicate_34', 'new_temp121', 'explicate_32', 'new_temp106', 'explicate_12', 'explicate_24', 'explicate_36', 'y', 'new_temp76', 'explicate_30', 'new_temp137', 'explicate_33', 'explicate_28', 'explicate_26', 'explicate_37', 'explicate_38', 'new_temp44', 'explicate_17', 'new_temp6', 'explicate_14', 'new_temp91', 'new_temp8', 'explicate_25', 'explicate_29'}, 'edx': {'explicate_22', 'explicate_34', 'new_temp121', 'explicate_32', 'new_temp106', 'explicate_12', 'explicate_24', 'explicate_36', 'y', 'new_temp76', 'explicate_30', 'new_temp137', 'explicate_33', 'explicate_28', 'explicate_26', 'explicate_37', 'explicate_38', 'new_temp44', 'explicate_17', 'new_temp6', 'explicate_14', 'new_temp91', 'new_temp8', 'explicate_25', 'explicate_29'}, 'new_temp8': {'explicate_22', 'new_temp105', 'explicate_13', 'new_temp71', 'new_temp92', 'new_temp51', 'new_temp54', 'new_temp1', 'new_temp100', 'new_temp83', 'new_temp96', 'new_temp85', 'new_temp88', 'explicate_23', 'new_temp3', 'new_temp7', 'explicate_18', 'new_temp86', 'new_temp90', 'new_temp93', 'new_temp50', 'explicate_24', 'new_temp48', 'new_temp66', 'explicate_27', 'new_temp4', 'explicate_28', 'explicate_15', 'new_temp78', 'new_temp95', 'new_temp40', 'explicate_21', 'explicate_14', 'new_temp77', 'new_temp91', 'new_temp2', 'explicate_20', 'new_temp102', 'new_temp65', 'explicate_25', 'new_temp68', 'unspillable_1', 'new_temp0', 'unspillable_2', 'new_temp75', 'new_temp67', 'new_temp110', 'new_temp64', 'new_temp53', 'new_temp42', 'new_temp79', 'new_temp43', 'new_temp103', 'new_temp99', 'new_temp97', 'new_temp47', 'new_temp80', 'new_temp55', 'new_temp101', 'explicate_16', 'explicate_19', 'new_temp82', 'new_temp62', 'new_temp94', 'new_temp45', 'new_temp57', 'explicate_12', 'new_temp81', 'new_temp41', 'y', 'new_temp69', 'new_temp70', 'new_temp58', 'z', 'new_temp76', 'unspillable_0', 'new_temp74', 'new_temp72', 'new_temp89', 'new_temp56', 'new_temp60', 'explicate_26', 'new_temp46', 'ecx', 'w', 'new_temp5', 'new_temp44', 'explicate_17', 'new_temp98', 'edx', 'new_temp6', 'new_temp49', 'new_temp63', 'new_temp104', 'x', 'new_temp61', 'explicate_29', 'new_temp84', 'eax', 'new_temp52', 'new_temp73', 'new_temp87', 'new_temp59'}, 'new_temp40': {'new_temp6', 'new_temp8'}, 'new_temp0': {'new_temp8', 'new_temp6'}, 'new_temp41': {'new_temp6', 'new_temp8'}, 'new_temp1': {'new_temp8', 'new_temp6'}, 'explicate_12': {'explicate_13', 'unspillable_0', 'ecx', 'new_temp48', 'new_temp6', 'edx', 'eax', 'new_temp49', 'new_temp42', 'new_temp43', 'new_temp8'}, 'unspillable_0': {'new_temp8', 'explicate_12', 'new_temp6'}, 'new_temp42': {'new_temp6', 'explicate_12', 'new_temp8'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp43': {'new_temp6', 'explicate_12', 'new_temp8'}, 'new_temp48': {'new_temp6', 'explicate_12', 'new_temp8'}, 'new_temp44': {'new_temp45', 'edx', 'new_temp6', 'eax', 'ecx', 'new_temp8'}, 'new_temp45': {'new_temp8', 'new_temp44', 'new_temp6'}, 'new_temp46': {'new_temp8', 'new_temp6'}, 'new_temp47': {'new_temp8', 'new_temp6'}, 'y': {'explicate_22', 'new_temp87', 'new_temp71', 'new_temp80', 'new_temp83', 'new_temp85', 'new_temp88', 'explicate_16', 'explicate_19', 'new_temp82', 'new_temp62', 'explicate_23', 'new_temp57', 'new_temp3', 'explicate_18', 'new_temp81', 'new_temp86', 'explicate_24', 'new_temp70', 'new_temp69', 'new_temp76', 'new_temp58', 'z', 'new_temp74', 'new_temp72', 'new_temp66', 'new_temp4', 'new_temp60', 'ecx', 'w', 'new_temp5', 'new_temp78', 'new_temp6', 'edx', 'explicate_21', 'new_temp8', 'new_temp63', 'new_temp77', 'explicate_20', 'new_temp65', 'new_temp61', 'new_temp68', 'unspillable_1', 'unspillable_2', 'new_temp84', 'new_temp75', 'new_temp67', 'new_temp64', 'eax', 'new_temp73', 'new_temp79', 'new_temp59'}, 'new_temp57': {'new_temp6', 'y', 'new_temp8'}, 'new_temp3': {'new_temp8', 'y', 'new_temp6'}, 'explicate_17': {'new_temp66', 'edx', 'explicate_18', 'new_temp60', 'new_temp65', 'ecx', 'new_temp68', 'new_temp6', 'new_temp67', 'new_temp64', 'new_temp58', 'eax', 'new_temp59', 'new_temp8'}, 'new_temp58': {'new_temp8', 'explicate_17', 'y', 'new_temp6'}, 'new_temp49': {'new_temp6', 'explicate_12', 'new_temp8'}, 'new_temp59': {'new_temp8', 'explicate_17', 'y', 'new_temp6'}, 'new_temp64': {'new_temp8', 'explicate_17', 'y', 'new_temp6'}, 'new_temp50': {'new_temp8', 'new_temp6'}, 'explicate_14': {'ecx', 'new_temp54', 'explicate_15', 'new_temp6', 'edx', 'eax', 'new_temp52', 'new_temp53', 'new_temp8'}, 'new_temp51': {'new_temp8', 'new_temp6'}, 'new_temp61': {'new_temp8', 'y', 'new_temp6'}, 'new_temp62': {'new_temp6', 'y', 'new_temp8'}, 'new_temp63': {'new_temp6', 'y', 'new_temp8'}, 'unspillable_1': {'new_temp8', 'y', 'new_temp6'}, 'new_temp73': {'new_temp6', 'y', 'new_temp8'}, 'new_temp5': {'new_temp8', 'y', 'new_temp6'}, 'unspillable_2': {'new_temp8', 'y', 'new_temp6'}, 'new_temp74': {'new_temp6', 'y', 'new_temp8'}, 'new_temp65': {'new_temp8', 'explicate_17', 'y', 'new_temp6'}, 'new_temp52': {'new_temp8', 'explicate_14', 'new_temp6'}, 'new_temp75': {'new_temp6', 'y', 'new_temp8'}, 'new_temp80': {'new_temp6', 'y', 'new_temp8'}, 'new_temp66': {'new_temp8', 'explicate_17', 'y', 'new_temp6'}, 'new_temp67': {'new_temp8', 'explicate_17', 'y', 'new_temp6'}, 'new_temp53': {'new_temp8', 'explicate_14', 'new_temp6'}, 'explicate_15': {'new_temp55', 'explicate_14', 'new_temp6', 'new_temp8'}, 'new_temp54': {'new_temp8', 'explicate_14', 'new_temp6'}, 'new_temp76': {'new_temp77', 'y', 'edx', 'eax', 'ecx', 'new_temp8'}, 'new_temp77': {'new_temp8', 'y', 'new_temp76'}, 'new_temp78': {'y', 'new_temp8'}, 'new_temp79': {'y', 'new_temp8'}, 'explicate_24': {'new_temp89', 'new_temp90', 'ecx', 'explicate_25', 'new_temp95', 'y', 'new_temp96', 'edx', 'eax', 'new_temp8'}, 'explicate_25': {'new_temp91', 'new_temp99', 'new_temp89', 'new_temp97', 'explicate_26', 'new_temp90', 'ecx', 'explicate_24', 'new_temp95', 'new_temp98', 'new_temp96', 'edx', 'eax', 'new_temp8'}, 'new_temp89': {'explicate_24', 'explicate_25', 'new_temp8'}, 'new_temp81': {'y', 'new_temp8'}, 'new_temp68': {'new_temp8', 'explicate_17', 'y', 'new_temp6'}, 'new_temp55': {'new_temp6', 'new_temp8', 'explicate_15'}, 'new_temp56': {'new_temp8', 'new_temp6'}, 'new_temp90': {'explicate_24', 'explicate_25', 'new_temp8'}, 'new_temp95': {'explicate_24', 'explicate_25', 'new_temp8'}, 'new_temp82': {'y', 'new_temp8'}, 'explicate_22': {'new_temp86', 'ecx', 'new_temp84', 'y', 'new_temp85', 'edx', 'eax', 'explicate_23', 'new_temp8'}, 'new_temp83': {'y', 'new_temp8'}, 'new_temp69': {'new_temp8', 'y', 'new_temp6'}, 'explicate_19': {'new_temp71', 'y', 'new_temp6', 'new_temp8'}, 'new_temp70': {'new_temp8', 'y', 'new_temp6'}, 'new_temp91': {'new_temp92', 'edx', 'eax', 'ecx', 'explicate_25', 'new_temp8'}, 'new_temp92': {'new_temp91', 'new_temp8'}, 'new_temp93': {'new_temp8'}, 'new_temp94': {'new_temp8'}, 'explicate_28': {'new_temp105', 'new_temp104', 'ecx', 'new_temp110', 'explicate_29', 'new_temp111', 'edx', 'eax', 'new_temp8'}, 'explicate_29': {'new_temp105', 'new_temp104', 'new_temp114', 'explicate_28', 'new_temp112', 'ecx', 'new_temp110', 'new_temp111', 'new_temp106', 'edx', 'eax', 'explicate_30', 'new_temp113', 'new_temp8'}, 'new_temp104': {'explicate_29', 'explicate_28', 'new_temp8'}, 'new_temp96': {'new_temp8', 'explicate_25', 'explicate_24'}, 'new_temp84': {'explicate_22', 'y', 'new_temp8'}, 'new_temp71': {'y', 'new_temp6', 'explicate_19', 'new_temp8'}, 'new_temp72': {'new_temp6', 'y', 'new_temp8'}, 'new_temp105': {'explicate_29', 'new_temp8', 'explicate_28'}, 'new_temp110': {'explicate_29', 'explicate_28', 'new_temp8'}, 'new_temp97': {'explicate_25', 'new_temp8'}, 'explicate_26': {'new_temp99', 'explicate_27', 'ecx', 'explicate_25', 'new_temp101', 'edx', 'eax', 'new_temp100', 'new_temp8'}, 'new_temp98': {'explicate_25', 'new_temp8'}, 'new_temp85': {'explicate_22', 'y', 'new_temp8'}, 'explicate_23': {'explicate_22', 'y', 'new_temp87', 'new_temp8'}, 'new_temp86': {'explicate_22', 'y', 'new_temp8'}, 'new_temp106': {'ecx', 'explicate_29', 'new_temp107', 'edx', 'eax'}, 'new_temp107': {'new_temp106'}, 'new_temp108': set(), 'new_temp109': set(), 'explicate_32': {'new_temp125', 'new_temp120', 'new_temp119', 'ecx', 'new_temp126', 'edx', 'eax', 'explicate_33'}, 'explicate_33': {'new_temp127', 'new_temp129', 'explicate_34', 'new_temp125', 'new_temp120', 'new_temp119', 'ecx', 'new_temp121', 'new_temp126', 'explicate_32', 'edx', 'eax', 'new_temp128'}, 'new_temp119': {'explicate_32', 'explicate_33'}, 'new_temp111': {'explicate_29', 'explicate_28'}, 'new_temp99': {'explicate_26', 'explicate_25', 'new_temp8'}, 'new_temp87': {'y', 'explicate_23', 'new_temp8'}, 'new_temp88': {'y', 'new_temp8'}, 'new_temp120': {'explicate_32', 'explicate_33'}, 'new_temp125': {'explicate_32', 'explicate_33'}, 'new_temp112': {'explicate_29'}, 'explicate_30': {'new_temp114', 'ecx', 'explicate_31', 'new_temp116', 'explicate_29', 'new_temp115', 'edx', 'eax'}, 'new_temp113': {'explicate_29'}, 'new_temp100': {'explicate_26', 'new_temp8'}, 'explicate_27': {'new_temp102', 'new_temp8', 'explicate_26'}, 'new_temp101': {'explicate_26', 'new_temp8'}, 'new_temp121': {'ecx', 'edx', 'eax', 'explicate_33', 'new_temp122'}, 'new_temp122': {'new_temp121'}, 'new_temp123': set(), 'new_temp124': set(), 'new_temp134': set(), 'new_temp10': {'explicate_36'}, 'explicate_36': {'new_temp136', 'new_temp135', 'new_temp141', 'new_temp10', 'ecx', 'explicate_37', 'new_temp142', 'edx', 'eax'}, 'explicate_37': {'edx', 'new_temp145', 'new_temp135', 'new_temp141', 'new_temp143', 'ecx', 'explicate_38', 'new_temp144', 'explicate_36', 'new_temp142', 'new_temp136', 'eax', 'new_temp137'}, 'new_temp135': {'explicate_36', 'explicate_37'}, 'new_temp126': {'explicate_32', 'explicate_33'}, 'new_temp114': {'explicate_29', 'explicate_30'}, 'new_temp102': {'explicate_27', 'new_temp8'}, 'new_temp103': {'new_temp8'}, 'new_temp136': {'explicate_36', 'explicate_37'}, 'new_temp141': {'explicate_36', 'explicate_37'}, 'new_temp127': {'explicate_33'}, 'explicate_34': {'new_temp129', 'ecx', 'explicate_35', 'new_temp130', 'new_temp131', 'edx', 'eax', 'explicate_33'}, 'new_temp128': {'explicate_33'}, 'new_temp115': {'explicate_30'}, 'explicate_31': {'explicate_30', 'new_temp117'}, 'new_temp116': {'explicate_30'}, 'new_temp137': {'new_temp138', 'ecx', 'explicate_37', 'edx', 'eax'}, 'new_temp138': {'new_temp137'}, 'new_temp139': set(), 'new_temp140': set(), 'new_temp142': {'explicate_36', 'explicate_37'}, 'new_temp129': {'explicate_33', 'explicate_34'}, 'new_temp117': {'explicate_31'}, 'new_temp118': set(), 'new_temp143': {'explicate_37'}, 'explicate_38': {'new_temp145', 'ecx', 'explicate_39', 'explicate_37', 'new_temp147', 'new_temp146', 'edx', 'eax'}, 'new_temp144': {'explicate_37'}, 'new_temp130': {'explicate_34'}, 'explicate_35': {'new_temp132', 'explicate_34'}, 'new_temp131': {'explicate_34'}, 'new_temp145': {'explicate_37', 'explicate_38'}, 'new_temp132': {'explicate_35'}, 'new_temp133': set(), 'new_temp146': {'explicate_38'}, 'explicate_39': {'new_temp148', 'explicate_38'}, 'new_temp147': {'explicate_38'}, 'new_temp148': {'explicate_39'}, 'new_temp149': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'unspillable_1': 1, 'unspillable_0': 1, 'unspillable_2': 1, 'new_temp8': 4, 'new_temp6': 5, 'explicate_17': 6, 'y': 6, 'new_temp76': 5, 'explicate_12': 6, 'explicate_14': 6, 'explicate_24': 5, 'explicate_22': 5, 'new_temp44': 6, 'explicate_25': 6, 'explicate_26': 5, 'new_temp91': 5, 'explicate_28': 5, 'explicate_29': 6, 'new_temp106': 4, 'explicate_30': 4, 'new_temp59': 1, 'new_temp73': 1, 'new_temp84': 1, 'new_temp61': 1, 'new_temp104': 1, 'new_temp63': 1, 'new_temp49': 1, 'new_temp52': 1, 'explicate_38': 4, 'explicate_37': 5, 'new_temp137': 4, 'explicate_36': 4, 'new_temp5': 1, 'new_temp89': 1, 'new_temp74': 1, 'new_temp72': 1, 'new_temp58': 1, 'new_temp69': 1, 'new_temp70': 1, 'new_temp57': 1, 'new_temp45': 1, 'new_temp62': 1, 'explicate_19': 1, 'new_temp71': 2, 'new_temp80': 1, 'new_temp121': 4, 'explicate_33': 5, 'explicate_32': 4, 'explicate_34': 4, 'new_temp99': 1, 'new_temp43': 1, 'new_temp42': 1, 'new_temp53': 1, 'new_temp64': 1, 'new_temp67': 1, 'new_temp75': 1, 'new_temp110': 1, 'new_temp68': 1, 'new_temp65': 1, 'new_temp77': 1, 'new_temp95': 1, 'explicate_15': 1, 'new_temp55': 2, 'new_temp66': 1, 'new_temp48': 1, 'new_temp90': 1, 'new_temp86': 1, 'new_temp3': 1, 'explicate_23': 1, 'new_temp87': 2, 'new_temp85': 1, 'new_temp96': 1, 'new_temp54': 1, 'new_temp105': 1, 'new_temp100': 1, 'new_temp98': 1, 'new_temp46': 1, 'new_temp120': 1, 'new_temp56': 1, 'new_temp114': 1, 'new_temp41': 1, 'new_temp79': 1, 'new_temp0': 1, 'new_temp126': 1, 'new_temp141': 1, 'new_temp129': 1, 'new_temp40': 1, 'new_temp78': 1, 'explicate_27': 1, 'new_temp102': 2, 'new_temp142': 1, 'new_temp50': 1, 'new_temp81': 1, 'new_temp82': 1, 'new_temp136': 1, 'new_temp101': 1, 'new_temp88': 1, 'new_temp111': 1, 'new_temp83': 1, 'new_temp1': 1, 'new_temp47': 1, 'new_temp51': 1, 'new_temp119': 1, 'new_temp135': 1, 'new_temp125': 1, 'new_temp92': 1, 'new_temp97': 1, 'new_temp145': 1, 'new_temp103': 1, 'new_temp128': 1, 'explicate_31': 1, 'new_temp130': 1, 'new_temp112': 1, 'new_temp122': 1, 'new_temp131': 1, 'new_temp117': 2, 'new_temp146': 1, 'explicate_39': 1, 'new_temp148': 2, 'explicate_35': 1, 'new_temp93': 1, 'new_temp143': 1, 'new_temp94': 1, 'new_temp113': 1, 'new_temp10': 1, 'new_temp115': 1, 'new_temp107': 1, 'new_temp116': 1, 'new_temp144': 1, 'new_temp147': 1, 'new_temp132': 2, 'new_temp138': 1, 'new_temp127': 1, 'new_temp123': 1, 'new_temp133': 1, 'new_temp124': 1, 'new_temp140': 1, 'new_temp134': 1, 'new_temp139': 1, 'new_temp149': 1, 'new_temp118': 1, 'new_temp109': 1, 'new_temp108': 1}
+Spilled set:
+ {'new_temp11', 'new_temp2', 'x', 'new_temp9', 'new_temp4', 'explicate_18', 'new_temp60', 'new_temp7', 'explicate_20', 'explicate_13', 'w', 'z', 'explicate_16', 'explicate_21'}
+
+
+--------------Spilling----------------
+unspillable_set
+ {'unspillable_2', 'unspillable_0', 'unspillable_1'}
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {'new_temp11': -4, 'new_temp2': -8, 'x': -12, 'new_temp9': -16, 'new_temp4': -20, 'explicate_18': -24, 'new_temp60': -28, 'new_temp7': -32, 'explicate_20': -36, 'explicate_13': -40, 'w': -44, 'z': -48, 'explicate_16': -52, 'explicate_21': -56, 'unspillable_1': 'eax', 'unspillable_0': 'eax', 'unspillable_2': 'eax', 'new_temp8': 'edi', 'new_temp6': 'ebx', 'explicate_17': 'esi', 'y': 'esi', 'new_temp76': 'ebx', 'explicate_12': 'esi', 'explicate_14': 'esi', 'explicate_24': 'ebx', 'explicate_22': 'ebx', 'new_temp44': 'esi', 'explicate_25': 'esi', 'explicate_26': 'ebx', 'new_temp91': 'ebx', 'explicate_28': 'ebx', 'explicate_29': 'esi', 'new_temp106': 'edi', 'explicate_30': 'edi', 'new_temp59': 'eax', 'new_temp73': 'eax', 'new_temp84': 'eax', 'new_temp61': 'eax', 'new_temp104': 'eax', 'new_temp63': 'eax', 'new_temp49': 'eax', 'new_temp52': 'eax', 'explicate_38': 'edi', 'explicate_37': 'ebx', 'new_temp137': 'edi', 'explicate_36': 'edi', 'new_temp5': 'eax', 'new_temp89': 'eax', 'new_temp74': 'eax', 'new_temp72': 'eax', 'new_temp58': 'eax', 'new_temp69': 'eax', 'new_temp70': 'eax', 'new_temp57': 'eax', 'new_temp45': 'eax', 'new_temp62': 'eax', 'explicate_19': 'eax', 'new_temp71': 'ecx', 'new_temp80': 'eax', 'new_temp121': 'edi', 'explicate_33': 'ebx', 'explicate_32': 'edi', 'explicate_34': 'edi', 'new_temp99': 'eax', 'new_temp43': 'eax', 'new_temp42': 'eax', 'new_temp53': 'eax', 'new_temp64': 'eax', 'new_temp67': 'eax', 'new_temp75': 'eax', 'new_temp110': 'eax', 'new_temp68': 'eax', 'new_temp65': 'eax', 'new_temp77': 'eax', 'new_temp95': 'eax', 'explicate_15': 'eax', 'new_temp55': 'ecx', 'new_temp66': 'eax', 'new_temp48': 'eax', 'new_temp90': 'eax', 'new_temp86': 'eax', 'new_temp3': 'eax', 'explicate_23': 'eax', 'new_temp87': 'ecx', 'new_temp85': 'eax', 'new_temp96': 'eax', 'new_temp54': 'eax', 'new_temp105': 'eax', 'new_temp100': 'eax', 'new_temp98': 'eax', 'new_temp46': 'eax', 'new_temp120': 'eax', 'new_temp56': 'eax', 'new_temp114': 'eax', 'new_temp41': 'eax', 'new_temp79': 'eax', 'new_temp0': 'eax', 'new_temp126': 'eax', 'new_temp141': 'eax', 'new_temp129': 'eax', 'new_temp40': 'eax', 'new_temp78': 'eax', 'explicate_27': 'eax', 'new_temp102': 'ecx', 'new_temp142': 'eax', 'new_temp50': 'eax', 'new_temp81': 'eax', 'new_temp82': 'eax', 'new_temp136': 'eax', 'new_temp101': 'eax', 'new_temp88': 'eax', 'new_temp111': 'eax', 'new_temp83': 'eax', 'new_temp1': 'eax', 'new_temp47': 'eax', 'new_temp51': 'eax', 'new_temp119': 'eax', 'new_temp135': 'eax', 'new_temp125': 'eax', 'new_temp92': 'eax', 'new_temp97': 'eax', 'new_temp145': 'eax', 'new_temp103': 'eax', 'new_temp128': 'eax', 'explicate_31': 'eax', 'new_temp130': 'eax', 'new_temp112': 'eax', 'new_temp122': 'eax', 'new_temp131': 'eax', 'new_temp117': 'ecx', 'new_temp146': 'eax', 'explicate_39': 'eax', 'new_temp148': 'ecx', 'explicate_35': 'eax', 'new_temp93': 'eax', 'new_temp143': 'eax', 'new_temp94': 'eax', 'new_temp113': 'eax', 'new_temp10': 'eax', 'new_temp115': 'eax', 'new_temp107': 'eax', 'new_temp116': 'eax', 'new_temp144': 'eax', 'new_temp147': 'eax', 'new_temp132': 'ecx', 'new_temp138': 'eax', 'new_temp127': 'eax', 'new_temp123': 'eax', 'new_temp133': 'eax', 'new_temp124': 'eax', 'new_temp140': 'eax', 'new_temp134': 'eax', 'new_temp139': 'eax', 'new_temp149': 'eax', 'new_temp118': 'eax', 'new_temp109': 'eax', 'new_temp108': 'eax'}
+new_temp40
+new_temp40
+new_temp0
+new_temp0
+new_temp41
+new_temp41
+new_temp1
+new_temp1
+explicate_12
+unspillable_0
+unspillable_0
+explicate_12
+new_temp42
+new_temp42
+new_temp43
+new_temp43
+explicate_12
+new_temp44
+new_temp45
+new_temp45
+new_temp44
+new_temp46
+new_temp46
+new_temp47
+new_temp47
+new_temp48
+new_temp48
+explicate_12
+new_temp49
+new_temp49
+explicate_12
+new_temp50
+new_temp50
+explicate_14
+explicate_12
+new_temp51
+new_temp51
+explicate_14
+new_temp52
+new_temp52
+new_temp53
+new_temp53
+explicate_15
+new_temp54
+new_temp54
+explicate_15
+explicate_14
+new_temp55
+explicate_15
+new_temp55
+new_temp55
+new_temp56
+new_temp56
+y
+new_temp57
+new_temp57
+new_temp3
+new_temp3
+y
+explicate_17
+new_temp58
+new_temp58
+explicate_17
+new_temp59
+new_temp59
+explicate_17
+new_temp61
+new_temp61
+new_temp62
+new_temp62
+new_temp63
+new_temp63
+explicate_17
+new_temp64
+new_temp64
+new_temp65
+new_temp65
+new_temp66
+new_temp66
+new_temp67
+new_temp67
+explicate_17
+new_temp68
+new_temp68
+explicate_17
+new_temp69
+new_temp69
+explicate_19
+explicate_17
+new_temp70
+new_temp70
+explicate_19
+new_temp71
+explicate_19
+new_temp71
+new_temp71
+new_temp72
+new_temp72
+unspillable_1
+unspillable_1
+new_temp73
+new_temp73
+new_temp5
+new_temp5
+unspillable_2
+unspillable_2
+new_temp74
+new_temp74
+new_temp75
+new_temp75
+new_temp76
+new_temp77
+new_temp77
+new_temp76
+new_temp78
+new_temp78
+new_temp79
+new_temp79
+new_temp6
+new_temp80
+new_temp80
+new_temp81
+new_temp81
+new_temp82
+new_temp82
+explicate_22
+new_temp83
+new_temp83
+explicate_22
+new_temp84
+new_temp84
+new_temp85
+new_temp85
+explicate_23
+new_temp86
+new_temp86
+explicate_23
+explicate_22
+new_temp87
+explicate_23
+new_temp87
+new_temp87
+new_temp88
+new_temp88
+new_temp6
+new_temp6
+explicate_24
+y
+explicate_25
+explicate_24
+new_temp89
+new_temp89
+explicate_25
+new_temp90
+new_temp90
+explicate_24
+new_temp91
+explicate_25
+new_temp92
+new_temp92
+new_temp91
+new_temp93
+new_temp93
+new_temp94
+new_temp94
+explicate_25
+new_temp95
+new_temp95
+explicate_24
+new_temp96
+new_temp96
+explicate_24
+new_temp97
+new_temp97
+explicate_26
+explicate_24
+new_temp98
+new_temp98
+explicate_26
+explicate_25
+new_temp99
+new_temp99
+explicate_25
+new_temp100
+new_temp100
+explicate_27
+explicate_25
+new_temp101
+new_temp101
+explicate_27
+explicate_26
+new_temp102
+explicate_27
+new_temp102
+new_temp102
+new_temp103
+new_temp103
+explicate_28
+explicate_29
+explicate_28
+new_temp104
+new_temp104
+explicate_29
+new_temp105
+new_temp105
+explicate_28
+new_temp106
+explicate_29
+new_temp107
+new_temp107
+new_temp106
+new_temp108
+new_temp108
+new_temp109
+new_temp109
+new_temp8
+explicate_29
+new_temp110
+new_temp110
+explicate_28
+new_temp111
+new_temp111
+explicate_28
+new_temp112
+new_temp112
+explicate_30
+explicate_28
+new_temp113
+new_temp113
+explicate_30
+explicate_29
+new_temp114
+new_temp114
+explicate_29
+new_temp115
+new_temp115
+explicate_31
+explicate_29
+new_temp116
+new_temp116
+explicate_31
+explicate_30
+new_temp117
+explicate_31
+new_temp117
+new_temp117
+new_temp118
+new_temp118
+new_temp8
+new_temp8
+explicate_32
+explicate_33
+explicate_32
+new_temp119
+new_temp119
+explicate_33
+new_temp120
+new_temp120
+explicate_32
+new_temp121
+explicate_33
+new_temp122
+new_temp122
+new_temp121
+new_temp123
+new_temp123
+new_temp124
+new_temp124
+explicate_33
+new_temp125
+new_temp125
+explicate_32
+new_temp126
+new_temp126
+explicate_32
+new_temp127
+new_temp127
+explicate_34
+explicate_32
+new_temp128
+new_temp128
+explicate_34
+explicate_33
+new_temp129
+new_temp129
+explicate_33
+new_temp130
+new_temp130
+explicate_35
+explicate_33
+new_temp131
+new_temp131
+explicate_35
+explicate_34
+new_temp132
+explicate_35
+new_temp132
+new_temp132
+new_temp133
+new_temp133
+new_temp134
+new_temp134
+new_temp10
+explicate_36
+new_temp10
+explicate_37
+explicate_36
+new_temp135
+new_temp135
+explicate_37
+new_temp136
+new_temp136
+explicate_36
+new_temp137
+explicate_37
+new_temp138
+new_temp138
+new_temp137
+new_temp139
+new_temp139
+new_temp140
+new_temp140
+explicate_37
+new_temp141
+new_temp141
+explicate_36
+new_temp142
+new_temp142
+explicate_36
+new_temp143
+new_temp143
+explicate_38
+explicate_36
+new_temp144
+new_temp144
+explicate_38
+explicate_37
+new_temp145
+new_temp145
+explicate_37
+new_temp146
+new_temp146
+explicate_39
+explicate_37
+new_temp147
+new_temp147
+explicate_39
+explicate_38
+new_temp148
+explicate_39
+new_temp148
+new_temp148
+new_temp149
+new_temp149

@@ -1,0 +1,219 @@
+--------------Original code----------------
+x = 2
+y = 3
+print(x)
+print(y)
+tmp = x
+x = y
+y = tmp
+print(x)
+print(y)
+
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Constant(value=2)),
+          Assign(
+               targets=[
+                    Name(id='y', ctx=Store())],
+               value=Constant(value=3)),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='x', ctx=Load())],
+                    keywords=[])),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='y', ctx=Load())],
+                    keywords=[])),
+          Assign(
+               targets=[
+                    Name(id='tmp', ctx=Store())],
+               value=Name(id='x', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Name(id='y', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='y', ctx=Store())],
+               value=Name(id='tmp', ctx=Load())),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='x', ctx=Load())],
+                    keywords=[])),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='y', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Constant(value=2)),
+          Assign(
+               targets=[
+                    Name(id='y', ctx=Store())],
+               value=Constant(value=3)),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='x', ctx=Load())],
+                    keywords=[])),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='y', ctx=Load())],
+                    keywords=[])),
+          Assign(
+               targets=[
+                    Name(id='tmp', ctx=Store())],
+               value=Name(id='x', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Name(id='y', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='y', ctx=Store())],
+               value=Name(id='tmp', ctx=Load())),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='x', ctx=Load())],
+                    keywords=[])),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='y', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
+--------------Code after flattening-------
+x = 2
+y = 3
+print(x)
+print(y)
+tmp = x
+x = y
+y = tmp
+print(x)
+print(y)
+<ast.Constant object at 0x7f863b2695d0>
+<ast.Constant object at 0x7f863b269570>
+<ast.Name object at 0x7f863b269300>
+<ast.Name object at 0x7f863b269270>
+<ast.Name object at 0x7f863b2691e0>
+
+x = inject_int(2)
+y = inject_int(3)
+print(x)
+print(y)
+tmp = x
+x = y
+y = tmp
+print(x)
+print(y)
+--------------Explicate code-------
+x = inject_int(2)
+y = inject_int(3)
+print(x)
+print(y)
+tmp = x
+x = y
+y = tmp
+print(x)
+print(y)
+
+
+--- explicated flattened python ---
+new_temp0 = inject_int(2)
+x = new_temp0
+new_temp1 = inject_int(3)
+y = new_temp1
+print(x)
+print(y)
+tmp = x
+x = y
+y = tmp
+print(x)
+print(y)
+
+
+--- x86 IR ---
+call  inject_int 2
+movl  eax ,  new_temp0
+movl  new_temp0 ,  x
+call  inject_int 3
+movl  eax ,  new_temp1
+movl  new_temp1 ,  y
+call  print x
+call  print y
+movl  x ,  tmp
+movl  y ,  x
+movl  tmp ,  y
+call  print x
+call  print y
+
+
+--- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp0': set(), 'x': {'eax', 'y', 'edx', 'ecx', 'new_temp1', 'tmp'}, 'eax': {'y', 'x'}, 'ecx': {'y', 'x'}, 'edx': {'y', 'x'}, 'new_temp1': {'x'}, 'y': {'eax', 'edx', 'ecx', 'tmp', 'x'}, 'tmp': {'y', 'x'}, 'edi': set(), 'ebx': set(), 'esi': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'x': 4, 'y': 5, 'tmp': 1, 'new_temp1': 1, 'new_temp0': 1}
+Spilled set:
+ set()
+
+
+--------------Spilling----------------
+unspillable_set
+ set()
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {'x': 'edi', 'y': 'ebx', 'tmp': 'eax', 'new_temp1': 'eax', 'new_temp0': 'eax'}
+new_temp0
+new_temp0
+x
+new_temp1
+new_temp1
+y
+x
+y
+x
+tmp
+y
+x
+tmp
+y
+x
+y

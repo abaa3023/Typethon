@@ -1,0 +1,1190 @@
+--------------Original code----------------
+climb = 2
+fall = 1
+peak = 40
+while int(fall != peak):
+    climb = fall + 2
+    fall = climb + -1
+
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='climb', ctx=Store())],
+               value=Constant(value=2)),
+          Assign(
+               targets=[
+                    Name(id='fall', ctx=Store())],
+               value=Constant(value=1)),
+          Assign(
+               targets=[
+                    Name(id='peak', ctx=Store())],
+               value=Constant(value=40)),
+          While(
+               test=Call(
+                    func=Name(id='int', ctx=Load()),
+                    args=[
+                         Compare(
+                              left=Name(id='fall', ctx=Load()),
+                              ops=[
+                                   NotEq()],
+                              comparators=[
+                                   Name(id='peak', ctx=Load())])],
+                    keywords=[]),
+               body=[
+                    Assign(
+                         targets=[
+                              Name(id='climb', ctx=Store())],
+                         value=BinOp(
+                              left=Name(id='fall', ctx=Load()),
+                              op=Add(),
+                              right=Constant(value=2))),
+                    Assign(
+                         targets=[
+                              Name(id='fall', ctx=Store())],
+                         value=BinOp(
+                              left=Name(id='climb', ctx=Load()),
+                              op=Add(),
+                              right=UnaryOp(
+                                   op=USub(),
+                                   operand=Constant(value=1))))],
+               orelse=[])],
+     type_ignores=[])
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='climb', ctx=Store())],
+               value=Constant(value=2)),
+          Assign(
+               targets=[
+                    Name(id='fall', ctx=Store())],
+               value=Constant(value=1)),
+          Assign(
+               targets=[
+                    Name(id='peak', ctx=Store())],
+               value=Constant(value=40)),
+          Assign(
+               targets=[
+                    Name(id='new_temp3', ctx=Store())],
+               value=Compare(
+                    left=Name(id='fall', ctx=Load()),
+                    ops=[
+                         NotEq()],
+                    comparators=[
+                         Name(id='peak', ctx=Load())])),
+          Assign(
+               targets=[
+                    Name(id='new_temp4', ctx=Store())],
+               value=Name(id='new_temp3', ctx=Store())),
+          Assign(
+               targets=[
+                    Name(id='new_temp5', ctx=Store())],
+               value=Call(
+                    func=Name(id='int', ctx=Load()),
+                    args=[
+                         Name(id='new_temp4', ctx=Load())],
+                    keywords=[])),
+          While(
+               test=Name(id='new_temp5', ctx=Load()),
+               body=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp0', ctx=Store())],
+                         value=BinOp(
+                              left=Name(id='fall', ctx=Load()),
+                              op=Add(),
+                              right=Constant(value=2))),
+                    Assign(
+                         targets=[
+                              Name(id='climb', ctx=Store())],
+                         value=Name(id='new_temp0', ctx=Load())),
+                    Assign(
+                         targets=[
+                              Name(id='new_temp1', ctx=Store())],
+                         value=UnaryOp(
+                              op=USub(),
+                              operand=Constant(value=1))),
+                    Assign(
+                         targets=[
+                              Name(id='new_temp2', ctx=Store())],
+                         value=BinOp(
+                              left=Name(id='climb', ctx=Load()),
+                              op=Add(),
+                              right=Name(id='new_temp1', ctx=Load()))),
+                    Assign(
+                         targets=[
+                              Name(id='fall', ctx=Store())],
+                         value=Name(id='new_temp2', ctx=Load())),
+                    Assign(
+                         targets=[
+                              Name(id='new_temp3', ctx=Store())],
+                         value=Compare(
+                              left=Name(id='fall', ctx=Load()),
+                              ops=[
+                                   NotEq()],
+                              comparators=[
+                                   Name(id='peak', ctx=Load())])),
+                    Assign(
+                         targets=[
+                              Name(id='new_temp4', ctx=Store())],
+                         value=Name(id='new_temp3', ctx=Store())),
+                    Assign(
+                         targets=[
+                              Name(id='new_temp5', ctx=Store())],
+                         value=Call(
+                              func=Name(id='int', ctx=Load()),
+                              args=[
+                                   Name(id='new_temp4', ctx=Load())],
+                              keywords=[]))],
+               orelse=[])],
+     type_ignores=[])
+--------------Code after flattening-------
+climb = 2
+fall = 1
+peak = 40
+new_temp3 = fall != peak
+new_temp4 = new_temp3
+new_temp5 = int(new_temp4)
+while new_temp5:
+    new_temp0 = fall + 2
+    climb = new_temp0
+    new_temp1 = -1
+    new_temp2 = climb + new_temp1
+    fall = new_temp2
+    new_temp3 = fall != peak
+    new_temp4 = new_temp3
+    new_temp5 = int(new_temp4)
+<ast.Constant object at 0x7fe9db2056f0>
+<ast.Constant object at 0x7fe9db205690>
+<ast.Constant object at 0x7fe9db205600>
+inject_bool(not_equal(project_big(explicate_6),project_big(explicate_7)))
+inject_bool(1)
+inject_bool(1)
+inject_bool(explicate_8!=explicate_9)
+<ast.Name object at 0x7fe9db204a90>
+inject_int(project_bool(explicate_10))
+inject_big(add(project_big(explicate_11),project_big(explicate_12)))
+inject_int(explicate_13+explicate_14)
+<ast.Name object at 0x7fe9db204fd0>
+inject_int(-1)
+inject_big(add(project_big(explicate_15),project_big(explicate_16)))
+inject_int(explicate_17+explicate_18)
+<ast.Name object at 0x7fe9db204e20>
+inject_bool(not_equal(project_big(explicate_19),project_big(explicate_20)))
+inject_bool(1)
+inject_bool(1)
+inject_bool(explicate_21!=explicate_22)
+<ast.Name object at 0x7fe9db204a90>
+inject_int(project_bool(explicate_23))
+
+climb = inject_int(2)
+fall = inject_int(1)
+peak = inject_int(40)
+explicate_6 = fall
+explicate_7 = peak
+if(is_big(explicate_6)):
+	if(is_big(explicate_7)):
+		new_temp3 = inject_bool(not_equal(project_big(explicate_6),project_big(explicate_7)))
+	else:
+		new_temp3 = inject_bool(1)
+else:
+	if(is_big(explicate_7)):
+		new_temp3 = inject_bool(1)
+	else:
+		if(is_int(explicate_6)):
+			explicate_8 = project_int(explicate_6)
+		else:
+			explicate_8 = project_bool(explicate_6)
+		if(is_int(explicate_7)):
+			explicate_9 = project_int(explicate_7)
+		else:
+			explicate_9 = project_bool(explicate_7)
+		new_temp3 = inject_bool(explicate_8!=explicate_9)
+new_temp4 = new_temp3
+explicate_10 = new_temp4
+if(is_bool(explicate_10)):
+	new_temp5 = inject_int(project_bool(explicate_10))
+while(is_true(new_temp5)):
+
+	explicate_11 = fall
+	explicate_12 = inject_int(2)
+	if(is_big(explicate_11)):
+		if(is_big(explicate_12)):
+			new_temp0 = inject_big(add(project_big(explicate_11),project_big(explicate_12)))
+	else:
+		if(is_big(explicate_12)):
+			error_pyobj(0)
+		else:
+			if(is_int(explicate_11)):
+				explicate_13 = project_int(explicate_11)
+			else:
+				explicate_13 = project_bool(explicate_11)
+			if(is_int(explicate_12)):
+				explicate_14 = project_int(explicate_12)
+			else:
+				explicate_14 = project_bool(explicate_12)
+			new_temp0 = inject_int(explicate_13+explicate_14)
+	climb = new_temp0
+	new_temp1 = inject_int(-1)
+	explicate_15 = climb
+	explicate_16 = new_temp1
+	if(is_big(explicate_15)):
+		if(is_big(explicate_16)):
+			new_temp2 = inject_big(add(project_big(explicate_15),project_big(explicate_16)))
+	else:
+		if(is_big(explicate_16)):
+			error_pyobj(0)
+		else:
+			if(is_int(explicate_15)):
+				explicate_17 = project_int(explicate_15)
+			else:
+				explicate_17 = project_bool(explicate_15)
+			if(is_int(explicate_16)):
+				explicate_18 = project_int(explicate_16)
+			else:
+				explicate_18 = project_bool(explicate_16)
+			new_temp2 = inject_int(explicate_17+explicate_18)
+	fall = new_temp2
+	explicate_19 = fall
+	explicate_20 = peak
+	if(is_big(explicate_19)):
+		if(is_big(explicate_20)):
+			new_temp3 = inject_bool(not_equal(project_big(explicate_19),project_big(explicate_20)))
+		else:
+			new_temp3 = inject_bool(1)
+	else:
+		if(is_big(explicate_20)):
+			new_temp3 = inject_bool(1)
+		else:
+			if(is_int(explicate_19)):
+				explicate_21 = project_int(explicate_19)
+			else:
+				explicate_21 = project_bool(explicate_19)
+			if(is_int(explicate_20)):
+				explicate_22 = project_int(explicate_20)
+			else:
+				explicate_22 = project_bool(explicate_20)
+			new_temp3 = inject_bool(explicate_21!=explicate_22)
+	new_temp4 = new_temp3
+	explicate_23 = new_temp4
+	if(is_bool(explicate_23)):
+		new_temp5 = inject_int(project_bool(explicate_23))
+--------------Explicate code-------
+climb = inject_int(2)
+fall = inject_int(1)
+peak = inject_int(40)
+explicate_6 = fall
+explicate_7 = peak
+if is_big(explicate_6):
+    if is_big(explicate_7):
+        new_temp3 = inject_bool(not_equal(project_big(explicate_6), project_big(explicate_7)))
+    else:
+        new_temp3 = inject_bool(1)
+elif is_big(explicate_7):
+    new_temp3 = inject_bool(1)
+else:
+    if is_int(explicate_6):
+        explicate_8 = project_int(explicate_6)
+    else:
+        explicate_8 = project_bool(explicate_6)
+    if is_int(explicate_7):
+        explicate_9 = project_int(explicate_7)
+    else:
+        explicate_9 = project_bool(explicate_7)
+    new_temp3 = inject_bool(explicate_8 != explicate_9)
+new_temp4 = new_temp3
+explicate_10 = new_temp4
+if is_bool(explicate_10):
+    new_temp5 = inject_int(project_bool(explicate_10))
+while is_true(new_temp5):
+    explicate_11 = fall
+    explicate_12 = inject_int(2)
+    if is_big(explicate_11):
+        if is_big(explicate_12):
+            new_temp0 = inject_big(add(project_big(explicate_11), project_big(explicate_12)))
+    elif is_big(explicate_12):
+        error_pyobj(0)
+    else:
+        if is_int(explicate_11):
+            explicate_13 = project_int(explicate_11)
+        else:
+            explicate_13 = project_bool(explicate_11)
+        if is_int(explicate_12):
+            explicate_14 = project_int(explicate_12)
+        else:
+            explicate_14 = project_bool(explicate_12)
+        new_temp0 = inject_int(explicate_13 + explicate_14)
+    climb = new_temp0
+    new_temp1 = inject_int(-1)
+    explicate_15 = climb
+    explicate_16 = new_temp1
+    if is_big(explicate_15):
+        if is_big(explicate_16):
+            new_temp2 = inject_big(add(project_big(explicate_15), project_big(explicate_16)))
+    elif is_big(explicate_16):
+        error_pyobj(0)
+    else:
+        if is_int(explicate_15):
+            explicate_17 = project_int(explicate_15)
+        else:
+            explicate_17 = project_bool(explicate_15)
+        if is_int(explicate_16):
+            explicate_18 = project_int(explicate_16)
+        else:
+            explicate_18 = project_bool(explicate_16)
+        new_temp2 = inject_int(explicate_17 + explicate_18)
+    fall = new_temp2
+    explicate_19 = fall
+    explicate_20 = peak
+    if is_big(explicate_19):
+        if is_big(explicate_20):
+            new_temp3 = inject_bool(not_equal(project_big(explicate_19), project_big(explicate_20)))
+        else:
+            new_temp3 = inject_bool(1)
+    elif is_big(explicate_20):
+        new_temp3 = inject_bool(1)
+    else:
+        if is_int(explicate_19):
+            explicate_21 = project_int(explicate_19)
+        else:
+            explicate_21 = project_bool(explicate_19)
+        if is_int(explicate_20):
+            explicate_22 = project_int(explicate_20)
+        else:
+            explicate_22 = project_bool(explicate_20)
+        new_temp3 = inject_bool(explicate_21 != explicate_22)
+    new_temp4 = new_temp3
+    explicate_23 = new_temp4
+    if is_bool(explicate_23):
+        new_temp5 = inject_int(project_bool(explicate_23))
+
+
+--- explicated flattened python ---
+new_temp24 = inject_int(2)
+climb = new_temp24
+new_temp25 = inject_int(1)
+fall = new_temp25
+new_temp26 = inject_int(40)
+peak = new_temp26
+explicate_6 = fall
+explicate_7 = peak
+new_temp27 = is_big(explicate_6)
+if new_temp27:
+    new_temp28 = is_big(explicate_7)
+    if new_temp28:
+        new_temp29 = project_big(explicate_6)
+        new_temp30 = project_big(explicate_7)
+        new_temp31 = not_equal(new_temp29, new_temp30)
+        new_temp32 = inject_bool(new_temp31)
+        new_temp3 = new_temp32
+    else:
+        new_temp33 = inject_bool(1)
+        new_temp3 = new_temp33
+else:
+    new_temp34 = is_big(explicate_7)
+    if new_temp34:
+        new_temp35 = inject_bool(1)
+        new_temp3 = new_temp35
+    else:
+        new_temp36 = is_int(explicate_6)
+        if new_temp36:
+            new_temp37 = project_int(explicate_6)
+            explicate_8 = new_temp37
+        else:
+            new_temp38 = project_bool(explicate_6)
+            explicate_8 = new_temp38
+        new_temp39 = is_int(explicate_7)
+        if new_temp39:
+            new_temp40 = project_int(explicate_7)
+            explicate_9 = new_temp40
+        else:
+            new_temp41 = project_bool(explicate_7)
+            explicate_9 = new_temp41
+        new_temp42 = explicate_8 != explicate_9
+        new_temp43 = new_temp42
+        new_temp44 = inject_bool(new_temp43)
+        new_temp3 = new_temp44
+new_temp4 = new_temp3
+explicate_10 = new_temp4
+new_temp45 = is_bool(explicate_10)
+if new_temp45:
+    new_temp46 = project_bool(explicate_10)
+    new_temp47 = inject_int(new_temp46)
+    new_temp5 = new_temp47
+new_temp102 = is_true(new_temp5)
+while new_temp102:
+    explicate_11 = fall
+    new_temp48 = inject_int(2)
+    explicate_12 = new_temp48
+    new_temp49 = is_big(explicate_11)
+    if new_temp49:
+        new_temp50 = is_big(explicate_12)
+        if new_temp50:
+            new_temp51 = project_big(explicate_11)
+            new_temp52 = project_big(explicate_12)
+            new_temp53 = add(new_temp51, new_temp52)
+            new_temp54 = inject_big(new_temp53)
+            new_temp0 = new_temp54
+    else:
+        new_temp55 = is_big(explicate_12)
+        if new_temp55:
+            error_pyobj(0)
+        else:
+            new_temp56 = is_int(explicate_11)
+            if new_temp56:
+                new_temp57 = project_int(explicate_11)
+                explicate_13 = new_temp57
+            else:
+                new_temp58 = project_bool(explicate_11)
+                explicate_13 = new_temp58
+            new_temp59 = is_int(explicate_12)
+            if new_temp59:
+                new_temp60 = project_int(explicate_12)
+                explicate_14 = new_temp60
+            else:
+                new_temp61 = project_bool(explicate_12)
+                explicate_14 = new_temp61
+            new_temp62 = explicate_13 + explicate_14
+            new_temp63 = inject_int(new_temp62)
+            new_temp0 = new_temp63
+    climb = new_temp0
+    new_temp64 = -1
+    new_temp65 = inject_int(new_temp64)
+    new_temp1 = new_temp65
+    explicate_15 = climb
+    explicate_16 = new_temp1
+    new_temp66 = is_big(explicate_15)
+    if new_temp66:
+        new_temp67 = is_big(explicate_16)
+        if new_temp67:
+            new_temp68 = project_big(explicate_15)
+            new_temp69 = project_big(explicate_16)
+            new_temp70 = add(new_temp68, new_temp69)
+            new_temp71 = inject_big(new_temp70)
+            new_temp2 = new_temp71
+    else:
+        new_temp72 = is_big(explicate_16)
+        if new_temp72:
+            error_pyobj(0)
+        else:
+            new_temp73 = is_int(explicate_15)
+            if new_temp73:
+                new_temp74 = project_int(explicate_15)
+                explicate_17 = new_temp74
+            else:
+                new_temp75 = project_bool(explicate_15)
+                explicate_17 = new_temp75
+            new_temp76 = is_int(explicate_16)
+            if new_temp76:
+                new_temp77 = project_int(explicate_16)
+                explicate_18 = new_temp77
+            else:
+                new_temp78 = project_bool(explicate_16)
+                explicate_18 = new_temp78
+            new_temp79 = explicate_17 + explicate_18
+            new_temp80 = inject_int(new_temp79)
+            new_temp2 = new_temp80
+    fall = new_temp2
+    explicate_19 = fall
+    explicate_20 = peak
+    new_temp81 = is_big(explicate_19)
+    if new_temp81:
+        new_temp82 = is_big(explicate_20)
+        if new_temp82:
+            new_temp83 = project_big(explicate_19)
+            new_temp84 = project_big(explicate_20)
+            new_temp85 = not_equal(new_temp83, new_temp84)
+            new_temp86 = inject_bool(new_temp85)
+            new_temp3 = new_temp86
+        else:
+            new_temp87 = inject_bool(1)
+            new_temp3 = new_temp87
+    else:
+        new_temp88 = is_big(explicate_20)
+        if new_temp88:
+            new_temp89 = inject_bool(1)
+            new_temp3 = new_temp89
+        else:
+            new_temp90 = is_int(explicate_19)
+            if new_temp90:
+                new_temp91 = project_int(explicate_19)
+                explicate_21 = new_temp91
+            else:
+                new_temp92 = project_bool(explicate_19)
+                explicate_21 = new_temp92
+            new_temp93 = is_int(explicate_20)
+            if new_temp93:
+                new_temp94 = project_int(explicate_20)
+                explicate_22 = new_temp94
+            else:
+                new_temp95 = project_bool(explicate_20)
+                explicate_22 = new_temp95
+            new_temp96 = explicate_21 != explicate_22
+            new_temp97 = new_temp96
+            new_temp98 = inject_bool(new_temp97)
+            new_temp3 = new_temp98
+    new_temp4 = new_temp3
+    explicate_23 = new_temp4
+    new_temp99 = is_bool(explicate_23)
+    if new_temp99:
+        new_temp100 = project_bool(explicate_23)
+        new_temp101 = inject_int(new_temp100)
+        new_temp5 = new_temp101
+    new_temp102 = is_true(new_temp5)
+
+
+--- x86 IR ---
+call  inject_int 2
+movl  eax ,  new_temp24
+movl  new_temp24 ,  climb
+call  inject_int 1
+movl  eax ,  new_temp25
+movl  new_temp25 ,  fall
+call  inject_int 40
+movl  eax ,  new_temp26
+movl  new_temp26 ,  peak
+movl  fall ,  explicate_6
+movl  peak ,  explicate_7
+call  is_big explicate_6
+movl  eax ,  new_temp27
+if1
+cmp 0, new_temp27
+je else1
+then1
+call  is_big explicate_7
+movl  eax ,  new_temp28
+if2
+cmp 0, new_temp28
+je else2
+then2
+call  project_big explicate_6
+movl  eax ,  new_temp29
+call  project_big explicate_7
+movl  eax ,  new_temp30
+call  not_equal new_temp29,new_temp30
+movl  eax ,  new_temp31
+call  inject_bool new_temp31
+movl  eax ,  new_temp32
+movl  new_temp32 ,  new_temp3
+else2
+call  inject_bool 1
+movl  eax ,  new_temp33
+movl  new_temp33 ,  new_temp3
+end if2
+else1
+call  is_big explicate_7
+movl  eax ,  new_temp34
+if2
+cmp 0, new_temp34
+je else2
+then2
+call  inject_bool 1
+movl  eax ,  new_temp35
+movl  new_temp35 ,  new_temp3
+else2
+call  is_int explicate_6
+movl  eax ,  new_temp36
+if3
+cmp 0, new_temp36
+je else3
+then3
+call  project_int explicate_6
+movl  eax ,  new_temp37
+movl  new_temp37 ,  explicate_8
+else3
+call  project_bool explicate_6
+movl  eax ,  new_temp38
+movl  new_temp38 ,  explicate_8
+end if3
+call  is_int explicate_7
+movl  eax ,  new_temp39
+if4
+cmp 0, new_temp39
+je else4
+then4
+call  project_int explicate_7
+movl  eax ,  new_temp40
+movl  new_temp40 ,  explicate_9
+else4
+call  project_bool explicate_7
+movl  eax ,  new_temp41
+movl  new_temp41 ,  explicate_9
+end if4
+int_compare  explicate_8 NotEq explicate_9 ,  new_temp42
+movl  new_temp42 ,  new_temp43
+call  inject_bool new_temp43
+movl  eax ,  new_temp44
+movl  new_temp44 ,  new_temp3
+end if2
+end if1
+movl  new_temp3 ,  new_temp4
+movl  new_temp4 ,  explicate_10
+call  is_bool explicate_10
+movl  eax ,  new_temp45
+if2
+cmp 0, new_temp45
+je end if2
+then2
+call  project_bool explicate_10
+movl  eax ,  new_temp46
+call  inject_int new_temp46
+movl  eax ,  new_temp47
+movl  new_temp47 ,  new_temp5
+end if2
+call  is_true new_temp5
+movl  eax ,  new_temp102
+While1
+cmp 0, new_temp102
+je endl While1
+movl  fall ,  explicate_11
+call  inject_int 2
+movl  eax ,  new_temp48
+movl  new_temp48 ,  explicate_12
+call  is_big explicate_11
+movl  eax ,  new_temp49
+if3
+cmp 0, new_temp49
+je else3
+then3
+call  is_big explicate_12
+movl  eax ,  new_temp50
+if4
+cmp 0, new_temp50
+je end if4
+then4
+call  project_big explicate_11
+movl  eax ,  new_temp51
+call  project_big explicate_12
+movl  eax ,  new_temp52
+call  add new_temp51,new_temp52
+movl  eax ,  new_temp53
+call  inject_big new_temp53
+movl  eax ,  new_temp54
+movl  new_temp54 ,  new_temp0
+end if4
+else3
+call  is_big explicate_12
+movl  eax ,  new_temp55
+if4
+cmp 0, new_temp55
+je else4
+then4
+call  error_pyobj 0
+else4
+call  is_int explicate_11
+movl  eax ,  new_temp56
+if5
+cmp 0, new_temp56
+je else5
+then5
+call  project_int explicate_11
+movl  eax ,  new_temp57
+movl  new_temp57 ,  explicate_13
+else5
+call  project_bool explicate_11
+movl  eax ,  new_temp58
+movl  new_temp58 ,  explicate_13
+end if5
+call  is_int explicate_12
+movl  eax ,  new_temp59
+if6
+cmp 0, new_temp59
+je else6
+then6
+call  project_int explicate_12
+movl  eax ,  new_temp60
+movl  new_temp60 ,  explicate_14
+else6
+call  project_bool explicate_12
+movl  eax ,  new_temp61
+movl  new_temp61 ,  explicate_14
+end if6
+movl  explicate_13 ,  new_temp62
+addl  explicate_14 ,  new_temp62
+call  inject_int new_temp62
+movl  eax ,  new_temp63
+movl  new_temp63 ,  new_temp0
+end if4
+end if3
+movl  new_temp0 ,  climb
+movl  1 ,  new_temp64
+negl  new_temp64
+call  inject_int new_temp64
+movl  eax ,  new_temp65
+movl  new_temp65 ,  new_temp1
+movl  climb ,  explicate_15
+movl  new_temp1 ,  explicate_16
+call  is_big explicate_15
+movl  eax ,  new_temp66
+if4
+cmp 0, new_temp66
+je else4
+then4
+call  is_big explicate_16
+movl  eax ,  new_temp67
+if5
+cmp 0, new_temp67
+je end if5
+then5
+call  project_big explicate_15
+movl  eax ,  new_temp68
+call  project_big explicate_16
+movl  eax ,  new_temp69
+call  add new_temp68,new_temp69
+movl  eax ,  new_temp70
+call  inject_big new_temp70
+movl  eax ,  new_temp71
+movl  new_temp71 ,  new_temp2
+end if5
+else4
+call  is_big explicate_16
+movl  eax ,  new_temp72
+if5
+cmp 0, new_temp72
+je else5
+then5
+call  error_pyobj 0
+else5
+call  is_int explicate_15
+movl  eax ,  new_temp73
+if6
+cmp 0, new_temp73
+je else6
+then6
+call  project_int explicate_15
+movl  eax ,  new_temp74
+movl  new_temp74 ,  explicate_17
+else6
+call  project_bool explicate_15
+movl  eax ,  new_temp75
+movl  new_temp75 ,  explicate_17
+end if6
+call  is_int explicate_16
+movl  eax ,  new_temp76
+if7
+cmp 0, new_temp76
+je else7
+then7
+call  project_int explicate_16
+movl  eax ,  new_temp77
+movl  new_temp77 ,  explicate_18
+else7
+call  project_bool explicate_16
+movl  eax ,  new_temp78
+movl  new_temp78 ,  explicate_18
+end if7
+movl  explicate_17 ,  new_temp79
+addl  explicate_18 ,  new_temp79
+call  inject_int new_temp79
+movl  eax ,  new_temp80
+movl  new_temp80 ,  new_temp2
+end if5
+end if4
+movl  new_temp2 ,  fall
+movl  fall ,  explicate_19
+movl  peak ,  explicate_20
+call  is_big explicate_19
+movl  eax ,  new_temp81
+if5
+cmp 0, new_temp81
+je else5
+then5
+call  is_big explicate_20
+movl  eax ,  new_temp82
+if6
+cmp 0, new_temp82
+je else6
+then6
+call  project_big explicate_19
+movl  eax ,  new_temp83
+call  project_big explicate_20
+movl  eax ,  new_temp84
+call  not_equal new_temp83,new_temp84
+movl  eax ,  new_temp85
+call  inject_bool new_temp85
+movl  eax ,  new_temp86
+movl  new_temp86 ,  new_temp3
+else6
+call  inject_bool 1
+movl  eax ,  new_temp87
+movl  new_temp87 ,  new_temp3
+end if6
+else5
+call  is_big explicate_20
+movl  eax ,  new_temp88
+if6
+cmp 0, new_temp88
+je else6
+then6
+call  inject_bool 1
+movl  eax ,  new_temp89
+movl  new_temp89 ,  new_temp3
+else6
+call  is_int explicate_19
+movl  eax ,  new_temp90
+if7
+cmp 0, new_temp90
+je else7
+then7
+call  project_int explicate_19
+movl  eax ,  new_temp91
+movl  new_temp91 ,  explicate_21
+else7
+call  project_bool explicate_19
+movl  eax ,  new_temp92
+movl  new_temp92 ,  explicate_21
+end if7
+call  is_int explicate_20
+movl  eax ,  new_temp93
+if8
+cmp 0, new_temp93
+je else8
+then8
+call  project_int explicate_20
+movl  eax ,  new_temp94
+movl  new_temp94 ,  explicate_22
+else8
+call  project_bool explicate_20
+movl  eax ,  new_temp95
+movl  new_temp95 ,  explicate_22
+end if8
+int_compare  explicate_21 NotEq explicate_22 ,  new_temp96
+movl  new_temp96 ,  new_temp97
+call  inject_bool new_temp97
+movl  eax ,  new_temp98
+movl  new_temp98 ,  new_temp3
+end if6
+end if5
+movl  new_temp3 ,  new_temp4
+movl  new_temp4 ,  explicate_23
+call  is_bool explicate_23
+movl  eax ,  new_temp99
+if6
+cmp 0, new_temp99
+je end if6
+then6
+call  project_bool explicate_23
+movl  eax ,  new_temp100
+call  inject_int new_temp100
+movl  eax ,  new_temp101
+movl  new_temp101 ,  new_temp5
+end if6
+call  is_true new_temp5
+movl  eax ,  new_temp102
+jmp While1
+endl While1
+
+
+--- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp0': {'explicate_6', 'new_temp29', 'new_temp38', 'explicate_17', 'explicate_11', 'new_temp80', 'new_temp100', 'explicate_21', 'new_temp30', 'explicate_10', 'new_temp74', 'new_temp37', 'new_temp102', 'explicate_7', 'new_temp79', 'new_temp35', 'new_temp46', 'new_temp72', 'new_temp83', 'new_temp71', 'fall', 'new_temp91', 'new_temp82', 'new_temp86', 'new_temp101', 'ecx', 'explicate_15', 'new_temp3', 'new_temp50', 'new_temp70', 'explicate_23', 'new_temp28', 'explicate_18', 'new_temp43', 'peak', 'new_temp96', 'eax', 'new_temp68', 'new_temp99', 'new_temp36', 'new_temp84', 'explicate_22', 'new_temp88', 'explicate_20', 'explicate_8', 'new_temp40', 'new_temp41', 'new_temp44', 'new_temp1', 'new_temp75', 'edx', 'new_temp93', 'new_temp95', 'climb', 'new_temp49', 'new_temp31', 'new_temp78', 'new_temp90', 'new_temp39', 'new_temp55', 'new_temp67', 'new_temp65', 'new_temp45', 'new_temp81', 'new_temp26', 'new_temp64', 'new_temp69', 'new_temp2', 'new_temp25', 'new_temp24', 'new_temp47', 'explicate_9', 'new_temp42', 'new_temp34', 'new_temp33', 'explicate_12', 'new_temp98', 'new_temp48', 'new_temp94', 'new_temp27', 'new_temp85', 'new_temp87', 'new_temp32', 'new_temp89', 'new_temp73', 'new_temp5', 'new_temp66', 'new_temp97', 'new_temp76', 'new_temp4', 'explicate_16', 'new_temp77', 'new_temp92', 'explicate_19'}, 'eax': {'explicate_13', 'new_temp0', 'new_temp83', 'explicate_6', 'fall', 'new_temp29', 'new_temp51', 'explicate_11', 'new_temp68', 'new_temp42', 'explicate_17', 'explicate_20', 'explicate_12', 'explicate_8', 'explicate_15', 'explicate_21', 'explicate_10', 'explicate_23', 'climb', 'new_temp5', 'explicate_7', 'explicate_16', 'peak', 'new_temp96', 'explicate_19', 'new_temp2'}, 'ecx': {'explicate_6', 'new_temp29', 'new_temp68', 'explicate_17', 'explicate_11', 'explicate_20', 'explicate_8', 'explicate_21', 'explicate_10', 'climb', 'explicate_7', 'new_temp2', 'explicate_13', 'new_temp0', 'new_temp83', 'new_temp51', 'fall', 'explicate_12', 'explicate_15', 'explicate_23', 'new_temp5', 'explicate_16', 'peak', 'explicate_19'}, 'edx': {'explicate_6', 'new_temp29', 'new_temp68', 'explicate_17', 'explicate_11', 'explicate_20', 'explicate_8', 'explicate_21', 'explicate_10', 'climb', 'explicate_7', 'new_temp2', 'explicate_13', 'new_temp0', 'new_temp83', 'new_temp51', 'fall', 'explicate_12', 'explicate_15', 'explicate_23', 'new_temp5', 'explicate_16', 'peak', 'explicate_19'}, 'new_temp5': {'new_temp58', 'explicate_6', 'new_temp29', 'new_temp38', 'explicate_17', 'explicate_11', 'new_temp80', 'explicate_21', 'new_temp30', 'explicate_10', 'new_temp74', 'new_temp54', 'new_temp37', 'new_temp102', 'explicate_7', 'new_temp79', 'new_temp35', 'new_temp59', 'explicate_13', 'new_temp72', 'new_temp83', 'new_temp51', 'fall', 'new_temp53', 'new_temp71', 'new_temp82', 'new_temp86', 'new_temp91', 'new_temp62', 'ecx', 'explicate_15', 'new_temp3', 'new_temp50', 'new_temp70', 'explicate_23', 'new_temp28', 'explicate_18', 'new_temp43', 'peak', 'new_temp96', 'new_temp60', 'eax', 'new_temp68', 'new_temp99', 'new_temp36', 'new_temp84', 'explicate_22', 'new_temp88', 'explicate_20', 'new_temp61', 'explicate_8', 'new_temp40', 'new_temp41', 'new_temp44', 'new_temp1', 'new_temp57', 'new_temp75', 'edx', 'new_temp93', 'new_temp95', 'climb', 'new_temp49', 'new_temp31', 'new_temp78', 'new_temp90', 'new_temp39', 'new_temp55', 'new_temp67', 'new_temp65', 'new_temp45', 'new_temp81', 'new_temp26', 'new_temp63', 'new_temp64', 'new_temp69', 'new_temp2', 'new_temp52', 'new_temp25', 'new_temp24', 'explicate_9', 'new_temp0', 'new_temp42', 'new_temp34', 'new_temp33', 'explicate_12', 'new_temp98', 'new_temp48', 'new_temp94', 'new_temp27', 'new_temp85', 'new_temp87', 'new_temp32', 'new_temp89', 'new_temp73', 'new_temp66', 'explicate_14', 'new_temp97', 'new_temp76', 'new_temp4', 'new_temp56', 'explicate_16', 'new_temp77', 'new_temp92', 'explicate_19'}, 'new_temp2': {'new_temp58', 'explicate_6', 'new_temp29', 'new_temp38', 'explicate_11', 'new_temp100', 'explicate_21', 'new_temp30', 'explicate_10', 'new_temp54', 'new_temp37', 'new_temp102', 'explicate_7', 'new_temp35', 'new_temp59', 'new_temp46', 'explicate_13', 'new_temp72', 'new_temp83', 'new_temp51', 'fall', 'new_temp53', 'new_temp82', 'new_temp86', 'new_temp91', 'new_temp101', 'new_temp62', 'ecx', 'explicate_15', 'new_temp3', 'new_temp50', 'explicate_23', 'new_temp28', 'new_temp43', 'peak', 'new_temp96', 'new_temp60', 'eax', 'new_temp99', 'new_temp36', 'new_temp84', 'explicate_22', 'new_temp88', 'explicate_20', 'new_temp61', 'explicate_8', 'new_temp40', 'new_temp41', 'new_temp44', 'new_temp1', 'new_temp57', 'edx', 'new_temp93', 'new_temp95', 'climb', 'new_temp49', 'new_temp31', 'new_temp90', 'new_temp39', 'new_temp55', 'new_temp67', 'new_temp65', 'new_temp45', 'new_temp81', 'new_temp26', 'new_temp63', 'new_temp64', 'new_temp52', 'new_temp25', 'new_temp24', 'new_temp47', 'explicate_9', 'new_temp0', 'new_temp42', 'new_temp34', 'new_temp33', 'explicate_12', 'new_temp98', 'new_temp48', 'new_temp94', 'new_temp27', 'new_temp85', 'new_temp87', 'new_temp32', 'new_temp89', 'new_temp5', 'new_temp66', 'explicate_14', 'new_temp97', 'new_temp4', 'new_temp56', 'explicate_16', 'new_temp92', 'explicate_19'}, 'new_temp24': {'new_temp0', 'new_temp5', 'new_temp2'}, 'climb': {'eax', 'new_temp0', 'new_temp1', 'ecx', 'edx', 'new_temp5', 'new_temp65', 'peak', 'new_temp64', 'new_temp2'}, 'new_temp25': {'new_temp0', 'new_temp5', 'new_temp2'}, 'fall': {'eax', 'new_temp29', 'new_temp38', 'new_temp99', 'new_temp36', 'new_temp84', 'explicate_22', 'new_temp88', 'explicate_20', 'explicate_8', 'new_temp40', 'new_temp41', 'new_temp44', 'new_temp100', 'explicate_21', 'edx', 'new_temp30', 'explicate_10', 'new_temp93', 'new_temp95', 'new_temp31', 'new_temp37', 'new_temp102', 'new_temp39', 'new_temp90', 'new_temp45', 'new_temp81', 'new_temp26', 'explicate_7', 'new_temp35', 'new_temp46', 'new_temp2', 'new_temp47', 'explicate_9', 'new_temp0', 'new_temp83', 'new_temp91', 'new_temp82', 'new_temp86', 'new_temp42', 'new_temp101', 'new_temp34', 'new_temp33', 'new_temp98', 'ecx', 'new_temp94', 'new_temp3', 'new_temp27', 'new_temp85', 'new_temp32', 'new_temp87', 'new_temp89', 'explicate_23', 'new_temp5', 'new_temp28', 'new_temp97', 'new_temp4', 'new_temp43', 'peak', 'new_temp96', 'new_temp92'}, 'new_temp26': {'fall', 'new_temp2', 'new_temp0', 'new_temp5'}, 'peak': {'new_temp58', 'explicate_6', 'new_temp29', 'new_temp38', 'explicate_17', 'explicate_11', 'new_temp80', 'new_temp100', 'explicate_21', 'new_temp30', 'explicate_10', 'new_temp74', 'new_temp54', 'new_temp37', 'new_temp102', 'new_temp79', 'new_temp35', 'new_temp59', 'new_temp46', 'explicate_13', 'new_temp72', 'new_temp83', 'new_temp51', 'fall', 'new_temp53', 'new_temp71', 'new_temp82', 'new_temp86', 'new_temp91', 'new_temp101', 'new_temp62', 'ecx', 'explicate_15', 'new_temp3', 'new_temp50', 'new_temp70', 'explicate_23', 'new_temp28', 'explicate_18', 'new_temp43', 'new_temp96', 'new_temp60', 'eax', 'new_temp68', 'new_temp99', 'new_temp36', 'new_temp84', 'explicate_22', 'new_temp88', 'new_temp61', 'explicate_8', 'new_temp40', 'new_temp41', 'new_temp44', 'new_temp1', 'new_temp57', 'new_temp75', 'edx', 'new_temp93', 'new_temp95', 'new_temp49', 'climb', 'new_temp31', 'new_temp78', 'new_temp90', 'new_temp39', 'new_temp55', 'new_temp67', 'new_temp65', 'new_temp45', 'new_temp81', 'new_temp63', 'new_temp64', 'new_temp69', 'new_temp2', 'new_temp52', 'new_temp47', 'explicate_9', 'new_temp0', 'new_temp42', 'new_temp34', 'new_temp33', 'explicate_12', 'new_temp98', 'new_temp48', 'new_temp94', 'new_temp27', 'new_temp85', 'new_temp87', 'new_temp32', 'new_temp89', 'new_temp73', 'new_temp5', 'new_temp66', 'explicate_14', 'new_temp97', 'new_temp76', 'new_temp4', 'new_temp56', 'explicate_16', 'new_temp77', 'new_temp92', 'explicate_19'}, 'explicate_6': {'eax', 'new_temp0', 'new_temp5', 'new_temp28', 'new_temp36', 'explicate_7', 'new_temp34', 'peak', 'ecx', 'new_temp27', 'edx', 'new_temp2'}, 'explicate_7': {'eax', 'new_temp0', 'explicate_6', 'fall', 'new_temp29', 'new_temp38', 'new_temp36', 'new_temp34', 'explicate_8', 'ecx', 'new_temp27', 'edx', 'new_temp37', 'new_temp5', 'new_temp39', 'new_temp28', 'new_temp2'}, 'new_temp27': {'explicate_7', 'new_temp0', 'new_temp5', 'peak', 'explicate_6', 'fall', 'new_temp2'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp28': {'explicate_7', 'new_temp0', 'new_temp5', 'peak', 'explicate_6', 'fall', 'new_temp2'}, 'new_temp34': {'explicate_7', 'new_temp0', 'new_temp5', 'peak', 'explicate_6', 'fall', 'new_temp2'}, 'new_temp29': {'eax', 'new_temp0', 'new_temp5', 'fall', 'explicate_7', 'peak', 'ecx', 'edx', 'new_temp30', 'new_temp2'}, 'new_temp30': {'new_temp0', 'new_temp5', 'peak', 'new_temp29', 'fall', 'new_temp2'}, 'new_temp31': {'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp32': {'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp3': {'new_temp0', 'new_temp5', 'fall', 'peak', 'new_temp2'}, 'new_temp33': {'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp35': {'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp36': {'explicate_7', 'new_temp0', 'new_temp5', 'peak', 'explicate_6', 'fall', 'new_temp2'}, 'new_temp4': {'new_temp0', 'new_temp5', 'fall', 'peak', 'new_temp2'}, 'explicate_10': {'eax', 'new_temp0', 'fall', 'ecx', 'edx', 'new_temp5', 'new_temp45', 'peak', 'new_temp2'}, 'new_temp45': {'new_temp0', 'new_temp5', 'peak', 'fall', 'explicate_10', 'new_temp2'}, 'new_temp37': {'explicate_7', 'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'explicate_8': {'eax', 'new_temp0', 'new_temp5', 'explicate_9', 'new_temp39', 'fall', 'explicate_7', 'new_temp40', 'new_temp41', 'peak', 'ecx', 'edx', 'new_temp2'}, 'new_temp38': {'explicate_7', 'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp46': {'fall', 'new_temp2', 'new_temp0', 'peak'}, 'new_temp47': {'fall', 'new_temp2', 'new_temp0', 'peak'}, 'new_temp102': {'new_temp0', 'new_temp5', 'fall', 'peak', 'new_temp2'}, 'new_temp39': {'explicate_7', 'explicate_8', 'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp40': {'explicate_8', 'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'explicate_9': {'new_temp0', 'new_temp5', 'fall', 'explicate_8', 'peak', 'new_temp2'}, 'new_temp41': {'explicate_8', 'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'explicate_11': {'new_temp49', 'eax', 'new_temp0', 'new_temp5', 'new_temp55', 'explicate_12', 'new_temp56', 'peak', 'new_temp48', 'ecx', 'edx', 'new_temp50', 'new_temp2'}, 'new_temp48': {'new_temp0', 'new_temp5', 'peak', 'explicate_11', 'new_temp2'}, 'explicate_12': {'explicate_13', 'eax', 'new_temp0', 'new_temp58', 'new_temp51', 'explicate_11', 'ecx', 'new_temp57', 'edx', 'new_temp50', 'new_temp49', 'new_temp5', 'new_temp55', 'new_temp56', 'peak', 'new_temp59', 'new_temp2'}, 'new_temp49': {'explicate_12', 'new_temp0', 'new_temp5', 'peak', 'explicate_11', 'new_temp2'}, 'new_temp42': {'eax', 'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp43': {'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp44': {'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp50': {'explicate_12', 'new_temp0', 'new_temp5', 'peak', 'explicate_11', 'new_temp2'}, 'new_temp55': {'explicate_12', 'new_temp0', 'new_temp5', 'peak', 'explicate_11', 'new_temp2'}, 'new_temp51': {'explicate_12', 'eax', 'new_temp5', 'peak', 'ecx', 'edx', 'new_temp2', 'new_temp52'}, 'new_temp52': {'new_temp2', 'new_temp5', 'peak', 'new_temp51'}, 'new_temp53': {'peak', 'new_temp5', 'new_temp2'}, 'new_temp54': {'peak', 'new_temp5', 'new_temp2'}, 'new_temp64': {'climb', 'new_temp0', 'new_temp5', 'peak', 'new_temp2'}, 'new_temp65': {'climb', 'new_temp0', 'new_temp5', 'peak', 'new_temp2'}, 'new_temp1': {'climb', 'new_temp0', 'new_temp5', 'peak', 'explicate_15', 'new_temp2'}, 'explicate_15': {'new_temp73', 'eax', 'new_temp0', 'new_temp5', 'new_temp66', 'new_temp72', 'new_temp67', 'explicate_16', 'peak', 'new_temp1', 'ecx', 'edx', 'new_temp2'}, 'explicate_16': {'eax', 'new_temp0', 'new_temp72', 'new_temp68', 'explicate_17', 'ecx', 'new_temp75', 'explicate_15', 'edx', 'new_temp74', 'new_temp73', 'new_temp5', 'new_temp66', 'new_temp67', 'new_temp76', 'peak', 'new_temp2'}, 'new_temp66': {'new_temp0', 'new_temp5', 'explicate_16', 'peak', 'explicate_15', 'new_temp2'}, 'new_temp56': {'explicate_12', 'new_temp5', 'peak', 'explicate_11', 'new_temp2'}, 'new_temp67': {'new_temp0', 'new_temp5', 'explicate_16', 'peak', 'explicate_15', 'new_temp2'}, 'new_temp72': {'new_temp0', 'new_temp5', 'explicate_16', 'peak', 'explicate_15', 'new_temp2'}, 'new_temp57': {'explicate_12', 'new_temp2', 'new_temp5', 'peak'}, 'explicate_13': {'eax', 'new_temp5', 'explicate_14', 'explicate_12', 'new_temp61', 'peak', 'ecx', 'new_temp60', 'edx', 'new_temp59', 'new_temp2'}, 'new_temp58': {'explicate_12', 'new_temp2', 'new_temp5', 'peak'}, 'new_temp68': {'eax', 'new_temp0', 'explicate_16', 'peak', 'new_temp5', 'ecx', 'edx', 'new_temp69'}, 'new_temp69': {'peak', 'new_temp0', 'new_temp5', 'new_temp68'}, 'new_temp70': {'new_temp5', 'new_temp0', 'peak'}, 'new_temp71': {'new_temp0', 'new_temp5', 'peak'}, 'explicate_19': {'eax', 'new_temp0', 'new_temp5', 'new_temp90', 'new_temp82', 'new_temp81', 'new_temp88', 'explicate_20', 'peak', 'ecx', 'edx', 'new_temp2'}, 'explicate_20': {'eax', 'new_temp0', 'new_temp83', 'new_temp91', 'fall', 'new_temp82', 'new_temp88', 'explicate_21', 'ecx', 'edx', 'new_temp93', 'new_temp5', 'new_temp90', 'new_temp81', 'new_temp92', 'explicate_19', 'new_temp2'}, 'new_temp81': {'explicate_20', 'new_temp0', 'new_temp5', 'peak', 'fall', 'explicate_19', 'new_temp2'}, 'new_temp73': {'new_temp0', 'new_temp5', 'explicate_16', 'peak', 'explicate_15'}, 'new_temp59': {'explicate_13', 'explicate_12', 'new_temp5', 'peak', 'new_temp2'}, 'new_temp82': {'explicate_20', 'new_temp0', 'new_temp5', 'peak', 'fall', 'explicate_19', 'new_temp2'}, 'new_temp88': {'explicate_20', 'new_temp0', 'new_temp5', 'peak', 'fall', 'explicate_19', 'new_temp2'}, 'new_temp74': {'new_temp5', 'new_temp0', 'explicate_16', 'peak'}, 'explicate_17': {'eax', 'new_temp0', 'new_temp5', 'new_temp77', 'new_temp78', 'explicate_18', 'new_temp76', 'explicate_16', 'peak', 'ecx', 'edx'}, 'new_temp75': {'new_temp5', 'new_temp0', 'explicate_16', 'peak'}, 'new_temp60': {'explicate_13', 'new_temp2', 'new_temp5', 'peak'}, 'explicate_14': {'explicate_13', 'new_temp5', 'new_temp62', 'peak', 'new_temp2'}, 'new_temp61': {'explicate_13', 'new_temp2', 'new_temp5', 'peak'}, 'new_temp83': {'eax', 'new_temp0', 'new_temp5', 'fall', 'new_temp84', 'explicate_20', 'peak', 'ecx', 'edx', 'new_temp2'}, 'new_temp84': {'new_temp0', 'new_temp5', 'new_temp83', 'peak', 'fall', 'new_temp2'}, 'new_temp85': {'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp86': {'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp87': {'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp89': {'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp90': {'explicate_20', 'new_temp0', 'new_temp5', 'peak', 'fall', 'explicate_19', 'new_temp2'}, 'new_temp76': {'new_temp0', 'new_temp5', 'explicate_16', 'peak', 'explicate_17'}, 'new_temp62': {'new_temp5', 'peak', 'explicate_14', 'new_temp2'}, 'new_temp63': {'peak', 'new_temp5', 'new_temp2'}, 'explicate_23': {'eax', 'new_temp0', 'fall', 'new_temp99', 'ecx', 'edx', 'new_temp5', 'peak', 'new_temp2'}, 'new_temp99': {'new_temp0', 'new_temp5', 'peak', 'fall', 'explicate_23', 'new_temp2'}, 'new_temp91': {'explicate_20', 'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'explicate_21': {'eax', 'new_temp0', 'new_temp5', 'fall', 'explicate_22', 'explicate_20', 'peak', 'ecx', 'new_temp94', 'edx', 'new_temp93', 'new_temp95', 'new_temp2'}, 'new_temp92': {'explicate_20', 'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp77': {'peak', 'explicate_17', 'new_temp0', 'new_temp5'}, 'explicate_18': {'new_temp0', 'new_temp5', 'explicate_17', 'peak', 'new_temp79'}, 'new_temp78': {'peak', 'explicate_17', 'new_temp0', 'new_temp5'}, 'new_temp100': {'fall', 'new_temp2', 'new_temp0', 'peak'}, 'new_temp101': {'fall', 'new_temp2', 'new_temp0', 'peak'}, 'new_temp93': {'explicate_20', 'explicate_21', 'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp79': {'new_temp0', 'new_temp5', 'peak', 'explicate_18'}, 'new_temp80': {'new_temp0', 'new_temp5', 'peak'}, 'new_temp94': {'explicate_21', 'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'explicate_22': {'new_temp0', 'new_temp5', 'fall', 'peak', 'explicate_21', 'new_temp2'}, 'new_temp95': {'explicate_21', 'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp96': {'eax', 'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp97': {'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}, 'new_temp98': {'new_temp0', 'new_temp5', 'peak', 'fall', 'new_temp2'}}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'explicate_16': 4, 'new_temp5': 5, 'new_temp0': 6, 'new_temp2': 7, 'new_temp68': 7, 'peak': 7, 'explicate_15': 7, 'explicate_17': 7, 'explicate_12': 4, 'explicate_11': 7, 'climb': 4, 'explicate_19': 4, 'explicate_20': 7, 'explicate_8': 4, 'fall': 7, 'explicate_7': 7, 'explicate_23': 4, 'new_temp51': 6, 'new_temp83': 4, 'explicate_13': 6, 'explicate_10': 4, 'explicate_21': 4, 'new_temp29': 4, 'explicate_6': 4, 'new_temp76': 1, 'new_temp95': 1, 'new_temp66': 1, 'new_temp73': 1, 'new_temp27': 1, 'new_temp94': 1, 'new_temp34': 1, 'new_temp42': 2, 'explicate_9': 1, 'new_temp64': 1, 'new_temp81': 1, 'new_temp45': 1, 'new_temp65': 1, 'new_temp67': 1, 'new_temp55': 1, 'new_temp39': 1, 'new_temp90': 1, 'new_temp49': 1, 'new_temp93': 1, 'new_temp75': 1, 'new_temp96': 2, 'new_temp28': 1, 'new_temp50': 1, 'new_temp82': 1, 'new_temp72': 1, 'new_temp59': 1, 'new_temp74': 1, 'new_temp30': 1, 'new_temp1': 1, 'new_temp41': 1, 'new_temp40': 1, 'new_temp88': 1, 'explicate_22': 1, 'new_temp84': 1, 'new_temp36': 1, 'new_temp99': 1, 'new_temp60': 1, 'new_temp92': 1, 'new_temp77': 1, 'new_temp43': 1, 'new_temp56': 1, 'new_temp4': 1, 'new_temp97': 1, 'explicate_14': 1, 'explicate_18': 1, 'new_temp79': 2, 'new_temp89': 1, 'new_temp32': 1, 'new_temp70': 1, 'new_temp87': 1, 'new_temp85': 1, 'new_temp3': 1, 'new_temp52': 1, 'new_temp69': 1, 'new_temp35': 1, 'new_temp26': 1, 'new_temp102': 1, 'new_temp78': 1, 'new_temp31': 1, 'new_temp37': 1, 'new_temp57': 1, 'new_temp48': 1, 'new_temp98': 1, 'new_temp44': 1, 'new_temp33': 1, 'new_temp62': 2, 'new_temp61': 1, 'new_temp80': 1, 'new_temp86': 1, 'new_temp38': 1, 'new_temp71': 1, 'new_temp91': 1, 'new_temp58': 1, 'new_temp24': 1, 'new_temp25': 1, 'new_temp46': 1, 'new_temp63': 1, 'new_temp100': 1, 'new_temp54': 1, 'new_temp101': 1, 'new_temp47': 1, 'new_temp53': 1}
+Spilled set:
+ {'new_temp68', 'fall', 'explicate_17', 'explicate_11', 'explicate_20', 'explicate_7', 'peak', 'explicate_15', 'new_temp2'}
+
+
+--------------Spilling----------------
+unspillable_set
+ {'unspillable_2', 'unspillable_0', 'unspillable_1', 'unspillable_3'}
+continue_looping
+ True
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp0': {'explicate_6', 'new_temp29', 'new_temp38', 'unspillable_3', 'explicate_11', 'explicate_17', 'new_temp80', 'new_temp100', 'explicate_21', 'new_temp30', 'explicate_10', 'new_temp74', 'new_temp37', 'new_temp102', 'explicate_7', 'unspillable_2', 'new_temp79', 'new_temp35', 'new_temp46', 'new_temp72', 'new_temp83', 'new_temp71', 'fall', 'new_temp91', 'new_temp82', 'new_temp86', 'new_temp101', 'ecx', 'explicate_15', 'new_temp3', 'new_temp50', 'new_temp70', 'explicate_23', 'new_temp28', 'explicate_18', 'new_temp43', 'peak', 'new_temp96', 'unspillable_1', 'eax', 'new_temp68', 'new_temp99', 'new_temp36', 'new_temp84', 'explicate_22', 'new_temp88', 'explicate_20', 'explicate_8', 'new_temp40', 'new_temp41', 'new_temp44', 'new_temp1', 'new_temp75', 'edx', 'new_temp93', 'new_temp95', 'climb', 'new_temp49', 'new_temp31', 'new_temp78', 'new_temp90', 'new_temp39', 'new_temp55', 'new_temp67', 'new_temp65', 'new_temp45', 'new_temp81', 'new_temp26', 'new_temp64', 'new_temp69', 'new_temp2', 'new_temp25', 'new_temp24', 'new_temp47', 'explicate_9', 'new_temp42', 'new_temp34', 'new_temp33', 'explicate_12', 'new_temp98', 'new_temp48', 'new_temp94', 'new_temp27', 'new_temp85', 'new_temp87', 'new_temp32', 'new_temp89', 'new_temp73', 'new_temp5', 'new_temp66', 'unspillable_0', 'new_temp97', 'new_temp76', 'new_temp4', 'explicate_16', 'new_temp77', 'new_temp92', 'explicate_19'}, 'eax': {'explicate_13', 'new_temp0', 'new_temp83', 'explicate_6', 'new_temp29', 'new_temp51', 'new_temp42', 'explicate_12', 'explicate_8', 'explicate_21', 'explicate_10', 'explicate_23', 'climb', 'new_temp5', 'explicate_16', 'new_temp96', 'explicate_19'}, 'ecx': {'climb', 'explicate_13', 'new_temp0', 'new_temp5', 'new_temp83', 'new_temp29', 'explicate_6', 'new_temp51', 'explicate_12', 'explicate_8', 'explicate_16', 'explicate_21', 'explicate_19', 'explicate_10', 'explicate_23'}, 'edx': {'climb', 'explicate_13', 'new_temp0', 'new_temp5', 'new_temp83', 'new_temp29', 'explicate_6', 'new_temp51', 'explicate_12', 'explicate_8', 'explicate_16', 'explicate_21', 'explicate_19', 'explicate_10', 'explicate_23'}, 'new_temp5': {'new_temp58', 'explicate_6', 'new_temp29', 'new_temp38', 'unspillable_3', 'explicate_11', 'explicate_17', 'new_temp80', 'explicate_21', 'new_temp30', 'explicate_10', 'new_temp74', 'new_temp54', 'new_temp37', 'new_temp102', 'explicate_7', 'unspillable_2', 'new_temp79', 'new_temp35', 'new_temp59', 'explicate_13', 'new_temp72', 'new_temp83', 'new_temp51', 'fall', 'new_temp53', 'new_temp71', 'new_temp82', 'new_temp86', 'new_temp91', 'new_temp62', 'ecx', 'explicate_15', 'new_temp3', 'new_temp50', 'new_temp70', 'explicate_23', 'new_temp28', 'explicate_18', 'new_temp43', 'peak', 'new_temp96', 'unspillable_1', 'new_temp60', 'eax', 'new_temp68', 'new_temp99', 'new_temp36', 'new_temp84', 'explicate_22', 'new_temp88', 'explicate_20', 'new_temp61', 'explicate_8', 'new_temp40', 'new_temp41', 'new_temp44', 'new_temp1', 'new_temp57', 'new_temp75', 'edx', 'new_temp93', 'new_temp95', 'climb', 'new_temp49', 'new_temp31', 'new_temp78', 'new_temp90', 'new_temp39', 'new_temp55', 'new_temp67', 'new_temp65', 'new_temp45', 'new_temp81', 'new_temp26', 'new_temp63', 'new_temp64', 'new_temp69', 'new_temp2', 'new_temp52', 'new_temp25', 'new_temp24', 'explicate_9', 'new_temp0', 'new_temp42', 'new_temp34', 'new_temp33', 'explicate_12', 'new_temp98', 'new_temp48', 'new_temp94', 'new_temp27', 'new_temp85', 'new_temp87', 'new_temp32', 'new_temp89', 'new_temp73', 'new_temp66', 'unspillable_0', 'explicate_14', 'new_temp97', 'new_temp76', 'new_temp4', 'new_temp56', 'explicate_16', 'new_temp77', 'new_temp92', 'explicate_19'}, 'new_temp24': {'new_temp0', 'new_temp5'}, 'climb': {'eax', 'new_temp0', 'new_temp5', 'new_temp64', 'new_temp1', 'ecx', 'edx', 'new_temp65'}, 'new_temp25': {'new_temp0', 'new_temp5'}, 'new_temp26': {'new_temp0', 'new_temp5'}, 'explicate_6': {'eax', 'new_temp0', 'new_temp5', 'new_temp28', 'unspillable_0', 'new_temp36', 'explicate_7', 'new_temp34', 'ecx', 'new_temp27', 'edx'}, 'unspillable_0': {'new_temp0', 'new_temp5', 'explicate_6'}, 'new_temp27': {'new_temp0', 'new_temp5', 'explicate_6'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp28': {'new_temp0', 'new_temp5', 'explicate_6'}, 'new_temp34': {'new_temp0', 'new_temp5', 'explicate_6'}, 'new_temp29': {'eax', 'new_temp0', 'new_temp5', 'ecx', 'edx', 'new_temp30'}, 'new_temp30': {'new_temp0', 'new_temp5', 'new_temp29'}, 'new_temp31': {'new_temp0', 'new_temp5'}, 'new_temp32': {'new_temp0', 'new_temp5'}, 'new_temp3': {'new_temp0', 'new_temp5'}, 'new_temp33': {'new_temp0', 'new_temp5'}, 'new_temp35': {'new_temp0', 'new_temp5'}, 'new_temp36': {'new_temp0', 'new_temp5', 'explicate_6'}, 'new_temp4': {'new_temp0', 'new_temp5'}, 'explicate_10': {'eax', 'new_temp0', 'new_temp5', 'ecx', 'edx', 'new_temp45'}, 'new_temp45': {'new_temp0', 'explicate_10', 'new_temp5'}, 'new_temp37': {'new_temp0', 'new_temp5'}, 'explicate_8': {'eax', 'new_temp0', 'new_temp5', 'explicate_9', 'new_temp39', 'new_temp40', 'new_temp41', 'ecx', 'edx'}, 'new_temp38': {'new_temp0', 'new_temp5'}, 'new_temp46': {'new_temp0'}, 'new_temp47': {'new_temp0'}, 'new_temp102': {'new_temp0', 'new_temp5'}, 'new_temp39': {'explicate_8', 'new_temp0', 'new_temp5'}, 'new_temp40': {'explicate_8', 'new_temp0', 'new_temp5'}, 'explicate_9': {'explicate_8', 'new_temp0', 'new_temp5'}, 'new_temp41': {'explicate_8', 'new_temp0', 'new_temp5'}, 'unspillable_1': {'new_temp0', 'new_temp5'}, 'new_temp48': {'new_temp0', 'new_temp5'}, 'explicate_12': {'new_temp49', 'explicate_13', 'eax', 'new_temp0', 'new_temp5', 'new_temp58', 'new_temp55', 'new_temp51', 'new_temp56', 'ecx', 'new_temp57', 'edx', 'new_temp50', 'new_temp59'}, 'new_temp49': {'explicate_12', 'new_temp0', 'new_temp5'}, 'new_temp42': {'eax', 'new_temp0', 'new_temp5'}, 'new_temp43': {'new_temp0', 'new_temp5'}, 'new_temp44': {'new_temp0', 'new_temp5'}, 'new_temp50': {'explicate_12', 'new_temp0', 'new_temp5'}, 'new_temp55': {'explicate_12', 'new_temp0', 'new_temp5'}, 'new_temp51': {'explicate_12', 'eax', 'new_temp5', 'ecx', 'edx', 'new_temp52'}, 'new_temp52': {'new_temp5', 'new_temp51'}, 'new_temp53': {'new_temp5'}, 'new_temp54': {'new_temp5'}, 'new_temp64': {'climb', 'new_temp0', 'new_temp5'}, 'new_temp65': {'climb', 'new_temp0', 'new_temp5'}, 'new_temp1': {'climb', 'explicate_15', 'new_temp0', 'new_temp5'}, 'explicate_16': {'new_temp73', 'eax', 'new_temp0', 'new_temp5', 'new_temp66', 'new_temp72', 'new_temp68', 'new_temp67', 'explicate_17', 'new_temp76', 'ecx', 'new_temp75', 'edx', 'new_temp74'}, 'new_temp66': {'new_temp0', 'explicate_16', 'new_temp5'}, 'new_temp56': {'explicate_12', 'new_temp5'}, 'new_temp67': {'new_temp0', 'explicate_16', 'new_temp5'}, 'new_temp72': {'new_temp0', 'explicate_16', 'new_temp5'}, 'new_temp57': {'explicate_12', 'new_temp5'}, 'explicate_13': {'eax', 'new_temp5', 'explicate_14', 'explicate_12', 'new_temp61', 'ecx', 'edx', 'new_temp59', 'new_temp60'}, 'new_temp58': {'explicate_12', 'new_temp5'}, 'new_temp69': {'new_temp0', 'new_temp5'}, 'new_temp70': {'new_temp0', 'new_temp5'}, 'new_temp71': {'new_temp0', 'new_temp5'}, 'unspillable_2': {'new_temp0', 'new_temp5'}, 'explicate_19': {'eax', 'new_temp0', 'new_temp5', 'new_temp90', 'unspillable_3', 'new_temp82', 'new_temp81', 'new_temp88', 'explicate_20', 'ecx', 'edx'}, 'unspillable_3': {'explicate_19', 'new_temp0', 'new_temp5'}, 'new_temp81': {'explicate_19', 'new_temp0', 'new_temp5'}, 'new_temp73': {'new_temp0', 'explicate_16', 'new_temp5'}, 'new_temp59': {'explicate_13', 'explicate_12', 'new_temp5'}, 'new_temp82': {'explicate_19', 'new_temp0', 'new_temp5'}, 'new_temp88': {'explicate_19', 'new_temp0', 'new_temp5'}, 'new_temp74': {'new_temp0', 'explicate_16', 'new_temp5'}, 'new_temp75': {'new_temp0', 'explicate_16', 'new_temp5'}, 'new_temp60': {'explicate_13', 'new_temp5'}, 'explicate_14': {'explicate_13', 'new_temp62', 'new_temp5'}, 'new_temp61': {'explicate_13', 'new_temp5'}, 'new_temp83': {'eax', 'new_temp0', 'new_temp5', 'ecx', 'edx', 'new_temp84'}, 'new_temp84': {'new_temp83', 'new_temp0', 'new_temp5'}, 'new_temp85': {'new_temp0', 'new_temp5'}, 'new_temp86': {'new_temp0', 'new_temp5'}, 'new_temp87': {'new_temp0', 'new_temp5'}, 'new_temp89': {'new_temp0', 'new_temp5'}, 'new_temp90': {'explicate_19', 'new_temp0', 'new_temp5'}, 'new_temp76': {'new_temp0', 'explicate_16', 'new_temp5'}, 'new_temp62': {'new_temp5', 'explicate_14'}, 'new_temp63': {'new_temp5'}, 'explicate_23': {'eax', 'new_temp0', 'new_temp5', 'ecx', 'new_temp99', 'edx'}, 'new_temp99': {'explicate_23', 'new_temp0', 'new_temp5'}, 'new_temp91': {'new_temp0', 'new_temp5'}, 'explicate_21': {'eax', 'new_temp0', 'new_temp5', 'explicate_22', 'ecx', 'new_temp94', 'edx', 'new_temp93', 'new_temp95'}, 'new_temp92': {'new_temp0', 'new_temp5'}, 'new_temp77': {'new_temp0', 'new_temp5'}, 'explicate_18': {'new_temp79', 'new_temp0', 'new_temp5'}, 'new_temp78': {'new_temp0', 'new_temp5'}, 'new_temp100': {'new_temp0'}, 'new_temp101': {'new_temp0'}, 'new_temp93': {'explicate_21', 'new_temp0', 'new_temp5'}, 'new_temp79': {'new_temp0', 'new_temp5', 'explicate_18'}, 'new_temp80': {'new_temp0', 'new_temp5'}, 'new_temp94': {'explicate_21', 'new_temp0', 'new_temp5'}, 'explicate_22': {'new_temp0', 'new_temp5', 'explicate_21'}, 'new_temp95': {'explicate_21', 'new_temp0', 'new_temp5'}, 'new_temp96': {'eax', 'new_temp0', 'new_temp5'}, 'new_temp97': {'new_temp0', 'new_temp5'}, 'new_temp98': {'new_temp0', 'new_temp5'}}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'unspillable_3': 1, 'unspillable_1': 1, 'unspillable_0': 1, 'unspillable_2': 1, 'explicate_16': 4, 'new_temp5': 5, 'new_temp0': 6, 'explicate_19': 4, 'explicate_12': 4, 'climb': 4, 'explicate_8': 4, 'explicate_23': 4, 'new_temp51': 6, 'new_temp83': 4, 'explicate_13': 6, 'explicate_10': 4, 'explicate_21': 4, 'new_temp29': 4, 'explicate_6': 4, 'new_temp95': 1, 'new_temp76': 1, 'new_temp66': 1, 'new_temp73': 1, 'new_temp27': 1, 'new_temp94': 1, 'new_temp34': 1, 'new_temp42': 2, 'explicate_9': 1, 'new_temp64': 1, 'new_temp81': 1, 'new_temp45': 1, 'new_temp65': 1, 'new_temp67': 1, 'new_temp55': 1, 'new_temp39': 1, 'new_temp90': 1, 'new_temp49': 1, 'new_temp93': 1, 'new_temp75': 1, 'new_temp96': 2, 'new_temp28': 1, 'new_temp50': 1, 'new_temp82': 1, 'new_temp72': 1, 'new_temp59': 1, 'new_temp74': 1, 'new_temp30': 1, 'new_temp1': 1, 'new_temp41': 1, 'new_temp40': 1, 'new_temp88': 1, 'explicate_22': 1, 'new_temp84': 1, 'new_temp36': 1, 'new_temp99': 1, 'new_temp60': 1, 'new_temp92': 1, 'new_temp77': 1, 'new_temp43': 1, 'new_temp56': 1, 'new_temp4': 1, 'new_temp97': 1, 'explicate_14': 1, 'explicate_18': 1, 'new_temp79': 2, 'new_temp89': 1, 'new_temp32': 1, 'new_temp70': 1, 'new_temp87': 1, 'new_temp85': 1, 'new_temp3': 1, 'new_temp52': 1, 'new_temp69': 1, 'new_temp35': 1, 'new_temp26': 1, 'new_temp102': 1, 'new_temp78': 1, 'new_temp31': 1, 'new_temp37': 1, 'new_temp57': 1, 'new_temp48': 1, 'new_temp98': 1, 'new_temp44': 1, 'new_temp33': 1, 'new_temp62': 2, 'new_temp61': 1, 'new_temp80': 1, 'new_temp86': 1, 'new_temp38': 1, 'new_temp71': 1, 'new_temp91': 1, 'new_temp58': 1, 'new_temp24': 1, 'new_temp25': 1, 'new_temp46': 1, 'new_temp63': 1, 'new_temp100': 1, 'new_temp54': 1, 'new_temp101': 1, 'new_temp47': 1, 'new_temp53': 1}
+Spilled set:
+ {'new_temp68', 'fall', 'explicate_17', 'explicate_11', 'explicate_20', 'explicate_7', 'peak', 'explicate_15', 'new_temp2'}
+
+
+--------------Spilling----------------
+unspillable_set
+ {'unspillable_2', 'unspillable_0', 'unspillable_1', 'unspillable_3'}
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {'new_temp68': -4, 'fall': -8, 'explicate_17': -12, 'explicate_11': -16, 'explicate_20': -20, 'explicate_7': -24, 'peak': -28, 'explicate_15': -32, 'new_temp2': -36, 'unspillable_3': 'eax', 'unspillable_1': 'eax', 'unspillable_0': 'eax', 'unspillable_2': 'eax', 'explicate_16': 'edi', 'new_temp5': 'ebx', 'new_temp0': 'esi', 'explicate_19': 'edi', 'explicate_12': 'edi', 'climb': 'edi', 'explicate_8': 'edi', 'explicate_23': 'edi', 'new_temp51': 'esi', 'new_temp83': 'edi', 'explicate_13': 'esi', 'explicate_10': 'edi', 'explicate_21': 'edi', 'new_temp29': 'edi', 'explicate_6': 'edi', 'new_temp95': 'eax', 'new_temp76': 'eax', 'new_temp66': 'eax', 'new_temp73': 'eax', 'new_temp27': 'eax', 'new_temp94': 'eax', 'new_temp34': 'eax', 'new_temp42': 'ecx', 'explicate_9': 'eax', 'new_temp64': 'eax', 'new_temp81': 'eax', 'new_temp45': 'eax', 'new_temp65': 'eax', 'new_temp67': 'eax', 'new_temp55': 'eax', 'new_temp39': 'eax', 'new_temp90': 'eax', 'new_temp49': 'eax', 'new_temp93': 'eax', 'new_temp75': 'eax', 'new_temp96': 'ecx', 'new_temp28': 'eax', 'new_temp50': 'eax', 'new_temp82': 'eax', 'new_temp72': 'eax', 'new_temp59': 'eax', 'new_temp74': 'eax', 'new_temp30': 'eax', 'new_temp1': 'eax', 'new_temp41': 'eax', 'new_temp40': 'eax', 'new_temp88': 'eax', 'explicate_22': 'eax', 'new_temp84': 'eax', 'new_temp36': 'eax', 'new_temp99': 'eax', 'new_temp60': 'eax', 'new_temp92': 'eax', 'new_temp77': 'eax', 'new_temp43': 'eax', 'new_temp56': 'eax', 'new_temp4': 'eax', 'new_temp97': 'eax', 'explicate_14': 'eax', 'explicate_18': 'eax', 'new_temp79': 'ecx', 'new_temp89': 'eax', 'new_temp32': 'eax', 'new_temp70': 'eax', 'new_temp87': 'eax', 'new_temp85': 'eax', 'new_temp3': 'eax', 'new_temp52': 'eax', 'new_temp69': 'eax', 'new_temp35': 'eax', 'new_temp26': 'eax', 'new_temp102': 'eax', 'new_temp78': 'eax', 'new_temp31': 'eax', 'new_temp37': 'eax', 'new_temp57': 'eax', 'new_temp48': 'eax', 'new_temp98': 'eax', 'new_temp44': 'eax', 'new_temp33': 'eax', 'new_temp62': 'ecx', 'new_temp61': 'eax', 'new_temp80': 'eax', 'new_temp86': 'eax', 'new_temp38': 'eax', 'new_temp71': 'eax', 'new_temp91': 'eax', 'new_temp58': 'eax', 'new_temp24': 'eax', 'new_temp25': 'eax', 'new_temp46': 'eax', 'new_temp63': 'eax', 'new_temp100': 'eax', 'new_temp54': 'eax', 'new_temp101': 'eax', 'new_temp47': 'eax', 'new_temp53': 'eax'}
+new_temp24
+new_temp24
+climb
+new_temp25
+new_temp25
+new_temp26
+new_temp26
+explicate_6
+unspillable_0
+unspillable_0
+explicate_6
+new_temp27
+new_temp27
+new_temp28
+new_temp28
+explicate_6
+new_temp29
+new_temp30
+new_temp30
+new_temp29
+new_temp31
+new_temp31
+new_temp32
+new_temp32
+new_temp3
+new_temp33
+new_temp33
+new_temp3
+new_temp34
+new_temp34
+new_temp35
+new_temp35
+new_temp3
+explicate_6
+new_temp36
+new_temp36
+explicate_6
+new_temp37
+new_temp37
+explicate_8
+explicate_6
+new_temp38
+new_temp38
+explicate_8
+new_temp39
+new_temp39
+new_temp40
+new_temp40
+explicate_9
+new_temp41
+new_temp41
+explicate_9
+explicate_8
+explicate_9
+new_temp42
+new_temp42
+new_temp42
+new_temp42
+new_temp42
+new_temp42
+new_temp43
+new_temp43
+new_temp44
+new_temp44
+new_temp3
+new_temp3
+new_temp4
+new_temp4
+explicate_10
+explicate_10
+new_temp45
+new_temp45
+explicate_10
+new_temp46
+new_temp46
+new_temp47
+new_temp47
+new_temp5
+new_temp5
+new_temp102
+new_temp102
+unspillable_1
+unspillable_1
+new_temp48
+new_temp48
+explicate_12
+new_temp49
+new_temp49
+explicate_12
+new_temp50
+new_temp50
+new_temp51
+explicate_12
+new_temp52
+new_temp52
+new_temp51
+new_temp53
+new_temp53
+new_temp54
+new_temp54
+new_temp0
+explicate_12
+new_temp55
+new_temp55
+new_temp56
+new_temp56
+new_temp57
+new_temp57
+explicate_13
+new_temp58
+new_temp58
+explicate_13
+explicate_12
+new_temp59
+new_temp59
+explicate_12
+new_temp60
+new_temp60
+explicate_14
+explicate_12
+new_temp61
+new_temp61
+explicate_14
+explicate_13
+new_temp62
+explicate_14
+new_temp62
+new_temp62
+new_temp63
+new_temp63
+new_temp0
+new_temp0
+climb
+new_temp64
+new_temp64
+new_temp64
+new_temp65
+new_temp65
+new_temp1
+climb
+new_temp1
+explicate_16
+new_temp66
+new_temp66
+explicate_16
+new_temp67
+new_temp67
+explicate_16
+new_temp69
+new_temp69
+new_temp70
+new_temp70
+new_temp71
+new_temp71
+explicate_16
+new_temp72
+new_temp72
+new_temp73
+new_temp73
+new_temp74
+new_temp74
+new_temp75
+new_temp75
+explicate_16
+new_temp76
+new_temp76
+explicate_16
+new_temp77
+new_temp77
+explicate_18
+explicate_16
+new_temp78
+new_temp78
+explicate_18
+new_temp79
+explicate_18
+new_temp79
+new_temp79
+new_temp80
+new_temp80
+unspillable_2
+unspillable_2
+explicate_19
+unspillable_3
+unspillable_3
+explicate_19
+new_temp81
+new_temp81
+new_temp82
+new_temp82
+explicate_19
+new_temp83
+new_temp84
+new_temp84
+new_temp83
+new_temp85
+new_temp85
+new_temp86
+new_temp86
+new_temp3
+new_temp87
+new_temp87
+new_temp3
+new_temp88
+new_temp88
+new_temp89
+new_temp89
+new_temp3
+explicate_19
+new_temp90
+new_temp90
+explicate_19
+new_temp91
+new_temp91
+explicate_21
+explicate_19
+new_temp92
+new_temp92
+explicate_21
+new_temp93
+new_temp93
+new_temp94
+new_temp94
+explicate_22
+new_temp95
+new_temp95
+explicate_22
+explicate_21
+explicate_22
+new_temp96
+new_temp96
+new_temp96
+new_temp96
+new_temp96
+new_temp96
+new_temp97
+new_temp97
+new_temp98
+new_temp98
+new_temp3
+new_temp3
+new_temp4
+new_temp4
+explicate_23
+explicate_23
+new_temp99
+new_temp99
+explicate_23
+new_temp100
+new_temp100
+new_temp101
+new_temp101
+new_temp5
+new_temp5
+new_temp102

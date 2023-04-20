@@ -1,0 +1,94 @@
+--------------Original code----------------
+print(-1)
+Module(
+     body=[
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         UnaryOp(
+                              op=USub(),
+                              operand=Constant(value=1))],
+                    keywords=[]))],
+     type_ignores=[])
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='new_temp0', ctx=Store())],
+               value=UnaryOp(
+                    op=USub(),
+                    operand=Constant(value=1))),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='new_temp0', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
+--------------Code after flattening-------
+new_temp0 = -1
+print(new_temp0)
+inject_int(-1)
+
+new_temp0 = inject_int(-1)
+print(new_temp0)
+--------------Explicate code-------
+new_temp0 = inject_int(-1)
+print(new_temp0)
+
+
+--- explicated flattened python ---
+new_temp1 = -1
+new_temp2 = inject_int(new_temp1)
+new_temp0 = new_temp2
+print(new_temp0)
+
+
+--- x86 IR ---
+movl  1 ,  new_temp1
+negl  new_temp1
+call  inject_int new_temp1
+movl  eax ,  new_temp2
+movl  new_temp2 ,  new_temp0
+call  print new_temp0
+
+
+--- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp1': set(), 'new_temp2': set(), 'new_temp0': set(), 'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp1': 1, 'new_temp2': 1, 'new_temp0': 1}
+Spilled set:
+ set()
+
+
+--------------Spilling----------------
+unspillable_set
+ set()
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {'new_temp1': 'eax', 'new_temp2': 'eax', 'new_temp0': 'eax'}
+new_temp1
+new_temp1
+new_temp1
+new_temp2
+new_temp2
+new_temp0
+new_temp0
