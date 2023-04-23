@@ -138,6 +138,13 @@ static void print_bool(int b) {
     printf ("False");
 }
 
+void print_bool_nl(int b) {
+  if (b)
+    printf ("True\n");
+  else
+    printf ("False\n");
+}
+
 static void print_pyobj(pyobj x) {
   switch (tag(x)) {
   case INT_TAG:

@@ -5,8 +5,10 @@
 *.out
 *.expected
 
+#runtime files
 runtime/runtime.o
 src/pyyc/__pycache__
+runtime/libpyyruntime.a
 
 # executables
 

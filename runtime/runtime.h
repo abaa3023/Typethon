@@ -7,6 +7,7 @@
 
 /* P0 functions in python3 */
 void print_int_nl(int x);
+void print_bool_nl(int b);
 int eval_input_int();
 
 
