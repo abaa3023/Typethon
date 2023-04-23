@@ -1,4 +1,4 @@
-x:int = int(input())
+x:int = bool(input())
 y:int = int(input()) + x
 z:int = int(input()) + y
 w:int = int(input()) + z
