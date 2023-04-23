@@ -46,7 +46,7 @@ class InferenceRules:
         What's the type of -> -type1
         """
         if(type1 == Int() or type1 == Bool()):
-            return type1
+            return Int()
         else:
             return TypeError(type1)
     
@@ -83,7 +83,7 @@ class InferenceRules:
         return Bool()
     
     
-    def BoolAnd(type1, type2):
+    def BoolAnd(*types):
         """
         What's the type of - type1 and type2
         """
@@ -92,12 +92,13 @@ class InferenceRules:
         # Should we restrict both types to be the same?
         
         
-        if(type1 == type2):
-            return type1
-        else:
-            return TypeError()
+        type1 = types[0]
+        for t in types[1:]:
+            if (t!=type1):
+                raise TypeError(f"Boolean And had conflicting types {type1} & {t}")
+        return type1
     
-    def BoolOr(type1, type2):
+    def BoolOr(*types):
         """
         What's the type of -> type1 or type2
         """
@@ -105,12 +106,12 @@ class InferenceRules:
         # The type of the result depends on the input types?
         # Should we restrict both types to be the same?
         
-        
-        if(type1 == type2):
-            return type1
-        else:
-            return TypeError()
-        
+        type1 = types[0]
+        for t in types[1:]:
+            if (t!=type1):
+                raise TypeError(f"Boolean Or had conflicting types {type1} & {t}")
+        return type1
+    
     def Equals(type1, type2):
         """
         What's the type of -> type1 == type2

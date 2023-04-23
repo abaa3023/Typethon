@@ -85,13 +85,15 @@ class TypeCheck(ast.NodeVisitor):
         self.visit(node.operand)
         
         if(isinstance(node.op, ast.USub)):
-            node.type = node.operand.type
+            node.type = InferenceRules.USub(node.operand.type)
+        elif(isinstance(node.op, ast.Not)):
+            node.type = InferenceRules.NotOp(node.operand.type)
         else:
             raise Exception("unkown unary op")
     
     def visit_Call(self, node):
         # self.visit(node.func)
-        print("inside call")
+        # print("inside call")
         # self.generic_visit(node)
         
         if(node.func.id == 'int'):
@@ -103,7 +105,16 @@ class TypeCheck(ast.NodeVisitor):
         if(len(node.args) >0):
             self.visit(node.args[0])
             
-            
+    
+    def visit_BoolOp(self, node):
+        self.generic_visit(node) # set the types of the elements underneath
+        
+        if(isinstance(node.op, ast.Or)):
+            node.type = InferenceRules.BoolOr(*[v.type for v in node.values])
+        elif (isinstance(node.op, ast.And)):
+            node.type = InferenceRules.BoolAnd(*[v.type for v in node.values])
+        else:
+            raise Exception("unkown boolOp")
             
 
             
