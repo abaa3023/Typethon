@@ -1,5 +1,9 @@
 class Type:
-    pass
+    def __eq__(self, type2):
+        return type(self) == type(type2)
+    
+    def __str__(self):
+        return str(type(self))
 
 class Dict(Type):
     """ Dictionaries -> {key_type: value_type} """
