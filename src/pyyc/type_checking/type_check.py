@@ -116,6 +116,24 @@ class TypeCheck(ast.NodeVisitor):
         else:
             raise Exception("unkown boolOp")
             
+    def visit_Compare(self, node):
+        
+        op = node.ops[0]
+        self.visit(node.left)
+        self.visit(node.comparators[0])
+        
+        left_type = node.left.type
+        right_type = node.comparators[0].type
+        
+        if(isinstance(op, ast.Is)):
+            node.type = InferenceRules.IsExpr(left_type, right_type)
+        elif(isinstance(op, ast.Eq)):
+            node.type = InferenceRules.Equals(left_type, right_type)
+        elif(isinstance(op, ast.NotEq)):
+            node.type = InferenceRules.NotEquals(left_type, right_type)
+        else:
+            raise Exception(f"Unknown comparison operator - {op}")
+            
 
             
 if __name__ == '__main__':
