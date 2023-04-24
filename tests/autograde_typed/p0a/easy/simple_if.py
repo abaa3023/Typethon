@@ -1,4 +1,5 @@
-if int(eval(input()) == 23):
-    print(42)
+x:int
+if 10==12:
+    x = 124
 else:
-    print(0)
+    x = 123
