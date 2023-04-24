@@ -8,6 +8,7 @@
 #runtime files
 runtime/runtime.o
 src/pyyc/__pycache__
+__pycache__
 runtime/libpyyruntime.a
 
 # executables
