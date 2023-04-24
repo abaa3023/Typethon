@@ -35,9 +35,9 @@ class InferenceRules:
                 else:
                     raise TypeError(type1, type2) 
             else:
-                return TypeError(type1, type2)
-        elif (type3 == Dict):
-            return TypeError(type1, type2)
+                raise TypeError(type1, type2)
+        elif (isinstance(type1, Dict)):
+            raise TypeError(type1, type2)
         
         
     
@@ -48,7 +48,7 @@ class InferenceRules:
         if(type1 == Int() or type1 == Bool()):
             return Int()
         else:
-            return TypeError(type1)
+            raise TypeError(type1)
     
     
     def Subscript(type1, type2):
@@ -56,21 +56,21 @@ class InferenceRules:
         What's the type of -> type1[type2]
         """
         
-        if(type1 == List):
+        if(isinstance(type1, List)):
             if(type2 == Int()):
                 # Subscripting a list of <whats>, we should get a <what>.
                 return type1.of_what
             else:
-                return TypeError(type1, type2)
+                raise TypeError(type1, type2)
             
-        elif(type1 == Dict):
+        elif(isinstance(type1, Dict)):
             if(type2 == type1.key_type):
                 return type1.value_type
             else:
-                return TypeError(type1, type2)
+                raise TypeError(type1, type2)
             
         else:
-            return TypeError(type1, type2)
+            raise TypeError(type1, type2)
     
     
     def NotOp(type1):

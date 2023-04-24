@@ -20,7 +20,29 @@ class TypeCheck(ast.NodeVisitor):
             elif(node.id == 'bool'):
                 return Bool()
             else:
-                return node.id #TODO: Change this to the type_class ascociated with node.id
+                # return node.id #TODO: Change this to the type_class ascociated with node.id
+                raise Exception(f"Unkown annotaion name - {node.id}")
+        elif(isinstance(node, ast.Subscript)):
+            if (isinstance(node.value, ast.Name)):
+                sub_type = node.value.id
+            else:
+                raise Exception("unkown type for subscript.value")
+                
+            if(sub_type == 'list'):
+                assert isinstance(node.slice, ast.Tuple) == False
+                list_type = self.get_annotation_type(node.slice)
+                return List(list_type)
+            
+                
+            elif(sub_type == 'dict'):
+                assert isinstance(node.slice, ast.Tuple) and len(node.slice.elts) == 2
+                
+                dict_key_type = self.get_annotation_type(node.slice.elts[0])
+                dict_value_type = self.get_annotation_type(node.slice.elts[1])
+                
+                return Dict(dict_key_type, dict_value_type)
+                
+            
         else:
             raise Exception("unkown type for node")
     
@@ -36,7 +58,7 @@ class TypeCheck(ast.NodeVisitor):
         self.visit(node.value)
         
         if(node.target.type != node.value.type):
-            raise TypeError(f"assigning {node.target.type} to {node.value.type}.")
+            raise TypeError(f"assigning {node.value.type} to {node.target.type}.")
         node.type = node.target.type
     
     
@@ -46,7 +68,7 @@ class TypeCheck(ast.NodeVisitor):
         
         
         if(node.targets[0].type != node.value.type):
-            raise TypeError(f"assigning {node.targets[0].type} to {node.value.type}.")
+            raise TypeError(f"assigning {node.value.type} to {node.targets[0].type}.")
     
     def visit_BinOp(self, node):
         self.generic_visit(node) #visit all the underlying elements and set their types
@@ -133,6 +155,48 @@ class TypeCheck(ast.NodeVisitor):
             node.type = InferenceRules.NotEquals(left_type, right_type)
         else:
             raise Exception(f"Unknown comparison operator - {op}")
+    
+    def visit_Dict(self, node):
+        self.generic_visit(node)
+        
+        dict_key_type = None
+        dict_value_type = None
+        
+        for k,v in zip(node.keys, node.values):
+            key_type = k.type
+            value_type = v.type
+            
+            if(dict_key_type==None):
+                dict_key_type = key_type
+            elif(key_type!=dict_key_type):
+                raise Exception(f"Incosistently typed dictionary keys: {dict_key_type}& {key_type}")
+                
+            if(dict_value_type == None):
+                dict_value_type = value_type
+            elif(value_type!=dict_value_type):
+                raise TypeError(f"Incosistently typed dictionary values: {dict_value_type}& {value_type}")
+        
+        node.type = Dict(dict_key_type, dict_value_type)
+        
+    def visit_List(self, node):
+        self.generic_visit(node)
+        
+        list_type = None
+        
+        for ele in node.elts:
+            ele_type = ele.type
+            
+            if(list_type == None):
+                list_type = ele_type
+            elif(list_type!=ele_type):
+                raise TypeError(f"Incosistently typed list: {list_type}& {ele_type}")
+            
+        node.type = List(list_type)
+    
+    def visit_Subscript(self, node):
+        self.generic_visit(node)
+        
+        node.type = InferenceRules.Subscript(node.value.type, node.slice.type)
             
 
             
