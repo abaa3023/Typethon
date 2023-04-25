@@ -1,0 +1,15 @@
+pytest --pyyctests autograde/p0
+
+
+python compile.py test.py
+gcc -m32 -g test.s runtime/libpyyruntime.a -lm -o test
+src/pyyc/testp0
+
+make
+
+
+make -C runtime
+
+rm -rf ./.ipynb_checkpoints
+
+print(ast.dump(node,indent=4))

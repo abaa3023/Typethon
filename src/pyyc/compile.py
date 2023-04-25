@@ -11,13 +11,17 @@ import graph_color
 import spill_ir
 import variable_homes
 import generate_assembly
+from parser.parser import parse
 
 def compile(src_file):
     
     prog = ''
     with open(src_file) as f:
         prog = f.read()
-    tree = ast.parse(prog)
+        
+        
+    #tree = ast.parse(prog)
+    tree.parse(prog)
     
     print('--------------Original code----------------')
     print(prog)
