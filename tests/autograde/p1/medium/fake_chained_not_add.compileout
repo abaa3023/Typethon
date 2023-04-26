@@ -1,6 +1,6 @@
-Syntax error at 'not'
 Illegal character '['
 Illegal character ']'
+Syntax error at ')'
 ------------------CORRECT TREE--------------------
 Module(
     body=[

@@ -17,4 +17,4 @@ Traceback (most recent call last):
     assembly_src.append(push_template(assembly_prefix(arg)))
   File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/generate_assembly.py", line 147, in assembly_prefix
     return register_prefix(homes[operand])
-KeyError: 'x'
+KeyError: 'a'

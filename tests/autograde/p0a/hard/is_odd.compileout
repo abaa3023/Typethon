@@ -1,5 +1,4 @@
 Illegal character ':'
-Syntax error at 'is_odd'
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -64,6 +63,48 @@ Module(
     body=[
         Assign(
             targets=[
+                Name(id='is_odd', ctx=Store())],
+            value=Constant(value=1)),
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Call(
+                func=Name(id='eval', ctx=Load()),
+                args=[
+                    Call(
+                        func=Name(id='input', ctx=Load()),
+                        args=[],
+                        keywords=[])],
+                keywords=[])),
+        Assign(
+            targets=[
+                Name(id='idx', ctx=Store())],
+            value=Constant(value=1)),
+        Expr(
+            value=Name(id='while', ctx=Load())),
+        Expr(
+            value=Call(
+                func=Name(id='int', ctx=Load()),
+                args=[
+                    Compare(
+                        left=Name(id='idx', ctx=Load()),
+                        ops=[
+                            NotEq()],
+                        comparators=[
+                            Name(id='x', ctx=Load())])],
+                keywords=[])),
+        Assign(
+            targets=[
+                Name(id='is_odd', ctx=Store())],
+            value=Call(
+                func=Name(id='int', ctx=Load()),
+                args=[
+                    UnaryOp(
+                        op=Not(),
+                        operand=Name(id='is_odd', ctx=Load()))],
+                keywords=[])),
+        Assign(
+            targets=[
                 Name(id='idx', ctx=Store())],
             value=BinOp(
                 left=Name(id='idx', ctx=Load()),
@@ -89,6 +130,48 @@ Module(
      body=[
           Assign(
                targets=[
+                    Name(id='is_odd', ctx=Store())],
+               value=Constant(value=1)),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Call(
+                    func=Name(id='eval', ctx=Load()),
+                    args=[
+                         Call(
+                              func=Name(id='input', ctx=Load()),
+                              args=[],
+                              keywords=[])],
+                    keywords=[])),
+          Assign(
+               targets=[
+                    Name(id='idx', ctx=Store())],
+               value=Constant(value=1)),
+          Expr(
+               value=Name(id='while', ctx=Load())),
+          Expr(
+               value=Call(
+                    func=Name(id='int', ctx=Load()),
+                    args=[
+                         Compare(
+                              left=Name(id='idx', ctx=Load()),
+                              ops=[
+                                   NotEq()],
+                              comparators=[
+                                   Name(id='x', ctx=Load())])],
+                    keywords=[])),
+          Assign(
+               targets=[
+                    Name(id='is_odd', ctx=Store())],
+               value=Call(
+                    func=Name(id='int', ctx=Load()),
+                    args=[
+                         UnaryOp(
+                              op=Not(),
+                              operand=Name(id='is_odd', ctx=Load()))],
+                    keywords=[])),
+          Assign(
+               targets=[
                     Name(id='idx', ctx=Store())],
                value=BinOp(
                     left=Name(id='idx', ctx=Load()),
@@ -105,7 +188,75 @@ Module(
      body=[
           Assign(
                targets=[
+                    Name(id='is_odd', ctx=Store())],
+               value=Constant(value=1)),
+          Assign(
+               targets=[
                     Name(id='new_temp0', ctx=Store())],
+               value=Call(
+                    func=Name(id='eval', ctx=Load()),
+                    args=[
+                         Call(
+                              func=Name(id='input', ctx=Load()),
+                              args=[],
+                              keywords=[])],
+                    keywords=[])),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Name(id='new_temp0', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='idx', ctx=Store())],
+               value=Constant(value=1)),
+          Expr(
+               value=Name(id='while', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp1', ctx=Store())],
+               value=Compare(
+                    left=Name(id='idx', ctx=Load()),
+                    ops=[
+                         NotEq()],
+                    comparators=[
+                         Name(id='x', ctx=Load())])),
+          Assign(
+               targets=[
+                    Name(id='new_temp2', ctx=Store())],
+               value=Name(id='new_temp1', ctx=Store())),
+          Expr(
+               value=Call(
+                    func=Name(id='int', ctx=Load()),
+                    args=[
+                         Name(id='new_temp2', ctx=Load())],
+                    keywords=[])),
+          If(
+               test=Name(id='is_odd', ctx=Load()),
+               body=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp3', ctx=Store())],
+                         value=Constant(value=False))],
+               orelse=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp3', ctx=Store())],
+                         value=Constant(value=True))]),
+          Assign(
+               targets=[
+                    Name(id='new_temp4', ctx=Store())],
+               value=Call(
+                    func=Name(id='int', ctx=Load()),
+                    args=[
+                         Name(id='new_temp3', ctx=Load())],
+                    keywords=[])),
+          Assign(
+               targets=[
+                    Name(id='is_odd', ctx=Store())],
+               value=Name(id='new_temp4', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp5', ctx=Store())],
                value=BinOp(
                     left=Name(id='idx', ctx=Load()),
                     op=Add(),
@@ -113,7 +264,7 @@ Module(
           Assign(
                targets=[
                     Name(id='idx', ctx=Store())],
-               value=Name(id='new_temp0', ctx=Load())),
+               value=Name(id='new_temp5', ctx=Load())),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -122,252 +273,36 @@ Module(
                     keywords=[]))],
      type_ignores=[])
 --------------Code after flattening-------
-new_temp0 = idx + 1
-idx = new_temp0
-print(is_odd)
-inject_big(add(project_big(explicate_1),project_big(explicate_2)))
-inject_int(explicate_3+explicate_4)
-<ast.Name object at 0x7f532feba170>
-
-explicate_1 = idx
-explicate_2 = inject_int(1)
-if(is_big(explicate_1)):
-	if(is_big(explicate_2)):
-		new_temp0 = inject_big(add(project_big(explicate_1),project_big(explicate_2)))
+is_odd = 1
+new_temp0 = eval(input())
+x = new_temp0
+idx = 1
+while
+new_temp1 = idx != x
+new_temp2 = new_temp1
+int(new_temp2)
+if is_odd:
+    new_temp3 = False
 else:
-	if(is_big(explicate_2)):
-		error_pyobj(0)
-	else:
-		if(is_int(explicate_1)):
-			explicate_3 = project_int(explicate_1)
-		else:
-			explicate_3 = project_bool(explicate_1)
-		if(is_int(explicate_2)):
-			explicate_4 = project_int(explicate_2)
-		else:
-			explicate_4 = project_bool(explicate_2)
-		new_temp0 = inject_int(explicate_3+explicate_4)
-idx = new_temp0
+    new_temp3 = True
+new_temp4 = int(new_temp3)
+is_odd = new_temp4
+new_temp5 = idx + 1
+idx = new_temp5
 print(is_odd)
---------------Explicate code-------
-explicate_1 = idx
-explicate_2 = inject_int(1)
-if is_big(explicate_1):
-    if is_big(explicate_2):
-        new_temp0 = inject_big(add(project_big(explicate_1), project_big(explicate_2)))
-elif is_big(explicate_2):
-    error_pyobj(0)
-else:
-    if is_int(explicate_1):
-        explicate_3 = project_int(explicate_1)
-    else:
-        explicate_3 = project_bool(explicate_1)
-    if is_int(explicate_2):
-        explicate_4 = project_int(explicate_2)
-    else:
-        explicate_4 = project_bool(explicate_2)
-    new_temp0 = inject_int(explicate_3 + explicate_4)
-idx = new_temp0
-print(is_odd)
-
-
---- explicated flattened python ---
-explicate_1 = idx
-new_temp5 = inject_int(1)
-explicate_2 = new_temp5
-new_temp6 = is_big(explicate_1)
-if new_temp6:
-    new_temp7 = is_big(explicate_2)
-    if new_temp7:
-        new_temp8 = project_big(explicate_1)
-        new_temp9 = project_big(explicate_2)
-        new_temp10 = add(new_temp8, new_temp9)
-        new_temp11 = inject_big(new_temp10)
-        new_temp0 = new_temp11
-else:
-    new_temp12 = is_big(explicate_2)
-    if new_temp12:
-        error_pyobj(0)
-    else:
-        new_temp13 = is_int(explicate_1)
-        if new_temp13:
-            new_temp14 = project_int(explicate_1)
-            explicate_3 = new_temp14
-        else:
-            new_temp15 = project_bool(explicate_1)
-            explicate_3 = new_temp15
-        new_temp16 = is_int(explicate_2)
-        if new_temp16:
-            new_temp17 = project_int(explicate_2)
-            explicate_4 = new_temp17
-        else:
-            new_temp18 = project_bool(explicate_2)
-            explicate_4 = new_temp18
-        new_temp19 = explicate_3 + explicate_4
-        new_temp20 = inject_int(new_temp19)
-        new_temp0 = new_temp20
-idx = new_temp0
-print(is_odd)
-
-
---- x86 IR ---
-movl  idx ,  explicate_1
-call  inject_int 1
-movl  eax ,  new_temp5
-movl  new_temp5 ,  explicate_2
-call  is_big explicate_1
-movl  eax ,  new_temp6
-if1
-cmp 0, new_temp6
-je else1
-then1
-call  is_big explicate_2
-movl  eax ,  new_temp7
-if2
-cmp 0, new_temp7
-je end if2
-then2
-call  project_big explicate_1
-movl  eax ,  new_temp8
-call  project_big explicate_2
-movl  eax ,  new_temp9
-call  add new_temp8,new_temp9
-movl  eax ,  new_temp10
-call  inject_big new_temp10
-movl  eax ,  new_temp11
-movl  new_temp11 ,  new_temp0
-end if2
-else1
-call  is_big explicate_2
-movl  eax ,  new_temp12
-if2
-cmp 0, new_temp12
-je else2
-then2
-call  error_pyobj 0
-else2
-call  is_int explicate_1
-movl  eax ,  new_temp13
-if3
-cmp 0, new_temp13
-je else3
-then3
-call  project_int explicate_1
-movl  eax ,  new_temp14
-movl  new_temp14 ,  explicate_3
-else3
-call  project_bool explicate_1
-movl  eax ,  new_temp15
-movl  new_temp15 ,  explicate_3
-end if3
-call  is_int explicate_2
-movl  eax ,  new_temp16
-if4
-cmp 0, new_temp16
-je else4
-then4
-call  project_int explicate_2
-movl  eax ,  new_temp17
-movl  new_temp17 ,  explicate_4
-else4
-call  project_bool explicate_2
-movl  eax ,  new_temp18
-movl  new_temp18 ,  explicate_4
-end if4
-movl  explicate_3 ,  new_temp19
-addl  explicate_4 ,  new_temp19
-call  inject_int new_temp19
-movl  eax ,  new_temp20
-movl  new_temp20 ,  new_temp0
-end if2
-end if1
-movl  new_temp0 ,  idx
-call  print is_odd
-
-
---- Control Flow Graph ---
-
-
--------------- Reset Liveness----------------
-
-
--------------- Liveness----------------
-
-
---------------Interference----------------
-
-
-Interference Graph:  {'is_odd': {'edx', 'new_temp19', 'new_temp0', 'new_temp16', 'new_temp12', 'new_temp5', 'explicate_1', 'new_temp18', 'new_temp20', 'new_temp10', 'explicate_3', 'explicate_2', 'eax', 'new_temp9', 'new_temp11', 'new_temp17', 'new_temp8', 'ecx', 'explicate_4', 'new_temp7', 'new_temp14', 'new_temp15', 'new_temp6', 'idx', 'new_temp13'}, 'new_temp0': {'edx', 'explicate_2', 'new_temp12', 'new_temp5', 'explicate_1', 'eax', 'is_odd', 'ecx', 'new_temp7', 'new_temp6'}, 'explicate_1': {'edx', 'explicate_2', 'new_temp0', 'new_temp12', 'eax', 'new_temp5', 'is_odd', 'ecx', 'new_temp7', 'new_temp6', 'new_temp13'}, 'eax': {'explicate_2', 'new_temp0', 'explicate_1', 'new_temp8', 'is_odd', 'explicate_3'}, 'ecx': {'explicate_2', 'new_temp0', 'explicate_1', 'new_temp8', 'is_odd', 'explicate_3'}, 'edx': {'explicate_2', 'new_temp0', 'explicate_1', 'new_temp8', 'is_odd', 'explicate_3'}, 'new_temp5': {'is_odd', 'explicate_1', 'new_temp0'}, 'explicate_2': {'edx', 'new_temp0', 'new_temp16', 'new_temp12', 'eax', 'explicate_1', 'new_temp8', 'is_odd', 'ecx', 'new_temp7', 'new_temp14', 'new_temp15', 'explicate_3', 'new_temp6', 'new_temp13'}, 'new_temp6': {'is_odd', 'explicate_2', 'explicate_1', 'new_temp0'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp7': {'is_odd', 'explicate_2', 'explicate_1', 'new_temp0'}, 'new_temp12': {'is_odd', 'explicate_2', 'explicate_1', 'new_temp0'}, 'new_temp8': {'is_odd', 'explicate_2', 'edx', 'ecx', 'eax', 'new_temp9'}, 'new_temp9': {'is_odd', 'new_temp8'}, 'new_temp10': {'is_odd'}, 'new_temp11': {'is_odd'}, 'idx': {'is_odd'}, 'new_temp13': {'is_odd', 'explicate_2', 'explicate_1'}, 'new_temp14': {'is_odd', 'explicate_2'}, 'explicate_3': {'edx', 'explicate_2', 'new_temp16', 'new_temp18', 'eax', 'new_temp17', 'is_odd', 'ecx', 'explicate_4'}, 'new_temp15': {'is_odd', 'explicate_2'}, 'new_temp16': {'is_odd', 'explicate_2', 'explicate_3'}, 'new_temp17': {'is_odd', 'explicate_3'}, 'explicate_4': {'is_odd', 'new_temp19', 'explicate_3'}, 'new_temp18': {'is_odd', 'explicate_3'}, 'new_temp19': {'is_odd', 'explicate_4'}, 'new_temp20': {'is_odd'}}
-
-
---------------Coloring----------------
-Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp8': 4, 'is_odd': 5, 'explicate_2': 6, 'explicate_3': 4, 'explicate_1': 4, 'new_temp0': 7, 'new_temp13': 1, 'new_temp6': 1, 'new_temp7': 1, 'new_temp12': 1, 'new_temp16': 1, 'new_temp15': 1, 'new_temp14': 1, 'explicate_4': 1, 'new_temp17': 1, 'new_temp9': 1, 'new_temp5': 1, 'new_temp18': 1, 'new_temp19': 2, 'new_temp20': 1, 'new_temp10': 1, 'idx': 1, 'new_temp11': 1}
-Spilled set:
- {'new_temp0'}
-
-
---------------Spilling----------------
-unspillable_set
- set()
-continue_looping
- False
-
-
-
-Homes for CFG0:  {'new_temp0': -4, 'new_temp8': 'edi', 'is_odd': 'ebx', 'explicate_2': 'esi', 'explicate_3': 'edi', 'explicate_1': 'edi', 'new_temp13': 'eax', 'new_temp6': 'eax', 'new_temp7': 'eax', 'new_temp12': 'eax', 'new_temp16': 'eax', 'new_temp15': 'eax', 'new_temp14': 'eax', 'explicate_4': 'eax', 'new_temp17': 'eax', 'new_temp9': 'eax', 'new_temp5': 'eax', 'new_temp18': 'eax', 'new_temp19': 'ecx', 'new_temp20': 'eax', 'new_temp10': 'eax', 'idx': 'eax', 'new_temp11': 'eax'}
-idx
-explicate_1
-new_temp5
-new_temp5
-explicate_2
-explicate_1
-new_temp6
-new_temp6
-explicate_2
-new_temp7
-new_temp7
-explicate_1
-new_temp8
-explicate_2
-new_temp9
-new_temp9
-new_temp8
-new_temp10
-new_temp10
-new_temp11
-new_temp11
-explicate_2
-new_temp12
-new_temp12
-explicate_1
-new_temp13
-new_temp13
-explicate_1
-new_temp14
-new_temp14
-explicate_3
-explicate_1
-new_temp15
-new_temp15
-explicate_3
-explicate_2
-new_temp16
-new_temp16
-explicate_2
-new_temp17
-new_temp17
-explicate_4
-explicate_2
-new_temp18
-new_temp18
-explicate_4
-explicate_3
-new_temp19
-explicate_4
-new_temp19
-new_temp19
-new_temp20
-new_temp20
-idx
-is_odd
+<ast.Constant object at 0x7f921bbb5ed0>
+eval(input())
+<ast.Name object at 0x7f921bbb6b90>
+<ast.Constant object at 0x7f921bbb6050>
+inject_bool(not_equal(project_big(explicate_6),project_big(explicate_7)))
+inject_bool(1)
+inject_bool(1)
+inject_bool(explicate_8!=explicate_9)
+<ast.Name object at 0x7f921bbb6e30>
+<ast.Constant object at 0x7f921bbb6e90>
+<ast.Constant object at 0x7f921bbb6f50>
+inject_int(project_bool(explicate_10))
+<ast.Name object at 0x7f921bbb6bc0>
+inject_big(add(project_big(explicate_11),project_big(explicate_12)))
+inject_int(explicate_13+explicate_14)
+<ast.Name object at 0x7f921bbb7070>

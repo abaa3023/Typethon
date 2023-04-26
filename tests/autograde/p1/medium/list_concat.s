@@ -13,14 +13,14 @@ START0:
  pushl $(3)
  call inject_int
  addl $(4), %esp
- movl %eax, %esi
+ movl %eax, %ebx
  pushl %edi
  call is_big
  addl $(4), %esp
  cmpl $(0), %eax
  je E1
 IF1:
- pushl %esi
+ pushl %ebx
  call is_big
  addl $(4), %esp
  cmpl $(0), %eax
@@ -30,7 +30,7 @@ IF2:
  call project_big
  addl $(4), %esp
  movl %eax, %edi
- pushl %esi
+ pushl %ebx
  call project_big
  addl $(4), %esp
  pushl %eax
@@ -40,10 +40,10 @@ IF2:
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, %esi
  jmp BB3
 E1:
- pushl %esi
+ pushl %ebx
  call is_big
  addl $(4), %esp
  cmpl $(0), %eax
@@ -71,18 +71,18 @@ E4:
  addl $(4), %esp
  movl %eax, %edi
 BB1:
- pushl %esi
+ pushl %ebx
  call is_int
  addl $(4), %esp
  cmpl $(0), %eax
  je E5
 IF5:
- pushl %esi
+ pushl %ebx
  call project_int
  addl $(4), %esp
  jmp BB2
 E5:
- pushl %esi
+ pushl %ebx
  call project_bool
  addl $(4), %esp
 BB2:
@@ -91,9 +91,9 @@ BB2:
  pushl %ecx
  call inject_int
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, %esi
 BB3:
- pushl %ebx
+ pushl %esi
  call print_any
  addl $(4), %esp
 END0:

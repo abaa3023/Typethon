@@ -44,6 +44,16 @@ Module(
 Module(
     body=[
         Expr(
+            value=BoolOp(
+                op=And(),
+                values=[
+                    UnaryOp(
+                        op=Not(),
+                        operand=Name(id='a', ctx=Load())),
+                    UnaryOp(
+                        op=Not(),
+                        operand=Name(id='b', ctx=Load()))])),
+        Expr(
             value=Call(
                 func=Name(id='print', ctx=Load()),
                 args=[
@@ -58,6 +68,16 @@ print(x)
 Module(
      body=[
           Expr(
+               value=BoolOp(
+                    op=And(),
+                    values=[
+                         UnaryOp(
+                              op=Not(),
+                              operand=Name(id='a', ctx=Load())),
+                         UnaryOp(
+                              op=Not(),
+                              operand=Name(id='b', ctx=Load()))])),
+          Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
                     args=[
@@ -66,6 +86,47 @@ Module(
      type_ignores=[])
 Module(
      body=[
+          If(
+               test=Name(id='a', ctx=Load()),
+               body=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp0', ctx=Store())],
+                         value=Constant(value=False))],
+               orelse=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp0', ctx=Store())],
+                         value=Constant(value=True))]),
+          If(
+               test=Name(id='new_temp0', ctx=Load()),
+               body=[
+                    If(
+                         test=Name(id='b', ctx=Load()),
+                         body=[
+                              Assign(
+                                   targets=[
+                                        Name(id='new_temp1', ctx=Store())],
+                                   value=Constant(value=False))],
+                         orelse=[
+                              Assign(
+                                   targets=[
+                                        Name(id='new_temp1', ctx=Store())],
+                                   value=Constant(value=True))]),
+                    Assign(
+                         targets=[
+                              Name(id='new_temp2', ctx=Store())],
+                         value=Name(id='new_temp1', ctx=Load()))],
+               orelse=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp2', ctx=Store())],
+                         value=Name(id='new_temp0', ctx=Load()))]),
+          Expr(
+               value=BoolOp(
+                    op=And(),
+                    values=[
+                         Name(id='new_temp2', ctx=Store())])),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -74,18 +135,124 @@ Module(
                     keywords=[]))],
      type_ignores=[])
 --------------Code after flattening-------
+if a:
+    new_temp0 = False
+else:
+    new_temp0 = True
+if new_temp0:
+    if b:
+        new_temp1 = False
+    else:
+        new_temp1 = True
+    new_temp2 = new_temp1
+else:
+    new_temp2 = new_temp0
+new_temp2
 print(x)
+<ast.Constant object at 0x7fed167fe2c0>
+<ast.Constant object at 0x7fed167fe380>
+<ast.Constant object at 0x7fed167fe4a0>
+<ast.Constant object at 0x7fed167fe560>
+<ast.Name object at 0x7fed167fe620>
+<ast.Name object at 0x7fed167fe440>
 
+if(is_true(a)):
+
+	new_temp0 = inject_bool(0)
+else:
+
+	new_temp0 = inject_bool(1)
+if(is_true(new_temp0)):
+
+	if(is_true(b)):
+	
+		new_temp1 = inject_bool(0)
+	else:
+	
+		new_temp1 = inject_bool(1)
+	new_temp2 = new_temp1
+else:
+
+	new_temp2 = new_temp0
 print(x)
 --------------Explicate code-------
+if is_true(a):
+    new_temp0 = inject_bool(0)
+else:
+    new_temp0 = inject_bool(1)
+if is_true(new_temp0):
+    if is_true(b):
+        new_temp1 = inject_bool(0)
+    else:
+        new_temp1 = inject_bool(1)
+    new_temp2 = new_temp1
+else:
+    new_temp2 = new_temp0
 print(x)
 
 
 --- explicated flattened python ---
+new_temp3 = is_true(a)
+if new_temp3:
+    new_temp4 = inject_bool(0)
+    new_temp0 = new_temp4
+else:
+    new_temp5 = inject_bool(1)
+    new_temp0 = new_temp5
+new_temp6 = is_true(new_temp0)
+if new_temp6:
+    new_temp7 = is_true(b)
+    if new_temp7:
+        new_temp8 = inject_bool(0)
+        new_temp1 = new_temp8
+    else:
+        new_temp9 = inject_bool(1)
+        new_temp1 = new_temp9
+    new_temp2 = new_temp1
+else:
+    new_temp2 = new_temp0
 print(x)
 
 
 --- x86 IR ---
+call  is_true a
+movl  eax ,  new_temp3
+if1
+cmp 0, new_temp3
+je else1
+then1
+call  inject_bool 0
+movl  eax ,  new_temp4
+movl  new_temp4 ,  new_temp0
+else1
+call  inject_bool 1
+movl  eax ,  new_temp5
+movl  new_temp5 ,  new_temp0
+end if1
+call  is_true new_temp0
+movl  eax ,  new_temp6
+if2
+cmp 0, new_temp6
+je else2
+then2
+call  is_true b
+movl  eax ,  new_temp7
+if3
+cmp 0, new_temp7
+je else3
+then3
+call  inject_bool 0
+movl  eax ,  new_temp8
+movl  new_temp8 ,  new_temp1
+else3
+call  inject_bool 1
+movl  eax ,  new_temp9
+movl  new_temp9 ,  new_temp1
+end if3
+movl  new_temp1 ,  new_temp2
+else2
+movl  new_temp0 ,  new_temp2
+end if2
 call  print x
 
 
@@ -101,12 +268,12 @@ call  print x
 --------------Interference----------------
 
 
-Interference Graph:  {'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'x': {'new_temp5', 'new_temp9', 'ecx', 'new_temp7', 'new_temp4', 'new_temp0', 'new_temp2', 'new_temp1', 'new_temp8', 'new_temp6', 'edx', 'new_temp3', 'eax'}, 'eax': {'x', 'new_temp0', 'b'}, 'ecx': {'x', 'new_temp0', 'b'}, 'edx': {'x', 'new_temp0', 'b'}, 'b': {'new_temp5', 'ecx', 'new_temp4', 'new_temp0', 'new_temp6', 'edx', 'new_temp3', 'eax'}, 'new_temp3': {'x', 'b'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp4': {'x', 'b'}, 'new_temp0': {'new_temp6', 'edx', 'x', 'ecx', 'eax', 'b'}, 'new_temp5': {'x', 'b'}, 'new_temp6': {'x', 'new_temp0', 'b'}, 'new_temp7': {'x'}, 'new_temp2': {'x'}, 'new_temp8': {'x'}, 'new_temp1': {'x'}, 'new_temp9': {'x'}}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'x': 4, 'new_temp0': 5, 'b': 4, 'new_temp6': 1, 'new_temp3': 1, 'new_temp8': 1, 'new_temp1': 1, 'new_temp2': 1, 'new_temp4': 1, 'new_temp7': 1, 'new_temp5': 1, 'new_temp9': 1}
 Spilled set:
  set()
 
@@ -119,5 +286,5 @@ continue_looping
 
 
 
-Homes for CFG0:  {}
-x
+Homes for CFG0:  {'x': 'edi', 'new_temp0': 'ebx', 'b': 'edi', 'new_temp6': 'eax', 'new_temp3': 'eax', 'new_temp8': 'eax', 'new_temp1': 'eax', 'new_temp2': 'eax', 'new_temp4': 'eax', 'new_temp7': 'eax', 'new_temp5': 'eax', 'new_temp9': 'eax'}
+a

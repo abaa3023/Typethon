@@ -108,9 +108,9 @@ y = 2
 z = x
 y
 print(z)
-<ast.Constant object at 0x7f05d28499f0>
-<ast.Constant object at 0x7f05d28499c0>
-<ast.Name object at 0x7f05d2848490>
+<ast.Constant object at 0x7f508ab39ba0>
+<ast.Constant object at 0x7f508ab39b70>
+<ast.Name object at 0x7f508ab384c0>
 
 x = inject_int(1)
 y = inject_int(2)
@@ -155,7 +155,7 @@ call  print z
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp0': set(), 'x': {'y', 'edx', 'ecx', 'new_temp1', 'eax'}, 'eax': {'x'}, 'ecx': {'x'}, 'edx': {'x'}, 'new_temp1': {'x'}, 'y': {'x'}, 'z': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'new_temp0': set(), 'x': {'y', 'ecx', 'eax', 'new_temp1', 'edx'}, 'eax': {'x'}, 'ecx': {'x'}, 'edx': {'x'}, 'new_temp1': {'x'}, 'y': {'x'}, 'z': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------

@@ -1,5 +1,6 @@
 Illegal character '['
 Illegal character ']'
+Syntax error at ')'
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -16,71 +17,24 @@ Module(
                 keywords=[]))],
     type_ignores=[])
 ------------------Tree with my parser--------------
-Module(
-    body=[
-        Expr(
-            value=Call(
-                func=Name(id='print', ctx=Load()),
-                args=[
-                    BinOp(
-                        left=Name(id='not', ctx=Load()),
-                        op=Add(),
-                        right=Constant(value=1))],
-                keywords=[]))],
-    type_ignores=[])
+Module(body=[], type_ignores=[])
 --------------Original code----------------
 print((not []) + 1)
 # 
-Module(
-     body=[
-          Expr(
-               value=Call(
-                    func=Name(id='print', ctx=Load()),
-                    args=[
-                         BinOp(
-                              left=Name(id='not', ctx=Load()),
-                              op=Add(),
-                              right=Constant(value=1))],
-                    keywords=[]))],
-     type_ignores=[])
-Module(
-     body=[
-          Assign(
-               targets=[
-                    Name(id='new_temp0', ctx=Store())],
-               value=BinOp(
-                    left=Name(id='not', ctx=Load()),
-                    op=Add(),
-                    right=Constant(value=1))),
-          Expr(
-               value=Call(
-                    func=Name(id='print', ctx=Load()),
-                    args=[
-                         Name(id='new_temp0', ctx=Load())],
-                    keywords=[]))],
-     type_ignores=[])
+Module(body=[], type_ignores=[])
+Module(body=[], type_ignores=[])
 --------------Code after flattening-------
-new_temp0 = not + 1
-print(new_temp0)
-inject_big(add(project_big(explicate_1),project_big(explicate_2)))
-inject_int(explicate_3+explicate_4)
 
-explicate_1 = not
-explicate_2 = inject_int(1)
-if(is_big(explicate_1)):
-	if(is_big(explicate_2)):
-		new_temp0 = inject_big(add(project_big(explicate_1),project_big(explicate_2)))
-else:
-	if(is_big(explicate_2)):
-		error_pyobj(0)
-	else:
-		if(is_int(explicate_1)):
-			explicate_3 = project_int(explicate_1)
-		else:
-			explicate_3 = project_bool(explicate_1)
-		if(is_int(explicate_2)):
-			explicate_4 = project_int(explicate_2)
-		else:
-			explicate_4 = project_bool(explicate_2)
-		new_temp0 = inject_int(explicate_3+explicate_4)
-print(new_temp0)
+
+--------------Explicate code-------
+
+
+
+--- explicated flattened python ---
+
+
+
+--- x86 IR ---
+
+
+--- Control Flow Graph ---

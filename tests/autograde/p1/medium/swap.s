@@ -9,24 +9,24 @@ START0:
  pushl $(1)
  call inject_int
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, %edi
  pushl $(4)
  call inject_int
  addl $(4), %esp
- movl %eax, %edi
- pushl %ebx
- call print_any
- addl $(4), %esp
+ movl %eax, %ebx
  pushl %edi
  call print_any
  addl $(4), %esp
- movl %ebx, %eax
- movl %edi, %ebx
- movl %eax, %edi
  pushl %ebx
  call print_any
  addl $(4), %esp
+ movl %edi, %eax
+ movl %ebx, %edi
+ movl %eax, %ebx
  pushl %edi
+ call print_any
+ addl $(4), %esp
+ pushl %ebx
  call print_any
  addl $(4), %esp
 END0:

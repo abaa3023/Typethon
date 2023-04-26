@@ -11,7 +11,8 @@ reserved = {    # dictionary defines keywords and associated token types
     'eval': 'EVAL',
     'input': 'INPUT',
     'int' : 'INT_FUNC',
-    'and' : 'AND'
+    'and' : 'AND',
+    'not' : 'NOT'
  }
 
 #TODO - Need INDENT AND DEDENT
@@ -35,6 +36,7 @@ t_EQUAL_EQUAL = r'\=='
 t_NOT_EQUAL = r'\!='
 t_INT_FUNC=r'int'
 t_AND = r'and'
+t_NOT = r'not'
 
 
 #TODO
@@ -190,7 +192,11 @@ def p_compare_notequals_expression(t):
     
 def p_expression_and_expression_boolop(t):
     'expression : expression AND expression'
-    t[0] = BoolOp(op=And(), values=[t[1], t[3]])    
+    t[0] = BoolOp(op=And(), values=[t[1], t[3]])  
+    
+def p_expression_not_expression_unop(t):
+    'expression : NOT expression'
+    t[0] = UnaryOp(op=Not(), operand=t[2])    
 #------------------------------------------------------------------------
 
 

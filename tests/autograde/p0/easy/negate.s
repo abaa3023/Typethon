@@ -9,42 +9,42 @@ START0:
  pushl $(2)
  call inject_int
  addl $(4), %esp
- movl %eax, %ebx
- pushl %ebx
+ movl %eax, %edi
+ pushl %edi
  call is_int
  addl $(4), %esp
  cmpl $(0), %eax
  je E1
 IF1:
- pushl %ebx
+ pushl %edi
  call project_int
  addl $(4), %esp
  negl %eax
  pushl %eax
  call inject_int
  addl $(4), %esp
- movl %eax, %edi
+ movl %eax, %ebx
  jmp BB1
 E1:
- pushl %ebx
+ pushl %edi
  call is_bool
  addl $(4), %esp
  cmpl $(0), %eax
  je BB1
 IF2:
- pushl %ebx
+ pushl %edi
  call project_bool
  addl $(4), %esp
  negl %eax
  pushl %eax
  call inject_int
  addl $(4), %esp
- movl %eax, %edi
+ movl %eax, %ebx
 BB1:
- pushl %ebx
+ pushl %edi
  call print_any
  addl $(4), %esp
- pushl %edi
+ pushl %ebx
  call print_any
  addl $(4), %esp
 END0:

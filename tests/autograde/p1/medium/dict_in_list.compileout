@@ -113,8 +113,8 @@ y = 1
 2
 x
 print(y)
-<ast.Constant object at 0x7f26505599c0>
-<ast.Constant object at 0x7f2650559a80>
+<ast.Constant object at 0x7fa7318d9b70>
+<ast.Constant object at 0x7fa7318d9c30>
 
 x = inject_int(1)
 y = inject_int(1)
@@ -160,7 +160,7 @@ Interference Graph:  {'new_temp0': set(), 'x': set(), 'new_temp1': set(), 'y': s
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'y': 1, 'new_temp0': 1, 'new_temp1': 1, 'x': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'x': 1, 'y': 1, 'new_temp0': 1, 'new_temp1': 1}
 Spilled set:
  set()
 
@@ -173,7 +173,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'y': 'eax', 'new_temp0': 'eax', 'new_temp1': 'eax', 'x': 'eax'}
+Homes for CFG0:  {'x': 'eax', 'y': 'eax', 'new_temp0': 'eax', 'new_temp1': 'eax'}
 new_temp0
 new_temp0
 x

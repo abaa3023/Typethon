@@ -1,2 +1,2 @@
-x = 2 and 3
+x = int(not 2)
 print(x)

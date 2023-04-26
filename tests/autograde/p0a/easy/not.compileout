@@ -1,4 +1,3 @@
-Syntax error at '2'
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -22,6 +21,16 @@ Module(
 ------------------Tree with my parser--------------
 Module(
     body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Call(
+                func=Name(id='int', ctx=Load()),
+                args=[
+                    UnaryOp(
+                        op=Not(),
+                        operand=Constant(value=2))],
+                keywords=[])),
         Expr(
             value=Call(
                 func=Name(id='print', ctx=Load()),
@@ -35,6 +44,16 @@ print(x)
 
 Module(
      body=[
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Call(
+                    func=Name(id='int', ctx=Load()),
+                    args=[
+                         UnaryOp(
+                              op=Not(),
+                              operand=Constant(value=2))],
+                    keywords=[])),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -44,6 +63,30 @@ Module(
      type_ignores=[])
 Module(
      body=[
+          If(
+               test=Constant(value=2),
+               body=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp0', ctx=Store())],
+                         value=Constant(value=False))],
+               orelse=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp0', ctx=Store())],
+                         value=Constant(value=True))]),
+          Assign(
+               targets=[
+                    Name(id='new_temp1', ctx=Store())],
+               value=Call(
+                    func=Name(id='int', ctx=Load()),
+                    args=[
+                         Name(id='new_temp0', ctx=Load())],
+                    keywords=[])),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Name(id='new_temp1', ctx=Load())),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -52,18 +95,85 @@ Module(
                     keywords=[]))],
      type_ignores=[])
 --------------Code after flattening-------
+if 2:
+    new_temp0 = False
+else:
+    new_temp0 = True
+new_temp1 = int(new_temp0)
+x = new_temp1
 print(x)
+<ast.Constant object at 0x7f447fb89ff0>
+<ast.Constant object at 0x7f447fb8a0b0>
+inject_int(project_bool(explicate_2))
+<ast.Name object at 0x7f447fb89ea0>
 
+if(2):
+
+	new_temp0 = inject_bool(0)
+else:
+
+	new_temp0 = inject_bool(1)
+explicate_2 = new_temp0
+if(is_bool(explicate_2)):
+	new_temp1 = inject_int(project_bool(explicate_2))
+x = new_temp1
 print(x)
 --------------Explicate code-------
+if 2:
+    new_temp0 = inject_bool(0)
+else:
+    new_temp0 = inject_bool(1)
+explicate_2 = new_temp0
+if is_bool(explicate_2):
+    new_temp1 = inject_int(project_bool(explicate_2))
+x = new_temp1
 print(x)
 
 
 --- explicated flattened python ---
+if 2:
+    new_temp3 = inject_bool(0)
+    new_temp0 = new_temp3
+else:
+    new_temp4 = inject_bool(1)
+    new_temp0 = new_temp4
+explicate_2 = new_temp0
+new_temp5 = is_bool(explicate_2)
+if new_temp5:
+    new_temp6 = project_bool(explicate_2)
+    new_temp7 = inject_int(new_temp6)
+    new_temp1 = new_temp7
+x = new_temp1
 print(x)
 
 
 --- x86 IR ---
+if1
+cmp 0, 2
+je else1
+then1
+call  inject_bool 0
+movl  eax ,  new_temp3
+movl  new_temp3 ,  new_temp0
+else1
+call  inject_bool 1
+movl  eax ,  new_temp4
+movl  new_temp4 ,  new_temp0
+end if1
+movl  new_temp0 ,  explicate_2
+call  is_bool explicate_2
+movl  eax ,  new_temp5
+if2
+cmp 0, new_temp5
+je end if2
+then2
+call  project_bool explicate_2
+movl  eax ,  new_temp6
+call  inject_int new_temp6
+movl  eax ,  new_temp7
+movl  new_temp7 ,  new_temp1
+end if2
+movl  new_temp1 ,  x
 call  print x
 
 
@@ -79,23 +189,70 @@ call  print x
 --------------Interference----------------
 
 
-Interference Graph:  {'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'eax': {'explicate_2', 'new_temp1'}, 'ecx': {'explicate_2', 'new_temp1'}, 'edx': {'explicate_2', 'new_temp1'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp1': {'explicate_2', 'ecx', 'edx', 'new_temp4', 'new_temp5', 'new_temp3', 'eax', 'new_temp0'}, 'new_temp3': {'new_temp1'}, 'new_temp0': {'new_temp1'}, 'new_temp4': {'new_temp1'}, 'explicate_2': {'ecx', 'edx', 'new_temp5', 'eax', 'new_temp1'}, 'new_temp5': {'explicate_2', 'new_temp1'}, 'new_temp6': set(), 'new_temp7': set(), 'x': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp1': 4, 'explicate_2': 5, 'new_temp5': 1, 'new_temp0': 1, 'new_temp3': 1, 'new_temp4': 1, 'new_temp7': 1, 'x': 1, 'new_temp6': 1}
 Spilled set:
  set()
 
 
 --------------Spilling----------------
 unspillable_set
+ {'unspillable_0'}
+continue_looping
+ True
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp1': {'explicate_2', 'ecx', 'edx', 'new_temp4', 'new_temp5', 'new_temp3', 'unspillable_0', 'eax', 'new_temp0'}, 'unspillable_0': {'new_temp1'}, 'eax': {'explicate_2', 'new_temp1'}, 'ecx': {'explicate_2', 'new_temp1'}, 'edx': {'explicate_2', 'new_temp1'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp3': {'new_temp1'}, 'new_temp0': {'new_temp1'}, 'new_temp4': {'new_temp1'}, 'explicate_2': {'ecx', 'edx', 'new_temp5', 'eax', 'new_temp1'}, 'new_temp5': {'explicate_2', 'new_temp1'}, 'new_temp6': set(), 'new_temp7': set(), 'x': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'unspillable_0': 1, 'new_temp1': 4, 'explicate_2': 5, 'new_temp5': 1, 'new_temp0': 1, 'new_temp3': 1, 'new_temp4': 1, 'new_temp7': 1, 'x': 1, 'new_temp6': 1}
+Spilled set:
  set()
+
+
+--------------Spilling----------------
+unspillable_set
+ {'unspillable_0'}
 continue_looping
  False
 
 
 
-Homes for CFG0:  {}
+Homes for CFG0:  {'unspillable_0': 'eax', 'new_temp1': 'edi', 'explicate_2': 'ebx', 'new_temp5': 'eax', 'new_temp0': 'eax', 'new_temp3': 'eax', 'new_temp4': 'eax', 'new_temp7': 'eax', 'x': 'eax', 'new_temp6': 'eax'}
+unspillable_0
+unspillable_0
+new_temp3
+new_temp3
+new_temp0
+new_temp4
+new_temp4
+new_temp0
+new_temp0
+explicate_2
+explicate_2
+new_temp5
+new_temp5
+explicate_2
+new_temp6
+new_temp6
+new_temp7
+new_temp7
+new_temp1
+new_temp1
+x
 x
