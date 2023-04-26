@@ -28,6 +28,64 @@ Illegal character ']'
 Illegal character '['
 Illegal character ']'
 Syntax error at ')'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='matrix1', ctx=Store())],
+            value=List(
+                elts=[
+                    List(
+                        elts=[
+                            Constant(value=1),
+                            Constant(value=2),
+                            Constant(value=3)],
+                        ctx=Load()),
+                    List(
+                        elts=[
+                            Constant(value=4),
+                            Constant(value=5),
+                            Constant(value=6)],
+                        ctx=Load()),
+                    List(
+                        elts=[
+                            Constant(value=7),
+                            Constant(value=8),
+                            Constant(value=9)],
+                        ctx=Load())],
+                ctx=Load())),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    BinOp(
+                        left=BinOp(
+                            left=Subscript(
+                                value=Subscript(
+                                    value=Name(id='matrix1', ctx=Load()),
+                                    slice=Constant(value=0),
+                                    ctx=Load()),
+                                slice=Constant(value=0),
+                                ctx=Load()),
+                            op=Add(),
+                            right=Subscript(
+                                value=Subscript(
+                                    value=Name(id='matrix1', ctx=Load()),
+                                    slice=Constant(value=1),
+                                    ctx=Load()),
+                                slice=Constant(value=1),
+                                ctx=Load())),
+                        op=Add(),
+                        right=Subscript(
+                            value=Subscript(
+                                value=Name(id='matrix1', ctx=Load()),
+                                slice=Constant(value=2),
+                                ctx=Load()),
+                            slice=Constant(value=2),
+                            ctx=Load()))],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(body=[], type_ignores=[])
 --------------Original code----------------

@@ -7,6 +7,42 @@ Illegal character ']'
 Illegal character '['
 Syntax error at '1'
 Illegal character ']'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=List(
+                elts=[
+                    Constant(value=1),
+                    Constant(value=2)],
+                ctx=Load())),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    BinOp(
+                        left=Subscript(
+                            value=Name(id='x', ctx=Load()),
+                            slice=Constant(value=0),
+                            ctx=Load()),
+                        op=Add(),
+                        right=Constant(value=1))],
+                keywords=[])),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    BinOp(
+                        left=Subscript(
+                            value=Name(id='x', ctx=Load()),
+                            slice=Constant(value=1),
+                            ctx=Load()),
+                        op=Add(),
+                        right=Constant(value=1))],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(body=[], type_ignores=[])
 --------------Original code----------------

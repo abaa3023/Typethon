@@ -2,6 +2,37 @@ Illegal character '['
 Illegal character ','
 Illegal character ','
 Illegal character ']'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='a', ctx=Store())],
+            value=Constant(value=1)),
+        Assign(
+            targets=[
+                Name(id='b', ctx=Store())],
+            value=Constant(value=2)),
+        Assign(
+            targets=[
+                Name(id='c', ctx=Store())],
+            value=Constant(value=3)),
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=List(
+                elts=[
+                    Name(id='a', ctx=Load()),
+                    Name(id='b', ctx=Load()),
+                    Name(id='c', ctx=Load())],
+                ctx=Load())),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='x', ctx=Load())],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(
     body=[
@@ -104,10 +135,10 @@ x = a
 b
 c
 print(x)
-<ast.Constant object at 0x7f4950cff100>
-<ast.Constant object at 0x7f4950d60fa0>
-<ast.Constant object at 0x7f4950d610c0>
-<ast.Name object at 0x7f4950d612a0>
+<ast.Constant object at 0x7fd68eec4280>
+<ast.Constant object at 0x7fd68eec4190>
+<ast.Constant object at 0x7fd68eec40a0>
+<ast.Name object at 0x7fd68eec5a20>
 
 a = inject_int(1)
 b = inject_int(2)
@@ -159,12 +190,12 @@ call  print x
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp0': set(), 'a': {'eax', 'new_temp2', 'edx', 'b', 'ecx', 'new_temp1', 'c'}, 'eax': {'a'}, 'ecx': {'a'}, 'edx': {'a'}, 'new_temp1': {'a'}, 'b': {'a'}, 'new_temp2': {'a'}, 'c': {'a'}, 'x': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'new_temp0': set(), 'a': {'new_temp2', 'ecx', 'b', 'c', 'edx', 'eax', 'new_temp1'}, 'eax': {'a'}, 'ecx': {'a'}, 'edx': {'a'}, 'new_temp1': {'a'}, 'b': {'a'}, 'new_temp2': {'a'}, 'c': {'a'}, 'x': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'a': 4, 'c': 1, 'new_temp2': 1, 'b': 1, 'new_temp1': 1, 'new_temp0': 1, 'x': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'a': 4, 'new_temp1': 1, 'b': 1, 'new_temp2': 1, 'c': 1, 'new_temp0': 1, 'x': 1}
 Spilled set:
  set()
 
@@ -177,7 +208,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'a': 'edi', 'c': 'eax', 'new_temp2': 'eax', 'b': 'eax', 'new_temp1': 'eax', 'new_temp0': 'eax', 'x': 'eax'}
+Homes for CFG0:  {'a': 'edi', 'new_temp1': 'eax', 'b': 'eax', 'new_temp2': 'eax', 'c': 'eax', 'new_temp0': 'eax', 'x': 'eax'}
 new_temp0
 new_temp0
 a

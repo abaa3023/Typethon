@@ -1,12 +1,84 @@
-Illegal character '!'
-Syntax error at '='
-Illegal character ':'
-Illegal character '!'
 Illegal character ':'
 Illegal character ':'
+Illegal character ':'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Constant(value=12)),
+        Assign(
+            targets=[
+                Name(id='positivity_counter', ctx=Store())],
+            value=Constant(value=0)),
+        While(
+            test=Compare(
+                left=Name(id='x', ctx=Load()),
+                ops=[
+                    NotEq()],
+                comparators=[
+                    Constant(value=0)]),
+            body=[
+                Assign(
+                    targets=[
+                        Name(id='x', ctx=Store())],
+                    value=BinOp(
+                        left=Name(id='x', ctx=Load()),
+                        op=Add(),
+                        right=UnaryOp(
+                            op=USub(),
+                            operand=Constant(value=1)))),
+                Assign(
+                    targets=[
+                        Name(id='positivity_counter', ctx=Store())],
+                    value=BinOp(
+                        left=Name(id='positivity_counter', ctx=Load()),
+                        op=Add(),
+                        right=Constant(value=1)))],
+            orelse=[]),
+        If(
+            test=Compare(
+                left=Name(id='positivity_counter', ctx=Load()),
+                ops=[
+                    NotEq()],
+                comparators=[
+                    Constant(value=0)]),
+            body=[
+                Expr(
+                    value=Call(
+                        func=Name(id='print', ctx=Load()),
+                        args=[
+                            Constant(value=1)],
+                        keywords=[]))],
+            orelse=[
+                Expr(
+                    value=Call(
+                        func=Name(id='print', ctx=Load()),
+                        args=[
+                            Constant(value=0)],
+                        keywords=[]))])],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(
     body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Constant(value=12)),
+        Assign(
+            targets=[
+                Name(id='positivity_counter', ctx=Store())],
+            value=Constant(value=0)),
+        Expr(
+            value=Name(id='while', ctx=Load())),
+        Expr(
+            value=Compare(
+                left=Name(id='x', ctx=Load()),
+                ops=[
+                    NotEq()],
+                comparators=[
+                    Constant(value=0)])),
         Assign(
             targets=[
                 Name(id='x', ctx=Store())],
@@ -25,10 +97,13 @@ Module(
                 right=Constant(value=1))),
         Expr(
             value=Name(id='if', ctx=Load())),
-        Assign(
-            targets=[
-                Name(id='positivity_counter', ctx=Store())],
-            value=Constant(value=0)),
+        Expr(
+            value=Compare(
+                left=Name(id='positivity_counter', ctx=Load()),
+                ops=[
+                    NotEq()],
+                comparators=[
+                    Constant(value=0)])),
         Expr(
             value=Call(
                 func=Name(id='print', ctx=Load()),
@@ -62,6 +137,23 @@ Module(
           Assign(
                targets=[
                     Name(id='x', ctx=Store())],
+               value=Constant(value=12)),
+          Assign(
+               targets=[
+                    Name(id='positivity_counter', ctx=Store())],
+               value=Constant(value=0)),
+          Expr(
+               value=Name(id='while', ctx=Load())),
+          Expr(
+               value=Compare(
+                    left=Name(id='x', ctx=Load()),
+                    ops=[
+                         NotEq()],
+                    comparators=[
+                         Constant(value=0)])),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
                value=BinOp(
                     left=Name(id='x', ctx=Load()),
                     op=Add(),
@@ -77,10 +169,13 @@ Module(
                     right=Constant(value=1))),
           Expr(
                value=Name(id='if', ctx=Load())),
-          Assign(
-               targets=[
-                    Name(id='positivity_counter', ctx=Store())],
-               value=Constant(value=0)),
+          Expr(
+               value=Compare(
+                    left=Name(id='positivity_counter', ctx=Load()),
+                    ops=[
+                         NotEq()],
+                    comparators=[
+                         Constant(value=0)])),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -100,24 +195,49 @@ Module(
      body=[
           Assign(
                targets=[
+                    Name(id='x', ctx=Store())],
+               value=Constant(value=12)),
+          Assign(
+               targets=[
+                    Name(id='positivity_counter', ctx=Store())],
+               value=Constant(value=0)),
+          Expr(
+               value=Name(id='while', ctx=Load())),
+          Assign(
+               targets=[
                     Name(id='new_temp0', ctx=Store())],
+               value=Compare(
+                    left=Name(id='x', ctx=Load()),
+                    ops=[
+                         NotEq()],
+                    comparators=[
+                         Constant(value=0)])),
+          Expr(
+               value=Compare(
+                    left=Name(id='new_temp0', ctx=Store()),
+                    ops=[],
+                    comparators=[
+                         Constant(value=0)])),
+          Assign(
+               targets=[
+                    Name(id='new_temp1', ctx=Store())],
                value=UnaryOp(
                     op=USub(),
                     operand=Constant(value=1))),
           Assign(
                targets=[
-                    Name(id='new_temp1', ctx=Store())],
+                    Name(id='new_temp2', ctx=Store())],
                value=BinOp(
                     left=Name(id='x', ctx=Load()),
                     op=Add(),
-                    right=Name(id='new_temp0', ctx=Load()))),
+                    right=Name(id='new_temp1', ctx=Load()))),
           Assign(
                targets=[
                     Name(id='x', ctx=Store())],
-               value=Name(id='new_temp1', ctx=Load())),
+               value=Name(id='new_temp2', ctx=Load())),
           Assign(
                targets=[
-                    Name(id='new_temp2', ctx=Store())],
+                    Name(id='new_temp3', ctx=Store())],
                value=BinOp(
                     left=Name(id='positivity_counter', ctx=Load()),
                     op=Add(),
@@ -125,13 +245,24 @@ Module(
           Assign(
                targets=[
                     Name(id='positivity_counter', ctx=Store())],
-               value=Name(id='new_temp2', ctx=Load())),
+               value=Name(id='new_temp3', ctx=Load())),
           Expr(
                value=Name(id='if', ctx=Load())),
           Assign(
                targets=[
-                    Name(id='positivity_counter', ctx=Store())],
-               value=Constant(value=0)),
+                    Name(id='new_temp4', ctx=Store())],
+               value=Compare(
+                    left=Name(id='positivity_counter', ctx=Load()),
+                    ops=[
+                         NotEq()],
+                    comparators=[
+                         Constant(value=0)])),
+          Expr(
+               value=Compare(
+                    left=Name(id='new_temp4', ctx=Store()),
+                    ops=[],
+                    comparators=[
+                         Constant(value=0)])),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -148,346 +279,676 @@ Module(
                     keywords=[]))],
      type_ignores=[])
 --------------Code after flattening-------
-new_temp0 = -1
-new_temp1 = x + new_temp0
-x = new_temp1
-new_temp2 = positivity_counter + 1
-positivity_counter = new_temp2
-if
+x = 12
 positivity_counter = 0
+while
+new_temp0 = x != 0
+new_temp0
+new_temp1 = -1
+new_temp2 = x + new_temp1
+x = new_temp2
+new_temp3 = positivity_counter + 1
+positivity_counter = new_temp3
+if
+new_temp4 = positivity_counter != 0
+new_temp4
 print(1)
 else
 print(0)
+<ast.Constant object at 0x7f8eaa0042b0>
+<ast.Constant object at 0x7f8eaa004ca0>
+inject_bool(not_equal(project_big(explicate_5),project_big(explicate_6)))
+inject_bool(1)
+inject_bool(1)
+inject_bool(explicate_7!=explicate_8)
 inject_int(-1)
-inject_big(add(project_big(explicate_3),project_big(explicate_4)))
-inject_int(explicate_5+explicate_6)
-<ast.Name object at 0x7f51c6569f60>
-inject_big(add(project_big(explicate_7),project_big(explicate_8)))
-inject_int(explicate_9+explicate_10)
-<ast.Name object at 0x7f51c656a0e0>
-<ast.Constant object at 0x7f51c65070d0>
+inject_big(add(project_big(explicate_9),project_big(explicate_10)))
+inject_int(explicate_11+explicate_12)
+<ast.Name object at 0x7f8eaa006740>
+inject_big(add(project_big(explicate_13),project_big(explicate_14)))
+inject_int(explicate_15+explicate_16)
+<ast.Name object at 0x7f8eaa006bf0>
+inject_bool(not_equal(project_big(explicate_17),project_big(explicate_18)))
+inject_bool(1)
+inject_bool(1)
+inject_bool(explicate_19!=explicate_20)
 
-new_temp0 = inject_int(-1)
-explicate_3 = x
-explicate_4 = new_temp0
-if(is_big(explicate_3)):
-	if(is_big(explicate_4)):
-		new_temp1 = inject_big(add(project_big(explicate_3),project_big(explicate_4)))
-else:
-	if(is_big(explicate_4)):
-		error_pyobj(0)
-	else:
-		if(is_int(explicate_3)):
-			explicate_5 = project_int(explicate_3)
-		else:
-			explicate_5 = project_bool(explicate_3)
-		if(is_int(explicate_4)):
-			explicate_6 = project_int(explicate_4)
-		else:
-			explicate_6 = project_bool(explicate_4)
-		new_temp1 = inject_int(explicate_5+explicate_6)
-x = new_temp1
-explicate_7 = positivity_counter
-explicate_8 = inject_int(1)
-if(is_big(explicate_7)):
-	if(is_big(explicate_8)):
-		new_temp2 = inject_big(add(project_big(explicate_7),project_big(explicate_8)))
-else:
-	if(is_big(explicate_8)):
-		error_pyobj(0)
-	else:
-		if(is_int(explicate_7)):
-			explicate_9 = project_int(explicate_7)
-		else:
-			explicate_9 = project_bool(explicate_7)
-		if(is_int(explicate_8)):
-			explicate_10 = project_int(explicate_8)
-		else:
-			explicate_10 = project_bool(explicate_8)
-		new_temp2 = inject_int(explicate_9+explicate_10)
-positivity_counter = new_temp2
+x = inject_int(12)
 positivity_counter = inject_int(0)
+explicate_5 = x
+explicate_6 = inject_int(0)
+if(is_big(explicate_5)):
+	if(is_big(explicate_6)):
+		new_temp0 = inject_bool(not_equal(project_big(explicate_5),project_big(explicate_6)))
+	else:
+		new_temp0 = inject_bool(1)
+else:
+	if(is_big(explicate_6)):
+		new_temp0 = inject_bool(1)
+	else:
+		if(is_int(explicate_5)):
+			explicate_7 = project_int(explicate_5)
+		else:
+			explicate_7 = project_bool(explicate_5)
+		if(is_int(explicate_6)):
+			explicate_8 = project_int(explicate_6)
+		else:
+			explicate_8 = project_bool(explicate_6)
+		new_temp0 = inject_bool(explicate_7!=explicate_8)
+new_temp1 = inject_int(-1)
+explicate_9 = x
+explicate_10 = new_temp1
+if(is_big(explicate_9)):
+	if(is_big(explicate_10)):
+		new_temp2 = inject_big(add(project_big(explicate_9),project_big(explicate_10)))
+else:
+	if(is_big(explicate_10)):
+		error_pyobj(0)
+	else:
+		if(is_int(explicate_9)):
+			explicate_11 = project_int(explicate_9)
+		else:
+			explicate_11 = project_bool(explicate_9)
+		if(is_int(explicate_10)):
+			explicate_12 = project_int(explicate_10)
+		else:
+			explicate_12 = project_bool(explicate_10)
+		new_temp2 = inject_int(explicate_11+explicate_12)
+x = new_temp2
+explicate_13 = positivity_counter
+explicate_14 = inject_int(1)
+if(is_big(explicate_13)):
+	if(is_big(explicate_14)):
+		new_temp3 = inject_big(add(project_big(explicate_13),project_big(explicate_14)))
+else:
+	if(is_big(explicate_14)):
+		error_pyobj(0)
+	else:
+		if(is_int(explicate_13)):
+			explicate_15 = project_int(explicate_13)
+		else:
+			explicate_15 = project_bool(explicate_13)
+		if(is_int(explicate_14)):
+			explicate_16 = project_int(explicate_14)
+		else:
+			explicate_16 = project_bool(explicate_14)
+		new_temp3 = inject_int(explicate_15+explicate_16)
+positivity_counter = new_temp3
+explicate_17 = positivity_counter
+explicate_18 = inject_int(0)
+if(is_big(explicate_17)):
+	if(is_big(explicate_18)):
+		new_temp4 = inject_bool(not_equal(project_big(explicate_17),project_big(explicate_18)))
+	else:
+		new_temp4 = inject_bool(1)
+else:
+	if(is_big(explicate_18)):
+		new_temp4 = inject_bool(1)
+	else:
+		if(is_int(explicate_17)):
+			explicate_19 = project_int(explicate_17)
+		else:
+			explicate_19 = project_bool(explicate_17)
+		if(is_int(explicate_18)):
+			explicate_20 = project_int(explicate_18)
+		else:
+			explicate_20 = project_bool(explicate_18)
+		new_temp4 = inject_bool(explicate_19!=explicate_20)
 print(inject_int(1))
 print(inject_int(0))
 --------------Explicate code-------
-new_temp0 = inject_int(-1)
-explicate_3 = x
-explicate_4 = new_temp0
-if is_big(explicate_3):
-    if is_big(explicate_4):
-        new_temp1 = inject_big(add(project_big(explicate_3), project_big(explicate_4)))
-elif is_big(explicate_4):
-    error_pyobj(0)
-else:
-    if is_int(explicate_3):
-        explicate_5 = project_int(explicate_3)
-    else:
-        explicate_5 = project_bool(explicate_3)
-    if is_int(explicate_4):
-        explicate_6 = project_int(explicate_4)
-    else:
-        explicate_6 = project_bool(explicate_4)
-    new_temp1 = inject_int(explicate_5 + explicate_6)
-x = new_temp1
-explicate_7 = positivity_counter
-explicate_8 = inject_int(1)
-if is_big(explicate_7):
-    if is_big(explicate_8):
-        new_temp2 = inject_big(add(project_big(explicate_7), project_big(explicate_8)))
-elif is_big(explicate_8):
-    error_pyobj(0)
-else:
-    if is_int(explicate_7):
-        explicate_9 = project_int(explicate_7)
-    else:
-        explicate_9 = project_bool(explicate_7)
-    if is_int(explicate_8):
-        explicate_10 = project_int(explicate_8)
-    else:
-        explicate_10 = project_bool(explicate_8)
-    new_temp2 = inject_int(explicate_9 + explicate_10)
-positivity_counter = new_temp2
+x = inject_int(12)
 positivity_counter = inject_int(0)
+explicate_5 = x
+explicate_6 = inject_int(0)
+if is_big(explicate_5):
+    if is_big(explicate_6):
+        new_temp0 = inject_bool(not_equal(project_big(explicate_5), project_big(explicate_6)))
+    else:
+        new_temp0 = inject_bool(1)
+elif is_big(explicate_6):
+    new_temp0 = inject_bool(1)
+else:
+    if is_int(explicate_5):
+        explicate_7 = project_int(explicate_5)
+    else:
+        explicate_7 = project_bool(explicate_5)
+    if is_int(explicate_6):
+        explicate_8 = project_int(explicate_6)
+    else:
+        explicate_8 = project_bool(explicate_6)
+    new_temp0 = inject_bool(explicate_7 != explicate_8)
+new_temp1 = inject_int(-1)
+explicate_9 = x
+explicate_10 = new_temp1
+if is_big(explicate_9):
+    if is_big(explicate_10):
+        new_temp2 = inject_big(add(project_big(explicate_9), project_big(explicate_10)))
+elif is_big(explicate_10):
+    error_pyobj(0)
+else:
+    if is_int(explicate_9):
+        explicate_11 = project_int(explicate_9)
+    else:
+        explicate_11 = project_bool(explicate_9)
+    if is_int(explicate_10):
+        explicate_12 = project_int(explicate_10)
+    else:
+        explicate_12 = project_bool(explicate_10)
+    new_temp2 = inject_int(explicate_11 + explicate_12)
+x = new_temp2
+explicate_13 = positivity_counter
+explicate_14 = inject_int(1)
+if is_big(explicate_13):
+    if is_big(explicate_14):
+        new_temp3 = inject_big(add(project_big(explicate_13), project_big(explicate_14)))
+elif is_big(explicate_14):
+    error_pyobj(0)
+else:
+    if is_int(explicate_13):
+        explicate_15 = project_int(explicate_13)
+    else:
+        explicate_15 = project_bool(explicate_13)
+    if is_int(explicate_14):
+        explicate_16 = project_int(explicate_14)
+    else:
+        explicate_16 = project_bool(explicate_14)
+    new_temp3 = inject_int(explicate_15 + explicate_16)
+positivity_counter = new_temp3
+explicate_17 = positivity_counter
+explicate_18 = inject_int(0)
+if is_big(explicate_17):
+    if is_big(explicate_18):
+        new_temp4 = inject_bool(not_equal(project_big(explicate_17), project_big(explicate_18)))
+    else:
+        new_temp4 = inject_bool(1)
+elif is_big(explicate_18):
+    new_temp4 = inject_bool(1)
+else:
+    if is_int(explicate_17):
+        explicate_19 = project_int(explicate_17)
+    else:
+        explicate_19 = project_bool(explicate_17)
+    if is_int(explicate_18):
+        explicate_20 = project_int(explicate_18)
+    else:
+        explicate_20 = project_bool(explicate_18)
+    new_temp4 = inject_bool(explicate_19 != explicate_20)
 print(inject_int(1))
 print(inject_int(0))
 
 
 --- explicated flattened python ---
-new_temp11 = -1
-new_temp12 = inject_int(new_temp11)
-new_temp0 = new_temp12
-explicate_3 = x
-explicate_4 = new_temp0
-new_temp13 = is_big(explicate_3)
-if new_temp13:
-    new_temp14 = is_big(explicate_4)
-    if new_temp14:
-        new_temp15 = project_big(explicate_3)
-        new_temp16 = project_big(explicate_4)
-        new_temp17 = add(new_temp15, new_temp16)
-        new_temp18 = inject_big(new_temp17)
-        new_temp1 = new_temp18
-else:
-    new_temp19 = is_big(explicate_4)
-    if new_temp19:
-        error_pyobj(0)
+new_temp21 = inject_int(12)
+x = new_temp21
+new_temp22 = inject_int(0)
+positivity_counter = new_temp22
+explicate_5 = x
+new_temp23 = inject_int(0)
+explicate_6 = new_temp23
+new_temp24 = is_big(explicate_5)
+if new_temp24:
+    new_temp25 = is_big(explicate_6)
+    if new_temp25:
+        new_temp26 = project_big(explicate_5)
+        new_temp27 = project_big(explicate_6)
+        new_temp28 = not_equal(new_temp26, new_temp27)
+        new_temp29 = inject_bool(new_temp28)
+        new_temp0 = new_temp29
     else:
-        new_temp20 = is_int(explicate_3)
-        if new_temp20:
-            new_temp21 = project_int(explicate_3)
-            explicate_5 = new_temp21
-        else:
-            new_temp22 = project_bool(explicate_3)
-            explicate_5 = new_temp22
-        new_temp23 = is_int(explicate_4)
-        if new_temp23:
-            new_temp24 = project_int(explicate_4)
-            explicate_6 = new_temp24
-        else:
-            new_temp25 = project_bool(explicate_4)
-            explicate_6 = new_temp25
-        new_temp26 = explicate_5 + explicate_6
-        new_temp27 = inject_int(new_temp26)
-        new_temp1 = new_temp27
-x = new_temp1
-explicate_7 = positivity_counter
-new_temp28 = inject_int(1)
-explicate_8 = new_temp28
-new_temp29 = is_big(explicate_7)
-if new_temp29:
-    new_temp30 = is_big(explicate_8)
-    if new_temp30:
-        new_temp31 = project_big(explicate_7)
-        new_temp32 = project_big(explicate_8)
-        new_temp33 = add(new_temp31, new_temp32)
-        new_temp34 = inject_big(new_temp33)
-        new_temp2 = new_temp34
+        new_temp30 = inject_bool(1)
+        new_temp0 = new_temp30
 else:
-    new_temp35 = is_big(explicate_8)
-    if new_temp35:
-        error_pyobj(0)
+    new_temp31 = is_big(explicate_6)
+    if new_temp31:
+        new_temp32 = inject_bool(1)
+        new_temp0 = new_temp32
     else:
-        new_temp36 = is_int(explicate_7)
+        new_temp33 = is_int(explicate_5)
+        if new_temp33:
+            new_temp34 = project_int(explicate_5)
+            explicate_7 = new_temp34
+        else:
+            new_temp35 = project_bool(explicate_5)
+            explicate_7 = new_temp35
+        new_temp36 = is_int(explicate_6)
         if new_temp36:
-            new_temp37 = project_int(explicate_7)
-            explicate_9 = new_temp37
+            new_temp37 = project_int(explicate_6)
+            explicate_8 = new_temp37
         else:
-            new_temp38 = project_bool(explicate_7)
-            explicate_9 = new_temp38
-        new_temp39 = is_int(explicate_8)
-        if new_temp39:
-            new_temp40 = project_int(explicate_8)
-            explicate_10 = new_temp40
+            new_temp38 = project_bool(explicate_6)
+            explicate_8 = new_temp38
+        new_temp39 = explicate_7 != explicate_8
+        new_temp40 = new_temp39
+        new_temp41 = inject_bool(new_temp40)
+        new_temp0 = new_temp41
+new_temp42 = -1
+new_temp43 = inject_int(new_temp42)
+new_temp1 = new_temp43
+explicate_9 = x
+explicate_10 = new_temp1
+new_temp44 = is_big(explicate_9)
+if new_temp44:
+    new_temp45 = is_big(explicate_10)
+    if new_temp45:
+        new_temp46 = project_big(explicate_9)
+        new_temp47 = project_big(explicate_10)
+        new_temp48 = add(new_temp46, new_temp47)
+        new_temp49 = inject_big(new_temp48)
+        new_temp2 = new_temp49
+else:
+    new_temp50 = is_big(explicate_10)
+    if new_temp50:
+        error_pyobj(0)
+    else:
+        new_temp51 = is_int(explicate_9)
+        if new_temp51:
+            new_temp52 = project_int(explicate_9)
+            explicate_11 = new_temp52
         else:
-            new_temp41 = project_bool(explicate_8)
-            explicate_10 = new_temp41
-        new_temp42 = explicate_9 + explicate_10
-        new_temp43 = inject_int(new_temp42)
-        new_temp2 = new_temp43
-positivity_counter = new_temp2
-new_temp44 = inject_int(0)
-positivity_counter = new_temp44
-new_temp45 = inject_int(1)
-print(new_temp45)
-new_temp46 = inject_int(0)
-print(new_temp46)
+            new_temp53 = project_bool(explicate_9)
+            explicate_11 = new_temp53
+        new_temp54 = is_int(explicate_10)
+        if new_temp54:
+            new_temp55 = project_int(explicate_10)
+            explicate_12 = new_temp55
+        else:
+            new_temp56 = project_bool(explicate_10)
+            explicate_12 = new_temp56
+        new_temp57 = explicate_11 + explicate_12
+        new_temp58 = inject_int(new_temp57)
+        new_temp2 = new_temp58
+x = new_temp2
+explicate_13 = positivity_counter
+new_temp59 = inject_int(1)
+explicate_14 = new_temp59
+new_temp60 = is_big(explicate_13)
+if new_temp60:
+    new_temp61 = is_big(explicate_14)
+    if new_temp61:
+        new_temp62 = project_big(explicate_13)
+        new_temp63 = project_big(explicate_14)
+        new_temp64 = add(new_temp62, new_temp63)
+        new_temp65 = inject_big(new_temp64)
+        new_temp3 = new_temp65
+else:
+    new_temp66 = is_big(explicate_14)
+    if new_temp66:
+        error_pyobj(0)
+    else:
+        new_temp67 = is_int(explicate_13)
+        if new_temp67:
+            new_temp68 = project_int(explicate_13)
+            explicate_15 = new_temp68
+        else:
+            new_temp69 = project_bool(explicate_13)
+            explicate_15 = new_temp69
+        new_temp70 = is_int(explicate_14)
+        if new_temp70:
+            new_temp71 = project_int(explicate_14)
+            explicate_16 = new_temp71
+        else:
+            new_temp72 = project_bool(explicate_14)
+            explicate_16 = new_temp72
+        new_temp73 = explicate_15 + explicate_16
+        new_temp74 = inject_int(new_temp73)
+        new_temp3 = new_temp74
+positivity_counter = new_temp3
+explicate_17 = positivity_counter
+new_temp75 = inject_int(0)
+explicate_18 = new_temp75
+new_temp76 = is_big(explicate_17)
+if new_temp76:
+    new_temp77 = is_big(explicate_18)
+    if new_temp77:
+        new_temp78 = project_big(explicate_17)
+        new_temp79 = project_big(explicate_18)
+        new_temp80 = not_equal(new_temp78, new_temp79)
+        new_temp81 = inject_bool(new_temp80)
+        new_temp4 = new_temp81
+    else:
+        new_temp82 = inject_bool(1)
+        new_temp4 = new_temp82
+else:
+    new_temp83 = is_big(explicate_18)
+    if new_temp83:
+        new_temp84 = inject_bool(1)
+        new_temp4 = new_temp84
+    else:
+        new_temp85 = is_int(explicate_17)
+        if new_temp85:
+            new_temp86 = project_int(explicate_17)
+            explicate_19 = new_temp86
+        else:
+            new_temp87 = project_bool(explicate_17)
+            explicate_19 = new_temp87
+        new_temp88 = is_int(explicate_18)
+        if new_temp88:
+            new_temp89 = project_int(explicate_18)
+            explicate_20 = new_temp89
+        else:
+            new_temp90 = project_bool(explicate_18)
+            explicate_20 = new_temp90
+        new_temp91 = explicate_19 != explicate_20
+        new_temp92 = new_temp91
+        new_temp93 = inject_bool(new_temp92)
+        new_temp4 = new_temp93
+new_temp94 = inject_int(1)
+print(new_temp94)
+new_temp95 = inject_int(0)
+print(new_temp95)
 
 
 --- x86 IR ---
-movl  1 ,  new_temp11
-negl  new_temp11
-call  inject_int new_temp11
-movl  eax ,  new_temp12
-movl  new_temp12 ,  new_temp0
-movl  x ,  explicate_3
-movl  new_temp0 ,  explicate_4
-call  is_big explicate_3
-movl  eax ,  new_temp13
+call  inject_int 12
+movl  eax ,  new_temp21
+movl  new_temp21 ,  x
+call  inject_int 0
+movl  eax ,  new_temp22
+movl  new_temp22 ,  positivity_counter
+movl  x ,  explicate_5
+call  inject_int 0
+movl  eax ,  new_temp23
+movl  new_temp23 ,  explicate_6
+call  is_big explicate_5
+movl  eax ,  new_temp24
 if1
-cmp 0, new_temp13
+cmp 0, new_temp24
 je else1
 then1
-call  is_big explicate_4
-movl  eax ,  new_temp14
+call  is_big explicate_6
+movl  eax ,  new_temp25
 if2
-cmp 0, new_temp14
-je end if2
+cmp 0, new_temp25
+je else2
 then2
-call  project_big explicate_3
-movl  eax ,  new_temp15
-call  project_big explicate_4
-movl  eax ,  new_temp16
-call  add new_temp15,new_temp16
-movl  eax ,  new_temp17
-call  inject_big new_temp17
-movl  eax ,  new_temp18
-movl  new_temp18 ,  new_temp1
+call  project_big explicate_5
+movl  eax ,  new_temp26
+call  project_big explicate_6
+movl  eax ,  new_temp27
+call  not_equal new_temp26,new_temp27
+movl  eax ,  new_temp28
+call  inject_bool new_temp28
+movl  eax ,  new_temp29
+movl  new_temp29 ,  new_temp0
+else2
+call  inject_bool 1
+movl  eax ,  new_temp30
+movl  new_temp30 ,  new_temp0
 end if2
 else1
-call  is_big explicate_4
-movl  eax ,  new_temp19
-if2
-cmp 0, new_temp19
-je else2
-then2
-call  error_pyobj 0
-else2
-call  is_int explicate_3
-movl  eax ,  new_temp20
-if3
-cmp 0, new_temp20
-je else3
-then3
-call  project_int explicate_3
-movl  eax ,  new_temp21
-movl  new_temp21 ,  explicate_5
-else3
-call  project_bool explicate_3
-movl  eax ,  new_temp22
-movl  new_temp22 ,  explicate_5
-end if3
-call  is_int explicate_4
-movl  eax ,  new_temp23
-if4
-cmp 0, new_temp23
-je else4
-then4
-call  project_int explicate_4
-movl  eax ,  new_temp24
-movl  new_temp24 ,  explicate_6
-else4
-call  project_bool explicate_4
-movl  eax ,  new_temp25
-movl  new_temp25 ,  explicate_6
-end if4
-movl  explicate_5 ,  new_temp26
-addl  explicate_6 ,  new_temp26
-call  inject_int new_temp26
-movl  eax ,  new_temp27
-movl  new_temp27 ,  new_temp1
-end if2
-end if1
-movl  new_temp1 ,  x
-movl  positivity_counter ,  explicate_7
-call  inject_int 1
-movl  eax ,  new_temp28
-movl  new_temp28 ,  explicate_8
-call  is_big explicate_7
-movl  eax ,  new_temp29
-if2
-cmp 0, new_temp29
-je else2
-then2
-call  is_big explicate_8
-movl  eax ,  new_temp30
-if3
-cmp 0, new_temp30
-je end if3
-then3
-call  project_big explicate_7
+call  is_big explicate_6
 movl  eax ,  new_temp31
-call  project_big explicate_8
+if2
+cmp 0, new_temp31
+je else2
+then2
+call  inject_bool 1
 movl  eax ,  new_temp32
-call  add new_temp31,new_temp32
-movl  eax ,  new_temp33
-call  inject_big new_temp33
-movl  eax ,  new_temp34
-movl  new_temp34 ,  new_temp2
-end if3
+movl  new_temp32 ,  new_temp0
 else2
-call  is_big explicate_8
-movl  eax ,  new_temp35
+call  is_int explicate_5
+movl  eax ,  new_temp33
 if3
-cmp 0, new_temp35
+cmp 0, new_temp33
 je else3
 then3
-call  error_pyobj 0
+call  project_int explicate_5
+movl  eax ,  new_temp34
+movl  new_temp34 ,  explicate_7
 else3
-call  is_int explicate_7
+call  project_bool explicate_5
+movl  eax ,  new_temp35
+movl  new_temp35 ,  explicate_7
+end if3
+call  is_int explicate_6
 movl  eax ,  new_temp36
 if4
 cmp 0, new_temp36
 je else4
 then4
-call  project_int explicate_7
+call  project_int explicate_6
 movl  eax ,  new_temp37
-movl  new_temp37 ,  explicate_9
+movl  new_temp37 ,  explicate_8
 else4
-call  project_bool explicate_7
+call  project_bool explicate_6
 movl  eax ,  new_temp38
-movl  new_temp38 ,  explicate_9
+movl  new_temp38 ,  explicate_8
 end if4
-call  is_int explicate_8
-movl  eax ,  new_temp39
-if5
-cmp 0, new_temp39
-je else5
-then5
-call  project_int explicate_8
-movl  eax ,  new_temp40
-movl  new_temp40 ,  explicate_10
-else5
-call  project_bool explicate_8
+int_compare  explicate_7 NotEq explicate_8 ,  new_temp39
+movl  new_temp39 ,  new_temp40
+call  inject_bool new_temp40
 movl  eax ,  new_temp41
-movl  new_temp41 ,  explicate_10
-end if5
-movl  explicate_9 ,  new_temp42
-addl  explicate_10 ,  new_temp42
+movl  new_temp41 ,  new_temp0
+end if2
+end if1
+movl  1 ,  new_temp42
+negl  new_temp42
 call  inject_int new_temp42
 movl  eax ,  new_temp43
-movl  new_temp43 ,  new_temp2
+movl  new_temp43 ,  new_temp1
+movl  x ,  explicate_9
+movl  new_temp1 ,  explicate_10
+call  is_big explicate_9
+movl  eax ,  new_temp44
+if2
+cmp 0, new_temp44
+je else2
+then2
+call  is_big explicate_10
+movl  eax ,  new_temp45
+if3
+cmp 0, new_temp45
+je end if3
+then3
+call  project_big explicate_9
+movl  eax ,  new_temp46
+call  project_big explicate_10
+movl  eax ,  new_temp47
+call  add new_temp46,new_temp47
+movl  eax ,  new_temp48
+call  inject_big new_temp48
+movl  eax ,  new_temp49
+movl  new_temp49 ,  new_temp2
+end if3
+else2
+call  is_big explicate_10
+movl  eax ,  new_temp50
+if3
+cmp 0, new_temp50
+je else3
+then3
+call  error_pyobj 0
+else3
+call  is_int explicate_9
+movl  eax ,  new_temp51
+if4
+cmp 0, new_temp51
+je else4
+then4
+call  project_int explicate_9
+movl  eax ,  new_temp52
+movl  new_temp52 ,  explicate_11
+else4
+call  project_bool explicate_9
+movl  eax ,  new_temp53
+movl  new_temp53 ,  explicate_11
+end if4
+call  is_int explicate_10
+movl  eax ,  new_temp54
+if5
+cmp 0, new_temp54
+je else5
+then5
+call  project_int explicate_10
+movl  eax ,  new_temp55
+movl  new_temp55 ,  explicate_12
+else5
+call  project_bool explicate_10
+movl  eax ,  new_temp56
+movl  new_temp56 ,  explicate_12
+end if5
+movl  explicate_11 ,  new_temp57
+addl  explicate_12 ,  new_temp57
+call  inject_int new_temp57
+movl  eax ,  new_temp58
+movl  new_temp58 ,  new_temp2
 end if3
 end if2
-movl  new_temp2 ,  positivity_counter
-call  inject_int 0
-movl  eax ,  new_temp44
-movl  new_temp44 ,  positivity_counter
+movl  new_temp2 ,  x
+movl  positivity_counter ,  explicate_13
 call  inject_int 1
-movl  eax ,  new_temp45
-call  print new_temp45
+movl  eax ,  new_temp59
+movl  new_temp59 ,  explicate_14
+call  is_big explicate_13
+movl  eax ,  new_temp60
+if3
+cmp 0, new_temp60
+je else3
+then3
+call  is_big explicate_14
+movl  eax ,  new_temp61
+if4
+cmp 0, new_temp61
+je end if4
+then4
+call  project_big explicate_13
+movl  eax ,  new_temp62
+call  project_big explicate_14
+movl  eax ,  new_temp63
+call  add new_temp62,new_temp63
+movl  eax ,  new_temp64
+call  inject_big new_temp64
+movl  eax ,  new_temp65
+movl  new_temp65 ,  new_temp3
+end if4
+else3
+call  is_big explicate_14
+movl  eax ,  new_temp66
+if4
+cmp 0, new_temp66
+je else4
+then4
+call  error_pyobj 0
+else4
+call  is_int explicate_13
+movl  eax ,  new_temp67
+if5
+cmp 0, new_temp67
+je else5
+then5
+call  project_int explicate_13
+movl  eax ,  new_temp68
+movl  new_temp68 ,  explicate_15
+else5
+call  project_bool explicate_13
+movl  eax ,  new_temp69
+movl  new_temp69 ,  explicate_15
+end if5
+call  is_int explicate_14
+movl  eax ,  new_temp70
+if6
+cmp 0, new_temp70
+je else6
+then6
+call  project_int explicate_14
+movl  eax ,  new_temp71
+movl  new_temp71 ,  explicate_16
+else6
+call  project_bool explicate_14
+movl  eax ,  new_temp72
+movl  new_temp72 ,  explicate_16
+end if6
+movl  explicate_15 ,  new_temp73
+addl  explicate_16 ,  new_temp73
+call  inject_int new_temp73
+movl  eax ,  new_temp74
+movl  new_temp74 ,  new_temp3
+end if4
+end if3
+movl  new_temp3 ,  positivity_counter
+movl  positivity_counter ,  explicate_17
 call  inject_int 0
-movl  eax ,  new_temp46
-call  print new_temp46
+movl  eax ,  new_temp75
+movl  new_temp75 ,  explicate_18
+call  is_big explicate_17
+movl  eax ,  new_temp76
+if4
+cmp 0, new_temp76
+je else4
+then4
+call  is_big explicate_18
+movl  eax ,  new_temp77
+if5
+cmp 0, new_temp77
+je else5
+then5
+call  project_big explicate_17
+movl  eax ,  new_temp78
+call  project_big explicate_18
+movl  eax ,  new_temp79
+call  not_equal new_temp78,new_temp79
+movl  eax ,  new_temp80
+call  inject_bool new_temp80
+movl  eax ,  new_temp81
+movl  new_temp81 ,  new_temp4
+else5
+call  inject_bool 1
+movl  eax ,  new_temp82
+movl  new_temp82 ,  new_temp4
+end if5
+else4
+call  is_big explicate_18
+movl  eax ,  new_temp83
+if5
+cmp 0, new_temp83
+je else5
+then5
+call  inject_bool 1
+movl  eax ,  new_temp84
+movl  new_temp84 ,  new_temp4
+else5
+call  is_int explicate_17
+movl  eax ,  new_temp85
+if6
+cmp 0, new_temp85
+je else6
+then6
+call  project_int explicate_17
+movl  eax ,  new_temp86
+movl  new_temp86 ,  explicate_19
+else6
+call  project_bool explicate_17
+movl  eax ,  new_temp87
+movl  new_temp87 ,  explicate_19
+end if6
+call  is_int explicate_18
+movl  eax ,  new_temp88
+if7
+cmp 0, new_temp88
+je else7
+then7
+call  project_int explicate_18
+movl  eax ,  new_temp89
+movl  new_temp89 ,  explicate_20
+else7
+call  project_bool explicate_18
+movl  eax ,  new_temp90
+movl  new_temp90 ,  explicate_20
+end if7
+int_compare  explicate_19 NotEq explicate_20 ,  new_temp91
+movl  new_temp91 ,  new_temp92
+call  inject_bool new_temp92
+movl  eax ,  new_temp93
+movl  new_temp93 ,  new_temp4
+end if5
+end if4
+call  inject_int 1
+movl  eax ,  new_temp94
+call  print new_temp94
+call  inject_int 0
+movl  eax ,  new_temp95
+call  print new_temp95
 
 
 --- Control Flow Graph ---
@@ -502,14 +963,14 @@ call  print new_temp46
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp2': {'new_temp30', 'explicate_4', 'new_temp19', 'explicate_3', 'explicate_5', 'new_temp1', 'explicate_6', 'new_temp25', 'edx', 'new_temp20', 'eax', 'new_temp22', 'new_temp14', 'new_temp23', 'new_temp28', 'explicate_7', 'new_temp21', 'new_temp18', 'new_temp24', 'new_temp13', 'new_temp0', 'new_temp27', 'ecx', 'new_temp26', 'new_temp17', 'new_temp12', 'new_temp11', 'new_temp29', 'x', 'new_temp15', 'explicate_8', 'new_temp35', 'new_temp16'}, 'positivity_counter': {'new_temp13', 'explicate_4', 'new_temp19', 'explicate_3', 'explicate_5', 'new_temp1', 'explicate_6', 'new_temp25', 'new_temp0', 'new_temp27', 'ecx', 'new_temp26', 'edx', 'new_temp17', 'new_temp12', 'new_temp20', 'new_temp11', 'x', 'eax', 'new_temp15', 'new_temp21', 'new_temp22', 'new_temp14', 'new_temp23', 'new_temp16', 'new_temp18', 'new_temp24'}, 'new_temp1': {'new_temp11', 'new_temp13', 'explicate_4', 'new_temp19', 'eax', 'explicate_3', 'new_temp14', 'new_temp2', 'positivity_counter', 'new_temp0', 'ecx', 'edx', 'new_temp12'}, 'x': {'new_temp2', 'new_temp11', 'positivity_counter', 'new_temp0', 'eax', 'ecx', 'edx', 'new_temp12'}, 'new_temp11': {'x', 'new_temp1', 'new_temp2', 'positivity_counter'}, 'eax': {'explicate_4', 'x', 'explicate_3', 'explicate_9', 'explicate_5', 'new_temp15', 'new_temp1', 'explicate_8', 'new_temp2', 'positivity_counter', 'explicate_7', 'new_temp31'}, 'ecx': {'explicate_4', 'x', 'explicate_3', 'explicate_9', 'explicate_5', 'new_temp15', 'new_temp1', 'explicate_8', 'new_temp2', 'positivity_counter', 'explicate_7', 'new_temp31'}, 'edx': {'explicate_4', 'x', 'explicate_3', 'explicate_9', 'explicate_5', 'new_temp15', 'new_temp1', 'explicate_8', 'new_temp2', 'positivity_counter', 'explicate_7', 'new_temp31'}, 'new_temp12': {'new_temp2', 'positivity_counter', 'new_temp1', 'x'}, 'new_temp0': {'x', 'explicate_3', 'new_temp1', 'new_temp2', 'positivity_counter'}, 'explicate_3': {'new_temp13', 'explicate_4', 'new_temp19', 'eax', 'new_temp1', 'new_temp14', 'new_temp2', 'positivity_counter', 'new_temp0', 'ecx', 'edx', 'new_temp20'}, 'explicate_4': {'new_temp13', 'new_temp19', 'explicate_3', 'eax', 'explicate_5', 'new_temp15', 'new_temp1', 'new_temp21', 'new_temp22', 'new_temp14', 'new_temp23', 'new_temp2', 'positivity_counter', 'ecx', 'edx', 'new_temp20'}, 'new_temp13': {'new_temp2', 'positivity_counter', 'explicate_4', 'explicate_3', 'new_temp1'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp14': {'new_temp2', 'positivity_counter', 'explicate_4', 'explicate_3', 'new_temp1'}, 'new_temp19': {'new_temp2', 'positivity_counter', 'explicate_4', 'explicate_3', 'new_temp1'}, 'new_temp15': {'new_temp2', 'positivity_counter', 'explicate_4', 'eax', 'ecx', 'edx', 'new_temp16'}, 'new_temp16': {'new_temp2', 'positivity_counter', 'new_temp15'}, 'new_temp17': {'new_temp2', 'positivity_counter'}, 'new_temp18': {'new_temp2', 'positivity_counter'}, 'explicate_7': {'new_temp30', 'new_temp36', 'new_temp29', 'eax', 'explicate_8', 'new_temp2', 'new_temp28', 'new_temp35', 'ecx', 'edx'}, 'new_temp28': {'new_temp2', 'explicate_7'}, 'explicate_8': {'new_temp30', 'new_temp36', 'new_temp29', 'explicate_9', 'eax', 'new_temp39', 'new_temp2', 'new_temp35', 'new_temp37', 'explicate_7', 'new_temp31', 'ecx', 'edx', 'new_temp38'}, 'new_temp29': {'explicate_8', 'new_temp2', 'explicate_7'}, 'new_temp20': {'new_temp2', 'positivity_counter', 'explicate_4', 'explicate_3'}, 'new_temp30': {'explicate_8', 'new_temp2', 'explicate_7'}, 'new_temp35': {'explicate_8', 'new_temp2', 'explicate_7'}, 'new_temp21': {'new_temp2', 'positivity_counter', 'explicate_4'}, 'explicate_5': {'explicate_4', 'eax', 'explicate_6', 'new_temp23', 'new_temp2', 'positivity_counter', 'new_temp25', 'ecx', 'edx', 'new_temp24'}, 'new_temp22': {'new_temp2', 'positivity_counter', 'explicate_4'}, 'new_temp31': {'eax', 'explicate_8', 'new_temp32', 'ecx', 'edx'}, 'new_temp32': {'new_temp31'}, 'new_temp33': set(), 'new_temp34': set(), 'new_temp44': set(), 'new_temp45': set(), 'new_temp46': set(), 'new_temp36': {'explicate_8', 'explicate_7'}, 'new_temp23': {'explicate_5', 'new_temp2', 'positivity_counter', 'explicate_4'}, 'new_temp37': {'explicate_8'}, 'explicate_9': {'eax', 'new_temp41', 'explicate_8', 'new_temp39', 'explicate_10', 'new_temp40', 'ecx', 'edx'}, 'new_temp38': {'explicate_8'}, 'new_temp24': {'explicate_5', 'new_temp2', 'positivity_counter'}, 'explicate_6': {'new_temp2', 'positivity_counter', 'explicate_5', 'new_temp26'}, 'new_temp25': {'explicate_5', 'new_temp2', 'positivity_counter'}, 'new_temp39': {'explicate_8', 'explicate_9'}, 'new_temp26': {'new_temp2', 'positivity_counter', 'explicate_6'}, 'new_temp27': {'new_temp2', 'positivity_counter'}, 'new_temp40': {'explicate_9'}, 'explicate_10': {'new_temp42', 'explicate_9'}, 'new_temp41': {'explicate_9'}, 'new_temp42': {'explicate_10'}, 'new_temp43': set()}
+Interference Graph:  {'new_temp2': {'new_temp37', 'new_temp39', 'new_temp45', 'new_temp3', 'ecx', 'new_temp40', 'new_temp22', 'new_temp31', 'new_temp44', 'new_temp33', 'explicate_9', 'new_temp50', 'new_temp27', 'explicate_6', 'new_temp35', 'new_temp34', 'edx', 'explicate_5', 'new_temp1', 'positivity_counter', 'new_temp38', 'new_temp32', 'explicate_8', 'eax', 'new_temp28', 'new_temp29', 'new_temp0', 'new_temp43', 'explicate_10', 'new_temp24', 'new_temp21', 'new_temp25', 'x', 'new_temp23', 'new_temp41', 'explicate_7', 'new_temp36', 'new_temp30', 'new_temp26', 'new_temp42'}, 'eax': {'new_temp2', 'new_temp39', 'new_temp3', 'new_temp78', 'explicate_11', 'new_temp46', 'explicate_9', 'explicate_10', 'explicate_14', 'new_temp62', 'x', 'explicate_6', 'explicate_19', 'new_temp91', 'explicate_7', 'explicate_15', 'explicate_13', 'new_temp26', 'explicate_5', 'positivity_counter', 'explicate_18', 'explicate_17'}, 'ecx': {'new_temp2', 'new_temp3', 'new_temp78', 'explicate_9', 'explicate_14', 'explicate_19', 'explicate_6', 'explicate_13', 'explicate_5', 'positivity_counter', 'explicate_11', 'new_temp46', 'explicate_10', 'new_temp62', 'x', 'explicate_7', 'explicate_15', 'new_temp26', 'explicate_18', 'explicate_17'}, 'edx': {'new_temp2', 'new_temp3', 'new_temp78', 'explicate_9', 'explicate_14', 'explicate_19', 'explicate_6', 'explicate_13', 'explicate_5', 'positivity_counter', 'explicate_11', 'new_temp46', 'explicate_10', 'new_temp62', 'x', 'explicate_7', 'explicate_15', 'new_temp26', 'explicate_18', 'explicate_17'}, 'new_temp3': {'new_temp59', 'new_temp2', 'new_temp37', 'new_temp39', 'new_temp45', 'new_temp47', 'ecx', 'new_temp40', 'new_temp22', 'new_temp31', 'new_temp44', 'new_temp55', 'new_temp33', 'explicate_9', 'new_temp50', 'new_temp27', 'explicate_14', 'explicate_6', 'new_temp35', 'new_temp34', 'new_temp49', 'explicate_12', 'explicate_13', 'new_temp56', 'edx', 'explicate_5', 'new_temp1', 'positivity_counter', 'new_temp38', 'new_temp32', 'new_temp52', 'explicate_8', 'new_temp48', 'new_temp60', 'eax', 'new_temp28', 'new_temp61', 'new_temp29', 'new_temp0', 'explicate_11', 'new_temp43', 'new_temp46', 'explicate_10', 'new_temp24', 'new_temp54', 'new_temp21', 'new_temp25', 'x', 'new_temp23', 'new_temp66', 'new_temp41', 'explicate_7', 'new_temp57', 'new_temp36', 'new_temp51', 'new_temp30', 'new_temp26', 'new_temp53', 'new_temp42', 'new_temp58'}, 'new_temp21': {'new_temp2', 'new_temp3'}, 'x': {'new_temp2', 'new_temp37', 'new_temp39', 'new_temp3', 'new_temp40', 'ecx', 'new_temp22', 'new_temp31', 'new_temp33', 'new_temp27', 'explicate_6', 'new_temp35', 'new_temp34', 'edx', 'new_temp1', 'positivity_counter', 'new_temp38', 'new_temp32', 'explicate_8', 'eax', 'new_temp28', 'new_temp29', 'new_temp0', 'new_temp43', 'new_temp24', 'new_temp25', 'new_temp23', 'new_temp41', 'explicate_7', 'new_temp36', 'new_temp30', 'new_temp26', 'new_temp42'}, 'new_temp22': {'new_temp2', 'x', 'new_temp3'}, 'positivity_counter': {'new_temp2', 'new_temp37', 'new_temp39', 'new_temp3', 'new_temp45', 'ecx', 'new_temp47', 'new_temp40', 'new_temp31', 'new_temp44', 'new_temp55', 'new_temp33', 'explicate_9', 'new_temp50', 'new_temp27', 'explicate_6', 'new_temp35', 'new_temp34', 'new_temp49', 'explicate_12', 'new_temp56', 'edx', 'explicate_5', 'new_temp1', 'new_temp38', 'new_temp32', 'new_temp52', 'explicate_8', 'new_temp48', 'eax', 'new_temp28', 'new_temp29', 'new_temp0', 'explicate_11', 'new_temp43', 'new_temp46', 'explicate_10', 'new_temp24', 'new_temp54', 'new_temp25', 'x', 'new_temp23', 'new_temp41', 'explicate_7', 'new_temp57', 'new_temp36', 'new_temp51', 'new_temp30', 'new_temp26', 'new_temp53', 'new_temp42', 'new_temp58'}, 'explicate_5': {'new_temp2', 'new_temp25', 'explicate_6', 'new_temp23', 'new_temp3', 'ecx', 'new_temp33', 'new_temp31', 'eax', 'edx', 'positivity_counter', 'new_temp24'}, 'new_temp23': {'new_temp2', 'x', 'new_temp3', 'explicate_5', 'positivity_counter'}, 'explicate_6': {'new_temp2', 'new_temp3', 'ecx', 'new_temp31', 'eax', 'new_temp33', 'new_temp24', 'new_temp25', 'x', 'new_temp35', 'new_temp34', 'explicate_7', 'new_temp36', 'edx', 'new_temp26', 'explicate_5', 'positivity_counter'}, 'new_temp24': {'new_temp2', 'x', 'explicate_6', 'new_temp3', 'explicate_5', 'positivity_counter'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp25': {'new_temp2', 'x', 'explicate_6', 'new_temp3', 'explicate_5', 'positivity_counter'}, 'new_temp31': {'new_temp2', 'x', 'explicate_6', 'new_temp3', 'explicate_5', 'positivity_counter'}, 'new_temp26': {'new_temp2', 'new_temp3', 'ecx', 'eax', 'new_temp27', 'explicate_6', 'x', 'edx', 'positivity_counter'}, 'new_temp27': {'new_temp2', 'x', 'new_temp26', 'new_temp3', 'positivity_counter'}, 'new_temp28': {'positivity_counter', 'new_temp2', 'x', 'new_temp3'}, 'new_temp29': {'positivity_counter', 'new_temp2', 'x', 'new_temp3'}, 'new_temp0': {'new_temp2', 'x', 'new_temp3', 'positivity_counter'}, 'new_temp30': {'positivity_counter', 'new_temp2', 'x', 'new_temp3'}, 'new_temp32': {'positivity_counter', 'new_temp2', 'x', 'new_temp3'}, 'new_temp33': {'new_temp2', 'x', 'explicate_6', 'new_temp3', 'explicate_5', 'positivity_counter'}, 'new_temp42': {'new_temp2', 'x', 'new_temp3', 'positivity_counter'}, 'new_temp43': {'positivity_counter', 'new_temp2', 'x', 'new_temp3'}, 'new_temp1': {'new_temp2', 'x', 'new_temp3', 'positivity_counter', 'explicate_9'}, 'explicate_9': {'new_temp2', 'new_temp3', 'new_temp45', 'ecx', 'new_temp44', 'eax', 'new_temp50', 'new_temp51', 'edx', 'new_temp1', 'positivity_counter', 'explicate_10'}, 'explicate_10': {'new_temp52', 'new_temp2', 'new_temp3', 'new_temp45', 'ecx', 'new_temp44', 'eax', 'new_temp51', 'new_temp53', 'edx', 'explicate_11', 'positivity_counter', 'new_temp46', 'explicate_9', 'new_temp50', 'new_temp54'}, 'new_temp44': {'new_temp2', 'new_temp3', 'positivity_counter', 'explicate_9', 'explicate_10'}, 'new_temp34': {'new_temp2', 'x', 'explicate_6', 'new_temp3', 'positivity_counter'}, 'explicate_7': {'new_temp2', 'x', 'explicate_6', 'new_temp3', 'new_temp37', 'ecx', 'explicate_8', 'new_temp36', 'eax', 'edx', 'positivity_counter', 'new_temp38'}, 'new_temp35': {'new_temp2', 'x', 'explicate_6', 'new_temp3', 'positivity_counter'}, 'new_temp45': {'new_temp2', 'new_temp3', 'positivity_counter', 'explicate_9', 'explicate_10'}, 'new_temp50': {'new_temp2', 'new_temp3', 'positivity_counter', 'explicate_9', 'explicate_10'}, 'new_temp36': {'new_temp2', 'x', 'explicate_6', 'new_temp3', 'positivity_counter', 'explicate_7'}, 'new_temp46': {'edx', 'ecx', 'new_temp3', 'new_temp47', 'positivity_counter', 'explicate_10', 'eax'}, 'new_temp47': {'positivity_counter', 'new_temp46', 'new_temp3'}, 'new_temp48': {'positivity_counter', 'new_temp3'}, 'new_temp49': {'positivity_counter', 'new_temp3'}, 'explicate_13': {'new_temp59', 'explicate_14', 'new_temp66', 'new_temp3', 'ecx', 'new_temp60', 'new_temp67', 'eax', 'edx', 'new_temp61'}, 'new_temp59': {'explicate_13', 'new_temp3'}, 'explicate_14': {'new_temp62', 'new_temp66', 'new_temp3', 'new_temp69', 'ecx', 'new_temp60', 'new_temp67', 'eax', 'new_temp68', 'explicate_13', 'explicate_15', 'edx', 'new_temp61', 'new_temp70'}, 'new_temp60': {'explicate_13', 'explicate_14', 'new_temp3'}, 'new_temp51': {'positivity_counter', 'explicate_9', 'explicate_10', 'new_temp3'}, 'new_temp37': {'new_temp2', 'x', 'new_temp3', 'positivity_counter', 'explicate_7'}, 'explicate_8': {'new_temp2', 'x', 'new_temp3', 'explicate_7', 'positivity_counter'}, 'new_temp38': {'new_temp2', 'x', 'new_temp3', 'positivity_counter', 'explicate_7'}, 'new_temp61': {'explicate_13', 'explicate_14', 'new_temp3'}, 'new_temp66': {'explicate_13', 'explicate_14', 'new_temp3'}, 'new_temp52': {'positivity_counter', 'explicate_10', 'new_temp3'}, 'explicate_11': {'new_temp3', 'ecx', 'explicate_12', 'eax', 'new_temp56', 'new_temp55', 'edx', 'positivity_counter', 'explicate_10', 'new_temp54'}, 'new_temp53': {'positivity_counter', 'explicate_10', 'new_temp3'}, 'new_temp39': {'new_temp2', 'x', 'new_temp3', 'eax', 'positivity_counter'}, 'new_temp40': {'positivity_counter', 'new_temp2', 'x', 'new_temp3'}, 'new_temp41': {'positivity_counter', 'new_temp2', 'x', 'new_temp3'}, 'new_temp62': {'new_temp63', 'explicate_14', 'ecx', 'eax', 'edx'}, 'new_temp63': {'new_temp62'}, 'new_temp64': set(), 'new_temp65': set(), 'explicate_17': {'new_temp75', 'ecx', 'new_temp76', 'eax', 'edx', 'new_temp85', 'new_temp83', 'explicate_18', 'new_temp77'}, 'new_temp75': {'explicate_17'}, 'explicate_18': {'new_temp88', 'explicate_19', 'ecx', 'new_temp76', 'eax', 'edx', 'new_temp78', 'new_temp85', 'new_temp83', 'new_temp86', 'new_temp87', 'explicate_17', 'new_temp77'}, 'new_temp76': {'explicate_18', 'explicate_17'}, 'new_temp67': {'explicate_13', 'explicate_14'}, 'new_temp54': {'positivity_counter', 'explicate_10', 'explicate_11', 'new_temp3'}, 'new_temp77': {'explicate_18', 'explicate_17'}, 'new_temp83': {'explicate_18', 'explicate_17'}, 'new_temp68': {'explicate_14'}, 'explicate_15': {'explicate_14', 'ecx', 'eax', 'new_temp72', 'edx', 'new_temp70', 'explicate_16', 'new_temp71'}, 'new_temp69': {'explicate_14'}, 'new_temp55': {'positivity_counter', 'explicate_11', 'new_temp3'}, 'explicate_12': {'explicate_11', 'new_temp3', 'positivity_counter', 'new_temp57'}, 'new_temp56': {'positivity_counter', 'explicate_11', 'new_temp3'}, 'new_temp78': {'new_temp79', 'ecx', 'eax', 'edx', 'explicate_18'}, 'new_temp79': {'new_temp78'}, 'new_temp80': set(), 'new_temp81': set(), 'new_temp4': set(), 'new_temp82': set(), 'new_temp84': set(), 'new_temp85': {'explicate_18', 'explicate_17'}, 'new_temp70': {'explicate_14', 'explicate_15'}, 'new_temp57': {'new_temp3', 'positivity_counter', 'explicate_12'}, 'new_temp58': {'positivity_counter', 'new_temp3'}, 'new_temp94': set(), 'new_temp95': set(), 'new_temp86': {'explicate_18'}, 'explicate_19': {'new_temp88', 'ecx', 'eax', 'edx', 'new_temp89', 'explicate_20', 'new_temp90', 'explicate_18'}, 'new_temp87': {'explicate_18'}, 'new_temp71': {'explicate_15'}, 'explicate_16': {'new_temp73', 'explicate_15'}, 'new_temp72': {'explicate_15'}, 'new_temp88': {'explicate_19', 'explicate_18'}, 'new_temp73': {'explicate_16'}, 'new_temp74': set(), 'new_temp89': {'explicate_19'}, 'explicate_20': {'explicate_19'}, 'new_temp90': {'explicate_19'}, 'new_temp91': {'eax'}, 'new_temp92': set(), 'new_temp93': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp31': 4, 'explicate_8': 5, 'explicate_9': 4, 'new_temp2': 4, 'explicate_7': 6, 'new_temp15': 5, 'explicate_4': 6, 'positivity_counter': 4, 'new_temp1': 5, 'explicate_3': 7, 'explicate_5': 5, 'x': 5, 'new_temp29': 1, 'new_temp35': 1, 'new_temp13': 1, 'new_temp23': 1, 'new_temp14': 1, 'new_temp19': 1, 'new_temp30': 1, 'new_temp24': 1, 'new_temp21': 1, 'new_temp28': 1, 'new_temp16': 1, 'new_temp22': 1, 'new_temp11': 1, 'new_temp12': 1, 'new_temp36': 1, 'new_temp20': 1, 'new_temp0': 1, 'new_temp25': 1, 'new_temp39': 1, 'explicate_6': 1, 'new_temp26': 2, 'new_temp18': 1, 'new_temp32': 1, 'new_temp17': 1, 'new_temp38': 1, 'new_temp40': 1, 'new_temp27': 1, 'new_temp37': 1, 'explicate_10': 1, 'new_temp41': 1, 'new_temp42': 2, 'new_temp45': 1, 'new_temp33': 1, 'new_temp46': 1, 'new_temp34': 1, 'new_temp43': 1, 'new_temp44': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'explicate_18': 4, 'explicate_19': 5, 'explicate_17': 5, 'new_temp78': 5, 'new_temp26': 4, 'x': 5, 'positivity_counter': 6, 'explicate_6': 7, 'new_temp3': 7, 'new_temp2': 7, 'explicate_7': 4, 'explicate_10': 4, 'new_temp46': 5, 'explicate_11': 5, 'explicate_9': 5, 'explicate_5': 4, 'new_temp36': 1, 'new_temp23': 1, 'new_temp24': 1, 'new_temp38': 1, 'explicate_14': 4, 'explicate_15': 5, 'new_temp62': 5, 'explicate_13': 5, 'new_temp33': 1, 'new_temp44': 1, 'new_temp31': 1, 'new_temp39': 2, 'new_temp37': 1, 'new_temp51': 1, 'new_temp25': 1, 'new_temp54': 1, 'explicate_8': 1, 'new_temp27': 1, 'new_temp50': 1, 'new_temp45': 1, 'new_temp42': 1, 'new_temp53': 1, 'new_temp30': 1, 'new_temp67': 1, 'new_temp41': 1, 'new_temp66': 1, 'new_temp77': 1, 'new_temp83': 1, 'new_temp43': 1, 'new_temp0': 1, 'new_temp29': 1, 'new_temp28': 1, 'new_temp61': 1, 'new_temp60': 1, 'new_temp32': 1, 'new_temp52': 1, 'new_temp1': 1, 'new_temp70': 1, 'new_temp56': 1, 'new_temp76': 1, 'explicate_12': 1, 'new_temp57': 2, 'new_temp34': 1, 'new_temp35': 1, 'new_temp85': 1, 'new_temp55': 1, 'new_temp47': 1, 'new_temp40': 1, 'new_temp88': 1, 'new_temp58': 1, 'new_temp86': 1, 'new_temp87': 1, 'explicate_16': 1, 'explicate_20': 1, 'new_temp72': 1, 'new_temp68': 1, 'new_temp49': 1, 'new_temp91': 2, 'new_temp69': 1, 'new_temp63': 1, 'new_temp90': 1, 'new_temp71': 1, 'new_temp89': 1, 'new_temp73': 2, 'new_temp22': 1, 'new_temp48': 1, 'new_temp75': 1, 'new_temp79': 1, 'new_temp59': 1, 'new_temp64': 1, 'new_temp95': 1, 'new_temp65': 1, 'new_temp84': 1, 'new_temp92': 1, 'new_temp94': 1, 'new_temp4': 1, 'new_temp74': 1, 'new_temp93': 1, 'new_temp81': 1, 'new_temp21': 1, 'new_temp82': 1, 'new_temp80': 1}
 Spilled set:
- {'explicate_3'}
+ {'new_temp2', 'explicate_6', 'new_temp3'}
 
 
 --------------Spilling----------------
@@ -520,124 +981,248 @@ continue_looping
 
 
 
-Homes for CFG0:  {'explicate_3': -4, 'new_temp31': 'edi', 'explicate_8': 'ebx', 'explicate_9': 'edi', 'new_temp2': 'edi', 'explicate_7': 'esi', 'new_temp15': 'ebx', 'explicate_4': 'esi', 'positivity_counter': 'edi', 'new_temp1': 'ebx', 'explicate_5': 'ebx', 'x': 'ebx', 'new_temp29': 'eax', 'new_temp35': 'eax', 'new_temp13': 'eax', 'new_temp23': 'eax', 'new_temp14': 'eax', 'new_temp19': 'eax', 'new_temp30': 'eax', 'new_temp24': 'eax', 'new_temp21': 'eax', 'new_temp28': 'eax', 'new_temp16': 'eax', 'new_temp22': 'eax', 'new_temp11': 'eax', 'new_temp12': 'eax', 'new_temp36': 'eax', 'new_temp20': 'eax', 'new_temp0': 'eax', 'new_temp25': 'eax', 'new_temp39': 'eax', 'explicate_6': 'eax', 'new_temp26': 'ecx', 'new_temp18': 'eax', 'new_temp32': 'eax', 'new_temp17': 'eax', 'new_temp38': 'eax', 'new_temp40': 'eax', 'new_temp27': 'eax', 'new_temp37': 'eax', 'explicate_10': 'eax', 'new_temp41': 'eax', 'new_temp42': 'ecx', 'new_temp45': 'eax', 'new_temp33': 'eax', 'new_temp46': 'eax', 'new_temp34': 'eax', 'new_temp43': 'eax', 'new_temp44': 'eax'}
-new_temp11
-new_temp11
-new_temp11
-new_temp12
-new_temp12
-new_temp0
-x
-new_temp0
-explicate_4
-new_temp13
-new_temp13
-explicate_4
-new_temp14
-new_temp14
-new_temp15
-explicate_4
-new_temp16
-new_temp16
-new_temp15
-new_temp17
-new_temp17
-new_temp18
-new_temp18
-new_temp1
-explicate_4
-new_temp19
-new_temp19
-new_temp20
-new_temp20
+Homes for CFG0:  {'new_temp2': -4, 'explicate_6': -8, 'new_temp3': -12, 'explicate_18': 'edi', 'explicate_19': 'ebx', 'explicate_17': 'ebx', 'new_temp78': 'ebx', 'new_temp26': 'edi', 'x': 'ebx', 'positivity_counter': 'esi', 'explicate_7': 'edi', 'explicate_10': 'edi', 'new_temp46': 'ebx', 'explicate_11': 'ebx', 'explicate_9': 'ebx', 'explicate_5': 'edi', 'new_temp36': 'eax', 'new_temp23': 'eax', 'new_temp24': 'eax', 'new_temp38': 'eax', 'explicate_14': 'edi', 'explicate_15': 'ebx', 'new_temp62': 'ebx', 'explicate_13': 'ebx', 'new_temp33': 'eax', 'new_temp44': 'eax', 'new_temp31': 'eax', 'new_temp39': 'ecx', 'new_temp37': 'eax', 'new_temp51': 'eax', 'new_temp25': 'eax', 'new_temp54': 'eax', 'explicate_8': 'eax', 'new_temp27': 'eax', 'new_temp50': 'eax', 'new_temp45': 'eax', 'new_temp42': 'eax', 'new_temp53': 'eax', 'new_temp30': 'eax', 'new_temp67': 'eax', 'new_temp41': 'eax', 'new_temp66': 'eax', 'new_temp77': 'eax', 'new_temp83': 'eax', 'new_temp43': 'eax', 'new_temp0': 'eax', 'new_temp29': 'eax', 'new_temp28': 'eax', 'new_temp61': 'eax', 'new_temp60': 'eax', 'new_temp32': 'eax', 'new_temp52': 'eax', 'new_temp1': 'eax', 'new_temp70': 'eax', 'new_temp56': 'eax', 'new_temp76': 'eax', 'explicate_12': 'eax', 'new_temp57': 'ecx', 'new_temp34': 'eax', 'new_temp35': 'eax', 'new_temp85': 'eax', 'new_temp55': 'eax', 'new_temp47': 'eax', 'new_temp40': 'eax', 'new_temp88': 'eax', 'new_temp58': 'eax', 'new_temp86': 'eax', 'new_temp87': 'eax', 'explicate_16': 'eax', 'explicate_20': 'eax', 'new_temp72': 'eax', 'new_temp68': 'eax', 'new_temp49': 'eax', 'new_temp91': 'ecx', 'new_temp69': 'eax', 'new_temp63': 'eax', 'new_temp90': 'eax', 'new_temp71': 'eax', 'new_temp89': 'eax', 'new_temp73': 'ecx', 'new_temp22': 'eax', 'new_temp48': 'eax', 'new_temp75': 'eax', 'new_temp79': 'eax', 'new_temp59': 'eax', 'new_temp64': 'eax', 'new_temp95': 'eax', 'new_temp65': 'eax', 'new_temp84': 'eax', 'new_temp92': 'eax', 'new_temp94': 'eax', 'new_temp4': 'eax', 'new_temp74': 'eax', 'new_temp93': 'eax', 'new_temp81': 'eax', 'new_temp21': 'eax', 'new_temp82': 'eax', 'new_temp80': 'eax'}
 new_temp21
 new_temp21
-explicate_5
-new_temp22
-new_temp22
-explicate_5
-explicate_4
-new_temp23
-new_temp23
-explicate_4
-new_temp24
-new_temp24
-explicate_6
-explicate_4
-new_temp25
-new_temp25
-explicate_6
-explicate_5
-new_temp26
-explicate_6
-new_temp26
-new_temp26
-new_temp27
-new_temp27
-new_temp1
-new_temp1
 x
+new_temp22
+new_temp22
 positivity_counter
-explicate_7
+x
+explicate_5
+new_temp23
+new_temp23
+explicate_5
+new_temp24
+new_temp24
+new_temp25
+new_temp25
+explicate_5
+new_temp26
+new_temp27
+new_temp27
+new_temp26
 new_temp28
 new_temp28
-explicate_8
-explicate_7
 new_temp29
 new_temp29
-explicate_8
+new_temp0
 new_temp30
 new_temp30
+new_temp0
+new_temp31
+new_temp31
+new_temp32
+new_temp32
+new_temp0
+explicate_5
+new_temp33
+new_temp33
+explicate_5
+new_temp34
+new_temp34
 explicate_7
-new_temp31
-explicate_8
-new_temp32
-new_temp32
-new_temp31
-new_temp33
-new_temp33
-new_temp34
-new_temp34
-new_temp2
-explicate_8
+explicate_5
 new_temp35
 new_temp35
 explicate_7
 new_temp36
 new_temp36
-explicate_7
 new_temp37
 new_temp37
-explicate_9
+explicate_8
+new_temp38
+new_temp38
+explicate_8
 explicate_7
-new_temp38
-new_temp38
-explicate_9
 explicate_8
 new_temp39
 new_temp39
-explicate_8
+new_temp39
+new_temp39
 new_temp40
 new_temp40
-explicate_10
-explicate_8
 new_temp41
 new_temp41
-explicate_10
-explicate_9
+new_temp0
 new_temp42
-explicate_10
 new_temp42
 new_temp42
 new_temp43
 new_temp43
-new_temp2
-new_temp2
-positivity_counter
+new_temp1
+x
+explicate_9
+new_temp1
+explicate_10
+explicate_9
 new_temp44
 new_temp44
+explicate_10
+new_temp45
+new_temp45
+explicate_9
+new_temp46
+explicate_10
+new_temp47
+new_temp47
+new_temp46
+new_temp48
+new_temp48
+new_temp49
+new_temp49
+explicate_10
+new_temp50
+new_temp50
+explicate_9
+new_temp51
+new_temp51
+explicate_9
+new_temp52
+new_temp52
+explicate_11
+explicate_9
+new_temp53
+new_temp53
+explicate_11
+explicate_10
+new_temp54
+new_temp54
+explicate_10
+new_temp55
+new_temp55
+explicate_12
+explicate_10
+new_temp56
+new_temp56
+explicate_12
+explicate_11
+new_temp57
+explicate_12
+new_temp57
+new_temp57
+new_temp58
+new_temp58
+x
 positivity_counter
-new_temp45
-new_temp45
-new_temp46
-new_temp46
+explicate_13
+new_temp59
+new_temp59
+explicate_14
+explicate_13
+new_temp60
+new_temp60
+explicate_14
+new_temp61
+new_temp61
+explicate_13
+new_temp62
+explicate_14
+new_temp63
+new_temp63
+new_temp62
+new_temp64
+new_temp64
+new_temp65
+new_temp65
+explicate_14
+new_temp66
+new_temp66
+explicate_13
+new_temp67
+new_temp67
+explicate_13
+new_temp68
+new_temp68
+explicate_15
+explicate_13
+new_temp69
+new_temp69
+explicate_15
+explicate_14
+new_temp70
+new_temp70
+explicate_14
+new_temp71
+new_temp71
+explicate_16
+explicate_14
+new_temp72
+new_temp72
+explicate_16
+explicate_15
+new_temp73
+explicate_16
+new_temp73
+new_temp73
+new_temp74
+new_temp74
+positivity_counter
+positivity_counter
+explicate_17
+new_temp75
+new_temp75
+explicate_18
+explicate_17
+new_temp76
+new_temp76
+explicate_18
+new_temp77
+new_temp77
+explicate_17
+new_temp78
+explicate_18
+new_temp79
+new_temp79
+new_temp78
+new_temp80
+new_temp80
+new_temp81
+new_temp81
+new_temp4
+new_temp82
+new_temp82
+new_temp4
+explicate_18
+new_temp83
+new_temp83
+new_temp84
+new_temp84
+new_temp4
+explicate_17
+new_temp85
+new_temp85
+explicate_17
+new_temp86
+new_temp86
+explicate_19
+explicate_17
+new_temp87
+new_temp87
+explicate_19
+explicate_18
+new_temp88
+new_temp88
+explicate_18
+new_temp89
+new_temp89
+explicate_20
+explicate_18
+new_temp90
+new_temp90
+explicate_20
+explicate_19
+explicate_20
+new_temp91
+new_temp91
+new_temp91
+new_temp91
+new_temp92
+new_temp92
+new_temp93
+new_temp93
+new_temp4
+new_temp94
+new_temp94
+new_temp95
+new_temp95

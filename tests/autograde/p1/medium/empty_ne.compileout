@@ -1,9 +1,23 @@
 Illegal character '['
 Illegal character ']'
-Illegal character '!'
-Syntax error at '='
+Syntax error at '!='
 Illegal character '{'
 Illegal character '}'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Compare(
+                        left=List(elts=[], ctx=Load()),
+                        ops=[
+                            NotEq()],
+                        comparators=[
+                            Dict(keys=[], values=[])])],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(body=[], type_ignores=[])
 --------------Original code----------------

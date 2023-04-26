@@ -1,5 +1,46 @@
 Syntax error at 'and'
 Syntax error at 'b'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='a', ctx=Store())],
+            value=Constant(value=False)),
+        Assign(
+            targets=[
+                Name(id='b', ctx=Store())],
+            value=Constant(value=True)),
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=BoolOp(
+                op=Or(),
+                values=[
+                    UnaryOp(
+                        op=Not(),
+                        operand=Compare(
+                            left=BoolOp(
+                                op=And(),
+                                values=[
+                                    Name(id='a', ctx=Load()),
+                                    Name(id='b', ctx=Load())]),
+                            ops=[
+                                Eq()],
+                            comparators=[
+                                UnaryOp(
+                                    op=Not(),
+                                    operand=Name(id='a', ctx=Load()))])),
+                    UnaryOp(
+                        op=Not(),
+                        operand=Name(id='b', ctx=Load()))])),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='x', ctx=Load())],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(
     body=[

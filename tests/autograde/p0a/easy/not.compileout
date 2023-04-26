@@ -1,4 +1,24 @@
 Syntax error at '2'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Call(
+                func=Name(id='int', ctx=Load()),
+                args=[
+                    UnaryOp(
+                        op=Not(),
+                        operand=Constant(value=2))],
+                keywords=[])),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='x', ctx=Load())],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(
     body=[

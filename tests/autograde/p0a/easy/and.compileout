@@ -1,3 +1,21 @@
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=BoolOp(
+                op=And(),
+                values=[
+                    Constant(value=2),
+                    Constant(value=3)])),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='x', ctx=Load())],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(
     body=[
@@ -58,7 +76,7 @@ x = 2
 and
 3
 print(x)
-<ast.Constant object at 0x7f849b477100>
+<ast.Constant object at 0x7ff5a4d9c190>
 
 x = inject_int(2)
 print(x)
@@ -97,7 +115,7 @@ Interference Graph:  {'new_temp0': set(), 'x': set(), 'eax': set(), 'ecx': set()
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 1, 'x': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'x': 1, 'new_temp0': 1}
 Spilled set:
  set()
 
@@ -110,7 +128,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'new_temp0': 'eax', 'x': 'eax'}
+Homes for CFG0:  {'x': 'eax', 'new_temp0': 'eax'}
 new_temp0
 new_temp0
 x

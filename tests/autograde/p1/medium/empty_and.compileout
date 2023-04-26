@@ -1,6 +1,20 @@
 Illegal character '['
 Illegal character ']'
 Syntax error at '1'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    BoolOp(
+                        op=And(),
+                        values=[
+                            List(elts=[], ctx=Load()),
+                            Constant(value=1)])],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(body=[], type_ignores=[])
 --------------Original code----------------

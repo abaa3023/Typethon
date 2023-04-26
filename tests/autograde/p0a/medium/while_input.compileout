@@ -1,4 +1,25 @@
 Illegal character ':'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        While(
+            test=Call(
+                func=Name(id='eval', ctx=Load()),
+                args=[
+                    Call(
+                        func=Name(id='input', ctx=Load()),
+                        args=[],
+                        keywords=[])],
+                keywords=[]),
+            body=[
+                Expr(
+                    value=Call(
+                        func=Name(id='print', ctx=Load()),
+                        args=[
+                            Constant(value=1)],
+                        keywords=[]))],
+            orelse=[])],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(
     body=[

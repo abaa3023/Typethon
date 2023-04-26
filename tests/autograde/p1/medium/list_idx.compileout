@@ -10,6 +10,43 @@ Illegal character ']'
 Syntax error at '='
 Illegal character '['
 Illegal character ']'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Dict(
+                keys=[
+                    Constant(value=1)],
+                values=[
+                    Constant(value=2)])),
+        Assign(
+            targets=[
+                Name(id='y', ctx=Store())],
+            value=List(
+                elts=[
+                    Constant(value=1),
+                    Constant(value=2),
+                    Name(id='x', ctx=Load())],
+                ctx=Load())),
+        Assign(
+            targets=[
+                Subscript(
+                    value=Name(id='y', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Store())],
+            value=Subscript(
+                value=Name(id='x', ctx=Load()),
+                slice=Constant(value=1),
+                ctx=Load())),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='y', ctx=Load())],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(
     body=[

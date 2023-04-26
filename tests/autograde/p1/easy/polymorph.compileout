@@ -2,6 +2,35 @@ Illegal character '['
 Illegal character ','
 Illegal character ','
 Illegal character ']'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=IfExp(
+                test=Call(
+                    func=Name(id='eval', ctx=Load()),
+                    args=[
+                        Call(
+                            func=Name(id='input', ctx=Load()),
+                            args=[],
+                            keywords=[])],
+                    keywords=[]),
+                body=Constant(value=42),
+                orelse=List(
+                    elts=[
+                        Constant(value=1),
+                        Constant(value=2),
+                        Constant(value=3)],
+                    ctx=Load()))),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='x', ctx=Load())],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(
     body=[
@@ -112,7 +141,7 @@ else
 2
 3
 print(x)
-<ast.Constant object at 0x7fcbcdefb100>
+<ast.Constant object at 0x7ff6645bc160>
 
 x = inject_int(42)
 eval(input())

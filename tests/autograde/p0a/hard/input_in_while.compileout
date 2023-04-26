@@ -1,5 +1,34 @@
 Syntax error at 'x'
 Illegal character ':'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Constant(value=0)),
+        While(
+            test=Call(
+                func=Name(id='int', ctx=Load()),
+                args=[
+                    UnaryOp(
+                        op=Not(),
+                        operand=Name(id='x', ctx=Load()))],
+                keywords=[]),
+            body=[
+                Assign(
+                    targets=[
+                        Name(id='x', ctx=Store())],
+                    value=Call(
+                        func=Name(id='eval', ctx=Load()),
+                        args=[
+                            Call(
+                                func=Name(id='input', ctx=Load()),
+                                args=[],
+                                keywords=[])],
+                        keywords=[]))],
+            orelse=[])],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(
     body=[
@@ -57,7 +86,7 @@ Module(
 new_temp0 = eval(input())
 x = new_temp0
 eval(input())
-<ast.Name object at 0x7fe1d13f94b0>
+<ast.Name object at 0x7ff590f1da20>
 
 new_temp0 = eval(input())
 x = new_temp0

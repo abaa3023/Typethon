@@ -1,8 +1,4 @@
-Illegal character '!'
-Syntax error at '='
 Illegal character ':'
-Illegal character '!'
-Syntax error at '='
 Syntax error at 'inner_loop_done'
 Illegal character ':'
 Illegal character ':'
@@ -12,6 +8,211 @@ Illegal character ':'
 Illegal character ':'
 Syntax error at 'inner_loop_done'
 Illegal character ':'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Constant(value=5)),
+        Assign(
+            targets=[
+                Name(id='y', ctx=Store())],
+            value=Constant(value=10)),
+        Assign(
+            targets=[
+                Name(id='z', ctx=Store())],
+            value=Constant(value=0)),
+        While(
+            test=Call(
+                func=Name(id='int', ctx=Load()),
+                args=[
+                    Compare(
+                        left=Name(id='x', ctx=Load()),
+                        ops=[
+                            NotEq()],
+                        comparators=[
+                            Constant(value=0)])],
+                keywords=[]),
+            body=[
+                Assign(
+                    targets=[
+                        Name(id='x', ctx=Store())],
+                    value=BinOp(
+                        left=Name(id='x', ctx=Load()),
+                        op=Add(),
+                        right=UnaryOp(
+                            op=USub(),
+                            operand=Constant(value=1)))),
+                Assign(
+                    targets=[
+                        Name(id='y_copy', ctx=Store())],
+                    value=Name(id='y', ctx=Load())),
+                Assign(
+                    targets=[
+                        Name(id='inner_loop_done', ctx=Store())],
+                    value=Constant(value=0)),
+                While(
+                    test=BoolOp(
+                        op=And(),
+                        values=[
+                            Call(
+                                func=Name(id='int', ctx=Load()),
+                                args=[
+                                    Compare(
+                                        left=Name(id='y_copy', ctx=Load()),
+                                        ops=[
+                                            NotEq()],
+                                        comparators=[
+                                            Constant(value=0)])],
+                                keywords=[]),
+                            Call(
+                                func=Name(id='int', ctx=Load()),
+                                args=[
+                                    UnaryOp(
+                                        op=Not(),
+                                        operand=Name(id='inner_loop_done', ctx=Load()))],
+                                keywords=[])]),
+                    body=[
+                        Assign(
+                            targets=[
+                                Name(id='y_copy', ctx=Store())],
+                            value=BinOp(
+                                left=Name(id='y_copy', ctx=Load()),
+                                op=Add(),
+                                right=UnaryOp(
+                                    op=USub(),
+                                    operand=Constant(value=1)))),
+                        If(
+                            test=Call(
+                                func=Name(id='int', ctx=Load()),
+                                args=[
+                                    Compare(
+                                        left=Name(id='y_copy', ctx=Load()),
+                                        ops=[
+                                            Eq()],
+                                        comparators=[
+                                            Constant(value=4)])],
+                                keywords=[]),
+                            body=[
+                                Assign(
+                                    targets=[
+                                        Name(id='z', ctx=Store())],
+                                    value=BinOp(
+                                        left=Name(id='z', ctx=Load()),
+                                        op=Add(),
+                                        right=Constant(value=1))),
+                                If(
+                                    test=Call(
+                                        func=Name(id='int', ctx=Load()),
+                                        args=[
+                                            Compare(
+                                                left=Name(id='x', ctx=Load()),
+                                                ops=[
+                                                    Eq()],
+                                                comparators=[
+                                                    Constant(value=3)])],
+                                        keywords=[]),
+                                    body=[
+                                        Assign(
+                                            targets=[
+                                                Name(id='z', ctx=Store())],
+                                            value=BinOp(
+                                                left=Name(id='z', ctx=Load()),
+                                                op=Add(),
+                                                right=Constant(value=1))),
+                                        Assign(
+                                            targets=[
+                                                Name(id='y', ctx=Store())],
+                                            value=BinOp(
+                                                left=Name(id='y', ctx=Load()),
+                                                op=Add(),
+                                                right=UnaryOp(
+                                                    op=USub(),
+                                                    operand=Constant(value=1)))),
+                                        Assign(
+                                            targets=[
+                                                Name(id='x', ctx=Store())],
+                                            value=BinOp(
+                                                left=Name(id='x', ctx=Load()),
+                                                op=Add(),
+                                                right=Constant(value=1))),
+                                        Assign(
+                                            targets=[
+                                                Name(id='inner_loop_done', ctx=Store())],
+                                            value=Constant(value=1))],
+                                    orelse=[
+                                        If(
+                                            test=Call(
+                                                func=Name(id='int', ctx=Load()),
+                                                args=[
+                                                    Compare(
+                                                        left=Name(id='x', ctx=Load()),
+                                                        ops=[
+                                                            Eq()],
+                                                        comparators=[
+                                                            Constant(value=2)])],
+                                                keywords=[]),
+                                            body=[
+                                                Assign(
+                                                    targets=[
+                                                        Name(id='z', ctx=Store())],
+                                                    value=BinOp(
+                                                        left=Name(id='z', ctx=Load()),
+                                                        op=Add(),
+                                                        right=Constant(value=2)))],
+                                            orelse=[
+                                                Assign(
+                                                    targets=[
+                                                        Name(id='z', ctx=Store())],
+                                                    value=BinOp(
+                                                        left=Name(id='z', ctx=Load()),
+                                                        op=Add(),
+                                                        right=Constant(value=3)))]),
+                                        Assign(
+                                            targets=[
+                                                Name(id='y', ctx=Store())],
+                                            value=BinOp(
+                                                left=Name(id='y', ctx=Load()),
+                                                op=Add(),
+                                                right=UnaryOp(
+                                                    op=USub(),
+                                                    operand=Constant(value=1)))),
+                                        Assign(
+                                            targets=[
+                                                Name(id='x', ctx=Store())],
+                                            value=BinOp(
+                                                left=Name(id='x', ctx=Load()),
+                                                op=Add(),
+                                                right=Constant(value=1))),
+                                        Assign(
+                                            targets=[
+                                                Name(id='inner_loop_done', ctx=Store())],
+                                            value=Constant(value=1))])],
+                            orelse=[])],
+                    orelse=[]),
+                If(
+                    test=Call(
+                        func=Name(id='int', ctx=Load()),
+                        args=[
+                            UnaryOp(
+                                op=Not(),
+                                operand=Name(id='inner_loop_done', ctx=Load()))],
+                        keywords=[]),
+                    body=[
+                        Assign(
+                            targets=[
+                                Name(id='y', ctx=Store())],
+                            value=Name(id='y_copy', ctx=Load()))],
+                    orelse=[])],
+            orelse=[]),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='z', ctx=Load())],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(
     body=[
@@ -89,7 +290,7 @@ Module(
 --------------Code after flattening-------
 y = y_copy
 print(z)
-<ast.Name object at 0x7fee3ed530d0>
+<ast.Name object at 0x7f467efb4f40>
 
 y = y_copy
 print(z)

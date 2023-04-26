@@ -6,6 +6,64 @@ Illegal character '['
 Illegal character ','
 Illegal character ','
 Illegal character ']'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='a', ctx=Store())],
+            value=List(
+                elts=[
+                    Constant(value=1),
+                    Constant(value=2),
+                    Constant(value=3)],
+                ctx=Load())),
+        Assign(
+            targets=[
+                Name(id='b', ctx=Store())],
+            value=List(
+                elts=[
+                    Constant(value=4),
+                    Constant(value=5),
+                    Constant(value=6)],
+                ctx=Load())),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='a', ctx=Load())],
+                keywords=[])),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='b', ctx=Load())],
+                keywords=[])),
+        Assign(
+            targets=[
+                Name(id='tmp', ctx=Store())],
+            value=Name(id='a', ctx=Load())),
+        Assign(
+            targets=[
+                Name(id='a', ctx=Store())],
+            value=Name(id='b', ctx=Load())),
+        Assign(
+            targets=[
+                Name(id='b', ctx=Store())],
+            value=Name(id='tmp', ctx=Load())),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='a', ctx=Load())],
+                keywords=[])),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='b', ctx=Load())],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(
     body=[
@@ -196,11 +254,11 @@ a = b
 b = tmp
 print(a)
 print(b)
-<ast.Constant object at 0x7f77dc95f100>
-<ast.Constant object at 0x7f77dc9c1120>
-<ast.Name object at 0x7f77dc9c1990>
-<ast.Name object at 0x7f77dc9c1bd0>
-<ast.Name object at 0x7f77dc9c1db0>
+<ast.Constant object at 0x7f03bbc1c610>
+<ast.Constant object at 0x7f03bbc1dcc0>
+<ast.Name object at 0x7f03bbc1e350>
+<ast.Name object at 0x7f03bbc1e500>
+<ast.Name object at 0x7f03bbc1e650>
 
 a = inject_int(1)
 b = inject_int(4)
@@ -265,7 +323,7 @@ call  print b
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp0': set(), 'a': {'ecx', 'new_temp1', 'edx', 'b', 'tmp', 'eax'}, 'eax': {'a', 'b'}, 'ecx': {'a', 'b'}, 'edx': {'a', 'b'}, 'new_temp1': {'a'}, 'b': {'ecx', 'a', 'edx', 'eax', 'tmp'}, 'tmp': {'a', 'b'}, 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'new_temp0': set(), 'a': {'b', 'eax', 'tmp', 'new_temp1', 'ecx', 'edx'}, 'eax': {'b', 'a'}, 'ecx': {'b', 'a'}, 'edx': {'b', 'a'}, 'new_temp1': {'a'}, 'b': {'a', 'eax', 'tmp', 'ecx', 'edx'}, 'tmp': {'a', 'b'}, 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------

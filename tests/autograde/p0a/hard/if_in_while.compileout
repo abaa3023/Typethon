@@ -1,13 +1,105 @@
-Illegal character '!'
-Syntax error at '='
-Illegal character ':'
-Illegal character '!'
-Syntax error at '='
 Illegal character ':'
 Illegal character ':'
+Illegal character ':'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Constant(value=2)),
+        Assign(
+            targets=[
+                Name(id='y', ctx=Store())],
+            value=Constant(value=10)),
+        While(
+            test=Call(
+                func=Name(id='int', ctx=Load()),
+                args=[
+                    Compare(
+                        left=Name(id='x', ctx=Load()),
+                        ops=[
+                            NotEq()],
+                        comparators=[
+                            Constant(value=23)])],
+                keywords=[]),
+            body=[
+                If(
+                    test=Call(
+                        func=Name(id='int', ctx=Load()),
+                        args=[
+                            Compare(
+                                left=BinOp(
+                                    left=Name(id='x', ctx=Load()),
+                                    op=Add(),
+                                    right=UnaryOp(
+                                        op=USub(),
+                                        operand=Name(id='y', ctx=Load()))),
+                                ops=[
+                                    NotEq()],
+                                comparators=[
+                                    Constant(value=12)])],
+                        keywords=[]),
+                    body=[
+                        Assign(
+                            targets=[
+                                Name(id='x', ctx=Store())],
+                            value=BinOp(
+                                left=Name(id='x', ctx=Load()),
+                                op=Add(),
+                                right=Name(id='y', ctx=Load())))],
+                    orelse=[
+                        Assign(
+                            targets=[
+                                Name(id='x', ctx=Store())],
+                            value=BinOp(
+                                left=Name(id='x', ctx=Load()),
+                                op=Add(),
+                                right=Constant(value=1)))])],
+            orelse=[])],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(
     body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Constant(value=2)),
+        Assign(
+            targets=[
+                Name(id='y', ctx=Store())],
+            value=Constant(value=10)),
+        Expr(
+            value=Name(id='while', ctx=Load())),
+        Expr(
+            value=Call(
+                func=Name(id='int', ctx=Load()),
+                args=[
+                    Compare(
+                        left=Name(id='x', ctx=Load()),
+                        ops=[
+                            NotEq()],
+                        comparators=[
+                            Constant(value=23)])],
+                keywords=[])),
+        Expr(
+            value=Name(id='if', ctx=Load())),
+        Expr(
+            value=Call(
+                func=Name(id='int', ctx=Load()),
+                args=[
+                    Compare(
+                        left=BinOp(
+                            left=Name(id='x', ctx=Load()),
+                            op=Add(),
+                            right=UnaryOp(
+                                op=USub(),
+                                operand=Name(id='y', ctx=Load()))),
+                        ops=[
+                            NotEq()],
+                        comparators=[
+                            Constant(value=12)])],
+                keywords=[])),
         Assign(
             targets=[
                 Name(id='x', ctx=Store())],
@@ -39,6 +131,45 @@ Module(
           Assign(
                targets=[
                     Name(id='x', ctx=Store())],
+               value=Constant(value=2)),
+          Assign(
+               targets=[
+                    Name(id='y', ctx=Store())],
+               value=Constant(value=10)),
+          Expr(
+               value=Name(id='while', ctx=Load())),
+          Expr(
+               value=Call(
+                    func=Name(id='int', ctx=Load()),
+                    args=[
+                         Compare(
+                              left=Name(id='x', ctx=Load()),
+                              ops=[
+                                   NotEq()],
+                              comparators=[
+                                   Constant(value=23)])],
+                    keywords=[])),
+          Expr(
+               value=Name(id='if', ctx=Load())),
+          Expr(
+               value=Call(
+                    func=Name(id='int', ctx=Load()),
+                    args=[
+                         Compare(
+                              left=BinOp(
+                                   left=Name(id='x', ctx=Load()),
+                                   op=Add(),
+                                   right=UnaryOp(
+                                        op=USub(),
+                                        operand=Name(id='y', ctx=Load()))),
+                              ops=[
+                                   NotEq()],
+                              comparators=[
+                                   Constant(value=12)])],
+                    keywords=[])),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
                value=BinOp(
                     left=Name(id='x', ctx=Load()),
                     op=Add(),
@@ -57,7 +188,70 @@ Module(
      body=[
           Assign(
                targets=[
+                    Name(id='x', ctx=Store())],
+               value=Constant(value=2)),
+          Assign(
+               targets=[
+                    Name(id='y', ctx=Store())],
+               value=Constant(value=10)),
+          Expr(
+               value=Name(id='while', ctx=Load())),
+          Assign(
+               targets=[
                     Name(id='new_temp0', ctx=Store())],
+               value=Compare(
+                    left=Name(id='x', ctx=Load()),
+                    ops=[
+                         NotEq()],
+                    comparators=[
+                         Constant(value=23)])),
+          Assign(
+               targets=[
+                    Name(id='new_temp1', ctx=Store())],
+               value=Name(id='new_temp0', ctx=Store())),
+          Expr(
+               value=Call(
+                    func=Name(id='int', ctx=Load()),
+                    args=[
+                         Name(id='new_temp1', ctx=Load())],
+                    keywords=[])),
+          Expr(
+               value=Name(id='if', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp2', ctx=Store())],
+               value=UnaryOp(
+                    op=USub(),
+                    operand=Name(id='y', ctx=Load()))),
+          Assign(
+               targets=[
+                    Name(id='new_temp3', ctx=Store())],
+               value=BinOp(
+                    left=Name(id='x', ctx=Load()),
+                    op=Add(),
+                    right=Name(id='new_temp2', ctx=Load()))),
+          Assign(
+               targets=[
+                    Name(id='new_temp4', ctx=Store())],
+               value=Compare(
+                    left=Name(id='new_temp3', ctx=Load()),
+                    ops=[
+                         NotEq()],
+                    comparators=[
+                         Constant(value=12)])),
+          Assign(
+               targets=[
+                    Name(id='new_temp5', ctx=Store())],
+               value=Name(id='new_temp4', ctx=Store())),
+          Expr(
+               value=Call(
+                    func=Name(id='int', ctx=Load()),
+                    args=[
+                         Name(id='new_temp5', ctx=Load())],
+                    keywords=[])),
+          Assign(
+               targets=[
+                    Name(id='new_temp6', ctx=Store())],
                value=BinOp(
                     left=Name(id='x', ctx=Load()),
                     op=Add(),
@@ -65,12 +259,12 @@ Module(
           Assign(
                targets=[
                     Name(id='x', ctx=Store())],
-               value=Name(id='new_temp0', ctx=Load())),
+               value=Name(id='new_temp6', ctx=Load())),
           Expr(
                value=Name(id='else', ctx=Load())),
           Assign(
                targets=[
-                    Name(id='new_temp1', ctx=Store())],
+                    Name(id='new_temp7', ctx=Store())],
                value=BinOp(
                     left=Name(id='x', ctx=Load()),
                     op=Add(),
@@ -78,448 +272,45 @@ Module(
           Assign(
                targets=[
                     Name(id='x', ctx=Store())],
-               value=Name(id='new_temp1', ctx=Load()))],
+               value=Name(id='new_temp7', ctx=Load()))],
      type_ignores=[])
 --------------Code after flattening-------
-new_temp0 = x + y
-x = new_temp0
+x = 2
+y = 10
+while
+new_temp0 = x != 23
+new_temp1 = new_temp0
+int(new_temp1)
+if
+new_temp2 = -y
+new_temp3 = x + new_temp2
+new_temp4 = new_temp3 != 12
+new_temp5 = new_temp4
+int(new_temp5)
+new_temp6 = x + y
+x = new_temp6
 else
-new_temp1 = x + 1
-x = new_temp1
-inject_big(add(project_big(explicate_2),project_big(explicate_3)))
-inject_int(explicate_4+explicate_5)
-<ast.Name object at 0x7fa8c37a17e0>
-inject_big(add(project_big(explicate_6),project_big(explicate_7)))
-inject_int(explicate_8+explicate_9)
-<ast.Name object at 0x7fa8c37a1960>
-
-explicate_2 = x
-explicate_3 = y
-if(is_big(explicate_2)):
-	if(is_big(explicate_3)):
-		new_temp0 = inject_big(add(project_big(explicate_2),project_big(explicate_3)))
-else:
-	if(is_big(explicate_3)):
-		error_pyobj(0)
-	else:
-		if(is_int(explicate_2)):
-			explicate_4 = project_int(explicate_2)
-		else:
-			explicate_4 = project_bool(explicate_2)
-		if(is_int(explicate_3)):
-			explicate_5 = project_int(explicate_3)
-		else:
-			explicate_5 = project_bool(explicate_3)
-		new_temp0 = inject_int(explicate_4+explicate_5)
-x = new_temp0
-explicate_6 = x
-explicate_7 = inject_int(1)
-if(is_big(explicate_6)):
-	if(is_big(explicate_7)):
-		new_temp1 = inject_big(add(project_big(explicate_6),project_big(explicate_7)))
-else:
-	if(is_big(explicate_7)):
-		error_pyobj(0)
-	else:
-		if(is_int(explicate_6)):
-			explicate_8 = project_int(explicate_6)
-		else:
-			explicate_8 = project_bool(explicate_6)
-		if(is_int(explicate_7)):
-			explicate_9 = project_int(explicate_7)
-		else:
-			explicate_9 = project_bool(explicate_7)
-		new_temp1 = inject_int(explicate_8+explicate_9)
-x = new_temp1
---------------Explicate code-------
-explicate_2 = x
-explicate_3 = y
-if is_big(explicate_2):
-    if is_big(explicate_3):
-        new_temp0 = inject_big(add(project_big(explicate_2), project_big(explicate_3)))
-elif is_big(explicate_3):
-    error_pyobj(0)
-else:
-    if is_int(explicate_2):
-        explicate_4 = project_int(explicate_2)
-    else:
-        explicate_4 = project_bool(explicate_2)
-    if is_int(explicate_3):
-        explicate_5 = project_int(explicate_3)
-    else:
-        explicate_5 = project_bool(explicate_3)
-    new_temp0 = inject_int(explicate_4 + explicate_5)
-x = new_temp0
-explicate_6 = x
-explicate_7 = inject_int(1)
-if is_big(explicate_6):
-    if is_big(explicate_7):
-        new_temp1 = inject_big(add(project_big(explicate_6), project_big(explicate_7)))
-elif is_big(explicate_7):
-    error_pyobj(0)
-else:
-    if is_int(explicate_6):
-        explicate_8 = project_int(explicate_6)
-    else:
-        explicate_8 = project_bool(explicate_6)
-    if is_int(explicate_7):
-        explicate_9 = project_int(explicate_7)
-    else:
-        explicate_9 = project_bool(explicate_7)
-    new_temp1 = inject_int(explicate_8 + explicate_9)
-x = new_temp1
-
-
---- explicated flattened python ---
-explicate_2 = x
-explicate_3 = y
-new_temp10 = is_big(explicate_2)
-if new_temp10:
-    new_temp11 = is_big(explicate_3)
-    if new_temp11:
-        new_temp12 = project_big(explicate_2)
-        new_temp13 = project_big(explicate_3)
-        new_temp14 = add(new_temp12, new_temp13)
-        new_temp15 = inject_big(new_temp14)
-        new_temp0 = new_temp15
-else:
-    new_temp16 = is_big(explicate_3)
-    if new_temp16:
-        error_pyobj(0)
-    else:
-        new_temp17 = is_int(explicate_2)
-        if new_temp17:
-            new_temp18 = project_int(explicate_2)
-            explicate_4 = new_temp18
-        else:
-            new_temp19 = project_bool(explicate_2)
-            explicate_4 = new_temp19
-        new_temp20 = is_int(explicate_3)
-        if new_temp20:
-            new_temp21 = project_int(explicate_3)
-            explicate_5 = new_temp21
-        else:
-            new_temp22 = project_bool(explicate_3)
-            explicate_5 = new_temp22
-        new_temp23 = explicate_4 + explicate_5
-        new_temp24 = inject_int(new_temp23)
-        new_temp0 = new_temp24
-x = new_temp0
-explicate_6 = x
-new_temp25 = inject_int(1)
-explicate_7 = new_temp25
-new_temp26 = is_big(explicate_6)
-if new_temp26:
-    new_temp27 = is_big(explicate_7)
-    if new_temp27:
-        new_temp28 = project_big(explicate_6)
-        new_temp29 = project_big(explicate_7)
-        new_temp30 = add(new_temp28, new_temp29)
-        new_temp31 = inject_big(new_temp30)
-        new_temp1 = new_temp31
-else:
-    new_temp32 = is_big(explicate_7)
-    if new_temp32:
-        error_pyobj(0)
-    else:
-        new_temp33 = is_int(explicate_6)
-        if new_temp33:
-            new_temp34 = project_int(explicate_6)
-            explicate_8 = new_temp34
-        else:
-            new_temp35 = project_bool(explicate_6)
-            explicate_8 = new_temp35
-        new_temp36 = is_int(explicate_7)
-        if new_temp36:
-            new_temp37 = project_int(explicate_7)
-            explicate_9 = new_temp37
-        else:
-            new_temp38 = project_bool(explicate_7)
-            explicate_9 = new_temp38
-        new_temp39 = explicate_8 + explicate_9
-        new_temp40 = inject_int(new_temp39)
-        new_temp1 = new_temp40
-x = new_temp1
-
-
---- x86 IR ---
-movl  x ,  explicate_2
-movl  y ,  explicate_3
-call  is_big explicate_2
-movl  eax ,  new_temp10
-if1
-cmp 0, new_temp10
-je else1
-then1
-call  is_big explicate_3
-movl  eax ,  new_temp11
-if2
-cmp 0, new_temp11
-je end if2
-then2
-call  project_big explicate_2
-movl  eax ,  new_temp12
-call  project_big explicate_3
-movl  eax ,  new_temp13
-call  add new_temp12,new_temp13
-movl  eax ,  new_temp14
-call  inject_big new_temp14
-movl  eax ,  new_temp15
-movl  new_temp15 ,  new_temp0
-end if2
-else1
-call  is_big explicate_3
-movl  eax ,  new_temp16
-if2
-cmp 0, new_temp16
-je else2
-then2
-call  error_pyobj 0
-else2
-call  is_int explicate_2
-movl  eax ,  new_temp17
-if3
-cmp 0, new_temp17
-je else3
-then3
-call  project_int explicate_2
-movl  eax ,  new_temp18
-movl  new_temp18 ,  explicate_4
-else3
-call  project_bool explicate_2
-movl  eax ,  new_temp19
-movl  new_temp19 ,  explicate_4
-end if3
-call  is_int explicate_3
-movl  eax ,  new_temp20
-if4
-cmp 0, new_temp20
-je else4
-then4
-call  project_int explicate_3
-movl  eax ,  new_temp21
-movl  new_temp21 ,  explicate_5
-else4
-call  project_bool explicate_3
-movl  eax ,  new_temp22
-movl  new_temp22 ,  explicate_5
-end if4
-movl  explicate_4 ,  new_temp23
-addl  explicate_5 ,  new_temp23
-call  inject_int new_temp23
-movl  eax ,  new_temp24
-movl  new_temp24 ,  new_temp0
-end if2
-end if1
-movl  new_temp0 ,  x
-movl  x ,  explicate_6
-call  inject_int 1
-movl  eax ,  new_temp25
-movl  new_temp25 ,  explicate_7
-call  is_big explicate_6
-movl  eax ,  new_temp26
-if2
-cmp 0, new_temp26
-je else2
-then2
-call  is_big explicate_7
-movl  eax ,  new_temp27
-if3
-cmp 0, new_temp27
-je end if3
-then3
-call  project_big explicate_6
-movl  eax ,  new_temp28
-call  project_big explicate_7
-movl  eax ,  new_temp29
-call  add new_temp28,new_temp29
-movl  eax ,  new_temp30
-call  inject_big new_temp30
-movl  eax ,  new_temp31
-movl  new_temp31 ,  new_temp1
-end if3
-else2
-call  is_big explicate_7
-movl  eax ,  new_temp32
-if3
-cmp 0, new_temp32
-je else3
-then3
-call  error_pyobj 0
-else3
-call  is_int explicate_6
-movl  eax ,  new_temp33
-if4
-cmp 0, new_temp33
-je else4
-then4
-call  project_int explicate_6
-movl  eax ,  new_temp34
-movl  new_temp34 ,  explicate_8
-else4
-call  project_bool explicate_6
-movl  eax ,  new_temp35
-movl  new_temp35 ,  explicate_8
-end if4
-call  is_int explicate_7
-movl  eax ,  new_temp36
-if5
-cmp 0, new_temp36
-je else5
-then5
-call  project_int explicate_7
-movl  eax ,  new_temp37
-movl  new_temp37 ,  explicate_9
-else5
-call  project_bool explicate_7
-movl  eax ,  new_temp38
-movl  new_temp38 ,  explicate_9
-end if5
-movl  explicate_8 ,  new_temp39
-addl  explicate_9 ,  new_temp39
-call  inject_int new_temp39
-movl  eax ,  new_temp40
-movl  new_temp40 ,  new_temp1
-end if3
-end if2
-movl  new_temp1 ,  x
-
-
---- Control Flow Graph ---
-
-
--------------- Reset Liveness----------------
-
-
--------------- Liveness----------------
-
-
---------------Interference----------------
-
-
-Interference Graph:  {'new_temp0': {'explicate_3', 'edx', 'eax', 'new_temp16', 'new_temp1', 'new_temp10', 'ecx', 'explicate_2', 'new_temp11'}, 'new_temp1': {'new_temp0', 'new_temp21', 'explicate_3', 'new_temp26', 'edx', 'explicate_6', 'new_temp20', 'eax', 'explicate_7', 'new_temp16', 'new_temp10', 'new_temp18', 'explicate_4', 'new_temp17', 'new_temp11', 'new_temp22', 'new_temp32', 'new_temp24', 'new_temp23', 'new_temp13', 'new_temp25', 'x', 'new_temp14', 'explicate_5', 'new_temp19', 'new_temp15', 'ecx', 'explicate_2', 'new_temp27', 'new_temp12'}, 'y': {'explicate_2'}, 'explicate_2': {'new_temp0', 'explicate_3', 'edx', 'eax', 'y', 'new_temp16', 'new_temp1', 'new_temp10', 'ecx', 'new_temp17', 'new_temp11'}, 'explicate_3': {'new_temp0', 'new_temp20', 'edx', 'eax', 'new_temp16', 'new_temp19', 'new_temp1', 'new_temp10', 'new_temp18', 'ecx', 'explicate_2', 'explicate_4', 'new_temp12', 'new_temp17', 'new_temp11'}, 'eax': {'new_temp0', 'explicate_3', 'explicate_6', 'explicate_7', 'new_temp28', 'new_temp1', 'explicate_4', 'explicate_2', 'new_temp12', 'explicate_8'}, 'ecx': {'new_temp0', 'explicate_3', 'explicate_6', 'explicate_7', 'new_temp28', 'new_temp1', 'explicate_4', 'explicate_2', 'new_temp12', 'explicate_8'}, 'edx': {'new_temp0', 'explicate_3', 'explicate_6', 'explicate_7', 'new_temp28', 'new_temp1', 'explicate_4', 'explicate_2', 'new_temp12', 'explicate_8'}, 'new_temp10': {'explicate_2', 'new_temp0', 'new_temp1', 'explicate_3'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp11': {'explicate_2', 'new_temp0', 'new_temp1', 'explicate_3'}, 'new_temp16': {'explicate_2', 'new_temp0', 'new_temp1', 'explicate_3'}, 'new_temp12': {'new_temp1', 'explicate_3', 'edx', 'new_temp13', 'eax', 'ecx'}, 'new_temp13': {'new_temp1', 'new_temp12'}, 'new_temp14': {'new_temp1'}, 'new_temp15': {'new_temp1'}, 'x': {'new_temp1'}, 'explicate_6': {'new_temp32', 'new_temp26', 'edx', 'new_temp25', 'eax', 'explicate_7', 'new_temp1', 'new_temp33', 'ecx', 'new_temp27'}, 'new_temp25': {'explicate_6', 'new_temp1'}, 'explicate_7': {'new_temp32', 'new_temp35', 'new_temp36', 'new_temp26', 'edx', 'explicate_6', 'eax', 'new_temp28', 'new_temp1', 'new_temp33', 'ecx', 'new_temp27', 'new_temp34', 'explicate_8'}, 'new_temp26': {'explicate_6', 'new_temp1', 'explicate_7'}, 'new_temp17': {'explicate_2', 'new_temp1', 'explicate_3'}, 'new_temp27': {'explicate_6', 'new_temp1', 'explicate_7'}, 'new_temp32': {'explicate_6', 'new_temp1', 'explicate_7'}, 'new_temp18': {'new_temp1', 'explicate_3'}, 'explicate_4': {'new_temp21', 'explicate_3', 'new_temp20', 'edx', 'eax', 'explicate_5', 'new_temp1', 'ecx', 'new_temp22'}, 'new_temp19': {'new_temp1', 'explicate_3'}, 'new_temp28': {'new_temp29', 'edx', 'eax', 'explicate_7', 'ecx'}, 'new_temp29': {'new_temp28'}, 'new_temp30': set(), 'new_temp31': set(), 'new_temp33': {'explicate_6', 'explicate_7'}, 'new_temp20': {'new_temp1', 'explicate_3', 'explicate_4'}, 'new_temp34': {'explicate_7'}, 'explicate_8': {'new_temp36', 'edx', 'explicate_7', 'eax', 'explicate_9', 'ecx', 'new_temp38', 'new_temp37'}, 'new_temp35': {'explicate_7'}, 'new_temp21': {'new_temp1', 'explicate_4'}, 'explicate_5': {'new_temp1', 'new_temp23', 'explicate_4'}, 'new_temp22': {'new_temp1', 'explicate_4'}, 'new_temp36': {'explicate_7', 'explicate_8'}, 'new_temp23': {'new_temp1', 'explicate_5'}, 'new_temp24': {'new_temp1'}, 'new_temp37': {'explicate_8'}, 'explicate_9': {'new_temp39', 'explicate_8'}, 'new_temp38': {'explicate_8'}, 'new_temp39': {'explicate_9'}, 'new_temp40': set()}
-
-
---------------Coloring----------------
-Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp12': 4, 'new_temp1': 5, 'explicate_3': 6, 'new_temp0': 4, 'explicate_2': 7, 'explicate_4': 4, 'explicate_7': 4, 'explicate_6': 6, 'explicate_8': 5, 'new_temp28': 5, 'new_temp27': 1, 'new_temp10': 1, 'new_temp20': 1, 'new_temp32': 1, 'new_temp11': 1, 'new_temp16': 1, 'new_temp26': 1, 'new_temp19': 1, 'explicate_5': 1, 'new_temp25': 1, 'new_temp13': 1, 'new_temp23': 2, 'new_temp22': 1, 'new_temp17': 1, 'new_temp18': 1, 'new_temp33': 1, 'new_temp36': 1, 'new_temp21': 1, 'new_temp37': 1, 'new_temp34': 1, 'new_temp38': 1, 'new_temp15': 1, 'explicate_9': 1, 'new_temp14': 1, 'x': 1, 'new_temp39': 2, 'new_temp24': 1, 'new_temp35': 1, 'new_temp29': 1, 'y': 1, 'new_temp31': 1, 'new_temp40': 1, 'new_temp30': 1}
-Spilled set:
- {'explicate_2'}
-
-
---------------Spilling----------------
-unspillable_set
- set()
-continue_looping
- False
-
-
-
-Homes for CFG0:  {'explicate_2': -4, 'new_temp12': 'edi', 'new_temp1': 'ebx', 'explicate_3': 'esi', 'new_temp0': 'edi', 'explicate_4': 'edi', 'explicate_7': 'edi', 'explicate_6': 'esi', 'explicate_8': 'ebx', 'new_temp28': 'ebx', 'new_temp27': 'eax', 'new_temp10': 'eax', 'new_temp20': 'eax', 'new_temp32': 'eax', 'new_temp11': 'eax', 'new_temp16': 'eax', 'new_temp26': 'eax', 'new_temp19': 'eax', 'explicate_5': 'eax', 'new_temp25': 'eax', 'new_temp13': 'eax', 'new_temp23': 'ecx', 'new_temp22': 'eax', 'new_temp17': 'eax', 'new_temp18': 'eax', 'new_temp33': 'eax', 'new_temp36': 'eax', 'new_temp21': 'eax', 'new_temp37': 'eax', 'new_temp34': 'eax', 'new_temp38': 'eax', 'new_temp15': 'eax', 'explicate_9': 'eax', 'new_temp14': 'eax', 'x': 'eax', 'new_temp39': 'ecx', 'new_temp24': 'eax', 'new_temp35': 'eax', 'new_temp29': 'eax', 'y': 'eax', 'new_temp31': 'eax', 'new_temp40': 'eax', 'new_temp30': 'eax'}
-x
-y
-explicate_3
-new_temp10
-new_temp10
-explicate_3
-new_temp11
-new_temp11
-new_temp12
-explicate_3
-new_temp13
-new_temp13
-new_temp12
-new_temp14
-new_temp14
-new_temp15
-new_temp15
-new_temp0
-explicate_3
-new_temp16
-new_temp16
-new_temp17
-new_temp17
-new_temp18
-new_temp18
-explicate_4
-new_temp19
-new_temp19
-explicate_4
-explicate_3
-new_temp20
-new_temp20
-explicate_3
-new_temp21
-new_temp21
-explicate_5
-explicate_3
-new_temp22
-new_temp22
-explicate_5
-explicate_4
-new_temp23
-explicate_5
-new_temp23
-new_temp23
-new_temp24
-new_temp24
-new_temp0
-new_temp0
-x
-x
-explicate_6
-new_temp25
-new_temp25
-explicate_7
-explicate_6
-new_temp26
-new_temp26
-explicate_7
-new_temp27
-new_temp27
-explicate_6
-new_temp28
-explicate_7
-new_temp29
-new_temp29
-new_temp28
-new_temp30
-new_temp30
-new_temp31
-new_temp31
-new_temp1
-explicate_7
-new_temp32
-new_temp32
-explicate_6
-new_temp33
-new_temp33
-explicate_6
-new_temp34
-new_temp34
-explicate_8
-explicate_6
-new_temp35
-new_temp35
-explicate_8
-explicate_7
-new_temp36
-new_temp36
-explicate_7
-new_temp37
-new_temp37
-explicate_9
-explicate_7
-new_temp38
-new_temp38
-explicate_9
-explicate_8
-new_temp39
-explicate_9
-new_temp39
-new_temp39
-new_temp40
-new_temp40
-new_temp1
-new_temp1
-x
+new_temp7 = x + 1
+x = new_temp7
+<ast.Constant object at 0x7fb93624c2e0>
+<ast.Constant object at 0x7fb93624c6d0>
+inject_bool(not_equal(project_big(explicate_8),project_big(explicate_9)))
+inject_bool(1)
+inject_bool(1)
+inject_bool(explicate_10!=explicate_11)
+<ast.Name object at 0x7fb93624ea40>
+inject_int(-project_int(y))
+inject_int(-project_bool(y))
+inject_big(add(project_big(explicate_12),project_big(explicate_13)))
+inject_int(explicate_14+explicate_15)
+inject_bool(not_equal(project_big(explicate_16),project_big(explicate_17)))
+inject_bool(1)
+inject_bool(1)
+inject_bool(explicate_18!=explicate_19)
+<ast.Name object at 0x7fb93624eda0>
+inject_big(add(project_big(explicate_20),project_big(explicate_21)))
+inject_int(explicate_22+explicate_23)
+<ast.Name object at 0x7fb93624e170>
+inject_big(add(project_big(explicate_24),project_big(explicate_25)))
+inject_int(explicate_26+explicate_27)
+<ast.Name object at 0x7fb93624dde0>

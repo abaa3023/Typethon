@@ -3,6 +3,21 @@ Illegal character ']'
 Syntax error at '=='
 Illegal character '{'
 Illegal character '}'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Compare(
+                        left=List(elts=[], ctx=Load()),
+                        ops=[
+                            Eq()],
+                        comparators=[
+                            Dict(keys=[], values=[])])],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(body=[], type_ignores=[])
 --------------Original code----------------

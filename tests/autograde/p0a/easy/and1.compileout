@@ -1,6 +1,80 @@
 Syntax error at 'and'
 Syntax error at 'and'
 Syntax error at 'and'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Constant(value=1)),
+        Assign(
+            targets=[
+                Name(id='y', ctx=Store())],
+            value=Constant(value=2)),
+        Assign(
+            targets=[
+                Name(id='z', ctx=Store())],
+            value=Constant(value=3)),
+        Assign(
+            targets=[
+                Name(id='w', ctx=Store())],
+            value=Constant(value=4)),
+        Assign(
+            targets=[
+                Name(id='v', ctx=Store())],
+            value=BinOp(
+                left=BinOp(
+                    left=BinOp(
+                        left=Name(id='x', ctx=Load()),
+                        op=Add(),
+                        right=Name(id='y', ctx=Load())),
+                    op=Add(),
+                    right=Name(id='z', ctx=Load())),
+                op=Add(),
+                right=Name(id='w', ctx=Load()))),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    BoolOp(
+                        op=And(),
+                        values=[
+                            BoolOp(
+                                op=And(),
+                                values=[
+                                    Name(id='x', ctx=Load()),
+                                    Name(id='y', ctx=Load())]),
+                            BoolOp(
+                                op=And(),
+                                values=[
+                                    Name(id='z', ctx=Load()),
+                                    Name(id='w', ctx=Load())])])],
+                keywords=[])),
+        Assign(
+            targets=[
+                Name(id='v', ctx=Store())],
+            value=BinOp(
+                left=BinOp(
+                    left=BinOp(
+                        left=Name(id='v', ctx=Load()),
+                        op=Add(),
+                        right=Name(id='v', ctx=Load())),
+                    op=Add(),
+                    right=Name(id='v', ctx=Load())),
+                op=Add(),
+                right=Name(id='v', ctx=Load()))),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    BoolOp(
+                        op=And(),
+                        values=[
+                            Name(id='v', ctx=Load()),
+                            Name(id='v', ctx=Load())])],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(body=[], type_ignores=[])
 --------------Original code----------------

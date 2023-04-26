@@ -2,6 +2,21 @@ Illegal character '['
 Illegal character ']'
 Illegal character '{'
 Illegal character '}'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Compare(
+                        left=List(elts=[], ctx=Load()),
+                        ops=[
+                            Is()],
+                        comparators=[
+                            Dict(keys=[], values=[])])],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(
     body=[

@@ -4,6 +4,32 @@ Illegal character '}'
 Illegal character '{'
 Illegal character ':'
 Illegal character '}'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Dict(
+                keys=[
+                    Constant(value=1)],
+                values=[
+                    Constant(value=2)])),
+        Assign(
+            targets=[
+                Name(id='y', ctx=Store())],
+            value=Dict(
+                keys=[
+                    Constant(value=2)],
+                values=[
+                    Name(id='x', ctx=Load())])),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='y', ctx=Load())],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(
     body=[
@@ -78,8 +104,8 @@ x = 1
 y = 2
 x
 print(y)
-<ast.Constant object at 0x7f9522103100>
-<ast.Constant object at 0x7f95221030a0>
+<ast.Constant object at 0x7f63401fc3a0>
+<ast.Constant object at 0x7f63401fc340>
 
 x = inject_int(1)
 y = inject_int(2)
@@ -125,7 +151,7 @@ Interference Graph:  {'new_temp0': set(), 'x': set(), 'new_temp1': set(), 'y': s
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 1, 'x': 1, 'new_temp1': 1, 'y': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 1, 'new_temp1': 1, 'y': 1, 'x': 1}
 Spilled set:
  set()
 
@@ -138,7 +164,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'new_temp0': 'eax', 'x': 'eax', 'new_temp1': 'eax', 'y': 'eax'}
+Homes for CFG0:  {'new_temp0': 'eax', 'new_temp1': 'eax', 'y': 'eax', 'x': 'eax'}
 new_temp0
 new_temp0
 x

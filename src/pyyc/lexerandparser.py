@@ -16,7 +16,7 @@ reserved = {    # dictionary defines keywords and associated token types
 #TODO - Need INDENT AND DEDENT
 #tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'COLON', 'IF', 'ELSE', 'WHILE', 'INT_WORD', 'NOT', 'AND', 'OR', 'EQUAL_EQUAL', 'NOT_EQUAL', 'INDENT', 'DEDENT'] + list(reserved.values()) #include reserved token types with other tokens
 
-tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'EQUAL_EQUAL'] + list(reserved.values()) #include reserved token types with other tokens
+tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'EQUAL_EQUAL','NOT_EQUAL'] + list(reserved.values()) #include reserved token types with other tokens
 
 #p0
 t_PRINT = r'print'
@@ -31,6 +31,7 @@ t_ignore = ' \t'
 
 #p0a
 t_EQUAL_EQUAL = r'\=='
+t_NOT_EQUAL = r'\!='
 t_INT_FUNC=r'int'
 
 
@@ -180,6 +181,10 @@ def p_int_func_expression(t):
 def p_compare_equals_expression(t):
     'expression : expression EQUAL_EQUAL expression'
     t[0] = Compare(left=t[1], ops=[Eq()], comparators=[t[3]], keywords=[])
+    
+def p_compare_notequals_expression(t):
+    'expression : expression NOT_EQUAL expression'
+    t[0] = Compare(left=t[1], ops=[NotEq()], comparators=[t[3]], keywords=[])    
 #------------------------------------------------------------------------
 
 

@@ -14,6 +14,53 @@ Illegal character ']'
 Illegal character '['
 Illegal character ']'
 Syntax error at ')'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=List(
+                elts=[
+                    Constant(value=1),
+                    Constant(value=2)],
+                ctx=Load())),
+        Assign(
+            targets=[
+                Name(id='y', ctx=Store())],
+            value=List(
+                elts=[
+                    Constant(value=3),
+                    Constant(value=4)],
+                ctx=Load())),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    BinOp(
+                        left=BinOp(
+                            left=BinOp(
+                                left=Subscript(
+                                    value=Name(id='x', ctx=Load()),
+                                    slice=Constant(value=0),
+                                    ctx=Load()),
+                                op=Add(),
+                                right=Subscript(
+                                    value=Name(id='y', ctx=Load()),
+                                    slice=Constant(value=0),
+                                    ctx=Load())),
+                            op=Add(),
+                            right=Subscript(
+                                value=Name(id='x', ctx=Load()),
+                                slice=Constant(value=1),
+                                ctx=Load())),
+                        op=Add(),
+                        right=Subscript(
+                            value=Name(id='y', ctx=Load()),
+                            slice=Constant(value=1),
+                            ctx=Load()))],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(body=[], type_ignores=[])
 --------------Original code----------------

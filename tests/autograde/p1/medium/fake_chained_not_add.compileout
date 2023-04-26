@@ -1,6 +1,23 @@
 Syntax error at 'not'
 Illegal character '['
 Illegal character ']'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    BinOp(
+                        left=UnaryOp(
+                            op=Not(),
+                            operand=UnaryOp(
+                                op=Not(),
+                                operand=List(elts=[], ctx=Load()))),
+                        op=Add(),
+                        right=Constant(value=1))],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(body=[], type_ignores=[])
 --------------Original code----------------

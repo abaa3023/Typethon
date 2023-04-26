@@ -3,6 +3,27 @@ Illegal character ','
 Illegal character '['
 Illegal character ']'
 Illegal character ']'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=List(
+                elts=[
+                    Constant(value=1),
+                    List(
+                        elts=[
+                            Constant(value=2)],
+                        ctx=Load())],
+                ctx=Load())),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='x', ctx=Load())],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(
     body=[
@@ -56,7 +77,7 @@ Module(
 x = 1
 2
 print(x)
-<ast.Constant object at 0x7f3115e23100>
+<ast.Constant object at 0x7fdcb0e78100>
 
 x = inject_int(1)
 print(x)

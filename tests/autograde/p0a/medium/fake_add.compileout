@@ -1,4 +1,23 @@
 Syntax error at '0'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    BinOp(
+                        left=Call(
+                            func=Name(id='int', ctx=Load()),
+                            args=[
+                                UnaryOp(
+                                    op=Not(),
+                                    operand=Constant(value=0))],
+                            keywords=[]),
+                        op=Add(),
+                        right=Constant(value=1))],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(body=[], type_ignores=[])
 --------------Original code----------------

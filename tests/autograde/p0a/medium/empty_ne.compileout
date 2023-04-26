@@ -1,7 +1,37 @@
-Illegal character '!'
-Syntax error at '='
-Illegal character '!'
-Syntax error at '='
+Syntax error at 'and'
+Syntax error at ')'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    BoolOp(
+                        op=And(),
+                        values=[
+                            Call(
+                                func=Name(id='int', ctx=Load()),
+                                args=[
+                                    Compare(
+                                        left=Constant(value=1),
+                                        ops=[
+                                            NotEq()],
+                                        comparators=[
+                                            Constant(value=0)])],
+                                keywords=[]),
+                            Call(
+                                func=Name(id='int', ctx=Load()),
+                                args=[
+                                    Compare(
+                                        left=Constant(value=0),
+                                        ops=[
+                                            NotEq()],
+                                        comparators=[
+                                            Constant(value=0)])],
+                                keywords=[])])],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(body=[], type_ignores=[])
 --------------Original code----------------

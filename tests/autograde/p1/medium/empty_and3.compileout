@@ -3,6 +3,23 @@ Illegal character '{'
 Illegal character '}'
 Illegal character ']'
 Syntax error at '2'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    BoolOp(
+                        op=And(),
+                        values=[
+                            List(
+                                elts=[
+                                    Dict(keys=[], values=[])],
+                                ctx=Load()),
+                            Constant(value=2)])],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(body=[], type_ignores=[])
 --------------Original code----------------

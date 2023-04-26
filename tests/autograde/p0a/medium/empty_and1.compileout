@@ -1,4 +1,31 @@
 Syntax error at 'and'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Call(
+                        func=Name(id='int', ctx=Load()),
+                        args=[
+                            Compare(
+                                left=BoolOp(
+                                    op=And(),
+                                    values=[
+                                        Constant(value=1),
+                                        Constant(value=2)]),
+                                ops=[
+                                    Eq()],
+                                comparators=[
+                                    BoolOp(
+                                        op=And(),
+                                        values=[
+                                            Constant(value=3),
+                                            Constant(value=5)])])],
+                        keywords=[])],
+                keywords=[]))],
+    type_ignores=[])
 ------------------Tree with my parser--------------
 Module(body=[], type_ignores=[])
 --------------Original code----------------
