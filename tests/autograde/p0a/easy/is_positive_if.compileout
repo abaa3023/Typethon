@@ -95,15 +95,15 @@ new_temp2 = int(new_temp1)
 if new_temp2:
     is_positive = 0
 print(is_positive)
-<ast.Constant object at 0x7fd4b06fcfa0>
-<ast.Constant object at 0x7fd4b06fcf40>
+<ast.Constant object at 0x7fed7e3b3e50>
+<ast.Constant object at 0x7fed7e400fd0>
 inject_bool(not_equal(project_big(explicate_3),project_big(explicate_4)))
 inject_bool(1)
 inject_bool(1)
 inject_bool(explicate_5!=explicate_6)
-<ast.Name object at 0x7fd4b06fd300>
+<ast.Name object at 0x7fed7e4012a0>
 inject_int(project_bool(explicate_7))
-<ast.Constant object at 0x7fd4b06fccd0>
+<ast.Constant object at 0x7fed7e400df0>
 
 x = inject_int(12)
 is_positive = inject_int(1)
@@ -346,14 +346,14 @@ call  print is_positive
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp2': {'eax', 'new_temp23', 'explicate_7', 'new_temp24', 'new_temp9', 'explicate_4', 'x', 'new_temp18', 'new_temp15', 'explicate_5', 'new_temp22', 'explicate_3', 'new_temp13', 'new_temp20', 'new_temp14', 'new_temp12', 'new_temp0', 'new_temp25', 'is_positive', 'new_temp10', 'new_temp1', 'new_temp19', 'new_temp8', 'edx', 'new_temp17', 'explicate_6', 'new_temp29', 'new_temp26', 'new_temp27', 'new_temp28', 'new_temp16', 'ecx', 'new_temp21', 'new_temp11'}, 'eax': {'is_positive', 'explicate_5', 'explicate_7', 'explicate_3', 'x', 'new_temp13', 'new_temp2', 'explicate_4', 'new_temp26'}, 'ecx': {'is_positive', 'explicate_5', 'explicate_7', 'explicate_3', 'x', 'new_temp13', 'new_temp2', 'explicate_4'}, 'edx': {'is_positive', 'explicate_5', 'explicate_7', 'explicate_3', 'x', 'new_temp13', 'new_temp2', 'explicate_4'}, 'new_temp8': {'new_temp2'}, 'x': {'is_positive', 'eax', 'ecx', 'new_temp2', 'new_temp9', 'edx'}, 'new_temp9': {'new_temp2', 'x'}, 'is_positive': {'eax', 'new_temp23', 'explicate_7', 'new_temp24', 'new_temp2', 'x', 'explicate_4', 'new_temp32', 'new_temp30', 'new_temp18', 'new_temp15', 'explicate_5', 'new_temp22', 'explicate_3', 'new_temp13', 'new_temp20', 'new_temp14', 'new_temp12', 'new_temp0', 'new_temp25', 'new_temp10', 'new_temp31', 'new_temp1', 'new_temp19', 'edx', 'new_temp17', 'explicate_6', 'new_temp29', 'new_temp26', 'new_temp27', 'new_temp28', 'new_temp16', 'ecx', 'new_temp21', 'new_temp11'}, 'explicate_3': {'is_positive', 'new_temp18', 'eax', 'new_temp10', 'new_temp20', 'edx', 'ecx', 'new_temp2', 'explicate_4', 'new_temp12', 'new_temp11'}, 'new_temp10': {'is_positive', 'explicate_3', 'new_temp2'}, 'explicate_4': {'is_positive', 'new_temp18', 'explicate_5', 'eax', 'new_temp23', 'new_temp22', 'explicate_3', 'new_temp13', 'new_temp20', 'ecx', 'new_temp2', 'edx', 'new_temp12', 'new_temp21', 'new_temp11'}, 'new_temp11': {'is_positive', 'explicate_3', 'new_temp2', 'explicate_4'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp12': {'is_positive', 'explicate_3', 'new_temp2', 'explicate_4'}, 'new_temp18': {'is_positive', 'explicate_3', 'new_temp2', 'explicate_4'}, 'new_temp13': {'edx', 'is_positive', 'ecx', 'new_temp2', 'eax', 'explicate_4', 'new_temp14'}, 'new_temp14': {'is_positive', 'new_temp13', 'new_temp2'}, 'new_temp15': {'is_positive', 'new_temp2'}, 'new_temp16': {'is_positive', 'new_temp2'}, 'new_temp0': {'is_positive', 'new_temp2'}, 'new_temp17': {'is_positive', 'new_temp2'}, 'new_temp19': {'is_positive', 'new_temp2'}, 'new_temp20': {'is_positive', 'explicate_3', 'new_temp2', 'explicate_4'}, 'new_temp1': {'is_positive', 'new_temp2'}, 'explicate_7': {'is_positive', 'ecx', 'new_temp2', 'eax', 'edx', 'new_temp29'}, 'new_temp29': {'is_positive', 'explicate_7', 'new_temp2'}, 'new_temp21': {'is_positive', 'new_temp2', 'explicate_4'}, 'explicate_5': {'explicate_4', 'new_temp25', 'is_positive', 'eax', 'new_temp23', 'new_temp24', 'ecx', 'new_temp2', 'edx', 'explicate_6'}, 'new_temp22': {'is_positive', 'new_temp2', 'explicate_4'}, 'new_temp30': {'is_positive'}, 'new_temp31': {'is_positive'}, 'new_temp32': {'is_positive'}, 'new_temp23': {'is_positive', 'explicate_5', 'new_temp2', 'explicate_4'}, 'new_temp33': set(), 'new_temp24': {'is_positive', 'explicate_5', 'new_temp2'}, 'explicate_6': {'is_positive', 'explicate_5', 'new_temp2'}, 'new_temp25': {'is_positive', 'explicate_5', 'new_temp2'}, 'new_temp26': {'is_positive', 'new_temp2', 'eax'}, 'new_temp27': {'is_positive', 'new_temp2'}, 'new_temp28': {'is_positive', 'new_temp2'}}
+Interference Graph:  {'new_temp2': {'explicate_6', 'explicate_7', 'explicate_3', 'is_positive', 'new_temp8', 'new_temp11', 'new_temp0', 'edx', 'new_temp15', 'new_temp24', 'new_temp29', 'new_temp27', 'new_temp1', 'new_temp12', 'new_temp14', 'new_temp18', 'new_temp20', 'new_temp26', 'explicate_4', 'new_temp28', 'new_temp21', 'new_temp25', 'new_temp16', 'new_temp10', 'new_temp22', 'x', 'new_temp19', 'new_temp13', 'new_temp23', 'new_temp17', 'explicate_5', 'ecx', 'new_temp9', 'eax'}, 'eax': {'explicate_7', 'explicate_3', 'new_temp13', 'new_temp2', 'is_positive', 'x', 'new_temp26', 'explicate_5', 'explicate_4'}, 'ecx': {'explicate_7', 'explicate_3', 'new_temp13', 'new_temp2', 'is_positive', 'x', 'explicate_5', 'explicate_4'}, 'edx': {'explicate_7', 'explicate_3', 'new_temp13', 'new_temp2', 'is_positive', 'x', 'explicate_5', 'explicate_4'}, 'new_temp8': {'new_temp2'}, 'x': {'new_temp2', 'is_positive', 'ecx', 'edx', 'new_temp9', 'eax'}, 'new_temp9': {'x', 'new_temp2'}, 'is_positive': {'explicate_6', 'explicate_7', 'explicate_3', 'new_temp11', 'new_temp0', 'edx', 'new_temp15', 'new_temp24', 'new_temp29', 'new_temp27', 'new_temp1', 'new_temp31', 'new_temp12', 'new_temp14', 'new_temp2', 'new_temp18', 'new_temp20', 'explicate_4', 'new_temp26', 'new_temp28', 'new_temp21', 'new_temp25', 'new_temp16', 'new_temp10', 'new_temp22', 'new_temp30', 'x', 'new_temp19', 'new_temp13', 'new_temp23', 'new_temp17', 'explicate_5', 'ecx', 'eax', 'new_temp32'}, 'explicate_3': {'eax', 'new_temp12', 'new_temp2', 'new_temp10', 'is_positive', 'new_temp11', 'new_temp18', 'new_temp20', 'ecx', 'edx', 'explicate_4'}, 'new_temp10': {'explicate_3', 'new_temp2', 'is_positive'}, 'explicate_4': {'new_temp21', 'explicate_3', 'new_temp12', 'new_temp13', 'new_temp2', 'new_temp11', 'is_positive', 'new_temp22', 'new_temp18', 'new_temp23', 'new_temp20', 'explicate_5', 'ecx', 'edx', 'eax'}, 'new_temp11': {'explicate_3', 'explicate_4', 'new_temp2', 'is_positive'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp12': {'explicate_3', 'explicate_4', 'new_temp2', 'is_positive'}, 'new_temp18': {'explicate_3', 'explicate_4', 'new_temp2', 'is_positive'}, 'new_temp13': {'new_temp14', 'eax', 'ecx', 'edx', 'explicate_4', 'new_temp2', 'is_positive'}, 'new_temp14': {'new_temp13', 'new_temp2', 'is_positive'}, 'new_temp15': {'new_temp2', 'is_positive'}, 'new_temp16': {'new_temp2', 'is_positive'}, 'new_temp0': {'new_temp2', 'is_positive'}, 'new_temp17': {'new_temp2', 'is_positive'}, 'new_temp19': {'new_temp2', 'is_positive'}, 'new_temp20': {'explicate_3', 'explicate_4', 'new_temp2', 'is_positive'}, 'new_temp1': {'new_temp2', 'is_positive'}, 'explicate_7': {'new_temp29', 'ecx', 'edx', 'eax', 'new_temp2', 'is_positive'}, 'new_temp29': {'explicate_7', 'new_temp2', 'is_positive'}, 'new_temp21': {'explicate_4', 'new_temp2', 'is_positive'}, 'explicate_5': {'new_temp24', 'explicate_6', 'new_temp25', 'new_temp2', 'is_positive', 'new_temp23', 'ecx', 'edx', 'eax', 'explicate_4'}, 'new_temp22': {'explicate_4', 'new_temp2', 'is_positive'}, 'new_temp30': {'is_positive'}, 'new_temp31': {'is_positive'}, 'new_temp32': {'is_positive'}, 'new_temp23': {'is_positive', 'explicate_4', 'new_temp2', 'explicate_5'}, 'new_temp33': set(), 'new_temp24': {'explicate_5', 'new_temp2', 'is_positive'}, 'explicate_6': {'explicate_5', 'new_temp2', 'is_positive'}, 'new_temp25': {'explicate_5', 'new_temp2', 'is_positive'}, 'new_temp26': {'eax', 'new_temp2', 'is_positive'}, 'new_temp27': {'new_temp2', 'is_positive'}, 'new_temp28': {'new_temp2', 'is_positive'}}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'is_positive': 4, 'new_temp13': 5, 'explicate_4': 6, 'new_temp2': 7, 'explicate_3': 5, 'explicate_5': 5, 'x': 5, 'explicate_7': 5, 'new_temp11': 1, 'new_temp12': 1, 'new_temp20': 1, 'new_temp18': 1, 'new_temp23': 1, 'new_temp21': 1, 'new_temp14': 1, 'new_temp22': 1, 'new_temp26': 2, 'new_temp29': 1, 'explicate_6': 1, 'new_temp24': 1, 'new_temp10': 1, 'new_temp25': 1, 'new_temp32': 1, 'new_temp17': 1, 'new_temp9': 1, 'new_temp19': 1, 'new_temp1': 1, 'new_temp16': 1, 'new_temp31': 1, 'new_temp15': 1, 'new_temp30': 1, 'new_temp28': 1, 'new_temp27': 1, 'new_temp0': 1, 'new_temp8': 1, 'new_temp33': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'explicate_5': 4, 'explicate_4': 5, 'new_temp2': 6, 'is_positive': 7, 'new_temp13': 4, 'explicate_3': 4, 'x': 4, 'explicate_7': 4, 'new_temp20': 1, 'new_temp23': 1, 'new_temp18': 1, 'new_temp12': 1, 'new_temp11': 1, 'new_temp26': 2, 'new_temp9': 1, 'new_temp14': 1, 'new_temp29': 1, 'new_temp24': 1, 'new_temp22': 1, 'new_temp10': 1, 'new_temp25': 1, 'new_temp21': 1, 'explicate_6': 1, 'new_temp15': 1, 'new_temp27': 1, 'new_temp0': 1, 'new_temp17': 1, 'new_temp8': 1, 'new_temp16': 1, 'new_temp19': 1, 'new_temp28': 1, 'new_temp1': 1, 'new_temp30': 1, 'new_temp32': 1, 'new_temp31': 1, 'new_temp33': 1}
 Spilled set:
- {'new_temp2'}
+ {'is_positive'}
 
 
 --------------Spilling----------------
@@ -364,13 +364,12 @@ continue_looping
 
 
 
-Homes for CFG0:  {'new_temp2': -4, 'is_positive': 'edi', 'new_temp13': 'ebx', 'explicate_4': 'esi', 'explicate_3': 'ebx', 'explicate_5': 'ebx', 'x': 'ebx', 'explicate_7': 'ebx', 'new_temp11': 'eax', 'new_temp12': 'eax', 'new_temp20': 'eax', 'new_temp18': 'eax', 'new_temp23': 'eax', 'new_temp21': 'eax', 'new_temp14': 'eax', 'new_temp22': 'eax', 'new_temp26': 'ecx', 'new_temp29': 'eax', 'explicate_6': 'eax', 'new_temp24': 'eax', 'new_temp10': 'eax', 'new_temp25': 'eax', 'new_temp32': 'eax', 'new_temp17': 'eax', 'new_temp9': 'eax', 'new_temp19': 'eax', 'new_temp1': 'eax', 'new_temp16': 'eax', 'new_temp31': 'eax', 'new_temp15': 'eax', 'new_temp30': 'eax', 'new_temp28': 'eax', 'new_temp27': 'eax', 'new_temp0': 'eax', 'new_temp8': 'eax', 'new_temp33': 'eax'}
+Homes for CFG0:  {'is_positive': -4, 'explicate_5': 'edi', 'explicate_4': 'ebx', 'new_temp2': 'esi', 'new_temp13': 'edi', 'explicate_3': 'edi', 'x': 'edi', 'explicate_7': 'edi', 'new_temp20': 'eax', 'new_temp23': 'eax', 'new_temp18': 'eax', 'new_temp12': 'eax', 'new_temp11': 'eax', 'new_temp26': 'ecx', 'new_temp9': 'eax', 'new_temp14': 'eax', 'new_temp29': 'eax', 'new_temp24': 'eax', 'new_temp22': 'eax', 'new_temp10': 'eax', 'new_temp25': 'eax', 'new_temp21': 'eax', 'explicate_6': 'eax', 'new_temp15': 'eax', 'new_temp27': 'eax', 'new_temp0': 'eax', 'new_temp17': 'eax', 'new_temp8': 'eax', 'new_temp16': 'eax', 'new_temp19': 'eax', 'new_temp28': 'eax', 'new_temp1': 'eax', 'new_temp30': 'eax', 'new_temp32': 'eax', 'new_temp31': 'eax', 'new_temp33': 'eax'}
 new_temp8
 new_temp8
 x
 new_temp9
 new_temp9
-is_positive
 x
 explicate_3
 new_temp10
@@ -447,9 +446,9 @@ new_temp30
 new_temp30
 new_temp31
 new_temp31
+new_temp2
+new_temp2
 new_temp32
 new_temp32
 new_temp33
 new_temp33
-is_positive
-is_positive

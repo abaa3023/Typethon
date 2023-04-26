@@ -52,7 +52,7 @@ START0:
  pushl %ebx
  call set_subscript
  addl $(12), %esp
- movl %ebx, %esi
+ movl %ebx, %edi
  pushl $(3)
  call inject_int
  addl $(4), %esp
@@ -62,7 +62,7 @@ START0:
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, %edi
+ movl %eax, %esi
  pushl $(0)
  call inject_int
  addl $(4), %esp
@@ -72,7 +72,7 @@ START0:
  addl $(4), %esp
  pushl %eax
  pushl %ebx
- pushl %edi
+ pushl %esi
  call set_subscript
  addl $(12), %esp
  pushl $(1)
@@ -84,7 +84,7 @@ START0:
  addl $(4), %esp
  pushl %eax
  pushl %ebx
- pushl %edi
+ pushl %esi
  call set_subscript
  addl $(12), %esp
  pushl $(2)
@@ -96,22 +96,23 @@ START0:
  addl $(4), %esp
  pushl %eax
  pushl %ebx
- pushl %edi
+ pushl %esi
  call set_subscript
  addl $(12), %esp
- pushl %esi
- call print_any
- addl $(4), %esp
+ movl %esi, %ebx
  pushl %edi
  call print_any
  addl $(4), %esp
- movl %esi, %eax
- movl %edi, %esi
- movl %eax, %edi
- pushl %esi
+ pushl %ebx
  call print_any
  addl $(4), %esp
+ movl %edi, %eax
+ movl %ebx, %edi
+ movl %eax, %ebx
  pushl %edi
+ call print_any
+ addl $(4), %esp
+ pushl %ebx
  call print_any
  addl $(4), %esp
 END0:

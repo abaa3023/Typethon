@@ -133,15 +133,15 @@ print(tmp2)
 eval(input())
 inject_int(-project_int(new_temp0))
 inject_int(-project_bool(new_temp0))
-<ast.Name object at 0x7f9f340a5060>
+<ast.Name object at 0x7f9dd9365240>
 inject_big(add(project_big(explicate_5),project_big(explicate_6)))
 inject_int(explicate_7+explicate_8)
-<ast.Name object at 0x7f9f340a4dc0>
+<ast.Name object at 0x7f9dd9364e50>
 eval(input())
-<ast.Name object at 0x7f9f340a4c40>
+<ast.Name object at 0x7f9dd9364d60>
 inject_big(add(project_big(explicate_9),project_big(explicate_10)))
 inject_int(explicate_11+explicate_12)
-<ast.Name object at 0x7f9f340a4b20>
+<ast.Name object at 0x7f9dd9364be0>
 
 new_temp0 = eval(input())
 if(is_int(new_temp0)):
@@ -524,14 +524,14 @@ call  print tmp2
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp4': {'new_temp26', 'edx', 'new_temp38', 'new_temp2', 'new_temp14', 'new_temp22', 'explicate_7', 'new_temp33', 'new_temp36', 'new_temp16', 'new_temp13', 'new_temp18', 'explicate_8', 'explicate_5', 'explicate_9', 'new_temp32', 'new_temp40', 'new_temp20', 'new_temp3', 'eax', 'tmp0', 'new_temp34', 'tmp1', 'new_temp23', 'new_temp45', 'new_temp39', 'new_temp19', 'ecx', 'new_temp17', 'new_temp24', 'explicate_6', 'new_temp31', 'new_temp37', 'new_temp15', 'new_temp27', 'new_temp28', 'new_temp0', 'new_temp30', 'new_temp21', 'new_temp1', 'new_temp25', 'new_temp29', 'new_temp35', 'explicate_10'}, 'eax': {'new_temp41', 'new_temp0', 'explicate_5', 'explicate_9', 'explicate_10', 'explicate_11', 'new_temp2', 'new_temp4', 'explicate_6', 'new_temp25', 'explicate_7', 'new_temp1', 'tmp1'}, 'ecx': {'new_temp41', 'new_temp0', 'explicate_5', 'explicate_9', 'explicate_10', 'explicate_11', 'new_temp2', 'new_temp4', 'explicate_6', 'new_temp25', 'explicate_7', 'new_temp1', 'tmp1'}, 'edx': {'new_temp41', 'new_temp0', 'explicate_5', 'explicate_9', 'explicate_10', 'explicate_11', 'new_temp2', 'new_temp4', 'explicate_6', 'new_temp25', 'explicate_7', 'new_temp1', 'tmp1'}, 'new_temp2': {'new_temp23', 'edx', 'ecx', 'new_temp19', 'new_temp17', 'new_temp14', 'explicate_6', 'new_temp24', 'new_temp22', 'new_temp15', 'new_temp20', 'new_temp16', 'new_temp13', 'new_temp18', 'new_temp0', 'explicate_5', 'new_temp21', 'new_temp4', 'eax', 'new_temp29', 'tmp0', 'new_temp1'}, 'new_temp1': {'new_temp13', 'new_temp18', 'new_temp0', 'edx', 'ecx', 'new_temp2', 'new_temp14', 'eax', 'new_temp4'}, 'new_temp13': {'new_temp4', 'new_temp2', 'new_temp1'}, 'new_temp0': {'new_temp18', 'edx', 'ecx', 'new_temp2', 'new_temp4', 'eax', 'new_temp14', 'new_temp1'}, 'new_temp14': {'new_temp1', 'new_temp0', 'new_temp2', 'new_temp4'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp15': {'new_temp2', 'new_temp4'}, 'new_temp16': {'new_temp2', 'new_temp4'}, 'new_temp17': {'new_temp2', 'new_temp4'}, 'new_temp18': {'new_temp1', 'new_temp0', 'new_temp2', 'new_temp4'}, 'tmp0': {'new_temp2', 'new_temp4', 'tmp1'}, 'explicate_5': {'new_temp23', 'new_temp30', 'explicate_6', 'edx', 'ecx', 'new_temp2', 'new_temp4', 'eax', 'new_temp24', 'new_temp29', 'new_temp22'}, 'new_temp22': {'new_temp2', 'new_temp4', 'explicate_5'}, 'explicate_6': {'new_temp23', 'new_temp25', 'explicate_5', 'new_temp30', 'new_temp32', 'edx', 'ecx', 'new_temp2', 'new_temp4', 'eax', 'new_temp24', 'new_temp29', 'new_temp31', 'new_temp33', 'explicate_7'}, 'new_temp23': {'explicate_5', 'new_temp2', 'new_temp4', 'explicate_6'}, 'new_temp19': {'new_temp2', 'new_temp4'}, 'new_temp20': {'new_temp2', 'new_temp4'}, 'new_temp21': {'new_temp2', 'new_temp4'}, 'new_temp24': {'explicate_5', 'new_temp2', 'new_temp4', 'explicate_6'}, 'new_temp29': {'explicate_5', 'new_temp2', 'new_temp4', 'explicate_6'}, 'new_temp25': {'edx', 'ecx', 'new_temp26', 'new_temp4', 'explicate_6', 'eax'}, 'new_temp26': {'new_temp25', 'new_temp4'}, 'new_temp27': {'new_temp4'}, 'new_temp28': {'new_temp4'}, 'tmp1': {'explicate_9', 'edx', 'ecx', 'new_temp38', 'new_temp4', 'eax', 'new_temp3', 'tmp0'}, 'new_temp38': {'new_temp4', 'tmp1'}, 'new_temp3': {'new_temp4', 'tmp1'}, 'explicate_9': {'new_temp45', 'new_temp46', 'new_temp39', 'edx', 'ecx', 'new_temp4', 'eax', 'new_temp40', 'explicate_10', 'tmp1'}, 'explicate_10': {'new_temp48', 'new_temp41', 'new_temp45', 'new_temp46', 'explicate_9', 'new_temp39', 'explicate_11', 'edx', 'ecx', 'new_temp47', 'new_temp4', 'eax', 'new_temp40', 'new_temp49'}, 'new_temp39': {'new_temp4', 'explicate_9', 'explicate_10'}, 'new_temp30': {'explicate_5', 'new_temp4', 'explicate_6'}, 'new_temp40': {'new_temp4', 'explicate_9', 'explicate_10'}, 'new_temp45': {'explicate_10', 'explicate_9', 'new_temp4'}, 'new_temp31': {'new_temp4', 'explicate_6'}, 'explicate_7': {'eax', 'new_temp35', 'explicate_8', 'edx', 'ecx', 'new_temp4', 'explicate_6', 'new_temp33', 'new_temp34'}, 'new_temp32': {'new_temp4', 'explicate_6'}, 'new_temp41': {'new_temp42', 'edx', 'ecx', 'eax', 'explicate_10'}, 'new_temp42': {'new_temp41'}, 'new_temp43': set(), 'new_temp44': set(), 'tmp2': set(), 'new_temp46': {'explicate_9', 'explicate_10'}, 'new_temp33': {'explicate_7', 'new_temp4', 'explicate_6'}, 'new_temp47': {'explicate_10'}, 'explicate_11': {'edx', 'ecx', 'new_temp50', 'eax', 'explicate_12', 'new_temp49', 'new_temp51', 'explicate_10'}, 'new_temp48': {'explicate_10'}, 'new_temp34': {'explicate_7', 'new_temp4'}, 'explicate_8': {'explicate_7', 'new_temp4', 'new_temp36'}, 'new_temp35': {'explicate_7', 'new_temp4'}, 'new_temp49': {'explicate_11', 'explicate_10'}, 'new_temp36': {'explicate_8', 'new_temp4'}, 'new_temp37': {'new_temp4'}, 'new_temp50': {'explicate_11'}, 'explicate_12': {'explicate_11', 'new_temp52'}, 'new_temp51': {'explicate_11'}, 'new_temp52': {'explicate_12'}, 'new_temp53': set()}
+Interference Graph:  {'new_temp4': {'explicate_7', 'new_temp27', 'tmp0', 'new_temp25', 'new_temp17', 'new_temp23', 'new_temp22', 'new_temp34', 'new_temp38', 'new_temp40', 'new_temp19', 'ecx', 'new_temp24', 'new_temp26', 'new_temp32', 'new_temp3', 'eax', 'new_temp15', 'new_temp29', 'new_temp28', 'new_temp30', 'new_temp37', 'explicate_10', 'new_temp16', 'edx', 'new_temp31', 'new_temp33', 'tmp1', 'new_temp14', 'new_temp2', 'new_temp36', 'explicate_8', 'new_temp1', 'new_temp45', 'explicate_6', 'new_temp21', 'new_temp35', 'explicate_9', 'explicate_5', 'new_temp13', 'new_temp18', 'new_temp39', 'new_temp0', 'new_temp20'}, 'eax': {'explicate_6', 'explicate_7', 'explicate_11', 'explicate_9', 'new_temp25', 'explicate_5', 'explicate_10', 'tmp1', 'new_temp41', 'new_temp0', 'new_temp2', 'new_temp4', 'new_temp1'}, 'ecx': {'explicate_6', 'explicate_7', 'explicate_11', 'explicate_9', 'new_temp25', 'explicate_5', 'explicate_10', 'tmp1', 'new_temp41', 'new_temp0', 'new_temp2', 'new_temp4', 'new_temp1'}, 'edx': {'explicate_6', 'explicate_7', 'explicate_11', 'explicate_9', 'new_temp25', 'explicate_5', 'explicate_10', 'tmp1', 'new_temp41', 'new_temp0', 'new_temp2', 'new_temp4', 'new_temp1'}, 'new_temp2': {'new_temp16', 'edx', 'tmp0', 'new_temp17', 'new_temp23', 'new_temp22', 'new_temp14', 'new_temp1', 'new_temp19', 'explicate_6', 'new_temp21', 'ecx', 'new_temp24', 'new_temp4', 'explicate_5', 'eax', 'new_temp13', 'new_temp15', 'new_temp18', 'new_temp29', 'new_temp0', 'new_temp20'}, 'new_temp1': {'ecx', 'edx', 'eax', 'new_temp13', 'new_temp18', 'new_temp0', 'new_temp14', 'new_temp4', 'new_temp2'}, 'new_temp13': {'new_temp4', 'new_temp2', 'new_temp1'}, 'new_temp0': {'ecx', 'edx', 'eax', 'new_temp18', 'new_temp2', 'new_temp14', 'new_temp4', 'new_temp1'}, 'new_temp14': {'new_temp4', 'new_temp0', 'new_temp1', 'new_temp2'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp15': {'new_temp4', 'new_temp2'}, 'new_temp16': {'new_temp4', 'new_temp2'}, 'new_temp17': {'new_temp4', 'new_temp2'}, 'new_temp18': {'new_temp4', 'new_temp0', 'new_temp1', 'new_temp2'}, 'tmp0': {'new_temp4', 'tmp1', 'new_temp2'}, 'explicate_5': {'explicate_6', 'ecx', 'new_temp24', 'edx', 'eax', 'new_temp23', 'new_temp29', 'new_temp30', 'new_temp22', 'new_temp2', 'new_temp4'}, 'new_temp22': {'new_temp4', 'explicate_5', 'new_temp2'}, 'explicate_6': {'explicate_7', 'ecx', 'new_temp24', 'edx', 'new_temp31', 'new_temp25', 'new_temp33', 'new_temp32', 'explicate_5', 'eax', 'new_temp23', 'new_temp29', 'new_temp30', 'new_temp2', 'new_temp4'}, 'new_temp23': {'explicate_6', 'new_temp4', 'explicate_5', 'new_temp2'}, 'new_temp19': {'new_temp4', 'new_temp2'}, 'new_temp20': {'new_temp4', 'new_temp2'}, 'new_temp21': {'new_temp4', 'new_temp2'}, 'new_temp24': {'explicate_6', 'new_temp4', 'explicate_5', 'new_temp2'}, 'new_temp29': {'explicate_6', 'new_temp4', 'explicate_5', 'new_temp2'}, 'new_temp25': {'explicate_6', 'ecx', 'new_temp26', 'edx', 'new_temp4', 'eax'}, 'new_temp26': {'new_temp4', 'new_temp25'}, 'new_temp27': {'new_temp4'}, 'new_temp28': {'new_temp4'}, 'tmp1': {'ecx', 'edx', 'tmp0', 'explicate_9', 'new_temp3', 'eax', 'new_temp38', 'new_temp4'}, 'new_temp38': {'new_temp4', 'tmp1'}, 'new_temp3': {'new_temp4', 'tmp1'}, 'explicate_9': {'ecx', 'edx', 'eax', 'tmp1', 'new_temp39', 'new_temp46', 'new_temp4', 'new_temp40', 'new_temp45', 'explicate_10'}, 'explicate_10': {'ecx', 'edx', 'explicate_9', 'explicate_11', 'eax', 'new_temp47', 'new_temp41', 'new_temp49', 'new_temp48', 'new_temp39', 'new_temp46', 'new_temp4', 'new_temp40', 'new_temp45'}, 'new_temp39': {'new_temp4', 'explicate_9', 'explicate_10'}, 'new_temp30': {'explicate_6', 'explicate_5', 'new_temp4'}, 'new_temp40': {'new_temp4', 'explicate_10', 'explicate_9'}, 'new_temp45': {'new_temp4', 'explicate_10', 'explicate_9'}, 'new_temp31': {'explicate_6', 'new_temp4'}, 'explicate_7': {'explicate_6', 'new_temp35', 'ecx', 'edx', 'new_temp33', 'eax', 'new_temp34', 'new_temp4', 'explicate_8'}, 'new_temp32': {'explicate_6', 'new_temp4'}, 'new_temp41': {'ecx', 'new_temp42', 'edx', 'eax', 'explicate_10'}, 'new_temp42': {'new_temp41'}, 'new_temp43': set(), 'new_temp44': set(), 'tmp2': set(), 'new_temp46': {'explicate_10', 'explicate_9'}, 'new_temp33': {'explicate_6', 'explicate_7', 'new_temp4'}, 'new_temp47': {'explicate_10'}, 'explicate_11': {'ecx', 'new_temp51', 'edx', 'explicate_12', 'eax', 'new_temp49', 'new_temp50', 'explicate_10'}, 'new_temp48': {'explicate_10'}, 'new_temp34': {'new_temp4', 'explicate_7'}, 'explicate_8': {'new_temp4', 'explicate_7', 'new_temp36'}, 'new_temp35': {'new_temp4', 'explicate_7'}, 'new_temp49': {'explicate_11', 'explicate_10'}, 'new_temp36': {'new_temp4', 'explicate_8'}, 'new_temp37': {'new_temp4'}, 'new_temp50': {'explicate_11'}, 'explicate_12': {'new_temp52', 'explicate_11'}, 'new_temp51': {'explicate_11'}, 'new_temp52': {'explicate_12'}, 'new_temp53': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp1': 4, 'new_temp0': 5, 'new_temp4': 6, 'new_temp2': 7, 'explicate_10': 4, 'explicate_9': 5, 'tmp1': 4, 'new_temp25': 4, 'explicate_6': 5, 'explicate_5': 4, 'explicate_7': 4, 'new_temp41': 5, 'explicate_11': 5, 'new_temp29': 1, 'new_temp30': 1, 'new_temp24': 1, 'new_temp39': 1, 'new_temp45': 1, 'new_temp23': 1, 'new_temp40': 1, 'new_temp18': 1, 'new_temp33': 1, 'new_temp14': 1, 'new_temp35': 1, 'new_temp49': 1, 'new_temp46': 1, 'new_temp31': 1, 'new_temp34': 1, 'new_temp3': 1, 'tmp0': 1, 'new_temp32': 1, 'explicate_8': 1, 'new_temp13': 1, 'new_temp36': 2, 'new_temp22': 1, 'new_temp38': 1, 'new_temp26': 1, 'new_temp20': 1, 'new_temp21': 1, 'new_temp47': 1, 'new_temp28': 1, 'new_temp16': 1, 'new_temp27': 1, 'new_temp51': 1, 'new_temp15': 1, 'new_temp37': 1, 'explicate_12': 1, 'new_temp17': 1, 'new_temp50': 1, 'new_temp19': 1, 'new_temp52': 2, 'new_temp42': 1, 'new_temp48': 1, 'tmp2': 1, 'new_temp53': 1, 'new_temp43': 1, 'new_temp44': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 4, 'new_temp1': 5, 'new_temp2': 6, 'new_temp4': 7, 'explicate_5': 4, 'explicate_6': 5, 'new_temp25': 4, 'explicate_7': 4, 'new_temp18': 1, 'explicate_9': 4, 'tmp1': 5, 'explicate_10': 5, 'explicate_11': 4, 'new_temp41': 4, 'new_temp14': 1, 'new_temp29': 1, 'new_temp24': 1, 'new_temp23': 1, 'new_temp39': 1, 'new_temp13': 1, 'new_temp45': 1, 'new_temp33': 1, 'new_temp46': 1, 'new_temp30': 1, 'new_temp40': 1, 'new_temp22': 1, 'new_temp49': 1, 'tmp0': 1, 'new_temp20': 1, 'new_temp50': 1, 'new_temp47': 1, 'new_temp48': 1, 'new_temp15': 1, 'explicate_12': 1, 'new_temp3': 1, 'new_temp32': 1, 'new_temp42': 1, 'new_temp26': 1, 'new_temp35': 1, 'new_temp21': 1, 'new_temp52': 2, 'new_temp19': 1, 'explicate_8': 1, 'new_temp36': 2, 'new_temp38': 1, 'new_temp34': 1, 'new_temp17': 1, 'new_temp31': 1, 'new_temp16': 1, 'new_temp51': 1, 'new_temp44': 1, 'new_temp43': 1, 'new_temp37': 1, 'new_temp53': 1, 'new_temp27': 1, 'tmp2': 1, 'new_temp28': 1}
 Spilled set:
- {'new_temp2'}
+ {'new_temp4'}
 
 
 --------------Spilling----------------
@@ -542,7 +542,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'new_temp2': -4, 'new_temp1': 'edi', 'new_temp0': 'ebx', 'new_temp4': 'esi', 'explicate_10': 'edi', 'explicate_9': 'ebx', 'tmp1': 'edi', 'new_temp25': 'edi', 'explicate_6': 'ebx', 'explicate_5': 'edi', 'explicate_7': 'edi', 'new_temp41': 'ebx', 'explicate_11': 'ebx', 'new_temp29': 'eax', 'new_temp30': 'eax', 'new_temp24': 'eax', 'new_temp39': 'eax', 'new_temp45': 'eax', 'new_temp23': 'eax', 'new_temp40': 'eax', 'new_temp18': 'eax', 'new_temp33': 'eax', 'new_temp14': 'eax', 'new_temp35': 'eax', 'new_temp49': 'eax', 'new_temp46': 'eax', 'new_temp31': 'eax', 'new_temp34': 'eax', 'new_temp3': 'eax', 'tmp0': 'eax', 'new_temp32': 'eax', 'explicate_8': 'eax', 'new_temp13': 'eax', 'new_temp36': 'ecx', 'new_temp22': 'eax', 'new_temp38': 'eax', 'new_temp26': 'eax', 'new_temp20': 'eax', 'new_temp21': 'eax', 'new_temp47': 'eax', 'new_temp28': 'eax', 'new_temp16': 'eax', 'new_temp27': 'eax', 'new_temp51': 'eax', 'new_temp15': 'eax', 'new_temp37': 'eax', 'explicate_12': 'eax', 'new_temp17': 'eax', 'new_temp50': 'eax', 'new_temp19': 'eax', 'new_temp52': 'ecx', 'new_temp42': 'eax', 'new_temp48': 'eax', 'tmp2': 'eax', 'new_temp53': 'eax', 'new_temp43': 'eax', 'new_temp44': 'eax'}
+Homes for CFG0:  {'new_temp4': -4, 'new_temp0': 'edi', 'new_temp1': 'ebx', 'new_temp2': 'esi', 'explicate_5': 'edi', 'explicate_6': 'ebx', 'new_temp25': 'edi', 'explicate_7': 'edi', 'new_temp18': 'eax', 'explicate_9': 'edi', 'tmp1': 'ebx', 'explicate_10': 'ebx', 'explicate_11': 'edi', 'new_temp41': 'edi', 'new_temp14': 'eax', 'new_temp29': 'eax', 'new_temp24': 'eax', 'new_temp23': 'eax', 'new_temp39': 'eax', 'new_temp13': 'eax', 'new_temp45': 'eax', 'new_temp33': 'eax', 'new_temp46': 'eax', 'new_temp30': 'eax', 'new_temp40': 'eax', 'new_temp22': 'eax', 'new_temp49': 'eax', 'tmp0': 'eax', 'new_temp20': 'eax', 'new_temp50': 'eax', 'new_temp47': 'eax', 'new_temp48': 'eax', 'new_temp15': 'eax', 'explicate_12': 'eax', 'new_temp3': 'eax', 'new_temp32': 'eax', 'new_temp42': 'eax', 'new_temp26': 'eax', 'new_temp35': 'eax', 'new_temp21': 'eax', 'new_temp52': 'ecx', 'new_temp19': 'eax', 'explicate_8': 'eax', 'new_temp36': 'ecx', 'new_temp38': 'eax', 'new_temp34': 'eax', 'new_temp17': 'eax', 'new_temp31': 'eax', 'new_temp16': 'eax', 'new_temp51': 'eax', 'new_temp44': 'eax', 'new_temp43': 'eax', 'new_temp37': 'eax', 'new_temp53': 'eax', 'new_temp27': 'eax', 'tmp2': 'eax', 'new_temp28': 'eax'}
 new_temp13
 new_temp13
 new_temp0
@@ -593,6 +593,7 @@ new_temp27
 new_temp27
 new_temp28
 new_temp28
+new_temp2
 explicate_6
 new_temp29
 new_temp29
@@ -625,6 +626,8 @@ new_temp36
 new_temp36
 new_temp37
 new_temp37
+new_temp2
+new_temp2
 tmp1
 new_temp38
 new_temp38
@@ -651,7 +654,6 @@ new_temp43
 new_temp43
 new_temp44
 new_temp44
-new_temp4
 explicate_10
 new_temp45
 new_temp45
@@ -684,7 +686,5 @@ new_temp52
 new_temp52
 new_temp53
 new_temp53
-new_temp4
-new_temp4
 tmp2
 tmp2

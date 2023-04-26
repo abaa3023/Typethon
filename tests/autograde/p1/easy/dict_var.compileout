@@ -63,10 +63,10 @@ y = 2
 new_temp0 = {x: y}
 z = new_temp0
 print(z)
-<ast.Constant object at 0x7fb9c9a64f70>
-<ast.Constant object at 0x7fb9c9a64f10>
-<ast.Dict object at 0x7fb9c9a64e80>
-<ast.Name object at 0x7fb9c9a649a0>
+<ast.Constant object at 0x7fcfba90bee0>
+<ast.Constant object at 0x7fcfba958fa0>
+<ast.Dict object at 0x7fcfba958f10>
+<ast.Name object at 0x7fcfba958130>
 
 x = inject_int(1)
 y = inject_int(2)
@@ -125,12 +125,12 @@ call  print z
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp1': set(), 'x': {'new_temp3', 'eax', 'edx', 'new_temp2', 'ecx', 'new_temp0', 'new_temp4', 'y'}, 'eax': {'x', 'new_temp0', 'y'}, 'ecx': {'x', 'new_temp0', 'y'}, 'edx': {'x', 'new_temp0', 'y'}, 'new_temp2': {'x'}, 'y': {'new_temp3', 'eax', 'ecx', 'edx', 'new_temp0', 'x', 'new_temp4'}, 'new_temp3': {'x', 'y'}, 'new_temp4': {'x', 'y'}, 'new_temp0': {'eax', 'ecx', 'edx', 'x', 'y'}, 'z': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'new_temp1': set(), 'x': {'new_temp4', 'edx', 'new_temp3', 'eax', 'new_temp2', 'y', 'ecx', 'new_temp0'}, 'eax': {'y', 'new_temp0', 'x'}, 'ecx': {'y', 'new_temp0', 'x'}, 'edx': {'y', 'new_temp0', 'x'}, 'new_temp2': {'x'}, 'y': {'new_temp4', 'edx', 'x', 'new_temp3', 'ecx', 'eax', 'new_temp0'}, 'new_temp3': {'y', 'x'}, 'new_temp4': {'y', 'x'}, 'new_temp0': {'y', 'edx', 'x', 'ecx', 'eax'}, 'z': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'y': 4, 'new_temp0': 5, 'x': 6, 'new_temp4': 1, 'new_temp3': 1, 'new_temp2': 1, 'z': 1, 'new_temp1': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 4, 'y': 5, 'x': 6, 'new_temp3': 1, 'new_temp4': 1, 'new_temp2': 1, 'new_temp1': 1, 'z': 1}
 Spilled set:
  set()
 
@@ -143,7 +143,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'y': 'edi', 'new_temp0': 'ebx', 'x': 'esi', 'new_temp4': 'eax', 'new_temp3': 'eax', 'new_temp2': 'eax', 'z': 'eax', 'new_temp1': 'eax'}
+Homes for CFG0:  {'new_temp0': 'edi', 'y': 'ebx', 'x': 'esi', 'new_temp3': 'eax', 'new_temp4': 'eax', 'new_temp2': 'eax', 'new_temp1': 'eax', 'z': 'eax'}
 new_temp1
 new_temp1
 x

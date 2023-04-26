@@ -45,9 +45,9 @@ new_temp0 = []
 new_temp1 = new_temp0 is 0
 new_temp2 = new_temp1
 print(new_temp2)
-<ast.List object at 0x7fcd6f55cb80>
+<ast.List object at 0x7fb6d741cc40>
 inject_bool(explicate_3==explicate_4)
-<ast.Name object at 0x7fcd6f55d1b0>
+<ast.Name object at 0x7fb6d741d150>
 
 new_temp0 = inject_big(create_list(inject_int(0)))
 explicate_3 = new_temp0
@@ -113,12 +113,12 @@ call  print new_temp2
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp5': set(), 'new_temp6': set(), 'new_temp7': set(), 'new_temp0': set(), 'explicate_3': {'explicate_4', 'ecx', 'new_temp8', 'eax', 'edx'}, 'eax': {'explicate_3', 'new_temp9'}, 'ecx': {'explicate_3'}, 'edx': {'explicate_3'}, 'new_temp8': {'explicate_3'}, 'explicate_4': {'explicate_3'}, 'new_temp9': {'eax'}, 'new_temp10': set(), 'new_temp11': set(), 'new_temp1': set(), 'new_temp2': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'new_temp5': set(), 'new_temp6': set(), 'new_temp7': set(), 'new_temp0': set(), 'explicate_3': {'new_temp8', 'ecx', 'eax', 'explicate_4', 'edx'}, 'eax': {'explicate_3', 'new_temp9'}, 'ecx': {'explicate_3'}, 'edx': {'explicate_3'}, 'new_temp8': {'explicate_3'}, 'explicate_4': {'explicate_3'}, 'new_temp9': {'eax'}, 'new_temp10': set(), 'new_temp11': set(), 'new_temp1': set(), 'new_temp2': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'explicate_3': 4, 'new_temp8': 1, 'new_temp9': 2, 'explicate_4': 1, 'new_temp1': 1, 'new_temp5': 1, 'new_temp10': 1, 'new_temp0': 1, 'new_temp11': 1, 'new_temp2': 1, 'new_temp7': 1, 'new_temp6': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'explicate_3': 4, 'explicate_4': 1, 'new_temp9': 2, 'new_temp8': 1, 'new_temp1': 1, 'new_temp5': 1, 'new_temp11': 1, 'new_temp0': 1, 'new_temp7': 1, 'new_temp2': 1, 'new_temp10': 1, 'new_temp6': 1}
 Spilled set:
  set()
 
@@ -131,7 +131,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'explicate_3': 'edi', 'new_temp8': 'eax', 'new_temp9': 'ecx', 'explicate_4': 'eax', 'new_temp1': 'eax', 'new_temp5': 'eax', 'new_temp10': 'eax', 'new_temp0': 'eax', 'new_temp11': 'eax', 'new_temp2': 'eax', 'new_temp7': 'eax', 'new_temp6': 'eax'}
+Homes for CFG0:  {'explicate_3': 'edi', 'explicate_4': 'eax', 'new_temp9': 'ecx', 'new_temp8': 'eax', 'new_temp1': 'eax', 'new_temp5': 'eax', 'new_temp11': 'eax', 'new_temp0': 'eax', 'new_temp7': 'eax', 'new_temp2': 'eax', 'new_temp10': 'eax', 'new_temp6': 'eax'}
 new_temp5
 new_temp5
 new_temp6

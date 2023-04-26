@@ -82,11 +82,11 @@ x = new_temp1
 new_temp2 = x[0]
 new_temp3 = new_temp2[1]
 print(new_temp3)
-<ast.List object at 0x7fcaf6248f70>
-<ast.List object at 0x7fcaf6248fa0>
-<ast.Name object at 0x7fcaf6248a00>
-<ast.Subscript object at 0x7fcaf6248d90>
-<ast.Subscript object at 0x7fcaf6248dc0>
+<ast.List object at 0x7f9e85c3bd90>
+<ast.List object at 0x7f9e85c3bee0>
+<ast.Name object at 0x7f9e85c88a90>
+<ast.Subscript object at 0x7f9e85c88e20>
+<ast.Subscript object at 0x7f9e85c88e50>
 
 new_temp0 = inject_big(create_list(inject_int(3)))
 set_subscript(new_temp0, inject_int(0), inject_int(12))
@@ -220,12 +220,12 @@ call  print new_temp3
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp4': set(), 'new_temp5': set(), 'new_temp6': set(), 'new_temp0': {'new_temp8', 'new_temp16', 'eax', 'new_temp7', 'ecx', 'new_temp9', 'new_temp12', 'edx', 'new_temp14', 'new_temp11', 'new_temp1', 'new_temp13', 'new_temp10', 'new_temp15'}, 'eax': {'x', 'new_temp2', 'new_temp7', 'new_temp9', 'new_temp0', 'new_temp11', 'new_temp1', 'new_temp17', 'new_temp19'}, 'ecx': {'x', 'new_temp2', 'new_temp7', 'new_temp9', 'new_temp0', 'new_temp11', 'new_temp1', 'new_temp17', 'new_temp19'}, 'edx': {'x', 'new_temp2', 'new_temp7', 'new_temp9', 'new_temp0', 'new_temp11', 'new_temp1', 'new_temp17', 'new_temp19'}, 'new_temp7': {'new_temp8', 'eax', 'ecx', 'new_temp0', 'edx'}, 'new_temp8': {'new_temp0', 'new_temp7'}, 'new_temp9': {'eax', 'ecx', 'new_temp0', 'edx', 'new_temp10'}, 'new_temp10': {'new_temp9', 'new_temp0'}, 'new_temp11': {'eax', 'ecx', 'new_temp12', 'new_temp0', 'edx'}, 'new_temp12': {'new_temp0', 'new_temp11'}, 'new_temp13': {'new_temp0'}, 'new_temp14': {'new_temp0'}, 'new_temp15': {'new_temp0'}, 'new_temp1': {'new_temp16', 'eax', 'ecx', 'new_temp0', 'edx', 'new_temp20', 'new_temp17', 'new_temp19', 'new_temp18'}, 'new_temp16': {'new_temp1', 'new_temp0'}, 'new_temp17': {'eax', 'ecx', 'edx', 'new_temp1', 'new_temp18'}, 'new_temp18': {'new_temp1', 'new_temp17'}, 'new_temp19': {'eax', 'ecx', 'edx', 'new_temp20', 'new_temp1'}, 'new_temp20': {'new_temp1', 'new_temp19'}, 'x': {'ecx', 'eax', 'edx', 'new_temp21'}, 'new_temp21': {'x'}, 'new_temp22': set(), 'new_temp2': {'ecx', 'eax', 'edx', 'new_temp23'}, 'new_temp23': {'new_temp2'}, 'new_temp24': set(), 'new_temp3': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'new_temp4': set(), 'new_temp5': set(), 'new_temp6': set(), 'new_temp0': {'eax', 'new_temp10', 'new_temp7', 'new_temp12', 'new_temp16', 'edx', 'new_temp14', 'new_temp9', 'new_temp11', 'new_temp1', 'new_temp15', 'new_temp8', 'ecx', 'new_temp13'}, 'eax': {'new_temp0', 'new_temp19', 'new_temp17', 'new_temp7', 'new_temp9', 'new_temp11', 'x', 'new_temp1', 'new_temp2'}, 'ecx': {'new_temp0', 'new_temp19', 'new_temp17', 'new_temp7', 'new_temp9', 'new_temp11', 'x', 'new_temp1', 'new_temp2'}, 'edx': {'new_temp0', 'new_temp19', 'new_temp17', 'new_temp7', 'new_temp9', 'new_temp11', 'x', 'new_temp1', 'new_temp2'}, 'new_temp7': {'new_temp0', 'eax', 'edx', 'new_temp8', 'ecx'}, 'new_temp8': {'new_temp0', 'new_temp7'}, 'new_temp9': {'new_temp0', 'eax', 'new_temp10', 'edx', 'ecx'}, 'new_temp10': {'new_temp9', 'new_temp0'}, 'new_temp11': {'new_temp0', 'eax', 'new_temp12', 'edx', 'ecx'}, 'new_temp12': {'new_temp11', 'new_temp0'}, 'new_temp13': {'new_temp0'}, 'new_temp14': {'new_temp0'}, 'new_temp15': {'new_temp0'}, 'new_temp1': {'new_temp0', 'eax', 'new_temp19', 'new_temp17', 'new_temp20', 'new_temp18', 'new_temp16', 'edx', 'ecx'}, 'new_temp16': {'new_temp0', 'new_temp1'}, 'new_temp17': {'eax', 'new_temp18', 'edx', 'new_temp1', 'ecx'}, 'new_temp18': {'new_temp1', 'new_temp17'}, 'new_temp19': {'eax', 'new_temp20', 'edx', 'new_temp1', 'ecx'}, 'new_temp20': {'new_temp19', 'new_temp1'}, 'x': {'eax', 'ecx', 'edx', 'new_temp21'}, 'new_temp21': {'x'}, 'new_temp22': set(), 'new_temp2': {'eax', 'ecx', 'edx', 'new_temp23'}, 'new_temp23': {'new_temp2'}, 'new_temp24': set(), 'new_temp3': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp17': 4, 'new_temp1': 5, 'new_temp19': 4, 'new_temp0': 4, 'new_temp9': 5, 'new_temp11': 5, 'new_temp7': 5, 'x': 4, 'new_temp2': 4, 'new_temp18': 1, 'new_temp16': 1, 'new_temp8': 1, 'new_temp10': 1, 'new_temp20': 1, 'new_temp12': 1, 'new_temp15': 1, 'new_temp13': 1, 'new_temp21': 1, 'new_temp23': 1, 'new_temp14': 1, 'new_temp24': 1, 'new_temp4': 1, 'new_temp3': 1, 'new_temp6': 1, 'new_temp22': 1, 'new_temp5': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp2': 4, 'new_temp9': 4, 'new_temp0': 5, 'new_temp7': 4, 'new_temp1': 4, 'new_temp17': 5, 'new_temp11': 4, 'new_temp19': 5, 'x': 4, 'new_temp16': 1, 'new_temp12': 1, 'new_temp18': 1, 'new_temp8': 1, 'new_temp20': 1, 'new_temp10': 1, 'new_temp13': 1, 'new_temp23': 1, 'new_temp15': 1, 'new_temp14': 1, 'new_temp21': 1, 'new_temp24': 1, 'new_temp6': 1, 'new_temp22': 1, 'new_temp3': 1, 'new_temp5': 1, 'new_temp4': 1}
 Spilled set:
  set()
 
@@ -238,7 +238,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'new_temp17': 'edi', 'new_temp1': 'ebx', 'new_temp19': 'edi', 'new_temp0': 'edi', 'new_temp9': 'ebx', 'new_temp11': 'ebx', 'new_temp7': 'ebx', 'x': 'edi', 'new_temp2': 'edi', 'new_temp18': 'eax', 'new_temp16': 'eax', 'new_temp8': 'eax', 'new_temp10': 'eax', 'new_temp20': 'eax', 'new_temp12': 'eax', 'new_temp15': 'eax', 'new_temp13': 'eax', 'new_temp21': 'eax', 'new_temp23': 'eax', 'new_temp14': 'eax', 'new_temp24': 'eax', 'new_temp4': 'eax', 'new_temp3': 'eax', 'new_temp6': 'eax', 'new_temp22': 'eax', 'new_temp5': 'eax'}
+Homes for CFG0:  {'new_temp2': 'edi', 'new_temp9': 'edi', 'new_temp0': 'ebx', 'new_temp7': 'edi', 'new_temp1': 'edi', 'new_temp17': 'ebx', 'new_temp11': 'edi', 'new_temp19': 'ebx', 'x': 'edi', 'new_temp16': 'eax', 'new_temp12': 'eax', 'new_temp18': 'eax', 'new_temp8': 'eax', 'new_temp20': 'eax', 'new_temp10': 'eax', 'new_temp13': 'eax', 'new_temp23': 'eax', 'new_temp15': 'eax', 'new_temp14': 'eax', 'new_temp21': 'eax', 'new_temp24': 'eax', 'new_temp6': 'eax', 'new_temp22': 'eax', 'new_temp3': 'eax', 'new_temp5': 'eax', 'new_temp4': 'eax'}
 new_temp4
 new_temp4
 new_temp5

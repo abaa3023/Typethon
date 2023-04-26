@@ -10,15 +10,15 @@ START0:
  pushl $(1)
  call inject_int
  addl $(4), %esp
- movl %eax, %edi
+ movl %eax, %esi
  pushl $(2)
  call inject_int
  addl $(4), %esp
- movl %eax, -4(%ebp)
+ movl %eax, %ebx
  pushl $(3)
  call inject_int
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, -4(%ebp)
  pushl $(3)
  call inject_int
  addl $(4), %esp
@@ -28,32 +28,32 @@ START0:
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, %esi
+ movl %eax, %edi
  pushl $(0)
  call inject_int
  addl $(4), %esp
- pushl %edi
- pushl %eax
  pushl %esi
+ pushl %eax
+ pushl %edi
  call set_subscript
  addl $(12), %esp
  pushl $(1)
  call inject_int
  addl $(4), %esp
- pushl -4(%ebp)
+ pushl %ebx
  pushl %eax
- pushl %esi
+ pushl %edi
  call set_subscript
  addl $(12), %esp
  pushl $(2)
  call inject_int
  addl $(4), %esp
- pushl %ebx
+ pushl -4(%ebp)
  pushl %eax
- pushl %esi
+ pushl %edi
  call set_subscript
  addl $(12), %esp
- movl %esi, %eax
+ movl %edi, %eax
  pushl %eax
  call print_any
  addl $(4), %esp

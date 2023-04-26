@@ -16,50 +16,50 @@ START0:
  pushl %eax
  call inject_big
  addl $(4), %esp
+ movl %eax, %ebx
+ pushl $(0)
+ call inject_int
+ addl $(4), %esp
+ movl %eax, %edi
+ pushl $(2)
+ call inject_int
+ addl $(4), %esp
+ pushl %eax
+ pushl %edi
+ pushl %ebx
+ call set_subscript
+ addl $(12), %esp
+ pushl $(2)
+ call inject_int
+ addl $(4), %esp
+ pushl %eax
+ call create_list
+ addl $(4), %esp
+ pushl %eax
+ call inject_big
+ addl $(4), %esp
  movl %eax, %edi
  pushl $(0)
  call inject_int
  addl $(4), %esp
- movl %eax, %ebx
- pushl $(2)
- call inject_int
- addl $(4), %esp
- pushl %eax
- pushl %ebx
- pushl %edi
- call set_subscript
- addl $(12), %esp
- pushl $(2)
- call inject_int
- addl $(4), %esp
- pushl %eax
- call create_list
- addl $(4), %esp
- pushl %eax
- call inject_big
- addl $(4), %esp
  movl %eax, %esi
- pushl $(0)
- call inject_int
- addl $(4), %esp
- movl %eax, %ebx
  pushl $(1)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl %ebx
  pushl %esi
- call set_subscript
- addl $(12), %esp
- pushl $(1)
- call inject_int
- addl $(4), %esp
  pushl %edi
- pushl %eax
- pushl %esi
  call set_subscript
  addl $(12), %esp
- movl %esi, %ebx
+ pushl $(1)
+ call inject_int
+ addl $(4), %esp
+ pushl %ebx
+ pushl %eax
+ pushl %edi
+ call set_subscript
+ addl $(12), %esp
+ movl %edi, -4(%ebp)
  pushl $(1)
  call inject_int
  addl $(4), %esp
@@ -69,7 +69,7 @@ START0:
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, %esi
+ movl %eax, %ebx
  pushl $(0)
  call inject_int
  addl $(4), %esp
@@ -79,7 +79,7 @@ START0:
  addl $(4), %esp
  pushl %eax
  pushl %edi
- pushl %esi
+ pushl %ebx
  call set_subscript
  addl $(12), %esp
  pushl $(2)
@@ -95,25 +95,25 @@ START0:
  pushl $(0)
  call inject_int
  addl $(4), %esp
- movl %eax, -4(%ebp)
+ movl %eax, %esi
  pushl $(3)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl -4(%ebp)
+ pushl %esi
  pushl %edi
  call set_subscript
  addl $(12), %esp
  pushl $(1)
  call inject_int
  addl $(4), %esp
- pushl %esi
+ pushl %ebx
  pushl %eax
  pushl %edi
  call set_subscript
  addl $(12), %esp
  movl %edi, %eax
- movl %ebx, %edi
+ movl -4(%ebp), %edi
  movl %eax, %ebx
  pushl %edi
  call is_big

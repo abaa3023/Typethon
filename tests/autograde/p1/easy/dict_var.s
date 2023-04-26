@@ -13,18 +13,18 @@ START0:
  pushl $(2)
  call inject_int
  addl $(4), %esp
- movl %eax, %edi
+ movl %eax, %ebx
  call create_dict
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, %ebx
- pushl %edi
- pushl %esi
+ movl %eax, %edi
  pushl %ebx
+ pushl %esi
+ pushl %edi
  call set_subscript
  addl $(12), %esp
- movl %ebx, %eax
+ movl %edi, %eax
  pushl %eax
  call print_any
  addl $(4), %esp

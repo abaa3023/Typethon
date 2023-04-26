@@ -113,11 +113,11 @@ x = y
 y = tmp
 print(x)
 print(y)
-<ast.Constant object at 0x7f863b2695d0>
-<ast.Constant object at 0x7f863b269570>
-<ast.Name object at 0x7f863b269300>
-<ast.Name object at 0x7f863b269270>
-<ast.Name object at 0x7f863b2691e0>
+<ast.Constant object at 0x7f3e088e7f10>
+<ast.Constant object at 0x7f3e08935630>
+<ast.Name object at 0x7f3e089353c0>
+<ast.Name object at 0x7f3e08935330>
+<ast.Name object at 0x7f3e089352a0>
 
 x = inject_int(2)
 y = inject_int(3)
@@ -182,7 +182,7 @@ call  print y
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp0': set(), 'x': {'eax', 'y', 'edx', 'ecx', 'new_temp1', 'tmp'}, 'eax': {'y', 'x'}, 'ecx': {'y', 'x'}, 'edx': {'y', 'x'}, 'new_temp1': {'x'}, 'y': {'eax', 'edx', 'ecx', 'tmp', 'x'}, 'tmp': {'y', 'x'}, 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'new_temp0': set(), 'x': {'y', 'new_temp1', 'tmp', 'eax', 'ecx', 'edx'}, 'eax': {'y', 'x'}, 'ecx': {'y', 'x'}, 'edx': {'y', 'x'}, 'new_temp1': {'x'}, 'y': {'x', 'tmp', 'eax', 'ecx', 'edx'}, 'tmp': {'y', 'x'}, 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------

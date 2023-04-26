@@ -55,10 +55,10 @@ else:
 new_temp1 = new_temp0
 x = new_temp1
 print(x)
-<ast.Constant object at 0x7fe62933cb80>
-<ast.Constant object at 0x7fe62933cbb0>
-<ast.Name object at 0x7fe62933d150>
-<ast.Name object at 0x7fe62933ceb0>
+<ast.Constant object at 0x7f1706e0cc10>
+<ast.Constant object at 0x7f1706e0cc40>
+<ast.Name object at 0x7f1706e0d0f0>
+<ast.Name object at 0x7f1706e0ce50>
 
 if(2):
 
@@ -126,7 +126,7 @@ Interference Graph:  {'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'e
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp1': 1, 'new_temp2': 1, 'x': 1, 'new_temp3': 1, 'new_temp0': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'x': 1, 'new_temp0': 1, 'new_temp3': 1, 'new_temp2': 1, 'new_temp1': 1}
 Spilled set:
  set()
 
@@ -152,7 +152,7 @@ Interference Graph:  {'unspillable_0': set(), 'eax': set(), 'ecx': set(), 'edx':
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'unspillable_0': 1, 'new_temp1': 1, 'new_temp2': 1, 'x': 1, 'new_temp3': 1, 'new_temp0': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'unspillable_0': 1, 'x': 1, 'new_temp0': 1, 'new_temp3': 1, 'new_temp2': 1, 'new_temp1': 1}
 Spilled set:
  set()
 
@@ -165,7 +165,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'unspillable_0': 'eax', 'new_temp1': 'eax', 'new_temp2': 'eax', 'x': 'eax', 'new_temp3': 'eax', 'new_temp0': 'eax'}
+Homes for CFG0:  {'unspillable_0': 'eax', 'x': 'eax', 'new_temp0': 'eax', 'new_temp3': 'eax', 'new_temp2': 'eax', 'new_temp1': 'eax'}
 unspillable_0
 unspillable_0
 new_temp2

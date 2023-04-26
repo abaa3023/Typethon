@@ -12,6 +12,7 @@ import spill_ir
 import variable_homes
 import generate_assembly
 from parser.parser import parse
+from lexerandparser import createASTFromMyParser
 
 def compile(src_file):
     
@@ -20,12 +21,18 @@ def compile(src_file):
         prog = f.read()
         
         
-    #tree = ast.parse(prog)
-    tree.parse(prog)
+    tree = ast.parse(prog)
+    #tree = createASTFromMyParser(src_file)
+    
+    
+    print("------------------Original Tree--------------")
+    print(ast.dump(tree,indent=4))
     
     print('--------------Original code----------------')
     print(prog)
 
+    raise Exception("im done")
+    
     flatten_tree = flatten.main(tree)
     
     print('--------------Code after flattening-------')
