@@ -11,7 +11,6 @@ import graph_color
 import spill_ir
 import variable_homes
 import generate_assembly
-from parser.parser import parse
 from lexerandparser import createASTFromMyParser
 
 def compile(src_file):
@@ -21,8 +20,8 @@ def compile(src_file):
         prog = f.read()
         
         
-    tree = ast.parse(prog)
-    #tree = createASTFromMyParser(src_file)
+    #tree = ast.parse(prog)
+    tree = createASTFromMyParser(src_file)
     
     
     print("------------------Original Tree--------------")
