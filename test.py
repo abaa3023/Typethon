@@ -1,1 +1,2 @@
-print(int(1 != 2))
+x = 2 and 3
+print(x)

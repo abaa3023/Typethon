@@ -520,7 +520,7 @@ inject_bool(equal(project_big(explicate_2),project_big(explicate_3)))
 inject_bool(0)
 inject_bool(0)
 inject_bool(explicate_4==explicate_5)
-<ast.Name object at 0x7ffb98d5a260>
+<ast.Name object at 0x7fa31c07c190>
 
 explicate_2 = matrix2
 explicate_3 = matrix2_t2
@@ -702,12 +702,12 @@ call  print new_temp1
 --------------Interference----------------
 
 
-Interference Graph:  {'matrix2_t2': {'explicate_2'}, 'explicate_2': {'edx', 'eax', 'new_temp6', 'matrix2_t2', 'new_temp7', 'new_temp13', 'explicate_3', 'new_temp15', 'ecx'}, 'explicate_3': {'edx', 'new_temp8', 'eax', 'explicate_4', 'new_temp6', 'new_temp17', 'new_temp18', 'new_temp16', 'new_temp7', 'new_temp13', 'new_temp15', 'ecx', 'explicate_2'}, 'eax': {'explicate_4', 'new_temp8', 'explicate_3', 'new_temp21', 'explicate_2'}, 'ecx': {'explicate_4', 'new_temp8', 'explicate_3', 'explicate_2'}, 'edx': {'explicate_4', 'new_temp8', 'explicate_3', 'explicate_2'}, 'new_temp6': {'explicate_3', 'explicate_2'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp7': {'explicate_3', 'explicate_2'}, 'new_temp13': {'explicate_3', 'explicate_2'}, 'new_temp8': {'edx', 'eax', 'new_temp9', 'explicate_3', 'ecx'}, 'new_temp9': {'new_temp8'}, 'new_temp10': set(), 'new_temp11': set(), 'new_temp0': set(), 'new_temp12': set(), 'new_temp14': set(), 'new_temp15': {'explicate_3', 'explicate_2'}, 'new_temp1': set(), 'new_temp16': {'explicate_3'}, 'explicate_4': {'edx', 'eax', 'explicate_5', 'new_temp20', 'new_temp18', 'new_temp19', 'explicate_3', 'ecx'}, 'new_temp17': {'explicate_3'}, 'new_temp18': {'explicate_4', 'explicate_3'}, 'new_temp19': {'explicate_4'}, 'explicate_5': {'explicate_4'}, 'new_temp20': {'explicate_4'}, 'new_temp21': {'eax'}, 'new_temp22': set(), 'new_temp23': set()}
+Interference Graph:  {'matrix2_t2': {'explicate_2'}, 'explicate_2': {'new_temp13', 'new_temp15', 'explicate_3', 'new_temp7', 'new_temp6', 'matrix2_t2', 'edx', 'eax', 'ecx'}, 'explicate_3': {'new_temp13', 'new_temp15', 'new_temp17', 'explicate_2', 'new_temp7', 'new_temp6', 'new_temp16', 'edx', 'new_temp8', 'explicate_4', 'eax', 'new_temp18', 'ecx'}, 'eax': {'new_temp8', 'explicate_4', 'explicate_2', 'explicate_3', 'new_temp21'}, 'ecx': {'new_temp8', 'explicate_4', 'explicate_2', 'explicate_3'}, 'edx': {'new_temp8', 'explicate_4', 'explicate_2', 'explicate_3'}, 'new_temp6': {'explicate_2', 'explicate_3'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp7': {'explicate_2', 'explicate_3'}, 'new_temp13': {'explicate_2', 'explicate_3'}, 'new_temp8': {'explicate_3', 'edx', 'new_temp9', 'eax', 'ecx'}, 'new_temp9': {'new_temp8'}, 'new_temp10': set(), 'new_temp11': set(), 'new_temp0': set(), 'new_temp12': set(), 'new_temp14': set(), 'new_temp15': {'explicate_2', 'explicate_3'}, 'new_temp1': set(), 'new_temp16': {'explicate_3'}, 'explicate_4': {'explicate_3', 'new_temp19', 'edx', 'eax', 'new_temp18', 'ecx', 'explicate_5', 'new_temp20'}, 'new_temp17': {'explicate_3'}, 'new_temp18': {'explicate_4', 'explicate_3'}, 'new_temp19': {'explicate_4'}, 'explicate_5': {'explicate_4'}, 'new_temp20': {'explicate_4'}, 'new_temp21': {'eax'}, 'new_temp22': set(), 'new_temp23': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp8': 4, 'explicate_3': 5, 'explicate_2': 4, 'explicate_4': 4, 'new_temp13': 1, 'new_temp7': 1, 'new_temp18': 1, 'new_temp6': 1, 'new_temp15': 1, 'new_temp21': 2, 'matrix2_t2': 1, 'new_temp19': 1, 'new_temp16': 1, 'new_temp17': 1, 'new_temp20': 1, 'explicate_5': 1, 'new_temp9': 1, 'new_temp12': 1, 'new_temp14': 1, 'new_temp11': 1, 'new_temp10': 1, 'new_temp0': 1, 'new_temp23': 1, 'new_temp1': 1, 'new_temp22': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp8': 4, 'explicate_3': 5, 'explicate_4': 4, 'explicate_2': 4, 'new_temp18': 1, 'new_temp6': 1, 'new_temp7': 1, 'new_temp15': 1, 'new_temp13': 1, 'new_temp20': 1, 'explicate_5': 1, 'new_temp21': 2, 'new_temp9': 1, 'matrix2_t2': 1, 'new_temp19': 1, 'new_temp16': 1, 'new_temp17': 1, 'new_temp22': 1, 'new_temp23': 1, 'new_temp14': 1, 'new_temp12': 1, 'new_temp11': 1, 'new_temp0': 1, 'new_temp10': 1, 'new_temp1': 1}
 Spilled set:
  set()
 
@@ -720,5 +720,5 @@ continue_looping
 
 
 
-Homes for CFG0:  {'new_temp8': 'edi', 'explicate_3': 'ebx', 'explicate_2': 'edi', 'explicate_4': 'edi', 'new_temp13': 'eax', 'new_temp7': 'eax', 'new_temp18': 'eax', 'new_temp6': 'eax', 'new_temp15': 'eax', 'new_temp21': 'ecx', 'matrix2_t2': 'eax', 'new_temp19': 'eax', 'new_temp16': 'eax', 'new_temp17': 'eax', 'new_temp20': 'eax', 'explicate_5': 'eax', 'new_temp9': 'eax', 'new_temp12': 'eax', 'new_temp14': 'eax', 'new_temp11': 'eax', 'new_temp10': 'eax', 'new_temp0': 'eax', 'new_temp23': 'eax', 'new_temp1': 'eax', 'new_temp22': 'eax'}
+Homes for CFG0:  {'new_temp8': 'edi', 'explicate_3': 'ebx', 'explicate_4': 'edi', 'explicate_2': 'edi', 'new_temp18': 'eax', 'new_temp6': 'eax', 'new_temp7': 'eax', 'new_temp15': 'eax', 'new_temp13': 'eax', 'new_temp20': 'eax', 'explicate_5': 'eax', 'new_temp21': 'ecx', 'new_temp9': 'eax', 'matrix2_t2': 'eax', 'new_temp19': 'eax', 'new_temp16': 'eax', 'new_temp17': 'eax', 'new_temp22': 'eax', 'new_temp23': 'eax', 'new_temp14': 'eax', 'new_temp12': 'eax', 'new_temp11': 'eax', 'new_temp0': 'eax', 'new_temp10': 'eax', 'new_temp1': 'eax'}
 matrix2

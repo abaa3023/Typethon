@@ -1,5 +1,4 @@
 Illegal character ':'
-Syntax error at 'and'
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -43,27 +42,184 @@ Module(
             orelse=[])],
     type_ignores=[])
 ------------------Tree with my parser--------------
-Module(body=[], type_ignores=[])
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Constant(value=1)),
+        Assign(
+            targets=[
+                Name(id='y', ctx=Store())],
+            value=Constant(value=100)),
+        Expr(
+            value=Name(id='while', ctx=Load())),
+        Expr(
+            value=Call(
+                func=Name(id='int', ctx=Load()),
+                args=[
+                    Compare(
+                        left=Name(id='x', ctx=Load()),
+                        ops=[
+                            NotEq()],
+                        comparators=[
+                            Name(id='y', ctx=Load())])],
+                keywords=[])),
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=BinOp(
+                left=Name(id='x', ctx=Load()),
+                op=Add(),
+                right=Constant(value=1))),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    BoolOp(
+                        op=And(),
+                        values=[
+                            Name(id='x', ctx=Load()),
+                            Name(id='y', ctx=Load())])],
+                keywords=[]))],
+    type_ignores=[])
 --------------Original code----------------
 x = 1
 y = 100
 while (int(x != y)):
   x = x + 1
   print(x and y)
-Module(body=[], type_ignores=[])
-Module(body=[], type_ignores=[])
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Constant(value=1)),
+          Assign(
+               targets=[
+                    Name(id='y', ctx=Store())],
+               value=Constant(value=100)),
+          Expr(
+               value=Name(id='while', ctx=Load())),
+          Expr(
+               value=Call(
+                    func=Name(id='int', ctx=Load()),
+                    args=[
+                         Compare(
+                              left=Name(id='x', ctx=Load()),
+                              ops=[
+                                   NotEq()],
+                              comparators=[
+                                   Name(id='y', ctx=Load())])],
+                    keywords=[])),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=BinOp(
+                    left=Name(id='x', ctx=Load()),
+                    op=Add(),
+                    right=Constant(value=1))),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         BoolOp(
+                              op=And(),
+                              values=[
+                                   Name(id='x', ctx=Load()),
+                                   Name(id='y', ctx=Load())])],
+                    keywords=[]))],
+     type_ignores=[])
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Constant(value=1)),
+          Assign(
+               targets=[
+                    Name(id='y', ctx=Store())],
+               value=Constant(value=100)),
+          Expr(
+               value=Name(id='while', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp0', ctx=Store())],
+               value=Compare(
+                    left=Name(id='x', ctx=Load()),
+                    ops=[
+                         NotEq()],
+                    comparators=[
+                         Name(id='y', ctx=Load())])),
+          Assign(
+               targets=[
+                    Name(id='new_temp1', ctx=Store())],
+               value=Name(id='new_temp0', ctx=Store())),
+          Expr(
+               value=Call(
+                    func=Name(id='int', ctx=Load()),
+                    args=[
+                         Name(id='new_temp1', ctx=Load())],
+                    keywords=[])),
+          Assign(
+               targets=[
+                    Name(id='new_temp2', ctx=Store())],
+               value=BinOp(
+                    left=Name(id='x', ctx=Load()),
+                    op=Add(),
+                    right=Constant(value=1))),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Name(id='new_temp2', ctx=Load())),
+          If(
+               test=Name(id='x', ctx=Load()),
+               body=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp3', ctx=Store())],
+                         value=Name(id='y', ctx=Load()))],
+               orelse=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp3', ctx=Store())],
+                         value=Name(id='x', ctx=Load()))]),
+          Assign(
+               targets=[
+                    Name(id='new_temp4', ctx=Store())],
+               value=Name(id='new_temp3', ctx=Store())),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='new_temp4', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
 --------------Code after flattening-------
-
-
---------------Explicate code-------
-
-
-
---- explicated flattened python ---
-
-
-
---- x86 IR ---
-
-
---- Control Flow Graph ---
+x = 1
+y = 100
+while
+new_temp0 = x != y
+new_temp1 = new_temp0
+int(new_temp1)
+new_temp2 = x + 1
+x = new_temp2
+if x:
+    new_temp3 = y
+else:
+    new_temp3 = x
+new_temp4 = new_temp3
+print(new_temp4)
+<ast.Constant object at 0x7f38f9a11b40>
+<ast.Constant object at 0x7f38f9a11b10>
+inject_bool(not_equal(project_big(explicate_5),project_big(explicate_6)))
+inject_bool(1)
+inject_bool(1)
+inject_bool(explicate_7!=explicate_8)
+<ast.Name object at 0x7f38f9a12740>
+inject_big(add(project_big(explicate_9),project_big(explicate_10)))
+inject_int(explicate_11+explicate_12)
+<ast.Name object at 0x7f38f9a124d0>
+<ast.Name object at 0x7f38f9a12290>
+<ast.Name object at 0x7f38f9a12170>
+<ast.Name object at 0x7f38f9a12b00>

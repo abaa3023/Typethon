@@ -1,5 +1,4 @@
 Syntax error at 'or'
-Syntax error at 'b'
 ------------------CORRECT TREE--------------------
 Module(
     body=[

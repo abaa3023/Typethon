@@ -218,18 +218,18 @@ climb = new_temp2
 new_temp3 = -1
 new_temp4 = climb + new_temp3
 fall = new_temp4
-<ast.Constant object at 0x7f0611458280>
-<ast.Constant object at 0x7f0611458670>
-<ast.Constant object at 0x7f06114580a0>
+<ast.Constant object at 0x7fc595e89b40>
+<ast.Constant object at 0x7fc595e89b10>
+<ast.Constant object at 0x7fc595e89ae0>
 inject_bool(not_equal(project_big(explicate_5),project_big(explicate_6)))
 inject_bool(1)
 inject_bool(1)
 inject_bool(explicate_7!=explicate_8)
-<ast.Name object at 0x7f061145a590>
+<ast.Name object at 0x7fc595e8a7a0>
 inject_big(add(project_big(explicate_9),project_big(explicate_10)))
 inject_int(explicate_11+explicate_12)
-<ast.Name object at 0x7f061145a3e0>
+<ast.Name object at 0x7fc595e8a5f0>
 inject_int(-1)
 inject_big(add(project_big(explicate_13),project_big(explicate_14)))
 inject_int(explicate_15+explicate_16)
-<ast.Name object at 0x7f061145a650>
+<ast.Name object at 0x7fc595e8a860>

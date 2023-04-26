@@ -113,8 +113,8 @@ y = 1
 2
 x
 print(y)
-<ast.Constant object at 0x7f8002158370>
-<ast.Constant object at 0x7f8002158310>
+<ast.Constant object at 0x7f26505599c0>
+<ast.Constant object at 0x7f2650559a80>
 
 x = inject_int(1)
 y = inject_int(1)

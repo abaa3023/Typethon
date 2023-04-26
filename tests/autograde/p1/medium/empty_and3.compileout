@@ -2,7 +2,7 @@ Illegal character '['
 Illegal character '{'
 Illegal character '}'
 Illegal character ']'
-Syntax error at '2'
+Syntax error at 'and'
 ------------------CORRECT TREE--------------------
 Module(
     body=[

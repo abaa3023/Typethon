@@ -254,11 +254,11 @@ a = b
 b = tmp
 print(a)
 print(b)
-<ast.Constant object at 0x7f03bbc1c610>
-<ast.Constant object at 0x7f03bbc1dcc0>
-<ast.Name object at 0x7f03bbc1e350>
-<ast.Name object at 0x7f03bbc1e500>
-<ast.Name object at 0x7f03bbc1e650>
+<ast.Constant object at 0x7fc83519dea0>
+<ast.Constant object at 0x7fc83519c700>
+<ast.Name object at 0x7fc83519e560>
+<ast.Name object at 0x7fc83519e710>
+<ast.Name object at 0x7fc83519e860>
 
 a = inject_int(1)
 b = inject_int(4)
@@ -323,12 +323,12 @@ call  print b
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp0': set(), 'a': {'b', 'eax', 'tmp', 'new_temp1', 'ecx', 'edx'}, 'eax': {'b', 'a'}, 'ecx': {'b', 'a'}, 'edx': {'b', 'a'}, 'new_temp1': {'a'}, 'b': {'a', 'eax', 'tmp', 'ecx', 'edx'}, 'tmp': {'a', 'b'}, 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'new_temp0': set(), 'a': {'eax', 'new_temp1', 'b', 'tmp', 'edx', 'ecx'}, 'eax': {'a', 'b'}, 'ecx': {'a', 'b'}, 'edx': {'a', 'b'}, 'new_temp1': {'a'}, 'b': {'eax', 'a', 'tmp', 'edx', 'ecx'}, 'tmp': {'a', 'b'}, 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'a': 4, 'b': 5, 'tmp': 1, 'new_temp1': 1, 'new_temp0': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'b': 4, 'a': 5, 'tmp': 1, 'new_temp1': 1, 'new_temp0': 1}
 Spilled set:
  set()
 
@@ -341,7 +341,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'a': 'edi', 'b': 'ebx', 'tmp': 'eax', 'new_temp1': 'eax', 'new_temp0': 'eax'}
+Homes for CFG0:  {'b': 'edi', 'a': 'ebx', 'tmp': 'eax', 'new_temp1': 'eax', 'new_temp0': 'eax'}
 new_temp0
 new_temp0
 a

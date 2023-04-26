@@ -1,5 +1,3 @@
-Syntax error at 'and'
-Syntax error at ')'
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -25,24 +23,565 @@ Module(
                 keywords=[]))],
     type_ignores=[])
 ------------------Tree with my parser--------------
-Module(body=[], type_ignores=[])
+Module(
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    BoolOp(
+                        op=And(),
+                        values=[
+                            Constant(value=1),
+                            BoolOp(
+                                op=And(),
+                                values=[
+                                    Call(
+                                        func=Name(id='int', ctx=Load()),
+                                        args=[
+                                            Compare(
+                                                left=Constant(value=1),
+                                                ops=[
+                                                    Eq()],
+                                                comparators=[
+                                                    Constant(value=3)])],
+                                        keywords=[]),
+                                    Constant(value=4)])])],
+                keywords=[]))],
+    type_ignores=[])
 --------------Original code----------------
 print(1 and int(1 == 3) and 4)
 
-Module(body=[], type_ignores=[])
-Module(body=[], type_ignores=[])
+Module(
+     body=[
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         BoolOp(
+                              op=And(),
+                              values=[
+                                   Constant(value=1),
+                                   BoolOp(
+                                        op=And(),
+                                        values=[
+                                             Call(
+                                                  func=Name(id='int', ctx=Load()),
+                                                  args=[
+                                                       Compare(
+                                                            left=Constant(value=1),
+                                                            ops=[
+                                                                 Eq()],
+                                                            comparators=[
+                                                                 Constant(value=3)])],
+                                                  keywords=[]),
+                                             Constant(value=4)])])],
+                    keywords=[]))],
+     type_ignores=[])
+Module(
+     body=[
+          If(
+               test=Constant(value=1),
+               body=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp0', ctx=Store())],
+                         value=Compare(
+                              left=Constant(value=1),
+                              ops=[
+                                   Eq()],
+                              comparators=[
+                                   Constant(value=3)])),
+                    Assign(
+                         targets=[
+                              Name(id='new_temp1', ctx=Store())],
+                         value=Name(id='new_temp0', ctx=Store())),
+                    Assign(
+                         targets=[
+                              Name(id='new_temp2', ctx=Store())],
+                         value=Call(
+                              func=Name(id='int', ctx=Load()),
+                              args=[
+                                   Name(id='new_temp1', ctx=Load())],
+                              keywords=[])),
+                    If(
+                         test=Name(id='new_temp2', ctx=Load()),
+                         body=[
+                              Assign(
+                                   targets=[
+                                        Name(id='new_temp3', ctx=Store())],
+                                   value=Constant(value=4))],
+                         orelse=[
+                              Assign(
+                                   targets=[
+                                        Name(id='new_temp3', ctx=Store())],
+                                   value=Name(id='new_temp2', ctx=Load()))]),
+                    Assign(
+                         targets=[
+                              Name(id='new_temp4', ctx=Store())],
+                         value=Name(id='new_temp3', ctx=Store())),
+                    Assign(
+                         targets=[
+                              Name(id='new_temp5', ctx=Store())],
+                         value=Name(id='new_temp4', ctx=Load()))],
+               orelse=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp5', ctx=Store())],
+                         value=Constant(value=1))]),
+          Assign(
+               targets=[
+                    Name(id='new_temp6', ctx=Store())],
+               value=Name(id='new_temp5', ctx=Store())),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='new_temp6', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
 --------------Code after flattening-------
+if 1:
+    new_temp0 = 1 == 3
+    new_temp1 = new_temp0
+    new_temp2 = int(new_temp1)
+    if new_temp2:
+        new_temp3 = 4
+    else:
+        new_temp3 = new_temp2
+    new_temp4 = new_temp3
+    new_temp5 = new_temp4
+else:
+    new_temp5 = 1
+new_temp6 = new_temp5
+print(new_temp6)
+inject_bool(equal(project_big(explicate_7),project_big(explicate_8)))
+inject_bool(0)
+inject_bool(0)
+inject_bool(explicate_9==explicate_10)
+<ast.Name object at 0x7ff044be22f0>
+inject_int(project_bool(explicate_11))
+<ast.Constant object at 0x7ff044be1a50>
+<ast.Name object at 0x7ff044be21a0>
+<ast.Name object at 0x7ff044be25c0>
+<ast.Name object at 0x7ff044be1fc0>
+<ast.Constant object at 0x7ff044be18d0>
+<ast.Name object at 0x7ff044be2800>
 
+if(1):
 
+	explicate_7 = inject_int(1)
+	explicate_8 = inject_int(3)
+	if(is_big(explicate_7)):
+		if(is_big(explicate_8)):
+			new_temp0 = inject_bool(equal(project_big(explicate_7),project_big(explicate_8)))
+		else:
+			new_temp0 = inject_bool(0)
+	else:
+		if(is_big(explicate_8)):
+			new_temp0 = inject_bool(0)
+		else:
+			if(is_int(explicate_7)):
+				explicate_9 = project_int(explicate_7)
+			else:
+				explicate_9 = project_bool(explicate_7)
+			if(is_int(explicate_8)):
+				explicate_10 = project_int(explicate_8)
+			else:
+				explicate_10 = project_bool(explicate_8)
+			new_temp0 = inject_bool(explicate_9==explicate_10)
+	new_temp1 = new_temp0
+	explicate_11 = new_temp1
+	if(is_bool(explicate_11)):
+		new_temp2 = inject_int(project_bool(explicate_11))
+	if(is_true(new_temp2)):
+	
+		new_temp3 = inject_int(4)
+	else:
+	
+		new_temp3 = new_temp2
+	new_temp4 = new_temp3
+	new_temp5 = new_temp4
+else:
+
+	new_temp5 = inject_int(1)
+new_temp6 = new_temp5
+print(new_temp6)
 --------------Explicate code-------
-
+if 1:
+    explicate_7 = inject_int(1)
+    explicate_8 = inject_int(3)
+    if is_big(explicate_7):
+        if is_big(explicate_8):
+            new_temp0 = inject_bool(equal(project_big(explicate_7), project_big(explicate_8)))
+        else:
+            new_temp0 = inject_bool(0)
+    elif is_big(explicate_8):
+        new_temp0 = inject_bool(0)
+    else:
+        if is_int(explicate_7):
+            explicate_9 = project_int(explicate_7)
+        else:
+            explicate_9 = project_bool(explicate_7)
+        if is_int(explicate_8):
+            explicate_10 = project_int(explicate_8)
+        else:
+            explicate_10 = project_bool(explicate_8)
+        new_temp0 = inject_bool(explicate_9 == explicate_10)
+    new_temp1 = new_temp0
+    explicate_11 = new_temp1
+    if is_bool(explicate_11):
+        new_temp2 = inject_int(project_bool(explicate_11))
+    if is_true(new_temp2):
+        new_temp3 = inject_int(4)
+    else:
+        new_temp3 = new_temp2
+    new_temp4 = new_temp3
+    new_temp5 = new_temp4
+else:
+    new_temp5 = inject_int(1)
+new_temp6 = new_temp5
+print(new_temp6)
 
 
 --- explicated flattened python ---
-
+if 1:
+    new_temp12 = inject_int(1)
+    explicate_7 = new_temp12
+    new_temp13 = inject_int(3)
+    explicate_8 = new_temp13
+    new_temp14 = is_big(explicate_7)
+    if new_temp14:
+        new_temp15 = is_big(explicate_8)
+        if new_temp15:
+            new_temp16 = project_big(explicate_7)
+            new_temp17 = project_big(explicate_8)
+            new_temp18 = equal(new_temp16, new_temp17)
+            new_temp19 = inject_bool(new_temp18)
+            new_temp0 = new_temp19
+        else:
+            new_temp20 = inject_bool(0)
+            new_temp0 = new_temp20
+    else:
+        new_temp21 = is_big(explicate_8)
+        if new_temp21:
+            new_temp22 = inject_bool(0)
+            new_temp0 = new_temp22
+        else:
+            new_temp23 = is_int(explicate_7)
+            if new_temp23:
+                new_temp24 = project_int(explicate_7)
+                explicate_9 = new_temp24
+            else:
+                new_temp25 = project_bool(explicate_7)
+                explicate_9 = new_temp25
+            new_temp26 = is_int(explicate_8)
+            if new_temp26:
+                new_temp27 = project_int(explicate_8)
+                explicate_10 = new_temp27
+            else:
+                new_temp28 = project_bool(explicate_8)
+                explicate_10 = new_temp28
+            new_temp29 = explicate_9 == explicate_10
+            new_temp30 = new_temp29
+            new_temp31 = inject_bool(new_temp30)
+            new_temp0 = new_temp31
+    new_temp1 = new_temp0
+    explicate_11 = new_temp1
+    new_temp32 = is_bool(explicate_11)
+    if new_temp32:
+        new_temp33 = project_bool(explicate_11)
+        new_temp34 = inject_int(new_temp33)
+        new_temp2 = new_temp34
+    new_temp35 = is_true(new_temp2)
+    if new_temp35:
+        new_temp36 = inject_int(4)
+        new_temp3 = new_temp36
+    else:
+        new_temp3 = new_temp2
+    new_temp4 = new_temp3
+    new_temp5 = new_temp4
+else:
+    new_temp37 = inject_int(1)
+    new_temp5 = new_temp37
+new_temp6 = new_temp5
+print(new_temp6)
 
 
 --- x86 IR ---
+if1
+cmp 0, 1
+je else1
+then1
+call  inject_int 1
+movl  eax ,  new_temp12
+movl  new_temp12 ,  explicate_7
+call  inject_int 3
+movl  eax ,  new_temp13
+movl  new_temp13 ,  explicate_8
+call  is_big explicate_7
+movl  eax ,  new_temp14
+if2
+cmp 0, new_temp14
+je else2
+then2
+call  is_big explicate_8
+movl  eax ,  new_temp15
+if3
+cmp 0, new_temp15
+je else3
+then3
+call  project_big explicate_7
+movl  eax ,  new_temp16
+call  project_big explicate_8
+movl  eax ,  new_temp17
+call  equal new_temp16,new_temp17
+movl  eax ,  new_temp18
+call  inject_bool new_temp18
+movl  eax ,  new_temp19
+movl  new_temp19 ,  new_temp0
+else3
+call  inject_bool 0
+movl  eax ,  new_temp20
+movl  new_temp20 ,  new_temp0
+end if3
+else2
+call  is_big explicate_8
+movl  eax ,  new_temp21
+if3
+cmp 0, new_temp21
+je else3
+then3
+call  inject_bool 0
+movl  eax ,  new_temp22
+movl  new_temp22 ,  new_temp0
+else3
+call  is_int explicate_7
+movl  eax ,  new_temp23
+if4
+cmp 0, new_temp23
+je else4
+then4
+call  project_int explicate_7
+movl  eax ,  new_temp24
+movl  new_temp24 ,  explicate_9
+else4
+call  project_bool explicate_7
+movl  eax ,  new_temp25
+movl  new_temp25 ,  explicate_9
+end if4
+call  is_int explicate_8
+movl  eax ,  new_temp26
+if5
+cmp 0, new_temp26
+je else5
+then5
+call  project_int explicate_8
+movl  eax ,  new_temp27
+movl  new_temp27 ,  explicate_10
+else5
+call  project_bool explicate_8
+movl  eax ,  new_temp28
+movl  new_temp28 ,  explicate_10
+end if5
+int_compare  explicate_9 Eq explicate_10 ,  new_temp29
+movl  new_temp29 ,  new_temp30
+call  inject_bool new_temp30
+movl  eax ,  new_temp31
+movl  new_temp31 ,  new_temp0
+end if3
+end if2
+movl  new_temp0 ,  new_temp1
+movl  new_temp1 ,  explicate_11
+call  is_bool explicate_11
+movl  eax ,  new_temp32
+if3
+cmp 0, new_temp32
+je end if3
+then3
+call  project_bool explicate_11
+movl  eax ,  new_temp33
+call  inject_int new_temp33
+movl  eax ,  new_temp34
+movl  new_temp34 ,  new_temp2
+end if3
+call  is_true new_temp2
+movl  eax ,  new_temp35
+if4
+cmp 0, new_temp35
+je else4
+then4
+call  inject_int 4
+movl  eax ,  new_temp36
+movl  new_temp36 ,  new_temp3
+else4
+movl  new_temp2 ,  new_temp3
+end if4
+movl  new_temp3 ,  new_temp4
+movl  new_temp4 ,  new_temp5
+else1
+call  inject_int 1
+movl  eax ,  new_temp37
+movl  new_temp37 ,  new_temp5
+end if1
+movl  new_temp5 ,  new_temp6
+call  print new_temp6
 
 
 --- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'eax': {'new_temp29', 'explicate_11', 'explicate_9', 'explicate_8', 'new_temp16', 'explicate_7', 'new_temp2'}, 'ecx': {'explicate_11', 'explicate_9', 'explicate_8', 'new_temp16', 'explicate_7', 'new_temp2'}, 'edx': {'explicate_11', 'explicate_9', 'explicate_8', 'new_temp16', 'explicate_7', 'new_temp2'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp2': {'new_temp1', 'new_temp13', 'explicate_11', 'new_temp29', 'new_temp27', 'new_temp14', 'edx', 'new_temp22', 'new_temp25', 'new_temp16', 'new_temp31', 'explicate_7', 'new_temp18', 'new_temp21', 'new_temp32', 'new_temp17', 'new_temp0', 'explicate_9', 'ecx', 'explicate_10', 'new_temp20', 'new_temp15', 'new_temp24', 'new_temp35', 'explicate_8', 'new_temp19', 'new_temp12', 'new_temp30', 'eax', 'new_temp23', 'new_temp26', 'new_temp28'}, 'new_temp12': {'new_temp2'}, 'explicate_7': {'new_temp13', 'new_temp15', 'new_temp14', 'edx', 'explicate_8', 'eax', 'new_temp23', 'new_temp21', 'new_temp2', 'ecx'}, 'new_temp13': {'new_temp2', 'explicate_7'}, 'explicate_8': {'new_temp15', 'new_temp24', 'new_temp14', 'explicate_9', 'edx', 'new_temp23', 'new_temp16', 'new_temp25', 'eax', 'explicate_7', 'new_temp21', 'new_temp2', 'new_temp26', 'ecx'}, 'new_temp14': {'new_temp2', 'explicate_8', 'explicate_7'}, 'new_temp37': set(), 'new_temp5': set(), 'new_temp15': {'new_temp2', 'explicate_8', 'explicate_7'}, 'new_temp21': {'new_temp2', 'explicate_8', 'explicate_7'}, 'new_temp6': set(), 'new_temp16': {'new_temp17', 'ecx', 'eax', 'new_temp2', 'edx', 'explicate_8'}, 'new_temp17': {'new_temp2', 'new_temp16'}, 'new_temp18': {'new_temp2'}, 'new_temp19': {'new_temp2'}, 'new_temp0': {'new_temp2'}, 'new_temp20': {'new_temp2'}, 'new_temp22': {'new_temp2'}, 'new_temp23': {'new_temp2', 'explicate_8', 'explicate_7'}, 'new_temp1': {'new_temp2'}, 'explicate_11': {'edx', 'eax', 'new_temp32', 'new_temp2', 'ecx'}, 'new_temp32': {'new_temp2', 'explicate_11'}, 'new_temp24': {'new_temp2', 'explicate_8'}, 'explicate_9': {'new_temp27', 'edx', 'explicate_8', 'eax', 'new_temp26', 'new_temp2', 'new_temp28', 'ecx', 'explicate_10'}, 'new_temp25': {'new_temp2', 'explicate_8'}, 'new_temp33': set(), 'new_temp34': set(), 'new_temp35': {'new_temp2'}, 'new_temp26': {'new_temp2', 'explicate_9', 'explicate_8'}, 'new_temp36': set(), 'new_temp3': set(), 'new_temp27': {'new_temp2', 'explicate_9'}, 'explicate_10': {'new_temp2', 'explicate_9'}, 'new_temp28': {'new_temp2', 'explicate_9'}, 'new_temp4': set(), 'new_temp29': {'new_temp2', 'eax'}, 'new_temp30': {'new_temp2'}, 'new_temp31': {'new_temp2'}}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp2': 4, 'explicate_7': 5, 'explicate_8': 6, 'new_temp16': 5, 'explicate_9': 5, 'explicate_11': 5, 'new_temp26': 1, 'new_temp23': 1, 'new_temp15': 1, 'new_temp21': 1, 'new_temp14': 1, 'new_temp28': 1, 'new_temp32': 1, 'new_temp24': 1, 'explicate_10': 1, 'new_temp17': 1, 'new_temp25': 1, 'new_temp27': 1, 'new_temp13': 1, 'new_temp29': 2, 'new_temp12': 1, 'new_temp30': 1, 'new_temp19': 1, 'new_temp35': 1, 'new_temp0': 1, 'new_temp31': 1, 'new_temp18': 1, 'new_temp22': 1, 'new_temp1': 1, 'new_temp20': 1, 'new_temp4': 1, 'new_temp5': 1, 'new_temp34': 1, 'new_temp36': 1, 'new_temp3': 1, 'new_temp6': 1, 'new_temp37': 1, 'new_temp33': 1}
+Spilled set:
+ set()
+
+
+--------------Spilling----------------
+unspillable_set
+ {'unspillable_0'}
+continue_looping
+ True
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp2': {'new_temp1', 'explicate_11', 'new_temp29', 'new_temp14', 'new_temp22', 'new_temp31', 'new_temp21', 'explicate_9', 'new_temp0', 'unspillable_0', 'new_temp20', 'new_temp15', 'new_temp24', 'explicate_8', 'new_temp19', 'new_temp30', 'new_temp13', 'new_temp27', 'edx', 'new_temp25', 'new_temp16', 'explicate_7', 'new_temp18', 'new_temp17', 'ecx', 'explicate_10', 'new_temp35', 'new_temp12', 'new_temp23', 'eax', 'new_temp32', 'new_temp26', 'new_temp28'}, 'unspillable_0': {'new_temp2'}, 'eax': {'new_temp29', 'explicate_11', 'explicate_9', 'explicate_8', 'new_temp16', 'explicate_7', 'new_temp2'}, 'ecx': {'explicate_11', 'explicate_9', 'explicate_8', 'new_temp16', 'explicate_7', 'new_temp2'}, 'edx': {'explicate_11', 'explicate_9', 'explicate_8', 'new_temp16', 'explicate_7', 'new_temp2'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp12': {'new_temp2'}, 'explicate_7': {'new_temp13', 'new_temp15', 'new_temp14', 'edx', 'explicate_8', 'eax', 'new_temp23', 'new_temp21', 'new_temp2', 'ecx'}, 'new_temp13': {'new_temp2', 'explicate_7'}, 'explicate_8': {'new_temp15', 'new_temp24', 'new_temp14', 'explicate_9', 'edx', 'new_temp23', 'new_temp16', 'new_temp25', 'eax', 'explicate_7', 'new_temp21', 'new_temp2', 'new_temp26', 'ecx'}, 'new_temp14': {'new_temp2', 'explicate_8', 'explicate_7'}, 'new_temp37': set(), 'new_temp5': set(), 'new_temp15': {'new_temp2', 'explicate_8', 'explicate_7'}, 'new_temp21': {'new_temp2', 'explicate_8', 'explicate_7'}, 'new_temp6': set(), 'new_temp16': {'new_temp17', 'ecx', 'eax', 'new_temp2', 'edx', 'explicate_8'}, 'new_temp17': {'new_temp2', 'new_temp16'}, 'new_temp18': {'new_temp2'}, 'new_temp19': {'new_temp2'}, 'new_temp0': {'new_temp2'}, 'new_temp20': {'new_temp2'}, 'new_temp22': {'new_temp2'}, 'new_temp23': {'new_temp2', 'explicate_8', 'explicate_7'}, 'new_temp1': {'new_temp2'}, 'explicate_11': {'edx', 'eax', 'new_temp32', 'new_temp2', 'ecx'}, 'new_temp32': {'new_temp2', 'explicate_11'}, 'new_temp24': {'new_temp2', 'explicate_8'}, 'explicate_9': {'new_temp27', 'edx', 'explicate_8', 'eax', 'new_temp26', 'new_temp2', 'new_temp28', 'ecx', 'explicate_10'}, 'new_temp25': {'new_temp2', 'explicate_8'}, 'new_temp33': set(), 'new_temp34': set(), 'new_temp35': {'new_temp2'}, 'new_temp26': {'new_temp2', 'explicate_9', 'explicate_8'}, 'new_temp36': set(), 'new_temp3': set(), 'new_temp27': {'new_temp2', 'explicate_9'}, 'explicate_10': {'new_temp2', 'explicate_9'}, 'new_temp28': {'new_temp2', 'explicate_9'}, 'new_temp4': set(), 'new_temp29': {'new_temp2', 'eax'}, 'new_temp30': {'new_temp2'}, 'new_temp31': {'new_temp2'}}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'unspillable_0': 1, 'new_temp2': 4, 'explicate_7': 5, 'explicate_8': 6, 'new_temp16': 5, 'explicate_9': 5, 'explicate_11': 5, 'new_temp26': 1, 'new_temp23': 1, 'new_temp15': 1, 'new_temp21': 1, 'new_temp14': 1, 'new_temp28': 1, 'new_temp32': 1, 'new_temp24': 1, 'explicate_10': 1, 'new_temp17': 1, 'new_temp25': 1, 'new_temp27': 1, 'new_temp13': 1, 'new_temp29': 2, 'new_temp12': 1, 'new_temp30': 1, 'new_temp19': 1, 'new_temp35': 1, 'new_temp0': 1, 'new_temp31': 1, 'new_temp18': 1, 'new_temp22': 1, 'new_temp1': 1, 'new_temp20': 1, 'new_temp4': 1, 'new_temp5': 1, 'new_temp34': 1, 'new_temp36': 1, 'new_temp3': 1, 'new_temp6': 1, 'new_temp37': 1, 'new_temp33': 1}
+Spilled set:
+ set()
+
+
+--------------Spilling----------------
+unspillable_set
+ {'unspillable_0'}
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {'unspillable_0': 'eax', 'new_temp2': 'edi', 'explicate_7': 'ebx', 'explicate_8': 'esi', 'new_temp16': 'ebx', 'explicate_9': 'ebx', 'explicate_11': 'ebx', 'new_temp26': 'eax', 'new_temp23': 'eax', 'new_temp15': 'eax', 'new_temp21': 'eax', 'new_temp14': 'eax', 'new_temp28': 'eax', 'new_temp32': 'eax', 'new_temp24': 'eax', 'explicate_10': 'eax', 'new_temp17': 'eax', 'new_temp25': 'eax', 'new_temp27': 'eax', 'new_temp13': 'eax', 'new_temp29': 'ecx', 'new_temp12': 'eax', 'new_temp30': 'eax', 'new_temp19': 'eax', 'new_temp35': 'eax', 'new_temp0': 'eax', 'new_temp31': 'eax', 'new_temp18': 'eax', 'new_temp22': 'eax', 'new_temp1': 'eax', 'new_temp20': 'eax', 'new_temp4': 'eax', 'new_temp5': 'eax', 'new_temp34': 'eax', 'new_temp36': 'eax', 'new_temp3': 'eax', 'new_temp6': 'eax', 'new_temp37': 'eax', 'new_temp33': 'eax'}
+unspillable_0
+unspillable_0
+new_temp12
+new_temp12
+explicate_7
+new_temp13
+new_temp13
+explicate_8
+explicate_7
+new_temp14
+new_temp14
+explicate_8
+new_temp15
+new_temp15
+explicate_7
+new_temp16
+explicate_8
+new_temp17
+new_temp17
+new_temp16
+new_temp18
+new_temp18
+new_temp19
+new_temp19
+new_temp0
+new_temp20
+new_temp20
+new_temp0
+explicate_8
+new_temp21
+new_temp21
+new_temp22
+new_temp22
+new_temp0
+explicate_7
+new_temp23
+new_temp23
+explicate_7
+new_temp24
+new_temp24
+explicate_9
+explicate_7
+new_temp25
+new_temp25
+explicate_9
+explicate_8
+new_temp26
+new_temp26
+explicate_8
+new_temp27
+new_temp27
+explicate_10
+explicate_8
+new_temp28
+new_temp28
+explicate_10
+explicate_9
+explicate_10
+new_temp29
+new_temp29
+new_temp29
+new_temp29
+new_temp29
+new_temp29
+new_temp30
+new_temp30
+new_temp31
+new_temp31
+new_temp0
+new_temp0
+new_temp1
+new_temp1
+explicate_11
+explicate_11
+new_temp32
+new_temp32
+explicate_11
+new_temp33
+new_temp33
+new_temp34
+new_temp34
+new_temp2
+new_temp2
+new_temp35
+new_temp35
+new_temp36
+new_temp36
+new_temp3
+new_temp2
+new_temp3
+new_temp3
+new_temp4
+new_temp4
+new_temp5
+new_temp37
+new_temp37
+new_temp5
+new_temp5
+new_temp6
+new_temp6
