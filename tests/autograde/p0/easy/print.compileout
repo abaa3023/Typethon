@@ -1,3 +1,13 @@
+------------------Tree with my parser--------------
+Module(
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Constant(value=1)],
+                keywords=[]))],
+    type_ignores=[])
 --------------Original code----------------
 print(1)
 Module(

@@ -1,3 +1,20 @@
+Syntax error at 'x'
+Illegal character ':'
+------------------Tree with my parser--------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Call(
+                func=Name(id='eval', ctx=Load()),
+                args=[
+                    Call(
+                        func=Name(id='input', ctx=Load()),
+                        args=[],
+                        keywords=[])],
+                keywords=[]))],
+    type_ignores=[])
 --------------Original code----------------
 x = 0
 while int(not x):
@@ -9,272 +26,57 @@ Module(
           Assign(
                targets=[
                     Name(id='x', ctx=Store())],
-               value=Constant(value=0)),
-          While(
-               test=Call(
-                    func=Name(id='int', ctx=Load()),
+               value=Call(
+                    func=Name(id='eval', ctx=Load()),
                     args=[
-                         UnaryOp(
-                              op=Not(),
-                              operand=Name(id='x', ctx=Load()))],
-                    keywords=[]),
-               body=[
-                    Assign(
-                         targets=[
-                              Name(id='x', ctx=Store())],
-                         value=Call(
-                              func=Name(id='eval', ctx=Load()),
-                              args=[
-                                   Call(
-                                        func=Name(id='input', ctx=Load()),
-                                        args=[],
-                                        keywords=[])],
-                              keywords=[]))],
-               orelse=[])],
+                         Call(
+                              func=Name(id='input', ctx=Load()),
+                              args=[],
+                              keywords=[])],
+                    keywords=[]))],
      type_ignores=[])
 Module(
      body=[
           Assign(
                targets=[
-                    Name(id='x', ctx=Store())],
-               value=Constant(value=0)),
-          If(
-               test=Name(id='x', ctx=Load()),
-               body=[
-                    Assign(
-                         targets=[
-                              Name(id='new_temp1', ctx=Store())],
-                         value=Constant(value=False))],
-               orelse=[
-                    Assign(
-                         targets=[
-                              Name(id='new_temp1', ctx=Store())],
-                         value=Constant(value=True))]),
+                    Name(id='new_temp0', ctx=Store())],
+               value=Call(
+                    func=Name(id='eval', ctx=Load()),
+                    args=[
+                         Call(
+                              func=Name(id='input', ctx=Load()),
+                              args=[],
+                              keywords=[])],
+                    keywords=[])),
           Assign(
                targets=[
-                    Name(id='new_temp2', ctx=Store())],
-               value=Call(
-                    func=Name(id='int', ctx=Load()),
-                    args=[
-                         Name(id='new_temp1', ctx=Load())],
-                    keywords=[])),
-          While(
-               test=Name(id='new_temp2', ctx=Load()),
-               body=[
-                    Assign(
-                         targets=[
-                              Name(id='new_temp0', ctx=Store())],
-                         value=Call(
-                              func=Name(id='eval', ctx=Load()),
-                              args=[
-                                   Call(
-                                        func=Name(id='input', ctx=Load()),
-                                        args=[],
-                                        keywords=[])],
-                              keywords=[])),
-                    Assign(
-                         targets=[
-                              Name(id='x', ctx=Store())],
-                         value=Name(id='new_temp0', ctx=Load())),
-                    If(
-                         test=Name(id='x', ctx=Load()),
-                         body=[
-                              Assign(
-                                   targets=[
-                                        Name(id='new_temp1', ctx=Store())],
-                                   value=Constant(value=False))],
-                         orelse=[
-                              Assign(
-                                   targets=[
-                                        Name(id='new_temp1', ctx=Store())],
-                                   value=Constant(value=True))]),
-                    Assign(
-                         targets=[
-                              Name(id='new_temp2', ctx=Store())],
-                         value=Call(
-                              func=Name(id='int', ctx=Load()),
-                              args=[
-                                   Name(id='new_temp1', ctx=Load())],
-                              keywords=[]))],
-               orelse=[])],
+                    Name(id='x', ctx=Store())],
+               value=Name(id='new_temp0', ctx=Load()))],
      type_ignores=[])
 --------------Code after flattening-------
-x = 0
-if x:
-    new_temp1 = False
-else:
-    new_temp1 = True
-new_temp2 = int(new_temp1)
-while new_temp2:
-    new_temp0 = eval(input())
-    x = new_temp0
-    if x:
-        new_temp1 = False
-    else:
-        new_temp1 = True
-    new_temp2 = int(new_temp1)
-<ast.Constant object at 0x7fa5777c7f10>
-<ast.Constant object at 0x7fa5778151b0>
-<ast.Constant object at 0x7fa577815210>
-inject_int(project_bool(explicate_3))
+new_temp0 = eval(input())
+x = new_temp0
 eval(input())
-<ast.Name object at 0x7fa577815030>
-<ast.Constant object at 0x7fa5778151b0>
-<ast.Constant object at 0x7fa577815210>
-inject_int(project_bool(explicate_4))
+<ast.Name object at 0x7fe1d13f94b0>
 
-x = inject_int(0)
-if(is_true(x)):
-
-	new_temp1 = inject_bool(0)
-else:
-
-	new_temp1 = inject_bool(1)
-explicate_3 = new_temp1
-if(is_bool(explicate_3)):
-	new_temp2 = inject_int(project_bool(explicate_3))
-while(is_true(new_temp2)):
-
-	new_temp0 = eval(input())
-	x = new_temp0
-	if(is_true(x)):
-	
-		new_temp1 = inject_bool(0)
-	else:
-	
-		new_temp1 = inject_bool(1)
-	explicate_4 = new_temp1
-	if(is_bool(explicate_4)):
-		new_temp2 = inject_int(project_bool(explicate_4))
+new_temp0 = eval(input())
+x = new_temp0
 --------------Explicate code-------
-x = inject_int(0)
-if is_true(x):
-    new_temp1 = inject_bool(0)
-else:
-    new_temp1 = inject_bool(1)
-explicate_3 = new_temp1
-if is_bool(explicate_3):
-    new_temp2 = inject_int(project_bool(explicate_3))
-while is_true(new_temp2):
-    new_temp0 = eval(input())
-    x = new_temp0
-    if is_true(x):
-        new_temp1 = inject_bool(0)
-    else:
-        new_temp1 = inject_bool(1)
-    explicate_4 = new_temp1
-    if is_bool(explicate_4):
-        new_temp2 = inject_int(project_bool(explicate_4))
+new_temp0 = eval(input())
+x = new_temp0
 
 
 --- explicated flattened python ---
-new_temp5 = inject_int(0)
-x = new_temp5
-new_temp6 = is_true(x)
-if new_temp6:
-    new_temp7 = inject_bool(0)
-    new_temp1 = new_temp7
-else:
-    new_temp8 = inject_bool(1)
-    new_temp1 = new_temp8
-explicate_3 = new_temp1
-new_temp9 = is_bool(explicate_3)
-if new_temp9:
-    new_temp10 = project_bool(explicate_3)
-    new_temp11 = inject_int(new_temp10)
-    new_temp2 = new_temp11
-new_temp19 = is_true(new_temp2)
-while new_temp19:
-    new_temp12 = eval(input())
-    new_temp0 = new_temp12
-    x = new_temp0
-    new_temp13 = is_true(x)
-    if new_temp13:
-        new_temp14 = inject_bool(0)
-        new_temp1 = new_temp14
-    else:
-        new_temp15 = inject_bool(1)
-        new_temp1 = new_temp15
-    explicate_4 = new_temp1
-    new_temp16 = is_bool(explicate_4)
-    if new_temp16:
-        new_temp17 = project_bool(explicate_4)
-        new_temp18 = inject_int(new_temp17)
-        new_temp2 = new_temp18
-    new_temp19 = is_true(new_temp2)
+new_temp1 = eval(input())
+new_temp0 = new_temp1
+x = new_temp0
 
 
 --- x86 IR ---
-call  inject_int 0
-movl  eax ,  new_temp5
-movl  new_temp5 ,  x
-call  is_true x
-movl  eax ,  new_temp6
-if1
-cmp 0, new_temp6
-je else1
-then1
-call  inject_bool 0
-movl  eax ,  new_temp7
-movl  new_temp7 ,  new_temp1
-else1
-call  inject_bool 1
-movl  eax ,  new_temp8
-movl  new_temp8 ,  new_temp1
-end if1
-movl  new_temp1 ,  explicate_3
-call  is_bool explicate_3
-movl  eax ,  new_temp9
-if2
-cmp 0, new_temp9
-je end if2
-then2
-call  project_bool explicate_3
-movl  eax ,  new_temp10
-call  inject_int new_temp10
-movl  eax ,  new_temp11
-movl  new_temp11 ,  new_temp2
-end if2
-call  is_true new_temp2
-movl  eax ,  new_temp19
-While1
-cmp 0, new_temp19
-je endl While1
 call  eval None
-movl  eax ,  new_temp12
-movl  new_temp12 ,  new_temp0
+movl  eax ,  new_temp1
+movl  new_temp1 ,  new_temp0
 movl  new_temp0 ,  x
-call  is_true x
-movl  eax ,  new_temp13
-if3
-cmp 0, new_temp13
-je else3
-then3
-call  inject_bool 0
-movl  eax ,  new_temp14
-movl  new_temp14 ,  new_temp1
-else3
-call  inject_bool 1
-movl  eax ,  new_temp15
-movl  new_temp15 ,  new_temp1
-end if3
-movl  new_temp1 ,  explicate_4
-call  is_bool explicate_4
-movl  eax ,  new_temp16
-if4
-cmp 0, new_temp16
-je end if4
-then4
-call  project_bool explicate_4
-movl  eax ,  new_temp17
-call  inject_int new_temp17
-movl  eax ,  new_temp18
-movl  new_temp18 ,  new_temp2
-end if4
-call  is_true new_temp2
-movl  eax ,  new_temp19
-jmp While1
-endl While1
 
 
 --- Control Flow Graph ---
@@ -289,12 +91,12 @@ endl While1
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp2': {'new_temp16', 'new_temp13', 'new_temp5', 'new_temp7', 'explicate_4', 'new_temp1', 'new_temp8', 'new_temp19', 'new_temp12', 'explicate_3', 'new_temp14', 'new_temp15', 'new_temp6', 'eax', 'new_temp9', 'x', 'new_temp0', 'ecx', 'edx'}, 'eax': {'explicate_3', 'explicate_4', 'new_temp2'}, 'ecx': {'explicate_3', 'explicate_4', 'new_temp2'}, 'edx': {'explicate_3', 'explicate_4', 'new_temp2'}, 'new_temp5': {'new_temp2'}, 'x': {'new_temp2'}, 'new_temp6': {'new_temp2'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp7': {'new_temp2'}, 'new_temp1': {'new_temp2'}, 'new_temp8': {'new_temp2'}, 'explicate_3': {'eax', 'new_temp9', 'ecx', 'edx', 'new_temp2'}, 'new_temp9': {'explicate_3', 'new_temp2'}, 'new_temp10': set(), 'new_temp11': set(), 'new_temp19': {'new_temp2'}, 'new_temp12': {'new_temp2'}, 'new_temp0': {'new_temp2'}, 'new_temp13': {'new_temp2'}, 'new_temp14': {'new_temp2'}, 'new_temp15': {'new_temp2'}, 'explicate_4': {'new_temp16', 'eax', 'ecx', 'edx', 'new_temp2'}, 'new_temp16': {'explicate_4', 'new_temp2'}, 'new_temp17': set(), 'new_temp18': set()}
+Interference Graph:  {'new_temp1': set(), 'new_temp0': set(), 'x': set(), 'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp2': 4, 'explicate_3': 5, 'explicate_4': 5, 'new_temp9': 1, 'new_temp16': 1, 'new_temp15': 1, 'new_temp0': 1, 'new_temp12': 1, 'new_temp19': 1, 'x': 1, 'new_temp6': 1, 'new_temp8': 1, 'new_temp1': 1, 'new_temp7': 1, 'new_temp14': 1, 'new_temp5': 1, 'new_temp13': 1, 'new_temp17': 1, 'new_temp18': 1, 'new_temp11': 1, 'new_temp10': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp1': 1, 'new_temp0': 1, 'x': 1}
 Spilled set:
  set()
 
@@ -307,57 +109,9 @@ continue_looping
 
 
 
-Homes for CFG0:  {'new_temp2': 'edi', 'explicate_3': 'ebx', 'explicate_4': 'ebx', 'new_temp9': 'eax', 'new_temp16': 'eax', 'new_temp15': 'eax', 'new_temp0': 'eax', 'new_temp12': 'eax', 'new_temp19': 'eax', 'x': 'eax', 'new_temp6': 'eax', 'new_temp8': 'eax', 'new_temp1': 'eax', 'new_temp7': 'eax', 'new_temp14': 'eax', 'new_temp5': 'eax', 'new_temp13': 'eax', 'new_temp17': 'eax', 'new_temp18': 'eax', 'new_temp11': 'eax', 'new_temp10': 'eax'}
-new_temp5
-new_temp5
-x
-x
-new_temp6
-new_temp6
-new_temp7
-new_temp7
-new_temp1
-new_temp8
-new_temp8
+Homes for CFG0:  {'new_temp1': 'eax', 'new_temp0': 'eax', 'x': 'eax'}
 new_temp1
 new_temp1
-explicate_3
-explicate_3
-new_temp9
-new_temp9
-explicate_3
-new_temp10
-new_temp10
-new_temp11
-new_temp11
-new_temp2
-new_temp2
-new_temp19
-new_temp19
-new_temp12
-new_temp12
 new_temp0
 new_temp0
 x
-x
-new_temp13
-new_temp13
-new_temp14
-new_temp14
-new_temp1
-new_temp15
-new_temp15
-new_temp1
-new_temp1
-explicate_4
-explicate_4
-new_temp16
-new_temp16
-explicate_4
-new_temp17
-new_temp17
-new_temp18
-new_temp18
-new_temp2
-new_temp2
-new_temp19

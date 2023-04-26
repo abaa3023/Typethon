@@ -9,14 +9,16 @@ from ast import *
 reserved = {    # dictionary defines keywords and associated token types
     'print': 'PRINT',
     'eval': 'EVAL',
-    'input': 'INPUT'
+    'input': 'INPUT',
+    'int' : 'INT_FUNC'
  }
 
 #TODO - Need INDENT AND DEDENT
-# tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'COLON', 'IF', 'ELSE', 'WHILE', 'INT_WORD', 'NOT', 'AND', 'OR', 'EQUAL_EQUAL', 'NOT_EQUAL', 'INDENT', 'DEDENT'] + list(reserved.values()) #include reserved token types with other tokens
+#tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'COLON', 'IF', 'ELSE', 'WHILE', 'INT_WORD', 'NOT', 'AND', 'OR', 'EQUAL_EQUAL', 'NOT_EQUAL', 'INDENT', 'DEDENT'] + list(reserved.values()) #include reserved token types with other tokens
 
-tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID'] + list(reserved.values()) #include reserved token types with other tokens
+tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'EQUAL_EQUAL'] + list(reserved.values()) #include reserved token types with other tokens
 
+#p0
 t_PRINT = r'print'
 t_EVAL = r'eval'
 t_INPUT = r'input'
@@ -26,6 +28,13 @@ t_RPAR = r'\)'
 t_MINUS = r'\-'
 t_EQUALS = r'\='
 t_ignore = ' \t'
+
+#p0a
+t_EQUAL_EQUAL = r'\=='
+t_INT_FUNC=r'int'
+
+
+#TODO
 #t_COLON = r'\:'
 # t_IF = r'\if'
 # t_ELSE = r'\else'
@@ -34,7 +43,6 @@ t_ignore = ' \t'
 # t_NOT = r'\not'
 # t_AND = r'\and'
 # t_OR = r'\or'
-# t_EQUAL_EQUAL = r'\=='
 # t_NOT_EQUAL = r'\!='
 
 
@@ -147,9 +155,6 @@ def p_assignment(t):
 # def p_expression_or_expression(t):
 #     'expression : expression OR expression'
 #     t[0] = t[1]
-# def p_int_equalequal_expression(t):
-#     'expression : INT_WORD LPAR expression EQUAL_EQUAL expression RPAR'
-#     t[0] = t[1]
 # def p_int_notequal_expression(t):
 #     'expression : INT_WORD LPAR expression NOT_EQUAL expression RPAR'
 #     t[0] = t[1]
@@ -165,6 +170,20 @@ def p_eval_input_expression(t):
     'expression : EVAL LPAR INPUT LPAR RPAR RPAR'
     t[0] = Call(func=Name(id='eval',ctx=Load()),args=[Call(func=Name(id='input', ctx=Load()),args=[],keywords=[])],keywords=[])
     
+    
+    
+#p0a STUFF ---------------------------------------------
+def p_int_func_expression(t):
+    'expression : INT_FUNC LPAR expression RPAR'
+    t[0] = Call(func=Name(id='int', ctx=Load()),args=[t[3]],keywords=[])
+    
+def p_compare_equals_expression(t):
+    'expression : expression EQUAL_EQUAL expression'
+    t[0] = Compare(left=t[1], ops=[Eq()], comparators=[t[3]], keywords=[])
+#------------------------------------------------------------------------
+
+
+
 def p_plus_expression(t):
     'expression : expression PLUS expression'
     t[0] = BinOp(t[1], Add(), t[3])    
@@ -200,7 +219,7 @@ def p_neg_expression(t):
 def p_par_wrapped_expression(t):
     'expression : LPAR expression RPAR'
     t[0] = t[2]
-    
+
 #End Expression and Assignment Grammar Rules --------------------------------------
 
 def p_error(t):

@@ -1,3 +1,51 @@
+------------------Tree with my parser--------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Constant(value=2)),
+        Assign(
+            targets=[
+                Name(id='y', ctx=Store())],
+            value=Constant(value=3)),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='x', ctx=Load())],
+                keywords=[])),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='y', ctx=Load())],
+                keywords=[])),
+        Assign(
+            targets=[
+                Name(id='tmp', ctx=Store())],
+            value=Name(id='x', ctx=Load())),
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Name(id='y', ctx=Load())),
+        Assign(
+            targets=[
+                Name(id='y', ctx=Store())],
+            value=Name(id='tmp', ctx=Load())),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='x', ctx=Load())],
+                keywords=[])),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='y', ctx=Load())],
+                keywords=[]))],
+    type_ignores=[])
 --------------Original code----------------
 x = 2
 y = 3
@@ -113,11 +161,11 @@ x = y
 y = tmp
 print(x)
 print(y)
-<ast.Constant object at 0x7f3e088e7f10>
-<ast.Constant object at 0x7f3e08935630>
-<ast.Name object at 0x7f3e089353c0>
-<ast.Name object at 0x7f3e08935330>
-<ast.Name object at 0x7f3e089352a0>
+<ast.Constant object at 0x7fb62e5bf100>
+<ast.Constant object at 0x7fb62e620fa0>
+<ast.Name object at 0x7fb62e621510>
+<ast.Name object at 0x7fb62e621750>
+<ast.Name object at 0x7fb62e621930>
 
 x = inject_int(2)
 y = inject_int(3)
@@ -182,12 +230,12 @@ call  print y
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp0': set(), 'x': {'y', 'new_temp1', 'tmp', 'eax', 'ecx', 'edx'}, 'eax': {'y', 'x'}, 'ecx': {'y', 'x'}, 'edx': {'y', 'x'}, 'new_temp1': {'x'}, 'y': {'x', 'tmp', 'eax', 'ecx', 'edx'}, 'tmp': {'y', 'x'}, 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'new_temp0': set(), 'x': {'tmp', 'ecx', 'new_temp1', 'eax', 'edx', 'y'}, 'eax': {'x', 'y'}, 'ecx': {'x', 'y'}, 'edx': {'x', 'y'}, 'new_temp1': {'x'}, 'y': {'tmp', 'ecx', 'x', 'eax', 'edx'}, 'tmp': {'x', 'y'}, 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'x': 4, 'y': 5, 'tmp': 1, 'new_temp1': 1, 'new_temp0': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'y': 4, 'x': 5, 'tmp': 1, 'new_temp1': 1, 'new_temp0': 1}
 Spilled set:
  set()
 
@@ -200,7 +248,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'x': 'edi', 'y': 'ebx', 'tmp': 'eax', 'new_temp1': 'eax', 'new_temp0': 'eax'}
+Homes for CFG0:  {'y': 'edi', 'x': 'ebx', 'tmp': 'eax', 'new_temp1': 'eax', 'new_temp0': 'eax'}
 new_temp0
 new_temp0
 x

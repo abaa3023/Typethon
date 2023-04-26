@@ -1,3 +1,11 @@
+------------------Tree with my parser--------------
+Module(
+    body=[
+        Expr(
+            value=Constant(value=1)),
+        Expr(
+            value=Constant(value=2))],
+    type_ignores=[])
 --------------Original code----------------
 1
 2
