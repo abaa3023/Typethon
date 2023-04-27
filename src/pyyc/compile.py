@@ -13,6 +13,7 @@ import variable_homes
 import generate_assembly
 # from lexerandparser import createASTFromMyParser
 from type_checking.type_check import TypeCheck
+from type_checking.remove_ann_assign import RemoveAnnAssign
 
 def compile(src_file):
     
@@ -26,6 +27,8 @@ def compile(src_file):
     
     
     TypeCheck().visit(tree)
+    
+    tree = RemoveAnnAssign().visit(tree)
     
     
     # print("------------------CORRECT TREE--------------------")
