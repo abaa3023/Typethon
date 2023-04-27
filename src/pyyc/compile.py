@@ -11,17 +11,33 @@ import graph_color
 import spill_ir
 import variable_homes
 import generate_assembly
+# from lexerandparser import createASTFromMyParser
+from type_checking.type_check import TypeCheck
 
 def compile(src_file):
     
     prog = ''
     with open(src_file) as f:
         prog = f.read()
+        
+        
     tree = ast.parse(prog)
+    # tree = createASTFromMyParser(src_file)
+    
+    
+    TypeCheck().visit(tree)
+    
+    
+    # print("------------------CORRECT TREE--------------------")
+    # print(ast.dump(tree1,indent=4))
+    # print("------------------Tree with my parser--------------")
+    # print(ast.dump(tree,indent=4))
     
     print('--------------Original code----------------')
     print(prog)
 
+    #raise Exception("im done")
+    
     flatten_tree = flatten.main(tree)
     
     print('--------------Code after flattening-------')
