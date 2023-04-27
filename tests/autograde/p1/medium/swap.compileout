@@ -71,18 +71,14 @@ Module(
             targets=[
                 Name(id='a', ctx=Store())],
             value=Constant(value=1)),
-        Expr(
-            value=Constant(value=2)),
-        Expr(
-            value=Constant(value=3)),
+        Constant(value=2),
+        Constant(value=3),
         Assign(
             targets=[
                 Name(id='b', ctx=Store())],
             value=Constant(value=4)),
-        Expr(
-            value=Constant(value=5)),
-        Expr(
-            value=Constant(value=6)),
+        Constant(value=5),
+        Constant(value=6),
         Expr(
             value=Call(
                 func=Name(id='print', ctx=Load()),
@@ -136,18 +132,14 @@ Module(
                targets=[
                     Name(id='a', ctx=Store())],
                value=Constant(value=1)),
-          Expr(
-               value=Constant(value=2)),
-          Expr(
-               value=Constant(value=3)),
+          Constant(value=2),
+          Constant(value=3),
           Assign(
                targets=[
                     Name(id='b', ctx=Store())],
                value=Constant(value=4)),
-          Expr(
-               value=Constant(value=5)),
-          Expr(
-               value=Constant(value=6)),
+          Constant(value=5),
+          Constant(value=6),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -191,18 +183,10 @@ Module(
                targets=[
                     Name(id='a', ctx=Store())],
                value=Constant(value=1)),
-          Expr(
-               value=Constant(value=2)),
-          Expr(
-               value=Constant(value=3)),
           Assign(
                targets=[
                     Name(id='b', ctx=Store())],
                value=Constant(value=4)),
-          Expr(
-               value=Constant(value=5)),
-          Expr(
-               value=Constant(value=6)),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -242,11 +226,7 @@ Module(
      type_ignores=[])
 --------------Code after flattening-------
 a = 1
-2
-3
 b = 4
-5
-6
 print(a)
 print(b)
 tmp = a
@@ -254,11 +234,11 @@ a = b
 b = tmp
 print(a)
 print(b)
-<ast.Constant object at 0x7fd968fda050>
-<ast.Constant object at 0x7fd968fd8e20>
-<ast.Name object at 0x7fd968fda6e0>
-<ast.Name object at 0x7fd968fda890>
-<ast.Name object at 0x7fd968fda9e0>
+<ast.Constant object at 0x7f8a90f2e9e0>
+<ast.Constant object at 0x7f8a90f2e920>
+<ast.Name object at 0x7f8a90f2eef0>
+<ast.Name object at 0x7f8a90f2f160>
+<ast.Name object at 0x7f8a90f2f2b0>
 
 a = inject_int(1)
 b = inject_int(4)
@@ -323,12 +303,12 @@ call  print b
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp0': set(), 'a': {'edx', 'eax', 'tmp', 'ecx', 'new_temp1', 'b'}, 'eax': {'a', 'b'}, 'ecx': {'a', 'b'}, 'edx': {'a', 'b'}, 'new_temp1': {'a'}, 'b': {'edx', 'eax', 'tmp', 'ecx', 'a'}, 'tmp': {'a', 'b'}, 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'new_temp0': set(), 'a': {'edx', 'ecx', 'new_temp1', 'eax', 'b', 'tmp'}, 'eax': {'a', 'b'}, 'ecx': {'a', 'b'}, 'edx': {'a', 'b'}, 'new_temp1': {'a'}, 'b': {'edx', 'ecx', 'eax', 'a', 'tmp'}, 'tmp': {'a', 'b'}, 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'a': 4, 'b': 5, 'tmp': 1, 'new_temp1': 1, 'new_temp0': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'b': 4, 'a': 5, 'tmp': 1, 'new_temp1': 1, 'new_temp0': 1}
 Spilled set:
  set()
 
@@ -341,7 +321,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'a': 'edi', 'b': 'ebx', 'tmp': 'eax', 'new_temp1': 'eax', 'new_temp0': 'eax'}
+Homes for CFG0:  {'b': 'edi', 'a': 'ebx', 'tmp': 'eax', 'new_temp1': 'eax', 'new_temp0': 'eax'}
 new_temp0
 new_temp0
 a

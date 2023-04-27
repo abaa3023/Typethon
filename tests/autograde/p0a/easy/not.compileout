@@ -102,10 +102,10 @@ else:
 new_temp1 = int(new_temp0)
 x = new_temp1
 print(x)
-<ast.Constant object at 0x7f447fb89ff0>
-<ast.Constant object at 0x7f447fb8a0b0>
+<ast.Constant object at 0x7f2fd6d56980>
+<ast.Constant object at 0x7f2fd6d56a40>
 inject_int(project_bool(explicate_2))
-<ast.Name object at 0x7f447fb89ea0>
+<ast.Name object at 0x7f2fd6d56830>
 
 if(2):
 
@@ -189,12 +189,12 @@ call  print x
 --------------Interference----------------
 
 
-Interference Graph:  {'eax': {'explicate_2', 'new_temp1'}, 'ecx': {'explicate_2', 'new_temp1'}, 'edx': {'explicate_2', 'new_temp1'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp1': {'explicate_2', 'ecx', 'edx', 'new_temp4', 'new_temp5', 'new_temp3', 'eax', 'new_temp0'}, 'new_temp3': {'new_temp1'}, 'new_temp0': {'new_temp1'}, 'new_temp4': {'new_temp1'}, 'explicate_2': {'ecx', 'edx', 'new_temp5', 'eax', 'new_temp1'}, 'new_temp5': {'explicate_2', 'new_temp1'}, 'new_temp6': set(), 'new_temp7': set(), 'x': set()}
+Interference Graph:  {'eax': {'new_temp1', 'explicate_2'}, 'ecx': {'new_temp1', 'explicate_2'}, 'edx': {'new_temp1', 'explicate_2'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp1': {'new_temp0', 'edx', 'ecx', 'explicate_2', 'eax', 'new_temp3', 'new_temp5', 'new_temp4'}, 'new_temp3': {'new_temp1'}, 'new_temp0': {'new_temp1'}, 'new_temp4': {'new_temp1'}, 'explicate_2': {'edx', 'ecx', 'new_temp5', 'eax', 'new_temp1'}, 'new_temp5': {'explicate_2', 'new_temp1'}, 'new_temp6': set(), 'new_temp7': set(), 'x': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp1': 4, 'explicate_2': 5, 'new_temp5': 1, 'new_temp0': 1, 'new_temp3': 1, 'new_temp4': 1, 'new_temp7': 1, 'x': 1, 'new_temp6': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp1': 4, 'explicate_2': 5, 'new_temp5': 1, 'new_temp4': 1, 'new_temp3': 1, 'new_temp0': 1, 'new_temp7': 1, 'x': 1, 'new_temp6': 1}
 Spilled set:
  set()
 
@@ -215,12 +215,12 @@ continue_looping
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp1': {'explicate_2', 'ecx', 'edx', 'new_temp4', 'new_temp5', 'new_temp3', 'unspillable_0', 'eax', 'new_temp0'}, 'unspillable_0': {'new_temp1'}, 'eax': {'explicate_2', 'new_temp1'}, 'ecx': {'explicate_2', 'new_temp1'}, 'edx': {'explicate_2', 'new_temp1'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp3': {'new_temp1'}, 'new_temp0': {'new_temp1'}, 'new_temp4': {'new_temp1'}, 'explicate_2': {'ecx', 'edx', 'new_temp5', 'eax', 'new_temp1'}, 'new_temp5': {'explicate_2', 'new_temp1'}, 'new_temp6': set(), 'new_temp7': set(), 'x': set()}
+Interference Graph:  {'new_temp1': {'new_temp0', 'edx', 'unspillable_0', 'ecx', 'explicate_2', 'eax', 'new_temp3', 'new_temp5', 'new_temp4'}, 'unspillable_0': {'new_temp1'}, 'eax': {'new_temp1', 'explicate_2'}, 'ecx': {'new_temp1', 'explicate_2'}, 'edx': {'new_temp1', 'explicate_2'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp3': {'new_temp1'}, 'new_temp0': {'new_temp1'}, 'new_temp4': {'new_temp1'}, 'explicate_2': {'edx', 'ecx', 'new_temp5', 'eax', 'new_temp1'}, 'new_temp5': {'explicate_2', 'new_temp1'}, 'new_temp6': set(), 'new_temp7': set(), 'x': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'unspillable_0': 1, 'new_temp1': 4, 'explicate_2': 5, 'new_temp5': 1, 'new_temp0': 1, 'new_temp3': 1, 'new_temp4': 1, 'new_temp7': 1, 'x': 1, 'new_temp6': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'unspillable_0': 1, 'new_temp1': 4, 'explicate_2': 5, 'new_temp5': 1, 'new_temp3': 1, 'new_temp4': 1, 'new_temp0': 1, 'new_temp7': 1, 'x': 1, 'new_temp6': 1}
 Spilled set:
  set()
 
@@ -233,7 +233,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'unspillable_0': 'eax', 'new_temp1': 'edi', 'explicate_2': 'ebx', 'new_temp5': 'eax', 'new_temp0': 'eax', 'new_temp3': 'eax', 'new_temp4': 'eax', 'new_temp7': 'eax', 'x': 'eax', 'new_temp6': 'eax'}
+Homes for CFG0:  {'unspillable_0': 'eax', 'new_temp1': 'edi', 'explicate_2': 'ebx', 'new_temp5': 'eax', 'new_temp3': 'eax', 'new_temp4': 'eax', 'new_temp0': 'eax', 'new_temp7': 'eax', 'x': 'eax', 'new_temp6': 'eax'}
 unspillable_0
 unspillable_0
 new_temp3

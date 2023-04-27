@@ -23,10 +23,8 @@ Module(
             targets=[
                 Name(id='x', ctx=Store())],
             value=Constant(value=1)),
-        Expr(
-            value=Name(id='or', ctx=Load())),
-        Expr(
-            value=Constant(value=2)),
+        Name(id='or', ctx=Load()),
+        Constant(value=2),
         Expr(
             value=Call(
                 func=Name(id='print', ctx=Load()),
@@ -43,10 +41,8 @@ Module(
                targets=[
                     Name(id='x', ctx=Store())],
                value=Constant(value=1)),
-          Expr(
-               value=Name(id='or', ctx=Load())),
-          Expr(
-               value=Constant(value=2)),
+          Name(id='or', ctx=Load()),
+          Constant(value=2),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -61,10 +57,6 @@ Module(
                     Name(id='x', ctx=Store())],
                value=Constant(value=1)),
           Expr(
-               value=Name(id='or', ctx=Load())),
-          Expr(
-               value=Constant(value=2)),
-          Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
                     args=[
@@ -73,10 +65,8 @@ Module(
      type_ignores=[])
 --------------Code after flattening-------
 x = 1
-or
-2
 print(x)
-<ast.Constant object at 0x7f0814d6da20>
+<ast.Constant object at 0x7f282d92a3b0>
 
 x = inject_int(1)
 print(x)
@@ -115,7 +105,7 @@ Interference Graph:  {'new_temp0': set(), 'x': set(), 'eax': set(), 'ecx': set()
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'x': 1, 'new_temp0': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 1, 'x': 1}
 Spilled set:
  set()
 
@@ -128,7 +118,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'x': 'eax', 'new_temp0': 'eax'}
+Homes for CFG0:  {'new_temp0': 'eax', 'x': 'eax'}
 new_temp0
 new_temp0
 x

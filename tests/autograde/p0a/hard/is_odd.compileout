@@ -1,4 +1,5 @@
-Illegal character ':'
+Syntax error at 'int'
+Syntax error at ':'
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -64,38 +65,6 @@ Module(
         Assign(
             targets=[
                 Name(id='is_odd', ctx=Store())],
-            value=Constant(value=1)),
-        Assign(
-            targets=[
-                Name(id='x', ctx=Store())],
-            value=Call(
-                func=Name(id='eval', ctx=Load()),
-                args=[
-                    Call(
-                        func=Name(id='input', ctx=Load()),
-                        args=[],
-                        keywords=[])],
-                keywords=[])),
-        Assign(
-            targets=[
-                Name(id='idx', ctx=Store())],
-            value=Constant(value=1)),
-        Expr(
-            value=Name(id='while', ctx=Load())),
-        Expr(
-            value=Call(
-                func=Name(id='int', ctx=Load()),
-                args=[
-                    Compare(
-                        left=Name(id='idx', ctx=Load()),
-                        ops=[
-                            NotEq()],
-                        comparators=[
-                            Name(id='x', ctx=Load())])],
-                keywords=[])),
-        Assign(
-            targets=[
-                Name(id='is_odd', ctx=Store())],
             value=Call(
                 func=Name(id='int', ctx=Load()),
                 args=[
@@ -131,38 +100,6 @@ Module(
           Assign(
                targets=[
                     Name(id='is_odd', ctx=Store())],
-               value=Constant(value=1)),
-          Assign(
-               targets=[
-                    Name(id='x', ctx=Store())],
-               value=Call(
-                    func=Name(id='eval', ctx=Load()),
-                    args=[
-                         Call(
-                              func=Name(id='input', ctx=Load()),
-                              args=[],
-                              keywords=[])],
-                    keywords=[])),
-          Assign(
-               targets=[
-                    Name(id='idx', ctx=Store())],
-               value=Constant(value=1)),
-          Expr(
-               value=Name(id='while', ctx=Load())),
-          Expr(
-               value=Call(
-                    func=Name(id='int', ctx=Load()),
-                    args=[
-                         Compare(
-                              left=Name(id='idx', ctx=Load()),
-                              ops=[
-                                   NotEq()],
-                              comparators=[
-                                   Name(id='x', ctx=Load())])],
-                    keywords=[])),
-          Assign(
-               targets=[
-                    Name(id='is_odd', ctx=Store())],
                value=Call(
                     func=Name(id='int', ctx=Load()),
                     args=[
@@ -186,77 +123,33 @@ Module(
      type_ignores=[])
 Module(
      body=[
-          Assign(
-               targets=[
-                    Name(id='is_odd', ctx=Store())],
-               value=Constant(value=1)),
-          Assign(
-               targets=[
-                    Name(id='new_temp0', ctx=Store())],
-               value=Call(
-                    func=Name(id='eval', ctx=Load()),
-                    args=[
-                         Call(
-                              func=Name(id='input', ctx=Load()),
-                              args=[],
-                              keywords=[])],
-                    keywords=[])),
-          Assign(
-               targets=[
-                    Name(id='x', ctx=Store())],
-               value=Name(id='new_temp0', ctx=Load())),
-          Assign(
-               targets=[
-                    Name(id='idx', ctx=Store())],
-               value=Constant(value=1)),
-          Expr(
-               value=Name(id='while', ctx=Load())),
-          Assign(
-               targets=[
-                    Name(id='new_temp1', ctx=Store())],
-               value=Compare(
-                    left=Name(id='idx', ctx=Load()),
-                    ops=[
-                         NotEq()],
-                    comparators=[
-                         Name(id='x', ctx=Load())])),
-          Assign(
-               targets=[
-                    Name(id='new_temp2', ctx=Store())],
-               value=Name(id='new_temp1', ctx=Store())),
-          Expr(
-               value=Call(
-                    func=Name(id='int', ctx=Load()),
-                    args=[
-                         Name(id='new_temp2', ctx=Load())],
-                    keywords=[])),
           If(
                test=Name(id='is_odd', ctx=Load()),
                body=[
                     Assign(
                          targets=[
-                              Name(id='new_temp3', ctx=Store())],
+                              Name(id='new_temp0', ctx=Store())],
                          value=Constant(value=False))],
                orelse=[
                     Assign(
                          targets=[
-                              Name(id='new_temp3', ctx=Store())],
+                              Name(id='new_temp0', ctx=Store())],
                          value=Constant(value=True))]),
           Assign(
                targets=[
-                    Name(id='new_temp4', ctx=Store())],
+                    Name(id='new_temp1', ctx=Store())],
                value=Call(
                     func=Name(id='int', ctx=Load()),
                     args=[
-                         Name(id='new_temp3', ctx=Load())],
+                         Name(id='new_temp0', ctx=Load())],
                     keywords=[])),
           Assign(
                targets=[
                     Name(id='is_odd', ctx=Store())],
-               value=Name(id='new_temp4', ctx=Load())),
+               value=Name(id='new_temp1', ctx=Load())),
           Assign(
                targets=[
-                    Name(id='new_temp5', ctx=Store())],
+                    Name(id='new_temp2', ctx=Store())],
                value=BinOp(
                     left=Name(id='idx', ctx=Load()),
                     op=Add(),
@@ -264,7 +157,7 @@ Module(
           Assign(
                targets=[
                     Name(id='idx', ctx=Store())],
-               value=Name(id='new_temp5', ctx=Load())),
+               value=Name(id='new_temp2', ctx=Load())),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -273,36 +166,341 @@ Module(
                     keywords=[]))],
      type_ignores=[])
 --------------Code after flattening-------
-is_odd = 1
-new_temp0 = eval(input())
-x = new_temp0
-idx = 1
-while
-new_temp1 = idx != x
-new_temp2 = new_temp1
-int(new_temp2)
 if is_odd:
-    new_temp3 = False
+    new_temp0 = False
 else:
-    new_temp3 = True
-new_temp4 = int(new_temp3)
-is_odd = new_temp4
-new_temp5 = idx + 1
-idx = new_temp5
+    new_temp0 = True
+new_temp1 = int(new_temp0)
+is_odd = new_temp1
+new_temp2 = idx + 1
+idx = new_temp2
 print(is_odd)
-<ast.Constant object at 0x7f921bbb5ed0>
-eval(input())
-<ast.Name object at 0x7f921bbb6b90>
-<ast.Constant object at 0x7f921bbb6050>
-inject_bool(not_equal(project_big(explicate_6),project_big(explicate_7)))
-inject_bool(1)
-inject_bool(1)
-inject_bool(explicate_8!=explicate_9)
-<ast.Name object at 0x7f921bbb6e30>
-<ast.Constant object at 0x7f921bbb6e90>
-<ast.Constant object at 0x7f921bbb6f50>
-inject_int(project_bool(explicate_10))
-<ast.Name object at 0x7f921bbb6bc0>
-inject_big(add(project_big(explicate_11),project_big(explicate_12)))
-inject_int(explicate_13+explicate_14)
-<ast.Name object at 0x7f921bbb7070>
+<ast.Constant object at 0x7f06e44a6f80>
+<ast.Constant object at 0x7f06e44a7040>
+inject_int(project_bool(explicate_3))
+<ast.Name object at 0x7f06e44a6e30>
+inject_big(add(project_big(explicate_4),project_big(explicate_5)))
+inject_int(explicate_6+explicate_7)
+<ast.Name object at 0x7f06e44a7160>
+
+if(is_true(is_odd)):
+
+	new_temp0 = inject_bool(0)
+else:
+
+	new_temp0 = inject_bool(1)
+explicate_3 = new_temp0
+if(is_bool(explicate_3)):
+	new_temp1 = inject_int(project_bool(explicate_3))
+is_odd = new_temp1
+explicate_4 = idx
+explicate_5 = inject_int(1)
+if(is_big(explicate_4)):
+	if(is_big(explicate_5)):
+		new_temp2 = inject_big(add(project_big(explicate_4),project_big(explicate_5)))
+else:
+	if(is_big(explicate_5)):
+		error_pyobj(0)
+	else:
+		if(is_int(explicate_4)):
+			explicate_6 = project_int(explicate_4)
+		else:
+			explicate_6 = project_bool(explicate_4)
+		if(is_int(explicate_5)):
+			explicate_7 = project_int(explicate_5)
+		else:
+			explicate_7 = project_bool(explicate_5)
+		new_temp2 = inject_int(explicate_6+explicate_7)
+idx = new_temp2
+print(is_odd)
+--------------Explicate code-------
+if is_true(is_odd):
+    new_temp0 = inject_bool(0)
+else:
+    new_temp0 = inject_bool(1)
+explicate_3 = new_temp0
+if is_bool(explicate_3):
+    new_temp1 = inject_int(project_bool(explicate_3))
+is_odd = new_temp1
+explicate_4 = idx
+explicate_5 = inject_int(1)
+if is_big(explicate_4):
+    if is_big(explicate_5):
+        new_temp2 = inject_big(add(project_big(explicate_4), project_big(explicate_5)))
+elif is_big(explicate_5):
+    error_pyobj(0)
+else:
+    if is_int(explicate_4):
+        explicate_6 = project_int(explicate_4)
+    else:
+        explicate_6 = project_bool(explicate_4)
+    if is_int(explicate_5):
+        explicate_7 = project_int(explicate_5)
+    else:
+        explicate_7 = project_bool(explicate_5)
+    new_temp2 = inject_int(explicate_6 + explicate_7)
+idx = new_temp2
+print(is_odd)
+
+
+--- explicated flattened python ---
+new_temp8 = is_true(is_odd)
+if new_temp8:
+    new_temp9 = inject_bool(0)
+    new_temp0 = new_temp9
+else:
+    new_temp10 = inject_bool(1)
+    new_temp0 = new_temp10
+explicate_3 = new_temp0
+new_temp11 = is_bool(explicate_3)
+if new_temp11:
+    new_temp12 = project_bool(explicate_3)
+    new_temp13 = inject_int(new_temp12)
+    new_temp1 = new_temp13
+is_odd = new_temp1
+explicate_4 = idx
+new_temp14 = inject_int(1)
+explicate_5 = new_temp14
+new_temp15 = is_big(explicate_4)
+if new_temp15:
+    new_temp16 = is_big(explicate_5)
+    if new_temp16:
+        new_temp17 = project_big(explicate_4)
+        new_temp18 = project_big(explicate_5)
+        new_temp19 = add(new_temp17, new_temp18)
+        new_temp20 = inject_big(new_temp19)
+        new_temp2 = new_temp20
+else:
+    new_temp21 = is_big(explicate_5)
+    if new_temp21:
+        error_pyobj(0)
+    else:
+        new_temp22 = is_int(explicate_4)
+        if new_temp22:
+            new_temp23 = project_int(explicate_4)
+            explicate_6 = new_temp23
+        else:
+            new_temp24 = project_bool(explicate_4)
+            explicate_6 = new_temp24
+        new_temp25 = is_int(explicate_5)
+        if new_temp25:
+            new_temp26 = project_int(explicate_5)
+            explicate_7 = new_temp26
+        else:
+            new_temp27 = project_bool(explicate_5)
+            explicate_7 = new_temp27
+        new_temp28 = explicate_6 + explicate_7
+        new_temp29 = inject_int(new_temp28)
+        new_temp2 = new_temp29
+idx = new_temp2
+print(is_odd)
+
+
+--- x86 IR ---
+call  is_true is_odd
+movl  eax ,  new_temp8
+if1
+cmp 0, new_temp8
+je else1
+then1
+call  inject_bool 0
+movl  eax ,  new_temp9
+movl  new_temp9 ,  new_temp0
+else1
+call  inject_bool 1
+movl  eax ,  new_temp10
+movl  new_temp10 ,  new_temp0
+end if1
+movl  new_temp0 ,  explicate_3
+call  is_bool explicate_3
+movl  eax ,  new_temp11
+if2
+cmp 0, new_temp11
+je end if2
+then2
+call  project_bool explicate_3
+movl  eax ,  new_temp12
+call  inject_int new_temp12
+movl  eax ,  new_temp13
+movl  new_temp13 ,  new_temp1
+end if2
+movl  new_temp1 ,  is_odd
+movl  idx ,  explicate_4
+call  inject_int 1
+movl  eax ,  new_temp14
+movl  new_temp14 ,  explicate_5
+call  is_big explicate_4
+movl  eax ,  new_temp15
+if3
+cmp 0, new_temp15
+je else3
+then3
+call  is_big explicate_5
+movl  eax ,  new_temp16
+if4
+cmp 0, new_temp16
+je end if4
+then4
+call  project_big explicate_4
+movl  eax ,  new_temp17
+call  project_big explicate_5
+movl  eax ,  new_temp18
+call  add new_temp17,new_temp18
+movl  eax ,  new_temp19
+call  inject_big new_temp19
+movl  eax ,  new_temp20
+movl  new_temp20 ,  new_temp2
+end if4
+else3
+call  is_big explicate_5
+movl  eax ,  new_temp21
+if4
+cmp 0, new_temp21
+je else4
+then4
+call  error_pyobj 0
+else4
+call  is_int explicate_4
+movl  eax ,  new_temp22
+if5
+cmp 0, new_temp22
+je else5
+then5
+call  project_int explicate_4
+movl  eax ,  new_temp23
+movl  new_temp23 ,  explicate_6
+else5
+call  project_bool explicate_4
+movl  eax ,  new_temp24
+movl  new_temp24 ,  explicate_6
+end if5
+call  is_int explicate_5
+movl  eax ,  new_temp25
+if6
+cmp 0, new_temp25
+je else6
+then6
+call  project_int explicate_5
+movl  eax ,  new_temp26
+movl  new_temp26 ,  explicate_7
+else6
+call  project_bool explicate_5
+movl  eax ,  new_temp27
+movl  new_temp27 ,  explicate_7
+end if6
+movl  explicate_6 ,  new_temp28
+addl  explicate_7 ,  new_temp28
+call  inject_int new_temp28
+movl  eax ,  new_temp29
+movl  new_temp29 ,  new_temp2
+end if4
+end if3
+movl  new_temp2 ,  idx
+call  print is_odd
+
+
+--- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp1': {'new_temp9', 'idx', 'explicate_3', 'new_temp10', 'new_temp0', 'edx', 'new_temp2', 'new_temp8', 'new_temp11', 'eax', 'ecx'}, 'eax': {'explicate_6', 'new_temp1', 'idx', 'new_temp17', 'explicate_5', 'explicate_3', 'is_odd', 'new_temp2', 'explicate_4'}, 'ecx': {'explicate_6', 'new_temp1', 'idx', 'new_temp17', 'explicate_5', 'explicate_3', 'is_odd', 'new_temp2', 'explicate_4'}, 'edx': {'explicate_6', 'new_temp1', 'idx', 'new_temp17', 'explicate_5', 'explicate_3', 'is_odd', 'new_temp2', 'explicate_4'}, 'idx': {'new_temp9', 'new_temp1', 'new_temp12', 'explicate_3', 'new_temp10', 'new_temp0', 'is_odd', 'edx', 'new_temp8', 'new_temp11', 'eax', 'new_temp13', 'ecx'}, 'new_temp2': {'new_temp12', 'new_temp16', 'explicate_3', 'is_odd', 'new_temp0', 'edx', 'explicate_4', 'new_temp14', 'ecx', 'new_temp9', 'new_temp1', 'explicate_5', 'new_temp10', 'new_temp21', 'new_temp8', 'new_temp11', 'eax', 'new_temp13', 'new_temp15'}, 'new_temp8': {'new_temp1', 'idx', 'new_temp2'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp9': {'new_temp1', 'idx', 'new_temp2'}, 'new_temp0': {'new_temp1', 'idx', 'new_temp2'}, 'new_temp10': {'new_temp1', 'idx', 'new_temp2'}, 'explicate_3': {'new_temp1', 'idx', 'new_temp2', 'edx', 'new_temp11', 'eax', 'ecx'}, 'new_temp11': {'explicate_3', 'new_temp1', 'idx', 'new_temp2'}, 'new_temp12': {'idx', 'new_temp2'}, 'new_temp13': {'idx', 'new_temp2'}, 'is_odd': {'explicate_7', 'idx', 'new_temp16', 'new_temp24', 'edx', 'explicate_4', 'new_temp2', 'new_temp27', 'new_temp28', 'new_temp14', 'ecx', 'new_temp25', 'explicate_6', 'new_temp26', 'new_temp17', 'explicate_5', 'new_temp20', 'new_temp29', 'new_temp22', 'new_temp19', 'new_temp21', 'new_temp15', 'new_temp23', 'eax', 'new_temp18'}, 'explicate_4': {'explicate_5', 'is_odd', 'new_temp22', 'edx', 'new_temp2', 'new_temp21', 'new_temp15', 'new_temp14', 'eax', 'new_temp16', 'ecx'}, 'new_temp14': {'is_odd', 'new_temp2', 'explicate_4'}, 'explicate_5': {'explicate_6', 'new_temp17', 'new_temp24', 'is_odd', 'new_temp22', 'new_temp25', 'edx', 'explicate_4', 'new_temp2', 'new_temp21', 'new_temp15', 'new_temp23', 'eax', 'new_temp16', 'ecx'}, 'new_temp15': {'is_odd', 'explicate_4', 'new_temp2', 'explicate_5'}, 'new_temp16': {'is_odd', 'explicate_4', 'new_temp2', 'explicate_5'}, 'new_temp21': {'is_odd', 'new_temp2', 'explicate_4', 'explicate_5'}, 'new_temp17': {'is_odd', 'edx', 'explicate_5', 'eax', 'new_temp18', 'ecx'}, 'new_temp18': {'is_odd', 'new_temp17'}, 'new_temp19': {'is_odd'}, 'new_temp20': {'is_odd'}, 'new_temp22': {'is_odd', 'explicate_4', 'explicate_5'}, 'new_temp23': {'is_odd', 'explicate_5'}, 'explicate_6': {'explicate_7', 'new_temp26', 'explicate_5', 'is_odd', 'edx', 'new_temp27', 'new_temp25', 'eax', 'ecx'}, 'new_temp24': {'is_odd', 'explicate_5'}, 'new_temp25': {'explicate_6', 'is_odd', 'explicate_5'}, 'new_temp26': {'explicate_6', 'is_odd'}, 'explicate_7': {'explicate_6', 'is_odd', 'new_temp28'}, 'new_temp27': {'explicate_6', 'is_odd'}, 'new_temp28': {'is_odd', 'explicate_7'}, 'new_temp29': {'is_odd'}}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'explicate_5': 4, 'explicate_6': 5, 'is_odd': 6, 'new_temp17': 5, 'new_temp2': 5, 'explicate_4': 7, 'new_temp1': 4, 'explicate_3': 6, 'idx': 5, 'new_temp15': 1, 'new_temp16': 1, 'new_temp11': 1, 'new_temp21': 1, 'new_temp25': 1, 'new_temp23': 1, 'new_temp18': 1, 'new_temp8': 1, 'new_temp10': 1, 'new_temp14': 1, 'new_temp27': 1, 'new_temp0': 1, 'new_temp22': 1, 'new_temp24': 1, 'new_temp26': 1, 'explicate_7': 1, 'new_temp28': 2, 'new_temp9': 1, 'new_temp13': 1, 'new_temp29': 1, 'new_temp12': 1, 'new_temp19': 1, 'new_temp20': 1}
+Spilled set:
+ {'explicate_4'}
+
+
+--------------Spilling----------------
+unspillable_set
+ set()
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {'explicate_4': -4, 'explicate_5': 'edi', 'explicate_6': 'ebx', 'is_odd': 'esi', 'new_temp17': 'ebx', 'new_temp2': 'ebx', 'new_temp1': 'edi', 'explicate_3': 'esi', 'idx': 'ebx', 'new_temp15': 'eax', 'new_temp16': 'eax', 'new_temp11': 'eax', 'new_temp21': 'eax', 'new_temp25': 'eax', 'new_temp23': 'eax', 'new_temp18': 'eax', 'new_temp8': 'eax', 'new_temp10': 'eax', 'new_temp14': 'eax', 'new_temp27': 'eax', 'new_temp0': 'eax', 'new_temp22': 'eax', 'new_temp24': 'eax', 'new_temp26': 'eax', 'explicate_7': 'eax', 'new_temp28': 'ecx', 'new_temp9': 'eax', 'new_temp13': 'eax', 'new_temp29': 'eax', 'new_temp12': 'eax', 'new_temp19': 'eax', 'new_temp20': 'eax'}
+is_odd
+new_temp8
+new_temp8
+new_temp9
+new_temp9
+new_temp0
+new_temp10
+new_temp10
+new_temp0
+new_temp0
+explicate_3
+explicate_3
+new_temp11
+new_temp11
+explicate_3
+new_temp12
+new_temp12
+new_temp13
+new_temp13
+new_temp1
+new_temp1
+is_odd
+idx
+new_temp14
+new_temp14
+explicate_5
+new_temp15
+new_temp15
+explicate_5
+new_temp16
+new_temp16
+new_temp17
+explicate_5
+new_temp18
+new_temp18
+new_temp17
+new_temp19
+new_temp19
+new_temp20
+new_temp20
+new_temp2
+explicate_5
+new_temp21
+new_temp21
+new_temp22
+new_temp22
+new_temp23
+new_temp23
+explicate_6
+new_temp24
+new_temp24
+explicate_6
+explicate_5
+new_temp25
+new_temp25
+explicate_5
+new_temp26
+new_temp26
+explicate_7
+explicate_5
+new_temp27
+new_temp27
+explicate_7
+explicate_6
+new_temp28
+explicate_7
+new_temp28
+new_temp28
+new_temp29
+new_temp29
+new_temp2
+new_temp2
+idx
+is_odd

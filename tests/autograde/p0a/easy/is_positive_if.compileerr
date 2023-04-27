@@ -3,8 +3,12 @@ Traceback (most recent call last):
     main()
   File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/compile.py", line 115, in main
     asm = compile(sys.argv[1])
-  File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/compile.py", line 42, in compile
-    explicated_code = explicate.tree_to_str(flatten_tree.body)
-  File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/explicate.py", line 402, in tree_to_str
-    return ("\n"+"\t"*prefix).join(explicate_prog)
-TypeError: sequence item 24: expected str instance, NoneType found
+  File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/compile.py", line 24, in compile
+    tree = createASTFromMyParser(src_file)
+  File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/lexerandparser.py", line 265, in createASTFromMyParser
+    tree = yacc.parse(prog) #alt parser.parse(prog)
+  File "/opt/conda/lib/python3.10/site-packages/ply/yacc.py", line 503, in parse
+    tok = self.errorfunc(errtoken)
+  File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/lexerandparser.py", line 254, in p_error
+    print("Syntax error at '%s'" % t.value)
+AttributeError: 'NoneType' object has no attribute 'value'

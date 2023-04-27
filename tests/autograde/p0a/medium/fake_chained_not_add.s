@@ -33,9 +33,9 @@ IF2:
  pushl %eax
  call inject_int
  addl $(4), %esp
- movl %eax, %edi
+ movl %eax, %ebx
 BB2:
- pushl %edi
+ pushl %ebx
  call is_true
  addl $(4), %esp
  cmpl $(0), %eax
@@ -50,22 +50,21 @@ E3:
  call inject_bool
  addl $(4), %esp
 BB3:
- movl %eax, %edi
- pushl %edi
+ movl %eax, %ebx
+ pushl %ebx
  call is_bool
  addl $(4), %esp
  cmpl $(0), %eax
  je BB4
 IF4:
- pushl %edi
+ pushl %ebx
  call project_bool
  addl $(4), %esp
  pushl %eax
  call inject_int
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, %edi
 BB4:
- movl %ebx, %edi
  pushl $(1)
  call inject_int
  addl $(4), %esp

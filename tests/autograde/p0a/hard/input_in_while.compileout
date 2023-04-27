@@ -1,4 +1,5 @@
-Illegal character ':'
+Syntax error at 'int'
+Syntax error at ':'
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -34,20 +35,6 @@ Module(
         Assign(
             targets=[
                 Name(id='x', ctx=Store())],
-            value=Constant(value=0)),
-        Expr(
-            value=Name(id='while', ctx=Load())),
-        Expr(
-            value=Call(
-                func=Name(id='int', ctx=Load()),
-                args=[
-                    UnaryOp(
-                        op=Not(),
-                        operand=Name(id='x', ctx=Load()))],
-                keywords=[])),
-        Assign(
-            targets=[
-                Name(id='x', ctx=Store())],
             value=Call(
                 func=Name(id='eval', ctx=Load()),
                 args=[
@@ -68,20 +55,6 @@ Module(
           Assign(
                targets=[
                     Name(id='x', ctx=Store())],
-               value=Constant(value=0)),
-          Expr(
-               value=Name(id='while', ctx=Load())),
-          Expr(
-               value=Call(
-                    func=Name(id='int', ctx=Load()),
-                    args=[
-                         UnaryOp(
-                              op=Not(),
-                              operand=Name(id='x', ctx=Load()))],
-                    keywords=[])),
-          Assign(
-               targets=[
-                    Name(id='x', ctx=Store())],
                value=Call(
                     func=Name(id='eval', ctx=Load()),
                     args=[
@@ -95,31 +68,7 @@ Module(
      body=[
           Assign(
                targets=[
-                    Name(id='x', ctx=Store())],
-               value=Constant(value=0)),
-          Expr(
-               value=Name(id='while', ctx=Load())),
-          If(
-               test=Name(id='x', ctx=Load()),
-               body=[
-                    Assign(
-                         targets=[
-                              Name(id='new_temp0', ctx=Store())],
-                         value=Constant(value=False))],
-               orelse=[
-                    Assign(
-                         targets=[
-                              Name(id='new_temp0', ctx=Store())],
-                         value=Constant(value=True))]),
-          Expr(
-               value=Call(
-                    func=Name(id='int', ctx=Load()),
-                    args=[
-                         Name(id='new_temp0', ctx=Load())],
-                    keywords=[])),
-          Assign(
-               targets=[
-                    Name(id='new_temp1', ctx=Store())],
+                    Name(id='new_temp0', ctx=Store())],
                value=Call(
                     func=Name(id='eval', ctx=Load()),
                     args=[
@@ -131,20 +80,67 @@ Module(
           Assign(
                targets=[
                     Name(id='x', ctx=Store())],
-               value=Name(id='new_temp1', ctx=Load()))],
+               value=Name(id='new_temp0', ctx=Load()))],
      type_ignores=[])
 --------------Code after flattening-------
-x = 0
-while
-if x:
-    new_temp0 = False
-else:
-    new_temp0 = True
-int(new_temp0)
-new_temp1 = eval(input())
-x = new_temp1
-<ast.Constant object at 0x7fced78b5ae0>
-<ast.Constant object at 0x7fced78b6260>
-<ast.Constant object at 0x7fced78b6320>
+new_temp0 = eval(input())
+x = new_temp0
 eval(input())
-<ast.Name object at 0x7fced78b61d0>
+<ast.Name object at 0x7fc8adcf6740>
+
+new_temp0 = eval(input())
+x = new_temp0
+--------------Explicate code-------
+new_temp0 = eval(input())
+x = new_temp0
+
+
+--- explicated flattened python ---
+new_temp1 = eval(input())
+new_temp0 = new_temp1
+x = new_temp0
+
+
+--- x86 IR ---
+call  eval None
+movl  eax ,  new_temp1
+movl  new_temp1 ,  new_temp0
+movl  new_temp0 ,  x
+
+
+--- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp1': set(), 'new_temp0': set(), 'x': set(), 'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 1, 'x': 1, 'new_temp1': 1}
+Spilled set:
+ set()
+
+
+--------------Spilling----------------
+unspillable_set
+ set()
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {'new_temp0': 'eax', 'x': 'eax', 'new_temp1': 'eax'}
+new_temp1
+new_temp1
+new_temp0
+new_temp0
+x

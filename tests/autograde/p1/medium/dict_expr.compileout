@@ -1,5 +1,5 @@
 Illegal character '{'
-Illegal character ':'
+Syntax error at ':'
 Illegal character '}'
 ------------------CORRECT TREE--------------------
 Module(
@@ -32,28 +32,12 @@ Module(
 ------------------Tree with my parser--------------
 Module(
     body=[
-        Assign(
-            targets=[
-                Name(id='x', ctx=Store())],
-            value=Constant(value=1)),
-        Assign(
-            targets=[
-                Name(id='y', ctx=Store())],
-            value=Constant(value=2)),
-        Assign(
-            targets=[
-                Name(id='z', ctx=Store())],
-            value=BinOp(
-                left=Name(id='x', ctx=Load()),
-                op=Add(),
-                right=Name(id='y', ctx=Load()))),
-        Expr(
-            value=BinOp(
-                left=Name(id='x', ctx=Load()),
-                op=Add(),
-                right=UnaryOp(
-                    op=USub(),
-                    operand=Name(id='y', ctx=Load()))))],
+        BinOp(
+            left=Name(id='x', ctx=Load()),
+            op=Add(),
+            right=UnaryOp(
+                op=USub(),
+                operand=Name(id='y', ctx=Load())))],
     type_ignores=[])
 --------------Original code----------------
 x = 1
@@ -61,289 +45,85 @@ y = 2
 z = { x + y : x + -y}
 Module(
      body=[
-          Assign(
-               targets=[
-                    Name(id='x', ctx=Store())],
-               value=Constant(value=1)),
-          Assign(
-               targets=[
-                    Name(id='y', ctx=Store())],
-               value=Constant(value=2)),
-          Assign(
-               targets=[
-                    Name(id='z', ctx=Store())],
-               value=BinOp(
-                    left=Name(id='x', ctx=Load()),
-                    op=Add(),
-                    right=Name(id='y', ctx=Load()))),
-          Expr(
-               value=BinOp(
-                    left=Name(id='x', ctx=Load()),
-                    op=Add(),
-                    right=UnaryOp(
-                         op=USub(),
-                         operand=Name(id='y', ctx=Load()))))],
+          BinOp(
+               left=Name(id='x', ctx=Load()),
+               op=Add(),
+               right=UnaryOp(
+                    op=USub(),
+                    operand=Name(id='y', ctx=Load())))],
      type_ignores=[])
 Module(
      body=[
           Assign(
                targets=[
-                    Name(id='x', ctx=Store())],
-               value=Constant(value=1)),
-          Assign(
-               targets=[
-                    Name(id='y', ctx=Store())],
-               value=Constant(value=2)),
-          Assign(
-               targets=[
                     Name(id='new_temp0', ctx=Store())],
-               value=BinOp(
-                    left=Name(id='x', ctx=Load()),
-                    op=Add(),
-                    right=Name(id='y', ctx=Load()))),
-          Assign(
-               targets=[
-                    Name(id='z', ctx=Store())],
-               value=Name(id='new_temp0', ctx=Load())),
-          Assign(
-               targets=[
-                    Name(id='new_temp1', ctx=Store())],
                value=UnaryOp(
                     op=USub(),
-                    operand=Name(id='y', ctx=Load()))),
-          Expr(
-               value=BinOp(
-                    left=Name(id='x', ctx=Load()),
-                    op=Add(),
-                    right=Name(id='new_temp1', ctx=Load())))],
+                    operand=Name(id='y', ctx=Load())))],
      type_ignores=[])
 --------------Code after flattening-------
-x = 1
-y = 2
-new_temp0 = x + y
-z = new_temp0
-new_temp1 = -y
-x + new_temp1
-<ast.Constant object at 0x7f3b1b00dba0>
-<ast.Constant object at 0x7f3b1b00db70>
-inject_big(add(project_big(explicate_2),project_big(explicate_3)))
-inject_int(explicate_4+explicate_5)
-<ast.Name object at 0x7f3b1b00e200>
+new_temp0 = -y
 inject_int(-project_int(y))
 inject_int(-project_bool(y))
 
-x = inject_int(1)
-y = inject_int(2)
-explicate_2 = x
-explicate_3 = y
-if(is_big(explicate_2)):
-	if(is_big(explicate_3)):
-		new_temp0 = inject_big(add(project_big(explicate_2),project_big(explicate_3)))
-else:
-	if(is_big(explicate_3)):
-		error_pyobj(0)
-	else:
-		if(is_int(explicate_2)):
-			explicate_4 = project_int(explicate_2)
-		else:
-			explicate_4 = project_bool(explicate_2)
-		if(is_int(explicate_3)):
-			explicate_5 = project_int(explicate_3)
-		else:
-			explicate_5 = project_bool(explicate_3)
-		new_temp0 = inject_int(explicate_4+explicate_5)
-z = new_temp0
 if(is_int(y)):
-	new_temp1 = inject_int(-project_int(y))
+	new_temp0 = inject_int(-project_int(y))
 else:
 	if(is_bool(y)):
-		new_temp1 = inject_int(-project_bool(y))
+		new_temp0 = inject_int(-project_bool(y))
 --------------Explicate code-------
-x = inject_int(1)
-y = inject_int(2)
-explicate_2 = x
-explicate_3 = y
-if is_big(explicate_2):
-    if is_big(explicate_3):
-        new_temp0 = inject_big(add(project_big(explicate_2), project_big(explicate_3)))
-elif is_big(explicate_3):
-    error_pyobj(0)
-else:
-    if is_int(explicate_2):
-        explicate_4 = project_int(explicate_2)
-    else:
-        explicate_4 = project_bool(explicate_2)
-    if is_int(explicate_3):
-        explicate_5 = project_int(explicate_3)
-    else:
-        explicate_5 = project_bool(explicate_3)
-    new_temp0 = inject_int(explicate_4 + explicate_5)
-z = new_temp0
 if is_int(y):
-    new_temp1 = inject_int(-project_int(y))
+    new_temp0 = inject_int(-project_int(y))
 elif is_bool(y):
-    new_temp1 = inject_int(-project_bool(y))
+    new_temp0 = inject_int(-project_bool(y))
 
 
 --- explicated flattened python ---
-new_temp6 = inject_int(1)
-x = new_temp6
-new_temp7 = inject_int(2)
-y = new_temp7
-explicate_2 = x
-explicate_3 = y
-new_temp8 = is_big(explicate_2)
-if new_temp8:
-    new_temp9 = is_big(explicate_3)
-    if new_temp9:
-        new_temp10 = project_big(explicate_2)
-        new_temp11 = project_big(explicate_3)
-        new_temp12 = add(new_temp10, new_temp11)
-        new_temp13 = inject_big(new_temp12)
-        new_temp0 = new_temp13
+new_temp1 = is_int(y)
+if new_temp1:
+    new_temp2 = project_int(y)
+    new_temp3 = -new_temp2
+    new_temp4 = inject_int(new_temp3)
+    new_temp0 = new_temp4
 else:
-    new_temp14 = is_big(explicate_3)
-    if new_temp14:
-        error_pyobj(0)
-    else:
-        new_temp15 = is_int(explicate_2)
-        if new_temp15:
-            new_temp16 = project_int(explicate_2)
-            explicate_4 = new_temp16
-        else:
-            new_temp17 = project_bool(explicate_2)
-            explicate_4 = new_temp17
-        new_temp18 = is_int(explicate_3)
-        if new_temp18:
-            new_temp19 = project_int(explicate_3)
-            explicate_5 = new_temp19
-        else:
-            new_temp20 = project_bool(explicate_3)
-            explicate_5 = new_temp20
-        new_temp21 = explicate_4 + explicate_5
-        new_temp22 = inject_int(new_temp21)
-        new_temp0 = new_temp22
-z = new_temp0
-new_temp23 = is_int(y)
-if new_temp23:
-    new_temp24 = project_int(y)
-    new_temp25 = -new_temp24
-    new_temp26 = inject_int(new_temp25)
-    new_temp1 = new_temp26
-else:
-    new_temp27 = is_bool(y)
-    if new_temp27:
-        new_temp28 = project_bool(y)
-        new_temp29 = -new_temp28
-        new_temp30 = inject_int(new_temp29)
-        new_temp1 = new_temp30
+    new_temp5 = is_bool(y)
+    if new_temp5:
+        new_temp6 = project_bool(y)
+        new_temp7 = -new_temp6
+        new_temp8 = inject_int(new_temp7)
+        new_temp0 = new_temp8
 
 
 --- x86 IR ---
-call  inject_int 1
-movl  eax ,  new_temp6
-movl  new_temp6 ,  x
-call  inject_int 2
-movl  eax ,  new_temp7
-movl  new_temp7 ,  y
-movl  x ,  explicate_2
-movl  y ,  explicate_3
-call  is_big explicate_2
-movl  eax ,  new_temp8
+call  is_int y
+movl  eax ,  new_temp1
 if1
-cmp 0, new_temp8
+cmp 0, new_temp1
 je else1
 then1
-call  is_big explicate_3
-movl  eax ,  new_temp9
+call  project_int y
+movl  eax ,  new_temp2
+movl  new_temp2 ,  new_temp3
+negl  new_temp3
+call  inject_int new_temp3
+movl  eax ,  new_temp4
+movl  new_temp4 ,  new_temp0
+else1
+call  is_bool y
+movl  eax ,  new_temp5
 if2
-cmp 0, new_temp9
+cmp 0, new_temp5
 je end if2
 then2
-call  project_big explicate_2
-movl  eax ,  new_temp10
-call  project_big explicate_3
-movl  eax ,  new_temp11
-call  add new_temp10,new_temp11
-movl  eax ,  new_temp12
-call  inject_big new_temp12
-movl  eax ,  new_temp13
-movl  new_temp13 ,  new_temp0
-end if2
-else1
-call  is_big explicate_3
-movl  eax ,  new_temp14
-if2
-cmp 0, new_temp14
-je else2
-then2
-call  error_pyobj 0
-else2
-call  is_int explicate_2
-movl  eax ,  new_temp15
-if3
-cmp 0, new_temp15
-je else3
-then3
-call  project_int explicate_2
-movl  eax ,  new_temp16
-movl  new_temp16 ,  explicate_4
-else3
-call  project_bool explicate_2
-movl  eax ,  new_temp17
-movl  new_temp17 ,  explicate_4
-end if3
-call  is_int explicate_3
-movl  eax ,  new_temp18
-if4
-cmp 0, new_temp18
-je else4
-then4
-call  project_int explicate_3
-movl  eax ,  new_temp19
-movl  new_temp19 ,  explicate_5
-else4
-call  project_bool explicate_3
-movl  eax ,  new_temp20
-movl  new_temp20 ,  explicate_5
-end if4
-movl  explicate_4 ,  new_temp21
-addl  explicate_5 ,  new_temp21
-call  inject_int new_temp21
-movl  eax ,  new_temp22
-movl  new_temp22 ,  new_temp0
+call  project_bool y
+movl  eax ,  new_temp6
+movl  new_temp6 ,  new_temp7
+negl  new_temp7
+call  inject_int new_temp7
+movl  eax ,  new_temp8
+movl  new_temp8 ,  new_temp0
 end if2
 end if1
-movl  new_temp0 ,  z
-call  is_int y
-movl  eax ,  new_temp23
-if2
-cmp 0, new_temp23
-je else2
-then2
-call  project_int y
-movl  eax ,  new_temp24
-movl  new_temp24 ,  new_temp25
-negl  new_temp25
-call  inject_int new_temp25
-movl  eax ,  new_temp26
-movl  new_temp26 ,  new_temp1
-else2
-call  is_bool y
-movl  eax ,  new_temp27
-if3
-cmp 0, new_temp27
-je end if3
-then3
-call  project_bool y
-movl  eax ,  new_temp28
-movl  new_temp28 ,  new_temp29
-negl  new_temp29
-call  inject_int new_temp29
-movl  eax ,  new_temp30
-movl  new_temp30 ,  new_temp1
-end if3
-end if2
 
 
 --- Control Flow Graph ---
@@ -358,12 +138,12 @@ end if2
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp0': {'new_temp9', 'eax', 'y', 'edx', 'new_temp6', 'x', 'new_temp7', 'new_temp14', 'new_temp8', 'ecx', 'explicate_3', 'explicate_2'}, 'eax': {'new_temp10', 'y', 'new_temp0', 'x', 'explicate_2', 'explicate_3', 'explicate_4'}, 'ecx': {'new_temp10', 'y', 'new_temp0', 'x', 'explicate_2', 'explicate_3', 'explicate_4'}, 'edx': {'new_temp10', 'y', 'new_temp0', 'x', 'explicate_2', 'explicate_3', 'explicate_4'}, 'new_temp6': {'new_temp0'}, 'x': {'eax', 'new_temp0', 'y', 'edx', 'new_temp7', 'ecx'}, 'new_temp7': {'x', 'new_temp0'}, 'y': {'new_temp9', 'eax', 'new_temp13', 'new_temp11', 'new_temp27', 'new_temp0', 'edx', 'x', 'new_temp15', 'new_temp12', 'new_temp16', 'new_temp8', 'z', 'new_temp21', 'new_temp20', 'explicate_4', 'new_temp18', 'explicate_5', 'new_temp10', 'new_temp22', 'new_temp23', 'new_temp19', 'new_temp14', 'new_temp17', 'ecx', 'explicate_2'}, 'explicate_2': {'new_temp9', 'eax', 'new_temp0', 'y', 'edx', 'new_temp15', 'new_temp14', 'new_temp8', 'ecx', 'explicate_3'}, 'explicate_3': {'new_temp9', 'eax', 'explicate_4', 'new_temp18', 'new_temp10', 'new_temp0', 'edx', 'new_temp15', 'new_temp14', 'new_temp16', 'new_temp17', 'new_temp8', 'ecx', 'explicate_2'}, 'new_temp8': {'explicate_3', 'y', 'new_temp0', 'explicate_2'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp9': {'explicate_3', 'y', 'new_temp0', 'explicate_2'}, 'new_temp14': {'new_temp0', 'explicate_3', 'y', 'explicate_2'}, 'new_temp10': {'eax', 'new_temp11', 'y', 'ecx', 'explicate_3', 'edx'}, 'new_temp11': {'new_temp10', 'y'}, 'new_temp12': {'y'}, 'new_temp13': {'y'}, 'z': {'y'}, 'new_temp23': {'y'}, 'new_temp15': {'explicate_3', 'y', 'explicate_2'}, 'new_temp24': set(), 'new_temp25': set(), 'new_temp26': set(), 'new_temp1': set(), 'new_temp27': {'y'}, 'new_temp16': {'explicate_3', 'y'}, 'explicate_4': {'eax', 'new_temp18', 'explicate_5', 'y', 'edx', 'new_temp19', 'ecx', 'explicate_3', 'new_temp20'}, 'new_temp17': {'explicate_3', 'y'}, 'new_temp28': set(), 'new_temp29': set(), 'new_temp30': set(), 'new_temp18': {'explicate_3', 'y', 'explicate_4'}, 'new_temp19': {'y', 'explicate_4'}, 'explicate_5': {'new_temp21', 'y', 'explicate_4'}, 'new_temp20': {'y', 'explicate_4'}, 'new_temp21': {'explicate_5', 'y'}, 'new_temp22': {'y'}}
+Interference Graph:  {'y': {'eax', 'ecx', 'edx', 'new_temp1', 'new_temp5'}, 'eax': {'y'}, 'ecx': {'y'}, 'edx': {'y'}, 'new_temp1': {'y'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp2': set(), 'new_temp3': set(), 'new_temp4': set(), 'new_temp0': set(), 'new_temp5': {'y'}, 'new_temp6': set(), 'new_temp7': set(), 'new_temp8': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'explicate_2': 4, 'y': 5, 'new_temp0': 6, 'x': 4, 'explicate_3': 5, 'new_temp10': 4, 'explicate_4': 4, 'new_temp14': 1, 'new_temp8': 1, 'new_temp9': 1, 'new_temp19': 1, 'explicate_5': 1, 'new_temp18': 1, 'new_temp20': 1, 'new_temp21': 2, 'new_temp15': 1, 'new_temp7': 1, 'new_temp11': 1, 'new_temp17': 1, 'new_temp23': 1, 'z': 1, 'new_temp16': 1, 'new_temp12': 1, 'new_temp6': 1, 'new_temp22': 1, 'new_temp13': 1, 'new_temp27': 1, 'new_temp26': 1, 'new_temp1': 1, 'new_temp24': 1, 'new_temp29': 1, 'new_temp28': 1, 'new_temp30': 1, 'new_temp25': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'y': 4, 'new_temp1': 1, 'new_temp5': 1, 'new_temp3': 1, 'new_temp4': 1, 'new_temp0': 1, 'new_temp6': 1, 'new_temp7': 1, 'new_temp2': 1, 'new_temp8': 1}
 Spilled set:
  set()
 
@@ -376,90 +156,28 @@ continue_looping
 
 
 
-Homes for CFG0:  {'explicate_2': 'edi', 'y': 'ebx', 'new_temp0': 'esi', 'x': 'edi', 'explicate_3': 'ebx', 'new_temp10': 'edi', 'explicate_4': 'edi', 'new_temp14': 'eax', 'new_temp8': 'eax', 'new_temp9': 'eax', 'new_temp19': 'eax', 'explicate_5': 'eax', 'new_temp18': 'eax', 'new_temp20': 'eax', 'new_temp21': 'ecx', 'new_temp15': 'eax', 'new_temp7': 'eax', 'new_temp11': 'eax', 'new_temp17': 'eax', 'new_temp23': 'eax', 'z': 'eax', 'new_temp16': 'eax', 'new_temp12': 'eax', 'new_temp6': 'eax', 'new_temp22': 'eax', 'new_temp13': 'eax', 'new_temp27': 'eax', 'new_temp26': 'eax', 'new_temp1': 'eax', 'new_temp24': 'eax', 'new_temp29': 'eax', 'new_temp28': 'eax', 'new_temp30': 'eax', 'new_temp25': 'eax'}
-new_temp6
-new_temp6
-x
-new_temp7
-new_temp7
+Homes for CFG0:  {'y': 'edi', 'new_temp1': 'eax', 'new_temp5': 'eax', 'new_temp3': 'eax', 'new_temp4': 'eax', 'new_temp0': 'eax', 'new_temp6': 'eax', 'new_temp7': 'eax', 'new_temp2': 'eax', 'new_temp8': 'eax'}
 y
-x
-explicate_2
-y
-explicate_3
-explicate_2
-new_temp8
-new_temp8
-explicate_3
-new_temp9
-new_temp9
-explicate_2
-new_temp10
-explicate_3
-new_temp11
-new_temp11
-new_temp10
-new_temp12
-new_temp12
-new_temp13
-new_temp13
-new_temp0
-explicate_3
-new_temp14
-new_temp14
-explicate_2
-new_temp15
-new_temp15
-explicate_2
-new_temp16
-new_temp16
-explicate_4
-explicate_2
-new_temp17
-new_temp17
-explicate_4
-explicate_3
-new_temp18
-new_temp18
-explicate_3
-new_temp19
-new_temp19
-explicate_5
-explicate_3
-new_temp20
-new_temp20
-explicate_5
-explicate_4
-new_temp21
-explicate_5
-new_temp21
-new_temp21
-new_temp22
-new_temp22
-new_temp0
-new_temp0
-z
-y
-new_temp23
-new_temp23
-y
-new_temp24
-new_temp24
-new_temp25
-new_temp25
-new_temp25
-new_temp26
-new_temp26
+new_temp1
 new_temp1
 y
-new_temp27
-new_temp27
+new_temp2
+new_temp2
+new_temp3
+new_temp3
+new_temp3
+new_temp4
+new_temp4
+new_temp0
 y
-new_temp28
-new_temp28
-new_temp29
-new_temp29
-new_temp29
-new_temp30
-new_temp30
-new_temp1
+new_temp5
+new_temp5
+y
+new_temp6
+new_temp6
+new_temp7
+new_temp7
+new_temp7
+new_temp8
+new_temp8
+new_temp0

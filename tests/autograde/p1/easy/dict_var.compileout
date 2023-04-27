@@ -1,5 +1,5 @@
 Illegal character '{'
-Illegal character ':'
+Syntax error at ':'
 Illegal character '}'
 ------------------CORRECT TREE--------------------
 Module(
@@ -30,20 +30,7 @@ Module(
 ------------------Tree with my parser--------------
 Module(
     body=[
-        Assign(
-            targets=[
-                Name(id='x', ctx=Store())],
-            value=Constant(value=1)),
-        Assign(
-            targets=[
-                Name(id='y', ctx=Store())],
-            value=Constant(value=2)),
-        Assign(
-            targets=[
-                Name(id='z', ctx=Store())],
-            value=Name(id='x', ctx=Load())),
-        Expr(
-            value=Name(id='y', ctx=Load())),
+        Name(id='y', ctx=Load()),
         Expr(
             value=Call(
                 func=Name(id='print', ctx=Load()),
@@ -58,20 +45,7 @@ z = { x : y}
 print(z)
 Module(
      body=[
-          Assign(
-               targets=[
-                    Name(id='x', ctx=Store())],
-               value=Constant(value=1)),
-          Assign(
-               targets=[
-                    Name(id='y', ctx=Store())],
-               value=Constant(value=2)),
-          Assign(
-               targets=[
-                    Name(id='z', ctx=Store())],
-               value=Name(id='x', ctx=Load())),
-          Expr(
-               value=Name(id='y', ctx=Load())),
+          Name(id='y', ctx=Load()),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -81,20 +55,6 @@ Module(
      type_ignores=[])
 Module(
      body=[
-          Assign(
-               targets=[
-                    Name(id='x', ctx=Store())],
-               value=Constant(value=1)),
-          Assign(
-               targets=[
-                    Name(id='y', ctx=Store())],
-               value=Constant(value=2)),
-          Assign(
-               targets=[
-                    Name(id='z', ctx=Store())],
-               value=Name(id='x', ctx=Load())),
-          Expr(
-               value=Name(id='y', ctx=Load())),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -103,43 +63,18 @@ Module(
                     keywords=[]))],
      type_ignores=[])
 --------------Code after flattening-------
-x = 1
-y = 2
-z = x
-y
 print(z)
-<ast.Constant object at 0x7f508ab39ba0>
-<ast.Constant object at 0x7f508ab39b70>
-<ast.Name object at 0x7f508ab384c0>
 
-x = inject_int(1)
-y = inject_int(2)
-z = x
 print(z)
 --------------Explicate code-------
-x = inject_int(1)
-y = inject_int(2)
-z = x
 print(z)
 
 
 --- explicated flattened python ---
-new_temp0 = inject_int(1)
-x = new_temp0
-new_temp1 = inject_int(2)
-y = new_temp1
-z = x
 print(z)
 
 
 --- x86 IR ---
-call  inject_int 1
-movl  eax ,  new_temp0
-movl  new_temp0 ,  x
-call  inject_int 2
-movl  eax ,  new_temp1
-movl  new_temp1 ,  y
-movl  x ,  z
 call  print z
 
 
@@ -155,12 +90,12 @@ call  print z
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp0': set(), 'x': {'y', 'ecx', 'eax', 'new_temp1', 'edx'}, 'eax': {'x'}, 'ecx': {'x'}, 'edx': {'x'}, 'new_temp1': {'x'}, 'y': {'x'}, 'z': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'x': 4, 'new_temp1': 1, 'y': 1, 'z': 1, 'new_temp0': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6}
 Spilled set:
  set()
 
@@ -173,13 +108,5 @@ continue_looping
 
 
 
-Homes for CFG0:  {'x': 'edi', 'new_temp1': 'eax', 'y': 'eax', 'z': 'eax', 'new_temp0': 'eax'}
-new_temp0
-new_temp0
-x
-new_temp1
-new_temp1
-y
-x
-z
+Homes for CFG0:  {}
 z

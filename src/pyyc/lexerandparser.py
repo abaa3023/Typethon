@@ -12,13 +12,16 @@ reserved = {    # dictionary defines keywords and associated token types
     'input': 'INPUT',
     'int' : 'INT_FUNC',
     'and' : 'AND',
-    'not' : 'NOT'
+    'not' : 'NOT',
+    'while' : 'WHILE',
+    'if' : 'IF',
+    'else' : 'ELSE'
  }
 
 #TODO - Need INDENT AND DEDENT
 #tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'COLON', 'IF', 'ELSE', 'WHILE', 'INT_WORD', 'NOT', 'AND', 'OR', 'EQUAL_EQUAL', 'NOT_EQUAL', 'INDENT', 'DEDENT'] + list(reserved.values()) #include reserved token types with other tokens
 
-tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'EQUAL_EQUAL','NOT_EQUAL'] + list(reserved.values()) #include reserved token types with other tokens
+tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'EQUAL_EQUAL','NOT_EQUAL', 'COLON'] + list(reserved.values()) #include reserved token types with other tokens
 
 #p0
 t_PRINT = r'print'
@@ -37,6 +40,10 @@ t_NOT_EQUAL = r'\!='
 t_INT_FUNC=r'int'
 t_AND = r'and'
 t_NOT = r'not'
+t_WHILE = r'while'
+t_COLON = r'\:'
+t_IF = r'if'
+t_ELSE = r'else'
 
 
 #TODO
@@ -119,61 +126,31 @@ def p_empty_statement(t):
     #We do nothing, we just want to recognize this as a "statement" 
     #We want to do this so that we can build module and body.
 
-#We only have one assignment grammar rule, and we want that to be recognized as a single statement.
-def p_assignment_statement(t):
-    'statement : assignment'
-    t[0] = t[1]
+    
 
 #All of our expressions should converge to one expression
 #Since expression + expression = expression
 #We want this collection of expressions to be recognized as a single statement
-def p_express_statement(t):
+def p_express_is_statement(t):
     'statement : expression'
-    t[0] = Expr(value=t[1])   
+    t[0] = t[1]
     
-#P0a STATEMENTS ---------------------
-# def p_if_statement(t):
-#     "statement : IF expression COLON suite"
-#     t[0] = t[1]
-
-# def p_if_else_statement(t):
-#     "statement : IF expression COLON suite ELSE colon suite"
-#     t[0] = t[1]
-    
-# def p_while_statement(t):
-#     "statement : WHILE expression COLON suite"
-#     t[0] = t[1]
-#End Statement Grammar rules -------------------------------------------  
-
-#Expression and Assignment Grammar Rules
-def p_assignment(t):
-    'assignment : ID EQUALS expression'
-    t[0] = Assign(targets=[Name(id=t[1], ctx=Store())], value=t[3])
-    
-#P0a Expression Grammar rules
-# def p_int_not_group_expression(t):
-#     "expression : INT_WORD LPAR NOT expression RPAR"
-#     t[0] = t[1]
-# def p_expression_and_expression(t):
-#     'expression : expression AND expression'
-#     t[0] = t[1]
-# def p_expression_or_expression(t):
-#     'expression : expression OR expression'
-#     t[0] = t[1]
-# def p_int_notequal_expression(t):
-#     'expression : INT_WORD LPAR expression NOT_EQUAL expression RPAR'
-#     t[0] = t[1]
-    
-#For print(x)
-def p_print_expression(t):
-    'expression : PRINT LPAR expression RPAR'
-    t[0] = Call(func=Name(id='print', ctx=Load()),args=[t[3]],keywords=[])
-    
-#This is for eval(input()) expression
-#In p0, we only have eval(input()) so this is the only token we need for eval or input
-def p_eval_input_expression(t):
-    'expression : EVAL LPAR INPUT LPAR RPAR RPAR'
-    t[0] = Call(func=Name(id='eval',ctx=Load()),args=[Call(func=Name(id='input', ctx=Load()),args=[],keywords=[])],keywords=[])
+def p_suite(t):
+    '''suite : expression
+                | expression suite'''
+    #If there is ONE statement (t[0] + t[1]) where t[0] is the BODY of Module
+    if len(t) == 2:
+        #If that ONE statement is NOT None (This happens in a 0byte file)
+        if t[1] is not None:
+            t[0] = [t[1]]
+        else:
+            #If t[1] is None, then we just want an empty list in Body
+            t[0] = []
+    else:
+        # 'statements' can be recursively handled by this grammar rule so we put t[1] statement in body
+        # and t[2] is statements so we just add that which would get handled again by this Grammar Rule.
+        #This is essentially how we handle the simple_statements+ syntax seen in EBNF.
+        t[0] = [t[1]] + t[2]
     
     
     
@@ -197,10 +174,44 @@ def p_expression_and_expression_boolop(t):
 def p_expression_not_expression_unop(t):
     'expression : NOT expression'
     t[0] = UnaryOp(op=Not(), operand=t[2])    
-#------------------------------------------------------------------------
+    
+def p_while_expression(t):
+    'expression : WHILE LPAR expression RPAR COLON suite'
+    t[0] = While(test=t[3], body=t[6], orelse=[])
+    
+def p_if_expression(t):
+    'expression : IF expression COLON suite ELSE COLON suite'
+    t[0] = If(test=t[2], body=t[4], orelse=t[7])
+#------------------------------------------------------------------------    
+    
+#For print(x)
+
+
+#------------ P0 FUNCTION CALLS ------------------------------
+def p_print_expression(t):
+    'expression : PRINT LPAR expression RPAR'
+    t[0] = Expr(value=Call(func=Name(id='print', ctx=Load()),args=[t[3]],keywords=[]))
+    
+#This is for eval(input()) expression
+#In p0, we only have eval(input()) so this is the only token we need for eval or input
+def p_eval_input_expression(t):
+    'expression : EVAL LPAR INPUT LPAR RPAR RPAR'
+    t[0] = Call(func=Name(id='eval',ctx=Load()),args=[Call(func=Name(id='input', ctx=Load()),args=[],keywords=[])],keywords=[])
+
+#-------------------------------------------------------------
 
 
 
+def p_assignment_expression(t):
+    'expression : assignment'
+    t[0] = t[1]
+    
+    
+#Expression and Assignment Grammar Rules
+def p_assignment(t):
+    'assignment : ID EQUALS expression'
+    t[0] = Assign(targets=[Name(id=t[1], ctx=Store())], value=t[3])
+    
 def p_plus_expression(t):
     'expression : expression PLUS expression'
     t[0] = BinOp(t[1], Add(), t[3])    

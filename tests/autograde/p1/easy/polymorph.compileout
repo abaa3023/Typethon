@@ -1,3 +1,4 @@
+Syntax error at 'else'
 Illegal character '['
 Illegal character ','
 Illegal character ','
@@ -34,29 +35,9 @@ Module(
 ------------------Tree with my parser--------------
 Module(
     body=[
-        Assign(
-            targets=[
-                Name(id='x', ctx=Store())],
-            value=Constant(value=42)),
-        Expr(
-            value=Name(id='if', ctx=Load())),
-        Expr(
-            value=Call(
-                func=Name(id='eval', ctx=Load()),
-                args=[
-                    Call(
-                        func=Name(id='input', ctx=Load()),
-                        args=[],
-                        keywords=[])],
-                keywords=[])),
-        Expr(
-            value=Name(id='else', ctx=Load())),
-        Expr(
-            value=Constant(value=1)),
-        Expr(
-            value=Constant(value=2)),
-        Expr(
-            value=Constant(value=3)),
+        Constant(value=1),
+        Constant(value=2),
+        Constant(value=3),
         Expr(
             value=Call(
                 func=Name(id='print', ctx=Load()),
@@ -70,29 +51,9 @@ print(x)
 
 Module(
      body=[
-          Assign(
-               targets=[
-                    Name(id='x', ctx=Store())],
-               value=Constant(value=42)),
-          Expr(
-               value=Name(id='if', ctx=Load())),
-          Expr(
-               value=Call(
-                    func=Name(id='eval', ctx=Load()),
-                    args=[
-                         Call(
-                              func=Name(id='input', ctx=Load()),
-                              args=[],
-                              keywords=[])],
-                    keywords=[])),
-          Expr(
-               value=Name(id='else', ctx=Load())),
-          Expr(
-               value=Constant(value=1)),
-          Expr(
-               value=Constant(value=2)),
-          Expr(
-               value=Constant(value=3)),
+          Constant(value=1),
+          Constant(value=2),
+          Constant(value=3),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -102,29 +63,6 @@ Module(
      type_ignores=[])
 Module(
      body=[
-          Assign(
-               targets=[
-                    Name(id='x', ctx=Store())],
-               value=Constant(value=42)),
-          Expr(
-               value=Name(id='if', ctx=Load())),
-          Expr(
-               value=Call(
-                    func=Name(id='eval', ctx=Load()),
-                    args=[
-                         Call(
-                              func=Name(id='input', ctx=Load()),
-                              args=[],
-                              keywords=[])],
-                    keywords=[])),
-          Expr(
-               value=Name(id='else', ctx=Load())),
-          Expr(
-               value=Constant(value=1)),
-          Expr(
-               value=Constant(value=2)),
-          Expr(
-               value=Constant(value=3)),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -133,37 +71,18 @@ Module(
                     keywords=[]))],
      type_ignores=[])
 --------------Code after flattening-------
-x = 42
-if
-eval(input())
-else
-1
-2
-3
 print(x)
-<ast.Constant object at 0x7f8997005ba0>
 
-x = inject_int(42)
-eval(input())
 print(x)
 --------------Explicate code-------
-x = inject_int(42)
-eval(input())
 print(x)
 
 
 --- explicated flattened python ---
-new_temp0 = inject_int(42)
-x = new_temp0
-eval(input())
 print(x)
 
 
 --- x86 IR ---
-call  inject_int 42
-movl  eax ,  new_temp0
-movl  new_temp0 ,  x
-call  eval None
 call  print x
 
 
@@ -179,12 +98,12 @@ call  print x
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp0': set(), 'x': {'edx', 'eax', 'ecx'}, 'eax': {'x'}, 'ecx': {'x'}, 'edx': {'x'}, 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'x': 4, 'new_temp0': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6}
 Spilled set:
  set()
 
@@ -197,8 +116,5 @@ continue_looping
 
 
 
-Homes for CFG0:  {'x': 'edi', 'new_temp0': 'eax'}
-new_temp0
-new_temp0
-x
+Homes for CFG0:  {}
 x

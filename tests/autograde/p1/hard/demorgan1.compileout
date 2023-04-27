@@ -43,16 +43,15 @@ Module(
 ------------------Tree with my parser--------------
 Module(
     body=[
-        Expr(
-            value=BoolOp(
-                op=And(),
-                values=[
-                    UnaryOp(
-                        op=Not(),
-                        operand=Name(id='a', ctx=Load())),
-                    UnaryOp(
-                        op=Not(),
-                        operand=Name(id='b', ctx=Load()))])),
+        BoolOp(
+            op=And(),
+            values=[
+                UnaryOp(
+                    op=Not(),
+                    operand=Name(id='a', ctx=Load())),
+                UnaryOp(
+                    op=Not(),
+                    operand=Name(id='b', ctx=Load()))]),
         Expr(
             value=Call(
                 func=Name(id='print', ctx=Load()),
@@ -67,16 +66,15 @@ x = not (a or b) == (not a) and (not b)
 print(x)
 Module(
      body=[
-          Expr(
-               value=BoolOp(
-                    op=And(),
-                    values=[
-                         UnaryOp(
-                              op=Not(),
-                              operand=Name(id='a', ctx=Load())),
-                         UnaryOp(
-                              op=Not(),
-                              operand=Name(id='b', ctx=Load()))])),
+          BoolOp(
+               op=And(),
+               values=[
+                    UnaryOp(
+                         op=Not(),
+                         operand=Name(id='a', ctx=Load())),
+                    UnaryOp(
+                         op=Not(),
+                         operand=Name(id='b', ctx=Load()))]),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -123,11 +121,6 @@ Module(
                               Name(id='new_temp2', ctx=Store())],
                          value=Name(id='new_temp0', ctx=Load()))]),
           Expr(
-               value=BoolOp(
-                    op=And(),
-                    values=[
-                         Name(id='new_temp2', ctx=Store())])),
-          Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
                     args=[
@@ -147,14 +140,13 @@ if new_temp0:
     new_temp2 = new_temp1
 else:
     new_temp2 = new_temp0
-new_temp2
 print(x)
-<ast.Constant object at 0x7fed167fe2c0>
-<ast.Constant object at 0x7fed167fe380>
-<ast.Constant object at 0x7fed167fe4a0>
-<ast.Constant object at 0x7fed167fe560>
-<ast.Name object at 0x7fed167fe620>
-<ast.Name object at 0x7fed167fe440>
+<ast.Constant object at 0x7fa91040ab00>
+<ast.Constant object at 0x7fa91040abc0>
+<ast.Constant object at 0x7fa91040ace0>
+<ast.Constant object at 0x7fa91040ada0>
+<ast.Name object at 0x7fa91040ae60>
+<ast.Name object at 0x7fa91040ac80>
 
 if(is_true(a)):
 
@@ -268,12 +260,12 @@ call  print x
 --------------Interference----------------
 
 
-Interference Graph:  {'x': {'new_temp5', 'new_temp9', 'ecx', 'new_temp7', 'new_temp4', 'new_temp0', 'new_temp2', 'new_temp1', 'new_temp8', 'new_temp6', 'edx', 'new_temp3', 'eax'}, 'eax': {'x', 'new_temp0', 'b'}, 'ecx': {'x', 'new_temp0', 'b'}, 'edx': {'x', 'new_temp0', 'b'}, 'b': {'new_temp5', 'ecx', 'new_temp4', 'new_temp0', 'new_temp6', 'edx', 'new_temp3', 'eax'}, 'new_temp3': {'x', 'b'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp4': {'x', 'b'}, 'new_temp0': {'new_temp6', 'edx', 'x', 'ecx', 'eax', 'b'}, 'new_temp5': {'x', 'b'}, 'new_temp6': {'x', 'new_temp0', 'b'}, 'new_temp7': {'x'}, 'new_temp2': {'x'}, 'new_temp8': {'x'}, 'new_temp1': {'x'}, 'new_temp9': {'x'}}
+Interference Graph:  {'x': {'new_temp9', 'new_temp0', 'new_temp3', 'new_temp5', 'new_temp8', 'eax', 'new_temp1', 'new_temp6', 'edx', 'new_temp7', 'new_temp2', 'ecx', 'new_temp4'}, 'eax': {'x', 'new_temp0', 'b'}, 'ecx': {'x', 'new_temp0', 'b'}, 'edx': {'x', 'new_temp0', 'b'}, 'b': {'new_temp0', 'new_temp3', 'new_temp5', 'eax', 'new_temp6', 'edx', 'ecx', 'new_temp4'}, 'new_temp3': {'x', 'b'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp4': {'x', 'b'}, 'new_temp0': {'x', 'b', 'ecx', 'eax', 'new_temp6', 'edx'}, 'new_temp5': {'x', 'b'}, 'new_temp6': {'x', 'new_temp0', 'b'}, 'new_temp7': {'x'}, 'new_temp2': {'x'}, 'new_temp8': {'x'}, 'new_temp1': {'x'}, 'new_temp9': {'x'}}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'x': 4, 'new_temp0': 5, 'b': 4, 'new_temp6': 1, 'new_temp3': 1, 'new_temp8': 1, 'new_temp1': 1, 'new_temp2': 1, 'new_temp4': 1, 'new_temp7': 1, 'new_temp5': 1, 'new_temp9': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'b': 4, 'new_temp0': 5, 'x': 4, 'new_temp6': 1, 'new_temp4': 1, 'new_temp7': 1, 'new_temp2': 1, 'new_temp1': 1, 'new_temp5': 1, 'new_temp3': 1, 'new_temp9': 1, 'new_temp8': 1}
 Spilled set:
  set()
 
@@ -286,5 +278,5 @@ continue_looping
 
 
 
-Homes for CFG0:  {'x': 'edi', 'new_temp0': 'ebx', 'b': 'edi', 'new_temp6': 'eax', 'new_temp3': 'eax', 'new_temp8': 'eax', 'new_temp1': 'eax', 'new_temp2': 'eax', 'new_temp4': 'eax', 'new_temp7': 'eax', 'new_temp5': 'eax', 'new_temp9': 'eax'}
+Homes for CFG0:  {'b': 'edi', 'new_temp0': 'ebx', 'x': 'edi', 'new_temp6': 'eax', 'new_temp4': 'eax', 'new_temp7': 'eax', 'new_temp2': 'eax', 'new_temp1': 'eax', 'new_temp5': 'eax', 'new_temp3': 'eax', 'new_temp9': 'eax', 'new_temp8': 'eax'}
 a

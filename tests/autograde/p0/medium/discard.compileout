@@ -9,31 +9,20 @@ Module(
 ------------------Tree with my parser--------------
 Module(
     body=[
-        Expr(
-            value=Constant(value=1)),
-        Expr(
-            value=Constant(value=2))],
+        Constant(value=1),
+        Constant(value=2)],
     type_ignores=[])
 --------------Original code----------------
 1
 2
 Module(
      body=[
-          Expr(
-               value=Constant(value=1)),
-          Expr(
-               value=Constant(value=2))],
+          Constant(value=1),
+          Constant(value=2)],
      type_ignores=[])
-Module(
-     body=[
-          Expr(
-               value=Constant(value=1)),
-          Expr(
-               value=Constant(value=2))],
-     type_ignores=[])
+Module(body=[], type_ignores=[])
 --------------Code after flattening-------
-1
-2
+
 
 --------------Explicate code-------
 

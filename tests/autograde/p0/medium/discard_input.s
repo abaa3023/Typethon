@@ -5,7 +5,6 @@ main:
 START0:
  call eval_input_pyobj
  call eval_input_pyobj
- call eval_input_pyobj
 END0:
 
  movl $0, %eax

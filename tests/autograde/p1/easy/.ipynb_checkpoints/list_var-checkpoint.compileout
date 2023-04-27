@@ -52,10 +52,8 @@ Module(
             targets=[
                 Name(id='x', ctx=Store())],
             value=Name(id='a', ctx=Load())),
-        Expr(
-            value=Name(id='b', ctx=Load())),
-        Expr(
-            value=Name(id='c', ctx=Load())),
+        Name(id='b', ctx=Load()),
+        Name(id='c', ctx=Load()),
         Expr(
             value=Call(
                 func=Name(id='print', ctx=Load()),
@@ -87,10 +85,8 @@ Module(
                targets=[
                     Name(id='x', ctx=Store())],
                value=Name(id='a', ctx=Load())),
-          Expr(
-               value=Name(id='b', ctx=Load())),
-          Expr(
-               value=Name(id='c', ctx=Load())),
+          Name(id='b', ctx=Load()),
+          Name(id='c', ctx=Load()),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -117,10 +113,6 @@ Module(
                     Name(id='x', ctx=Store())],
                value=Name(id='a', ctx=Load())),
           Expr(
-               value=Name(id='b', ctx=Load())),
-          Expr(
-               value=Name(id='c', ctx=Load())),
-          Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
                     args=[
@@ -132,13 +124,11 @@ a = 1
 b = 2
 c = 3
 x = a
-b
-c
 print(x)
-<ast.Constant object at 0x7ff904e81cc0>
-<ast.Constant object at 0x7ff904e81c90>
-<ast.Constant object at 0x7ff904e81c60>
-<ast.Name object at 0x7ff904e81e10>
+<ast.Constant object at 0x7f8298f5e650>
+<ast.Constant object at 0x7f8298f5e5f0>
+<ast.Constant object at 0x7f8298f5c820>
+<ast.Name object at 0x7f8298f5e800>
 
 a = inject_int(1)
 b = inject_int(2)
@@ -190,12 +180,12 @@ call  print x
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp0': set(), 'a': {'new_temp1', 'edx', 'eax', 'new_temp2', 'c', 'b', 'ecx'}, 'eax': {'a'}, 'ecx': {'a'}, 'edx': {'a'}, 'new_temp1': {'a'}, 'b': {'a'}, 'new_temp2': {'a'}, 'c': {'a'}, 'x': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'new_temp0': set(), 'a': {'eax', 'new_temp1', 'edx', 'b', 'new_temp2', 'c', 'ecx'}, 'eax': {'a'}, 'ecx': {'a'}, 'edx': {'a'}, 'new_temp1': {'a'}, 'b': {'a'}, 'new_temp2': {'a'}, 'c': {'a'}, 'x': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'a': 4, 'c': 1, 'new_temp2': 1, 'new_temp1': 1, 'b': 1, 'x': 1, 'new_temp0': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'a': 4, 'c': 1, 'new_temp2': 1, 'b': 1, 'new_temp1': 1, 'x': 1, 'new_temp0': 1}
 Spilled set:
  set()
 
@@ -208,7 +198,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'a': 'edi', 'c': 'eax', 'new_temp2': 'eax', 'new_temp1': 'eax', 'b': 'eax', 'x': 'eax', 'new_temp0': 'eax'}
+Homes for CFG0:  {'a': 'edi', 'c': 'eax', 'new_temp2': 'eax', 'b': 'eax', 'new_temp1': 'eax', 'x': 'eax', 'new_temp0': 'eax'}
 new_temp0
 new_temp0
 a

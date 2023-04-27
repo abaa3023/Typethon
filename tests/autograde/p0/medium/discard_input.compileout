@@ -33,68 +33,64 @@ Module(
 ------------------Tree with my parser--------------
 Module(
     body=[
-        Expr(
-            value=BinOp(
-                left=Call(
-                    func=Name(id='eval', ctx=Load()),
-                    args=[
-                        Call(
-                            func=Name(id='input', ctx=Load()),
-                            args=[],
-                            keywords=[])],
-                    keywords=[]),
-                op=Add(),
-                right=Call(
-                    func=Name(id='eval', ctx=Load()),
-                    args=[
-                        Call(
-                            func=Name(id='input', ctx=Load()),
-                            args=[],
-                            keywords=[])],
-                    keywords=[]))),
-        Expr(
-            value=Call(
+        BinOp(
+            left=Call(
                 func=Name(id='eval', ctx=Load()),
                 args=[
                     Call(
                         func=Name(id='input', ctx=Load()),
                         args=[],
                         keywords=[])],
-                keywords=[]))],
+                keywords=[]),
+            op=Add(),
+            right=Call(
+                func=Name(id='eval', ctx=Load()),
+                args=[
+                    Call(
+                        func=Name(id='input', ctx=Load()),
+                        args=[],
+                        keywords=[])],
+                keywords=[])),
+        Call(
+            func=Name(id='eval', ctx=Load()),
+            args=[
+                Call(
+                    func=Name(id='input', ctx=Load()),
+                    args=[],
+                    keywords=[])],
+            keywords=[])],
     type_ignores=[])
 --------------Original code----------------
 eval(input()) + eval(input())
 eval(input())
 Module(
      body=[
-          Expr(
-               value=BinOp(
-                    left=Call(
-                         func=Name(id='eval', ctx=Load()),
-                         args=[
-                              Call(
-                                   func=Name(id='input', ctx=Load()),
-                                   args=[],
-                                   keywords=[])],
-                         keywords=[]),
-                    op=Add(),
-                    right=Call(
-                         func=Name(id='eval', ctx=Load()),
-                         args=[
-                              Call(
-                                   func=Name(id='input', ctx=Load()),
-                                   args=[],
-                                   keywords=[])],
-                         keywords=[]))),
-          Expr(
-               value=Call(
+          BinOp(
+               left=Call(
                     func=Name(id='eval', ctx=Load()),
                     args=[
                          Call(
                               func=Name(id='input', ctx=Load()),
                               args=[],
                               keywords=[])],
-                    keywords=[]))],
+                    keywords=[]),
+               op=Add(),
+               right=Call(
+                    func=Name(id='eval', ctx=Load()),
+                    args=[
+                         Call(
+                              func=Name(id='input', ctx=Load()),
+                              args=[],
+                              keywords=[])],
+                    keywords=[])),
+          Call(
+               func=Name(id='eval', ctx=Load()),
+               args=[
+                    Call(
+                         func=Name(id='input', ctx=Load()),
+                         args=[],
+                         keywords=[])],
+               keywords=[])],
      type_ignores=[])
 Module(
      body=[
@@ -119,37 +115,19 @@ Module(
                               func=Name(id='input', ctx=Load()),
                               args=[],
                               keywords=[])],
-                    keywords=[])),
-          Expr(
-               value=BinOp(
-                    left=Name(id='new_temp0', ctx=Load()),
-                    op=Add(),
-                    right=Name(id='new_temp1', ctx=Load()))),
-          Expr(
-               value=Call(
-                    func=Name(id='eval', ctx=Load()),
-                    args=[
-                         Call(
-                              func=Name(id='input', ctx=Load()),
-                              args=[],
-                              keywords=[])],
                     keywords=[]))],
      type_ignores=[])
 --------------Code after flattening-------
 new_temp0 = eval(input())
 new_temp1 = eval(input())
-new_temp0 + new_temp1
-eval(input())
 eval(input())
 eval(input())
 
 new_temp0 = eval(input())
 new_temp1 = eval(input())
-eval(input())
 --------------Explicate code-------
 new_temp0 = eval(input())
 new_temp1 = eval(input())
-eval(input())
 
 
 --- explicated flattened python ---
@@ -157,7 +135,6 @@ new_temp2 = eval(input())
 new_temp0 = new_temp2
 new_temp3 = eval(input())
 new_temp1 = new_temp3
-eval(input())
 
 
 --- x86 IR ---
@@ -167,7 +144,6 @@ movl  new_temp2 ,  new_temp0
 call  eval None
 movl  eax ,  new_temp3
 movl  new_temp3 ,  new_temp1
-call  eval None
 
 
 --- Control Flow Graph ---
@@ -187,7 +163,7 @@ Interference Graph:  {'new_temp2': set(), 'new_temp0': set(), 'new_temp3': set()
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 1, 'new_temp3': 1, 'new_temp1': 1, 'new_temp2': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp1': 1, 'new_temp2': 1, 'new_temp3': 1, 'new_temp0': 1}
 Spilled set:
  set()
 
@@ -200,7 +176,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'new_temp0': 'eax', 'new_temp3': 'eax', 'new_temp1': 'eax', 'new_temp2': 'eax'}
+Homes for CFG0:  {'new_temp1': 'eax', 'new_temp2': 'eax', 'new_temp3': 'eax', 'new_temp0': 'eax'}
 new_temp2
 new_temp2
 new_temp0

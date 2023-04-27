@@ -1,5 +1,5 @@
 Illegal character '{'
-Illegal character ':'
+Syntax error at ':'
 Illegal character '}'
 Illegal character '['
 Illegal character ','
@@ -50,10 +50,8 @@ Module(
 ------------------Tree with my parser--------------
 Module(
     body=[
-        Expr(
-            value=Name(id='x', ctx=Load())),
-        Expr(
-            value=Constant(value=1)),
+        Name(id='x', ctx=Load()),
+        Constant(value=1),
         Expr(
             value=Call(
                 func=Name(id='print', ctx=Load()),
@@ -68,10 +66,8 @@ y[2] = x[1]
 print(y)
 Module(
      body=[
-          Expr(
-               value=Name(id='x', ctx=Load())),
-          Expr(
-               value=Constant(value=1)),
+          Name(id='x', ctx=Load()),
+          Constant(value=1),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -82,10 +78,6 @@ Module(
 Module(
      body=[
           Expr(
-               value=Name(id='x', ctx=Load())),
-          Expr(
-               value=Constant(value=1)),
-          Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
                     args=[
@@ -93,8 +85,6 @@ Module(
                     keywords=[]))],
      type_ignores=[])
 --------------Code after flattening-------
-x
-1
 print(y)
 
 print(y)
