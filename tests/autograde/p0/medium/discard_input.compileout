@@ -163,7 +163,7 @@ Interference Graph:  {'new_temp2': set(), 'new_temp0': set(), 'new_temp3': set()
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp1': 1, 'new_temp2': 1, 'new_temp3': 1, 'new_temp0': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 1, 'new_temp1': 1, 'new_temp2': 1, 'new_temp3': 1}
 Spilled set:
  set()
 
@@ -176,7 +176,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'new_temp1': 'eax', 'new_temp2': 'eax', 'new_temp3': 'eax', 'new_temp0': 'eax'}
+Homes for CFG0:  {'new_temp0': 'eax', 'new_temp1': 'eax', 'new_temp2': 'eax', 'new_temp3': 'eax'}
 new_temp2
 new_temp2
 new_temp0

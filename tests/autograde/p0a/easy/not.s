@@ -19,22 +19,22 @@ E1:
  call inject_bool
  addl $(4), %esp
 BB1:
- movl %eax, %ebx
- pushl %ebx
+ movl %eax, %edi
+ pushl %edi
  call is_bool
  addl $(4), %esp
  cmpl $(0), %eax
  je BB2
 IF2:
- pushl %ebx
+ pushl %edi
  call project_bool
  addl $(4), %esp
  pushl %eax
  call inject_int
  addl $(4), %esp
- movl %eax, %edi
+ movl %eax, %ebx
 BB2:
- movl %edi, %eax
+ movl %ebx, %eax
  pushl %eax
  call print_any
  addl $(4), %esp

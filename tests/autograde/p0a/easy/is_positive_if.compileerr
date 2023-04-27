@@ -3,12 +3,18 @@ Traceback (most recent call last):
     main()
   File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/compile.py", line 115, in main
     asm = compile(sys.argv[1])
-  File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/compile.py", line 24, in compile
-    tree = createASTFromMyParser(src_file)
-  File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/lexerandparser.py", line 265, in createASTFromMyParser
-    tree = yacc.parse(prog) #alt parser.parse(prog)
-  File "/opt/conda/lib/python3.10/site-packages/ply/yacc.py", line 503, in parse
-    tok = self.errorfunc(errtoken)
-  File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/lexerandparser.py", line 254, in p_error
-    print("Syntax error at '%s'" % t.value)
-AttributeError: 'NoneType' object has no attribute 'value'
+  File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/compile.py", line 109, in compile
+    optimized_asm = generate_assembly.main(cfg_list, homes_list, spilled_set_list)
+  File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/generate_assembly.py", line 262, in main
+    assembly_src_prog.extend(generate_assembly_cfg(cfg_list[i], homes_list[i], spilled_set_list[i], not cfg_list[i][0].visited))
+  File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/generate_assembly.py", line 248, in generate_assembly_cfg
+    iterateBlocksInOrder(assembly_src,first_block,homes,spilled_set,visit_flag, save_callee_saved_registers)
+  File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/generate_assembly.py", line 226, in iterateBlocksInOrder
+    assembly_src.append(generate_assembly_block(block,homes,spilled_set, save_callee_saved_registers))
+  File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/generate_assembly.py", line 198, in generate_assembly_block
+    assembly.append(generate_assembly(block.statements, homes, spilled_set, save_callee_saved_registers))
+  File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/generate_assembly.py", line 172, in generate_assembly
+    assembly_src.append(push_template(assembly_prefix(arg)))
+  File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/generate_assembly.py", line 147, in assembly_prefix
+    return register_prefix(homes[operand])
+KeyError: 'is_positive'

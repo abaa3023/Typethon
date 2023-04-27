@@ -85,7 +85,7 @@ Module(
 --------------Code after flattening-------
 y = 1
 print(y)
-<ast.Constant object at 0x7fb6ace525c0>
+<ast.Constant object at 0x7eff7a066b60>
 
 y = inject_int(1)
 print(y)
@@ -124,7 +124,7 @@ Interference Graph:  {'new_temp0': set(), 'y': set(), 'eax': set(), 'ecx': set()
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 1, 'y': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'y': 1, 'new_temp0': 1}
 Spilled set:
  set()
 
@@ -137,7 +137,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'new_temp0': 'eax', 'y': 'eax'}
+Homes for CFG0:  {'y': 'eax', 'new_temp0': 'eax'}
 new_temp0
 new_temp0
 y

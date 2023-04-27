@@ -7,12 +7,12 @@ main:
  pushl %ebx
  pushl %esi
 START0:
- movl %eax, %edi
+ movl %eax, %ebx
  pushl $(2)
  call inject_int
  addl $(4), %esp
  movl %eax, %esi
- pushl %edi
+ pushl %ebx
  call is_big
  addl $(4), %esp
  cmpl $(0), %eax
@@ -24,7 +24,7 @@ IF1:
  cmpl $(0), %eax
  je BB3
 IF2:
- pushl %edi
+ pushl %ebx
  call project_big
  addl $(4), %esp
  movl %eax, %edi
@@ -38,7 +38,7 @@ IF2:
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, -4(%ebp)
+ movl %eax, %edi
  jmp BB3
 E1:
  pushl %esi
@@ -52,19 +52,19 @@ IF3:
  addl $(4), %esp
  jmp BB3
 E3:
- pushl %edi
+ pushl %ebx
  call is_int
  addl $(4), %esp
  cmpl $(0), %eax
  je E4
 IF4:
- pushl %edi
+ pushl %ebx
  call project_int
  addl $(4), %esp
  movl %eax, %edi
  jmp BB1
 E4:
- pushl %edi
+ pushl %ebx
  call project_bool
  addl $(4), %esp
  movl %eax, %edi
@@ -89,46 +89,44 @@ BB2:
  pushl %ecx
  call inject_int
  addl $(4), %esp
- movl %eax, -4(%ebp)
+ movl %eax, %edi
 BB3:
- movl -4(%ebp), %edi
  movl $(1), %eax
  negl %eax
  pushl %eax
  call inject_int
  addl $(4), %esp
- movl %edi, %esi
- movl %eax, %edi
- pushl %esi
+ movl %eax, %ebx
+ pushl %edi
  call is_big
  addl $(4), %esp
  cmpl $(0), %eax
  je E6
 IF6:
- pushl %edi
+ pushl %ebx
  call is_big
  addl $(4), %esp
  cmpl $(0), %eax
  je BB6
 IF7:
- pushl %esi
- call project_big
- addl $(4), %esp
- movl %eax, %ebx
  pushl %edi
  call project_big
  addl $(4), %esp
- pushl %eax
+ movl %eax, %edi
  pushl %ebx
+ call project_big
+ addl $(4), %esp
+ pushl %eax
+ pushl %edi
  call add
  addl $(8), %esp
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, -4(%ebp)
  jmp BB6
 E6:
- pushl %edi
+ pushl %ebx
  call is_big
  addl $(4), %esp
  cmpl $(0), %eax
@@ -139,46 +137,46 @@ IF8:
  addl $(4), %esp
  jmp BB6
 E8:
- pushl %esi
+ pushl %edi
  call is_int
  addl $(4), %esp
  cmpl $(0), %eax
  je E9
 IF9:
- pushl %esi
+ pushl %edi
  call project_int
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, %edi
  jmp BB4
 E9:
- pushl %esi
+ pushl %edi
  call project_bool
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, %edi
 BB4:
- pushl %edi
+ pushl %ebx
  call is_int
  addl $(4), %esp
  cmpl $(0), %eax
  je E10
 IF10:
- pushl %edi
+ pushl %ebx
  call project_int
  addl $(4), %esp
  jmp BB5
 E10:
- pushl %edi
+ pushl %ebx
  call project_bool
  addl $(4), %esp
 BB5:
- movl %ebx, %ecx
+ movl %edi, %ecx
  addl %eax, %ecx
  pushl %ecx
  call inject_int
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, -4(%ebp)
 BB6:
- movl %ebx, %eax
+ movl -4(%ebp), %eax
 END0:
 
  popl %esi

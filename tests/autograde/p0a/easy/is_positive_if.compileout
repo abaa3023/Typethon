@@ -1,0 +1,122 @@
+Syntax error at 'is_positive'
+------------------CORRECT TREE--------------------
+Module(
+    body=[
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Constant(value=12)),
+        Assign(
+            targets=[
+                Name(id='is_positive', ctx=Store())],
+            value=Constant(value=1)),
+        If(
+            test=Call(
+                func=Name(id='int', ctx=Load()),
+                args=[
+                    Compare(
+                        left=Name(id='x', ctx=Load()),
+                        ops=[
+                            NotEq()],
+                        comparators=[
+                            Constant(value=0)])],
+                keywords=[]),
+            body=[
+                Assign(
+                    targets=[
+                        Name(id='is_positive', ctx=Store())],
+                    value=Constant(value=0))],
+            orelse=[]),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='is_positive', ctx=Load())],
+                keywords=[]))],
+    type_ignores=[])
+------------------Tree with my parser--------------
+Module(
+    body=[
+        Constant(value=0),
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Name(id='is_positive', ctx=Load())],
+                keywords=[]))],
+    type_ignores=[])
+--------------Original code----------------
+x = 12
+is_positive = 1
+if int(x != 0):
+    is_positive = 0
+
+print(is_positive)
+
+Module(
+     body=[
+          Constant(value=0),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='is_positive', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
+Module(
+     body=[
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='is_positive', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
+--------------Code after flattening-------
+print(is_positive)
+
+print(is_positive)
+--------------Explicate code-------
+print(is_positive)
+
+
+--- explicated flattened python ---
+print(is_positive)
+
+
+--- x86 IR ---
+call  print is_positive
+
+
+--- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6}
+Spilled set:
+ set()
+
+
+--------------Spilling----------------
+unspillable_set
+ set()
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {}
+is_positive

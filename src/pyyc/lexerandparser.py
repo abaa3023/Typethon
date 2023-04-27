@@ -21,7 +21,7 @@ reserved = {    # dictionary defines keywords and associated token types
 #TODO - Need INDENT AND DEDENT
 #tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'COLON', 'IF', 'ELSE', 'WHILE', 'INT_WORD', 'NOT', 'AND', 'OR', 'EQUAL_EQUAL', 'NOT_EQUAL', 'INDENT', 'DEDENT'] + list(reserved.values()) #include reserved token types with other tokens
 
-tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'EQUAL_EQUAL','NOT_EQUAL', 'COLON'] + list(reserved.values()) #include reserved token types with other tokens
+tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'EQUAL_EQUAL','NOT_EQUAL', 'COLON', 'INDENT'] + list(reserved.values()) #include reserved token types with other tokens
 
 #p0
 t_PRINT = r'print'
@@ -32,7 +32,7 @@ t_LPAR = r'\('
 t_RPAR = r'\)'
 t_MINUS = r'\-'
 t_EQUALS = r'\='
-t_ignore = ' \t'
+#t_ignore = ' '
 
 #p0a
 t_EQUAL_EQUAL = r'\=='
@@ -44,7 +44,7 @@ t_WHILE = r'while'
 t_COLON = r'\:'
 t_IF = r'if'
 t_ELSE = r'else'
-
+#t_INDENT = r'\t'
 
 #TODO
 #t_COLON = r'\:'
@@ -56,8 +56,6 @@ t_ELSE = r'else'
 # t_AND = r'\and'
 # t_OR = r'\or'
 # t_NOT_EQUAL = r'\!='
-
-
 
 
 def t_ID(t):
@@ -82,9 +80,27 @@ def t_comment(t):
     r'\#.*'
     pass
 
+# Define the INDENT token rule
+def t_INDENT(t):
+    r'\n[ \t]*'
+    # Get the whitespace at the beginning of the line
+    whitespace = t.value[len('\n'):]
+    
+    # If the whitespace is longer than the previous whitespace,
+    # return an INDENT token with the length of the new whitespace
+    if len(whitespace) > lexer.last_whitespace:
+        t.value = len(whitespace)
+        lexer.last_whitespace = len(whitespace)
+        return t
+    
+# Define a rule to ignore whitespace
+t_ignore = ' \t'
+
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
+    
+
     
 lex.lex()
 
@@ -99,9 +115,6 @@ def p_module(t):
     'module : statements'
     t[0] = Module(body=t[1],type_ignores=[])
     
-# def p_suite(t):
-#     'suite : INDENT statements DEDENT'
-#     t[0] = t[2]
 #Statement Grammar Rules ------------------------------------------
 def p_statements(t):
     '''statements : statement 
@@ -134,26 +147,7 @@ def p_empty_statement(t):
 def p_express_is_statement(t):
     'statement : expression'
     t[0] = t[1]
-    
-def p_suite(t):
-    '''suite : expression
-                | expression suite'''
-    #If there is ONE statement (t[0] + t[1]) where t[0] is the BODY of Module
-    if len(t) == 2:
-        #If that ONE statement is NOT None (This happens in a 0byte file)
-        if t[1] is not None:
-            t[0] = [t[1]]
-        else:
-            #If t[1] is None, then we just want an empty list in Body
-            t[0] = []
-    else:
-        # 'statements' can be recursively handled by this grammar rule so we put t[1] statement in body
-        # and t[2] is statements so we just add that which would get handled again by this Grammar Rule.
-        #This is essentially how we handle the simple_statements+ syntax seen in EBNF.
-        t[0] = [t[1]] + t[2]
-    
-    
-    
+     
 #p0a STUFF ---------------------------------------------
 def p_int_func_expression(t):
     'expression : INT_FUNC LPAR expression RPAR'
@@ -176,12 +170,47 @@ def p_expression_not_expression_unop(t):
     t[0] = UnaryOp(op=Not(), operand=t[2])    
     
 def p_while_expression(t):
-    'expression : WHILE LPAR expression RPAR COLON suite'
+    'expression : WHILE LPAR expression RPAR COLON suites'
     t[0] = While(test=t[3], body=t[6], orelse=[])
     
-def p_if_expression(t):
-    'expression : IF expression COLON suite ELSE COLON suite'
+def p_if_else_expression(t):
+    'expression : IF expression COLON suites ELSE COLON suites'
     t[0] = If(test=t[2], body=t[4], orelse=t[7])
+    
+def p_if_expression(t):
+    'expression : IF expression COLON suites'
+    t[0] = If(test=t[2], body=t[4], orelse=[])
+    
+def p_suites_is_statement(t):
+    'statement : suites'
+    t[0] = t[1]
+
+# def p_suites_is_expression(t):
+#     'expression : suites'
+#     t[0] = t[1]
+    
+def p_suite_indent(t):
+    'suite : INDENT expression'
+    t[0] = t[2]
+    
+def p_suite(t):
+    '''suites : suite
+                | suite suites'''
+    #If there is ONE statement (t[0] + t[1]) where t[0] is the BODY of Module
+    if len(t) == 2:
+        #If that ONE statement is NOT None (This happens in a 0byte file)
+        if t[1] is not None:
+            t[0] = [t[1]]
+        else:
+            #If t[1] is None, then we just want an empty list in Body
+            t[0] = []
+    else:
+        # 'statements' can be recursively handled by this grammar rule so we put t[1] statement in body
+        # and t[2] is statements so we just add that which would get handled again by this Grammar Rule.
+        #This is essentially how we handle the simple_statements+ syntax seen in EBNF.
+        t[0] = [t[1]] + t[2]
+        
+        
 #------------------------------------------------------------------------    
     
 #For print(x)

@@ -175,13 +175,13 @@ is_odd = new_temp1
 new_temp2 = idx + 1
 idx = new_temp2
 print(is_odd)
-<ast.Constant object at 0x7f06e44a6f80>
-<ast.Constant object at 0x7f06e44a7040>
+<ast.Constant object at 0x7f9283c6f4f0>
+<ast.Constant object at 0x7f9283c6f5b0>
 inject_int(project_bool(explicate_3))
-<ast.Name object at 0x7f06e44a6e30>
+<ast.Name object at 0x7f9283c6f3a0>
 inject_big(add(project_big(explicate_4),project_big(explicate_5)))
 inject_int(explicate_6+explicate_7)
-<ast.Name object at 0x7f06e44a7160>
+<ast.Name object at 0x7f9283c6f6d0>
 
 if(is_true(is_odd)):
 
@@ -411,14 +411,14 @@ call  print is_odd
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp1': {'new_temp9', 'idx', 'explicate_3', 'new_temp10', 'new_temp0', 'edx', 'new_temp2', 'new_temp8', 'new_temp11', 'eax', 'ecx'}, 'eax': {'explicate_6', 'new_temp1', 'idx', 'new_temp17', 'explicate_5', 'explicate_3', 'is_odd', 'new_temp2', 'explicate_4'}, 'ecx': {'explicate_6', 'new_temp1', 'idx', 'new_temp17', 'explicate_5', 'explicate_3', 'is_odd', 'new_temp2', 'explicate_4'}, 'edx': {'explicate_6', 'new_temp1', 'idx', 'new_temp17', 'explicate_5', 'explicate_3', 'is_odd', 'new_temp2', 'explicate_4'}, 'idx': {'new_temp9', 'new_temp1', 'new_temp12', 'explicate_3', 'new_temp10', 'new_temp0', 'is_odd', 'edx', 'new_temp8', 'new_temp11', 'eax', 'new_temp13', 'ecx'}, 'new_temp2': {'new_temp12', 'new_temp16', 'explicate_3', 'is_odd', 'new_temp0', 'edx', 'explicate_4', 'new_temp14', 'ecx', 'new_temp9', 'new_temp1', 'explicate_5', 'new_temp10', 'new_temp21', 'new_temp8', 'new_temp11', 'eax', 'new_temp13', 'new_temp15'}, 'new_temp8': {'new_temp1', 'idx', 'new_temp2'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp9': {'new_temp1', 'idx', 'new_temp2'}, 'new_temp0': {'new_temp1', 'idx', 'new_temp2'}, 'new_temp10': {'new_temp1', 'idx', 'new_temp2'}, 'explicate_3': {'new_temp1', 'idx', 'new_temp2', 'edx', 'new_temp11', 'eax', 'ecx'}, 'new_temp11': {'explicate_3', 'new_temp1', 'idx', 'new_temp2'}, 'new_temp12': {'idx', 'new_temp2'}, 'new_temp13': {'idx', 'new_temp2'}, 'is_odd': {'explicate_7', 'idx', 'new_temp16', 'new_temp24', 'edx', 'explicate_4', 'new_temp2', 'new_temp27', 'new_temp28', 'new_temp14', 'ecx', 'new_temp25', 'explicate_6', 'new_temp26', 'new_temp17', 'explicate_5', 'new_temp20', 'new_temp29', 'new_temp22', 'new_temp19', 'new_temp21', 'new_temp15', 'new_temp23', 'eax', 'new_temp18'}, 'explicate_4': {'explicate_5', 'is_odd', 'new_temp22', 'edx', 'new_temp2', 'new_temp21', 'new_temp15', 'new_temp14', 'eax', 'new_temp16', 'ecx'}, 'new_temp14': {'is_odd', 'new_temp2', 'explicate_4'}, 'explicate_5': {'explicate_6', 'new_temp17', 'new_temp24', 'is_odd', 'new_temp22', 'new_temp25', 'edx', 'explicate_4', 'new_temp2', 'new_temp21', 'new_temp15', 'new_temp23', 'eax', 'new_temp16', 'ecx'}, 'new_temp15': {'is_odd', 'explicate_4', 'new_temp2', 'explicate_5'}, 'new_temp16': {'is_odd', 'explicate_4', 'new_temp2', 'explicate_5'}, 'new_temp21': {'is_odd', 'new_temp2', 'explicate_4', 'explicate_5'}, 'new_temp17': {'is_odd', 'edx', 'explicate_5', 'eax', 'new_temp18', 'ecx'}, 'new_temp18': {'is_odd', 'new_temp17'}, 'new_temp19': {'is_odd'}, 'new_temp20': {'is_odd'}, 'new_temp22': {'is_odd', 'explicate_4', 'explicate_5'}, 'new_temp23': {'is_odd', 'explicate_5'}, 'explicate_6': {'explicate_7', 'new_temp26', 'explicate_5', 'is_odd', 'edx', 'new_temp27', 'new_temp25', 'eax', 'ecx'}, 'new_temp24': {'is_odd', 'explicate_5'}, 'new_temp25': {'explicate_6', 'is_odd', 'explicate_5'}, 'new_temp26': {'explicate_6', 'is_odd'}, 'explicate_7': {'explicate_6', 'is_odd', 'new_temp28'}, 'new_temp27': {'explicate_6', 'is_odd'}, 'new_temp28': {'is_odd', 'explicate_7'}, 'new_temp29': {'is_odd'}}
+Interference Graph:  {'idx': {'is_odd', 'new_temp11', 'new_temp13', 'new_temp12', 'new_temp9', 'new_temp0', 'edx', 'ecx', 'new_temp1', 'eax', 'explicate_3', 'new_temp10', 'new_temp8'}, 'eax': {'is_odd', 'explicate_5', 'new_temp2', 'explicate_4', 'idx', 'new_temp17', 'new_temp1', 'explicate_3', 'explicate_6'}, 'ecx': {'is_odd', 'explicate_5', 'new_temp2', 'explicate_4', 'idx', 'new_temp17', 'new_temp1', 'explicate_3', 'explicate_6'}, 'edx': {'is_odd', 'explicate_5', 'new_temp2', 'explicate_4', 'idx', 'new_temp17', 'new_temp1', 'explicate_3', 'explicate_6'}, 'new_temp2': {'explicate_5', 'new_temp21', 'new_temp13', 'new_temp15', 'explicate_4', 'new_temp12', 'new_temp0', 'ecx', 'eax', 'new_temp10', 'is_odd', 'new_temp16', 'new_temp11', 'new_temp14', 'new_temp9', 'edx', 'new_temp1', 'explicate_3', 'new_temp8'}, 'new_temp1': {'new_temp2', 'new_temp11', 'idx', 'new_temp9', 'new_temp0', 'edx', 'ecx', 'eax', 'explicate_3', 'new_temp10', 'new_temp8'}, 'new_temp8': {'idx', 'new_temp2', 'new_temp1'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp9': {'new_temp2', 'idx', 'new_temp1'}, 'new_temp0': {'idx', 'new_temp1', 'new_temp2'}, 'new_temp10': {'new_temp2', 'idx', 'new_temp1'}, 'explicate_3': {'idx', 'edx', 'ecx', 'new_temp1', 'new_temp11', 'eax', 'new_temp2'}, 'new_temp11': {'explicate_3', 'new_temp2', 'idx', 'new_temp1'}, 'new_temp12': {'new_temp2', 'idx'}, 'new_temp13': {'new_temp2', 'idx'}, 'is_odd': {'explicate_5', 'new_temp21', 'new_temp19', 'new_temp2', 'new_temp15', 'explicate_4', 'ecx', 'eax', 'new_temp27', 'explicate_6', 'new_temp16', 'new_temp14', 'new_temp23', 'idx', 'new_temp20', 'new_temp24', 'new_temp25', 'new_temp18', 'explicate_7', 'new_temp17', 'edx', 'new_temp26', 'new_temp22', 'new_temp29', 'new_temp28'}, 'explicate_4': {'is_odd', 'new_temp16', 'explicate_5', 'new_temp21', 'new_temp14', 'new_temp15', 'new_temp22', 'edx', 'ecx', 'eax', 'new_temp2'}, 'new_temp14': {'is_odd', 'new_temp2', 'explicate_4'}, 'explicate_5': {'is_odd', 'new_temp16', 'new_temp21', 'new_temp23', 'new_temp15', 'explicate_4', 'new_temp22', 'new_temp24', 'new_temp25', 'new_temp17', 'edx', 'ecx', 'eax', 'new_temp2', 'explicate_6'}, 'new_temp15': {'is_odd', 'new_temp2', 'explicate_5', 'explicate_4'}, 'new_temp16': {'is_odd', 'new_temp2', 'explicate_5', 'explicate_4'}, 'new_temp21': {'is_odd', 'new_temp2', 'explicate_5', 'explicate_4'}, 'new_temp17': {'is_odd', 'explicate_5', 'edx', 'ecx', 'eax', 'new_temp18'}, 'new_temp18': {'is_odd', 'new_temp17'}, 'new_temp19': {'is_odd'}, 'new_temp20': {'is_odd'}, 'new_temp22': {'is_odd', 'explicate_5', 'explicate_4'}, 'new_temp23': {'is_odd', 'explicate_5'}, 'explicate_6': {'is_odd', 'explicate_5', 'new_temp25', 'explicate_7', 'edx', 'ecx', 'new_temp26', 'new_temp27', 'eax'}, 'new_temp24': {'is_odd', 'explicate_5'}, 'new_temp25': {'is_odd', 'explicate_5', 'explicate_6'}, 'new_temp26': {'is_odd', 'explicate_6'}, 'explicate_7': {'is_odd', 'new_temp28', 'explicate_6'}, 'new_temp27': {'is_odd', 'explicate_6'}, 'new_temp28': {'is_odd', 'explicate_7'}, 'new_temp29': {'is_odd'}}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'explicate_5': 4, 'explicate_6': 5, 'is_odd': 6, 'new_temp17': 5, 'new_temp2': 5, 'explicate_4': 7, 'new_temp1': 4, 'explicate_3': 6, 'idx': 5, 'new_temp15': 1, 'new_temp16': 1, 'new_temp11': 1, 'new_temp21': 1, 'new_temp25': 1, 'new_temp23': 1, 'new_temp18': 1, 'new_temp8': 1, 'new_temp10': 1, 'new_temp14': 1, 'new_temp27': 1, 'new_temp0': 1, 'new_temp22': 1, 'new_temp24': 1, 'new_temp26': 1, 'explicate_7': 1, 'new_temp28': 2, 'new_temp9': 1, 'new_temp13': 1, 'new_temp29': 1, 'new_temp12': 1, 'new_temp19': 1, 'new_temp20': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp1': 4, 'new_temp2': 5, 'explicate_3': 6, 'idx': 5, 'is_odd': 4, 'explicate_4': 6, 'explicate_5': 7, 'new_temp17': 5, 'explicate_6': 5, 'new_temp14': 1, 'new_temp11': 1, 'new_temp16': 1, 'new_temp15': 1, 'new_temp21': 1, 'new_temp8': 1, 'new_temp22': 1, 'new_temp26': 1, 'explicate_7': 1, 'new_temp28': 2, 'new_temp10': 1, 'new_temp27': 1, 'new_temp18': 1, 'new_temp0': 1, 'new_temp9': 1, 'new_temp25': 1, 'new_temp29': 1, 'new_temp12': 1, 'new_temp20': 1, 'new_temp23': 1, 'new_temp19': 1, 'new_temp13': 1, 'new_temp24': 1}
 Spilled set:
- {'explicate_4'}
+ {'explicate_5'}
 
 
 --------------Spilling----------------
@@ -429,7 +429,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'explicate_4': -4, 'explicate_5': 'edi', 'explicate_6': 'ebx', 'is_odd': 'esi', 'new_temp17': 'ebx', 'new_temp2': 'ebx', 'new_temp1': 'edi', 'explicate_3': 'esi', 'idx': 'ebx', 'new_temp15': 'eax', 'new_temp16': 'eax', 'new_temp11': 'eax', 'new_temp21': 'eax', 'new_temp25': 'eax', 'new_temp23': 'eax', 'new_temp18': 'eax', 'new_temp8': 'eax', 'new_temp10': 'eax', 'new_temp14': 'eax', 'new_temp27': 'eax', 'new_temp0': 'eax', 'new_temp22': 'eax', 'new_temp24': 'eax', 'new_temp26': 'eax', 'explicate_7': 'eax', 'new_temp28': 'ecx', 'new_temp9': 'eax', 'new_temp13': 'eax', 'new_temp29': 'eax', 'new_temp12': 'eax', 'new_temp19': 'eax', 'new_temp20': 'eax'}
+Homes for CFG0:  {'explicate_5': -4, 'new_temp1': 'edi', 'new_temp2': 'ebx', 'explicate_3': 'esi', 'idx': 'ebx', 'is_odd': 'edi', 'explicate_4': 'esi', 'new_temp17': 'ebx', 'explicate_6': 'ebx', 'new_temp14': 'eax', 'new_temp11': 'eax', 'new_temp16': 'eax', 'new_temp15': 'eax', 'new_temp21': 'eax', 'new_temp8': 'eax', 'new_temp22': 'eax', 'new_temp26': 'eax', 'explicate_7': 'eax', 'new_temp28': 'ecx', 'new_temp10': 'eax', 'new_temp27': 'eax', 'new_temp18': 'eax', 'new_temp0': 'eax', 'new_temp9': 'eax', 'new_temp25': 'eax', 'new_temp29': 'eax', 'new_temp12': 'eax', 'new_temp20': 'eax', 'new_temp23': 'eax', 'new_temp19': 'eax', 'new_temp13': 'eax', 'new_temp24': 'eax'}
 is_odd
 new_temp8
 new_temp8
@@ -453,16 +453,16 @@ new_temp1
 new_temp1
 is_odd
 idx
+explicate_4
 new_temp14
 new_temp14
-explicate_5
+explicate_4
 new_temp15
 new_temp15
-explicate_5
 new_temp16
 new_temp16
+explicate_4
 new_temp17
-explicate_5
 new_temp18
 new_temp18
 new_temp17
@@ -471,25 +471,24 @@ new_temp19
 new_temp20
 new_temp20
 new_temp2
-explicate_5
 new_temp21
 new_temp21
+explicate_4
 new_temp22
 new_temp22
+explicate_4
 new_temp23
 new_temp23
 explicate_6
+explicate_4
 new_temp24
 new_temp24
 explicate_6
-explicate_5
 new_temp25
 new_temp25
-explicate_5
 new_temp26
 new_temp26
 explicate_7
-explicate_5
 new_temp27
 new_temp27
 explicate_7

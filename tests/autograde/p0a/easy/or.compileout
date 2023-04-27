@@ -66,7 +66,7 @@ Module(
 --------------Code after flattening-------
 x = 1
 print(x)
-<ast.Constant object at 0x7f282d92a3b0>
+<ast.Constant object at 0x7f611d83a950>
 
 x = inject_int(1)
 print(x)
