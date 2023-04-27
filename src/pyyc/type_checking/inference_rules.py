@@ -1,6 +1,6 @@
 import ast
 
-from python_types import List, Dict, Int, Bool
+from .python_types import List, Dict, Int, Bool
 
 
 class InferenceRules:

@@ -1,6 +1,6 @@
 import ast
-from inference_rules import InferenceRules
-from python_types import Int, Bool, List, Dict
+from .inference_rules import InferenceRules
+from .python_types import Int, Bool, List, Dict
 
 
 class TypeCheck(ast.NodeVisitor):
