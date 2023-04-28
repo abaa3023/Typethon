@@ -6,6 +6,7 @@ from .python_types import Int, Bool, List, Dict
 class TypeCheck(ast.NodeVisitor):
     
     def __init__(self):
+        # print("TypeCheck initialised")
         super(TypeCheck, self).__init__()
         self.variable_types = {}
         self.this_type = None
@@ -50,10 +51,12 @@ class TypeCheck(ast.NodeVisitor):
     def visit_AnnAssign(self, node):
         # print("visiting AnnAssign")
         old_this_type = self.this_type
+        # print(f"{old_this_type = }")
         self.this_type = self.get_annotation_type(node.annotation)
         # print(f"{self.this_type = }")
         self.visit(node.target)
         self.this_type = old_this_type
+        # print(f"{self.this_type = }")
         
         self.visit(node.value)
         

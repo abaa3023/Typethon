@@ -5,6 +5,8 @@ from ast import *
 import flatten
 from flatten import *
 
+from type_checking.python_types import *
+
 def handle_constant(node):
     if node.value == True:
         return 1
@@ -101,70 +103,120 @@ def tree_to_str(flattened_tree,prefix = 0):
                 
                 right_var = gen_new_var("explicate_")
                 explicate_prog.append(assignString(right_var,src.right))
+                
+                if((isinstance(src.left.type, List)) or (isinstance(src.left.type, Dict))):
+                    if((isinstance(src.right.type, List)) or (isinstance(src.right.type, Dict))):
+                        left = 'project_big(' + left_var + ')'
+                        right = 'project_big(' + right_var + ')'
+                        add_call = 'add('+ left + ',' + right + ')'
+                        statement = assignString(dest,inject_big_str(add_call))
+                        append_list_with_prefix(explicate_prog,statement,local_if_count)
+                else:
+                    if((isinstance(src.right.type, List)) or (isinstance(src.right.type, Dict))):
+                        # throw error
+                        pass
+                    else:
+                        if(isinstance(src.left.type, Int)):
+                            left = gen_new_var("explicate_")
+                            left_assn = 'project_int(' + left_var + ')'
+                            statement = assignString(left,left_assn)
+                            append_list_with_prefix(explicate_prog,statement,local_if_count)
+                        else:
+                            left = gen_new_var("explicate_")
+                            left_assn = 'project_bool(' + left_var + ')'
+                            statement = assignString(left,left_assn)
+                            append_list_with_prefix(explicate_prog,statement,local_if_count)
+                        if(isinstance(src.right.type, Int)):
+                            right = gen_new_var("explicate_")
+                            right_assn = 'project_int(' + right_var + ')'
+                            statement = assignString(right,right_assn)
+                            append_list_with_prefix(explicate_prog,statement,local_if_count)
+                        else:
+                            right = gen_new_var("explicate_")
+                            right_assn = 'project_bool(' + right_var + ')'
+                            statement = assignString(right,right_assn)
+                            append_list_with_prefix(explicate_prog,statement,local_if_count)
 
-                value = "is_big(" + left_var + ")"
-                local_if_count = addif(explicate_prog,value,local_if_count)
+                        add_call = left + '+' + right
+                        statement = assignString(dest,inject_int_str(add_call))
+                        append_list_with_prefix(explicate_prog,statement,local_if_count)
+                        
+                
+#                 if(isinstance(src.left.type, Int)):
+#                     left = gen_new_var("explicate_")
+#                     left_assn = 'project_int(' + left_var + ')'
+#                     statement = assignString(left,left_assn)
+#                     append_list_with_prefix(explicate_prog,statement,local_if_count)
+#                 if(isinstance(src.right.type, Int)):
+#                     right = gen_new_var("explicate_")
+#                     right_assn = 'project_int(' + right_var + ')'
+#                     statement = assignString(right,right_assn)
+#                     append_list_with_prefix(explicate_prog,statement,local_if_count)
+                
+#                 add_call = left + '+' + right
+#                 statement = assignString(dest,inject_int_str(add_call))
+#                 append_list_with_prefix(explicate_prog,statement,local_if_count)
 
-                value = "is_big(" + right_var + ")"
-                local_if_count = addif(explicate_prog,value,local_if_count)
+#                 value = "is_big(" + left_var + ")"
+#                 local_if_count = addif(explicate_prog,value,local_if_count)
 
-                left = 'project_big(' + left_var + ')'
-                right = 'project_big(' + right_var + ')'
-                add_call = 'add('+ left + ',' + right + ')'
-                statement = assignString(dest,inject_big_str(add_call))
-                append_list_with_prefix(explicate_prog,statement,local_if_count)
+#                 value = "is_big(" + right_var + ")"
+#                 local_if_count = addif(explicate_prog,value,local_if_count)
 
-                local_if_count = endif(local_if_count)
+#                 
 
-                addelse(explicate_prog,local_if_count)
 
-                value = "is_big(" + right_var + ")"
-                local_if_count = addif(explicate_prog,value,local_if_count)
+#                 local_if_count = endif(local_if_count)
+
+#                 addelse(explicate_prog,local_if_count)
+
+#                 value = "is_big(" + right_var + ")"
+#                 local_if_count = addif(explicate_prog,value,local_if_count)
                 
-                statement = 'error_pyobj(0)'
-                append_list_with_prefix(explicate_prog,statement,local_if_count)
+#                 statement = 'error_pyobj(0)'
+#                 append_list_with_prefix(explicate_prog,statement,local_if_count)
                 
-                addelse(explicate_prog,local_if_count)
+#                 addelse(explicate_prog,local_if_count)
                 
-                value = "is_int(" + left_var + ")"
-                local_if_count = addif(explicate_prog,value,local_if_count)
+#                 value = "is_int(" + left_var + ")"
+#                 local_if_count = addif(explicate_prog,value,local_if_count)
                 
-                left = gen_new_var("explicate_")
-                left_assn = 'project_int(' + left_var + ')'
-                statement = assignString(left,left_assn)
-                append_list_with_prefix(explicate_prog,statement,local_if_count)
+#                 left = gen_new_var("explicate_")
+#                 left_assn = 'project_int(' + left_var + ')'
+#                 statement = assignString(left,left_assn)
+#                 append_list_with_prefix(explicate_prog,statement,local_if_count)
                 
-                addelse(explicate_prog,local_if_count)
+#                 addelse(explicate_prog,local_if_count)
                 
-                left_assn = 'project_bool(' + left_var + ')'
-                statement = assignString(left,left_assn)
-                append_list_with_prefix(explicate_prog,statement,local_if_count)
+#                 left_assn = 'project_bool(' + left_var + ')'
+#                 statement = assignString(left,left_assn)
+#                 append_list_with_prefix(explicate_prog,statement,local_if_count)
                 
-                local_if_count = endif(local_if_count)
+#                 local_if_count = endif(local_if_count)
                 
-                value = "is_int(" + right_var + ")"
-                local_if_count = addif(explicate_prog,value,local_if_count)
+#                 value = "is_int(" + right_var + ")"
+#                 local_if_count = addif(explicate_prog,value,local_if_count)
                 
-                right = gen_new_var("explicate_")
-                right_assn = 'project_int(' + right_var + ')'
-                statement = assignString(right,right_assn)
-                append_list_with_prefix(explicate_prog,statement,local_if_count)
+#                 right = gen_new_var("explicate_")
+#                 right_assn = 'project_int(' + right_var + ')'
+#                 statement = assignString(right,right_assn)
+#                 append_list_with_prefix(explicate_prog,statement,local_if_count)
                 
-                addelse(explicate_prog,local_if_count)
+#                 addelse(explicate_prog,local_if_count)
                 
-                right_assn = 'project_bool(' + right_var + ')'
-                statement = assignString(right,right_assn)
-                append_list_with_prefix(explicate_prog,statement,local_if_count)
+#                 right_assn = 'project_bool(' + right_var + ')'
+#                 statement = assignString(right,right_assn)
+#                 append_list_with_prefix(explicate_prog,statement,local_if_count)
                 
-                local_if_count = endif(local_if_count)
+#                 local_if_count = endif(local_if_count)
                 
-                add_call = left + '+' + right
-                statement = assignString(dest,inject_int_str(add_call))
-                append_list_with_prefix(explicate_prog,statement,local_if_count)
+#                 add_call = left + '+' + right
+#                 statement = assignString(dest,inject_int_str(add_call))
+#                 append_list_with_prefix(explicate_prog,statement,local_if_count)
                 
-                local_if_count = endif(local_if_count)
+#                 local_if_count = endif(local_if_count)
                 
-                local_if_count = endif(local_if_count)
+#                 local_if_count = endif(local_if_count)
                 
             elif isinstance(src,UnaryOp) and isinstance(src.op,USub):
                 if isinstance(src.operand,Constant):
