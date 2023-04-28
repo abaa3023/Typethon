@@ -96,7 +96,7 @@ class TypeCheck(ast.NodeVisitor):
             node.type = this_type
         else:
             raise TypeError(f"No type found for variable {node.id}")
-            
+
     def visit_Constant(self, node):
         # TODO: Change below.
         if(type(node.value) ==int):
@@ -115,6 +115,10 @@ class TypeCheck(ast.NodeVisitor):
             node.type = InferenceRules.NotOp(node.operand.type)
         else:
             raise Exception("unkown unary op")
+        if(isinstance(node.operand, ast.Constant)):
+            print("node.operand = ", node.operand.value)
+        elif(isinstance(node.operand, ast.Name)):
+            print("node.operand = ", node.operand.id)
     
     def visit_Call(self, node):
         # self.visit(node.func)

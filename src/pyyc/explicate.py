@@ -219,33 +219,46 @@ def tree_to_str(flattened_tree,prefix = 0):
 #                 local_if_count = endif(local_if_count)
                 
             elif isinstance(src,UnaryOp) and isinstance(src.op,USub):
+                local_if_count = 0
                 if isinstance(src.operand,Constant):
                     explicate_prog.append(assignString(dest,inject_int_str('-' + str(handle_constant(src.operand)))))
                     
                 elif isinstance(src.operand,Name):
-                    local_if_count = 0
+                    if(isinstance(src.operand.type, Int)):
+                        operand = 'project_int(' + src.operand.id + ')'
+                        sub_call = '-' + operand
+                        statement = assignString(dest,inject_int_str(sub_call))
+                        append_list_with_prefix(explicate_prog,statement,local_if_count)
+                    elif(isinstance(src.operand.type, Bool)):
+                        operand = 'project_bool(' + src.operand.id + ')'
+                        sub_call = '-' + operand
+                        statement = assignString(dest,inject_int_str(sub_call))
+                        append_list_with_prefix(explicate_prog,statement,local_if_count)
+                        
                     
-                    value = "is_int(" + src.operand.id + ")"
-                    local_if_count = addif(explicate_prog,value,local_if_count)
+#                     local_if_count = 0
                     
-                    operand = 'project_int(' + src.operand.id + ')'
-                    sub_call = '-' + operand
-                    statement = assignString(dest,inject_int_str(sub_call))
-                    append_list_with_prefix(explicate_prog,statement,local_if_count)
+#                     value = "is_int(" + src.operand.id + ")"
+#                     local_if_count = addif(explicate_prog,value,local_if_count)
                     
-                    addelse(explicate_prog,local_if_count)
+#                     operand = 'project_int(' + src.operand.id + ')'
+#                     sub_call = '-' + operand
+#                     statement = assignString(dest,inject_int_str(sub_call))
+#                     append_list_with_prefix(explicate_prog,statement,local_if_count)
                     
-                    value = "is_bool(" + src.operand.id + ")"
-                    local_if_count = addif(explicate_prog,value,local_if_count)
+#                     addelse(explicate_prog,local_if_count)
                     
-                    operand = 'project_bool(' + src.operand.id + ')'
-                    sub_call = '-' + operand
-                    statement = assignString(dest,inject_int_str(sub_call))
-                    append_list_with_prefix(explicate_prog,statement,local_if_count)
+#                     value = "is_bool(" + src.operand.id + ")"
+#                     local_if_count = addif(explicate_prog,value,local_if_count)
                     
-                    local_if_count = endif(local_if_count)
+#                     operand = 'project_bool(' + src.operand.id + ')'
+#                     sub_call = '-' + operand
+#                     statement = assignString(dest,inject_int_str(sub_call))
+#                     append_list_with_prefix(explicate_prog,statement,local_if_count)
                     
-                    local_if_count = endif(local_if_count)
+#                     local_if_count = endif(local_if_count)
+                    
+#                     local_if_count = endif(local_if_count)
                     
 
             
