@@ -263,121 +263,84 @@ def tree_to_str(flattened_tree,prefix = 0):
 
             
             elif isinstance(src, Compare):
-                local_if_count = 0
+                
+                local_if_count=0
                 left_var = gen_new_var("explicate_")
                 explicate_prog.append(assignString(left_var,src.left))
-                
+
                 right_var = gen_new_var("explicate_")
                 explicate_prog.append(assignString(right_var,src.comparators[0]))
-                
+
                 if isinstance(src.ops[0],Is):
                     eq_call = left_var + '==' + right_var
                     statement = assignString(dest,inject_bool_str(eq_call))
                     append_list_with_prefix(explicate_prog,statement,local_if_count)
-                
+
                 elif isinstance(src.ops[0],IsNot):
                     eq_call = left_var + '!=' + right_var
                     statement = assignString(dest,inject_bool_str(eq_call))
                     append_list_with_prefix(explicate_prog,statement,local_if_count)
-                    
+
                 else:
                     local_if_count = 0
-                    
-                    value = "is_big(" + left_var + ")"
-                    local_if_count = addif(explicate_prog,value,local_if_count)
+                    if((isinstance(src.left.type, List)) or (isinstance(src.left.type, Dict))):
+                        if((isinstance(src.comparators[0].type, List)) or (isinstance(src.comparators[0].type, Dict))):
+                            left = 'project_big(' + left_var + ')'
+                            right = 'project_big(' + right_var + ')'
+                            if isinstance(src.ops[0],Eq):
+                                eq_call = 'equal('+ left + ',' + right + ')'
+                                statement = assignString(dest,inject_bool_str(eq_call))
+                                append_list_with_prefix(explicate_prog,statement,local_if_count)
 
-                    value = "is_big(" + right_var + ")"
-                    local_if_count = addif(explicate_prog,value,local_if_count)
+                            elif isinstance(src.ops[0],NotEq):
+                                eq_call = 'not_equal('+ left + ',' + right + ')'
+                                statement = assignString(dest,inject_bool_str(eq_call))
+                                append_list_with_prefix(explicate_prog,statement,local_if_count)
+                        else:
+                            if isinstance(src.ops[0],Eq):
+                                statement = assignString(dest,inject_bool_str(0))
+                                append_list_with_prefix(explicate_prog,statement,local_if_count)
 
-                    left = 'project_big(' + left_var + ')'
-                    right = 'project_big(' + right_var + ')'
-                    
-                    if isinstance(src.ops[0],Eq):
-                        eq_call = 'equal('+ left + ',' + right + ')'
-                        statement = assignString(dest,inject_bool_str(eq_call))
-                        append_list_with_prefix(explicate_prog,statement,local_if_count)
-                        
-                    elif isinstance(src.ops[0],NotEq):
-                        eq_call = 'not_equal('+ left + ',' + right + ')'
-                        statement = assignString(dest,inject_bool_str(eq_call))
-                        append_list_with_prefix(explicate_prog,statement,local_if_count)
-                    
-                    addelse(explicate_prog,local_if_count)
-                    
-                    if isinstance(src.ops[0],Eq):
-                        statement = assignString(dest,inject_bool_str(0))
-                        append_list_with_prefix(explicate_prog,statement,local_if_count)
-                        
-                    elif isinstance(src.ops[0],NotEq):
-                        statement = assignString(dest,inject_bool_str(1))
-                        append_list_with_prefix(explicate_prog,statement,local_if_count)
+                            elif isinstance(src.ops[0],NotEq):
+                                statement = assignString(dest,inject_bool_str(1))
+                                append_list_with_prefix(explicate_prog,statement,local_if_count)
+                    elif((isinstance(src.comparators[0].type, List)) or (isinstance(src.comparators[0].type, Dict))):
+                        if isinstance(src.ops[0],Eq):
+                            statement = assignString(dest,inject_bool_str(0))
+                            append_list_with_prefix(explicate_prog,statement,local_if_count)
 
-                    local_if_count = endif(local_if_count)
+                        elif isinstance(src.ops[0],NotEq):
+                            statement = assignString(dest,inject_bool_str(1))
+                            append_list_with_prefix(explicate_prog,statement,local_if_count)
+                    else:
+                        left = gen_new_var("explicate_")
+                        if(isinstance(src.left.type, Int)):
+                            left_assn = 'project_int(' + left_var + ')'
+                            statement = assignString(left,left_assn)
+                            append_list_with_prefix(explicate_prog,statement,local_if_count)
+                        else:
+                            left_assn = 'project_bool(' + left_var + ')'
+                            statement = assignString(left,left_assn)
+                            append_list_with_prefix(explicate_prog,statement,local_if_count)
+                        right = gen_new_var("explicate_")
+                        if(isinstance(src.comparators[0].type, Int)):  
+                            right_assn = 'project_int(' + right_var + ')'
+                            statement = assignString(right,right_assn)
+                            append_list_with_prefix(explicate_prog,statement,local_if_count)
+                        else:
+                            right_assn = 'project_bool(' + right_var + ')'
+                            statement = assignString(right,right_assn)
+                            append_list_with_prefix(explicate_prog,statement,local_if_count)
+                       
+                        if isinstance(src.ops[0],Eq):
+                            eq_call = left + '==' + right
+                            statement = assignString(dest,inject_bool_str(eq_call))
+                            append_list_with_prefix(explicate_prog,statement,local_if_count)
 
-                    addelse(explicate_prog,local_if_count)
-
-                    value = "is_big(" + right_var + ")"
-                    local_if_count = addif(explicate_prog,value,local_if_count)
-
-                    if isinstance(src.ops[0],Eq):
-                        statement = assignString(dest,inject_bool_str(0))
-                        append_list_with_prefix(explicate_prog,statement,local_if_count)
-                        
-                    elif isinstance(src.ops[0],NotEq):
-                        statement = assignString(dest,inject_bool_str(1))
-                        append_list_with_prefix(explicate_prog,statement,local_if_count)
-
-                    addelse(explicate_prog,local_if_count)
-
-                    value = "is_int(" + left_var + ")"
-                    local_if_count = addif(explicate_prog,value,local_if_count)
-
-                    left = gen_new_var("explicate_")
-                    left_assn = 'project_int(' + left_var + ')'
-                    statement = assignString(left,left_assn)
-                    append_list_with_prefix(explicate_prog,statement,local_if_count)
-
-                    addelse(explicate_prog,local_if_count)
-
-                    left_assn = 'project_bool(' + left_var + ')'
-                    statement = assignString(left,left_assn)
-                    append_list_with_prefix(explicate_prog,statement,local_if_count)
-
-                    local_if_count = endif(local_if_count)
-
-                    value = "is_int(" + right_var + ")"
-                    local_if_count = addif(explicate_prog,value,local_if_count)
-
-                    right = gen_new_var("explicate_")
-                    right_assn = 'project_int(' + right_var + ')'
-                    statement = assignString(right,right_assn)
-                    append_list_with_prefix(explicate_prog,statement,local_if_count)
-
-                    addelse(explicate_prog,local_if_count)
-
-                    right_assn = 'project_bool(' + right_var + ')'
-                    statement = assignString(right,right_assn)
-                    append_list_with_prefix(explicate_prog,statement,local_if_count)
-
-                    local_if_count = endif(local_if_count)
-                    
-                    
-                    if isinstance(src.ops[0],Eq):
-                        eq_call = left + '==' + right
-                        statement = assignString(dest,inject_bool_str(eq_call))
-                        append_list_with_prefix(explicate_prog,statement,local_if_count)
-                        
-                    elif isinstance(src.ops[0],NotEq):
-                        eq_call = left + '!=' + right
-                        statement = assignString(dest,inject_bool_str(eq_call))
-                        append_list_with_prefix(explicate_prog,statement,local_if_count)
-                        
-
-                    local_if_count = endif(local_if_count)
-
-                    local_if_count = endif(local_if_count)
-                    
-                    local_if_count = endif(local_if_count)
+                        elif isinstance(src.ops[0],NotEq):
+                            eq_call = left + '!=' + right
+                            statement = assignString(dest,inject_bool_str(eq_call))
+                            append_list_with_prefix(explicate_prog,statement,local_if_count)
                 
             elif isinstance(src,Call):
                 if src.func.id == 'eval':
