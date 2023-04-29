@@ -40,9 +40,6 @@ def compile(src_file):
     print("------------------Tree after removing AnnAssign--------------")
     print(ast.dump(tree,indent=4))
     
-    # print('--------------Code after removing AnnAssign-------')
-    # print(ast.unparse(flatten_tree))
-    
     flatten_tree = flatten.main(tree)
     
     print('--------------Code after flattening-------')
