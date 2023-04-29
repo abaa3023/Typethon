@@ -58,12 +58,20 @@ def box_value(ASTNode):
     elif isinstance(ASTNode,Dict):
         return inject_big_str('create_dict()')
             
+    elif isinstance(ASTNode,Call):
+        argsList = [box_value(x) for x in ASTNode.args]
+        value = ASTNode.func.id + '(' + ",".join(argsList) + ')'
+        if ASTNode.func.id == 'create_closure':
+            return inject_big_str(value)
+        else:
+            return value
+            
     elif isinstance(ASTNode,str):
         return ASTNode
 
 def assignString(dest,value):
     if isinstance(dest,Name):
-        print(value)
+        # print(value)
         return dest.id + ' = ' + box_value(value)
     
     elif isinstance(dest,Subscript):
@@ -351,6 +359,8 @@ def tree_to_str(flattened_tree,prefix = 0):
                     arg = gen_new_var("explicate_")
                     explicate_prog.append(assignString(arg,src.args[0]))
                     
+                    # print("src.args[0].type = ", src.args[0].type)
+                    
                     value = "is_bool(" + arg + ")"
                     local_if_count = addif(explicate_prog,value,local_if_count)
                     
@@ -360,6 +370,8 @@ def tree_to_str(flattened_tree,prefix = 0):
                     local_if_count = endif(local_if_count)
                     
                 else:
+                    # print("dest under Call = ", dest)
+                    # print("src under Call = ", src)
                     explicate_prog.append(assignString(dest,src))
                 
             elif isinstance(src,List):
