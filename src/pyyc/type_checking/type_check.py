@@ -1,15 +1,17 @@
 import ast
-from .inference_rules import InferenceRules
+from .inference_rules_strict import InferenceRulesStrict
 from .python_types import Int, Bool, List, Dict
 
 
 class TypeCheck(ast.NodeVisitor):
+    """
+    Strictly perform type checking. Everything needs to be typed
+    """
     
     def __init__(self):
         super(TypeCheck, self).__init__()
         self.variable_types = {}
         self.this_type = None
-    
     
     def get_annotation_type(self, node):
         # return the correct type
@@ -74,7 +76,7 @@ class TypeCheck(ast.NodeVisitor):
         self.generic_visit(node) #visit all the underlying elements and set their types
         
         if isinstance(node.op, ast.Add):
-            node.type = InferenceRules.BinAdd(node.left.type, node.right.type)
+            node.type = InferenceRulesStrict.BinAdd(node.left.type, node.right.type)
         else:
             raise Exception("Unsopported binop")
             
@@ -107,9 +109,9 @@ class TypeCheck(ast.NodeVisitor):
         self.visit(node.operand)
         
         if(isinstance(node.op, ast.USub)):
-            node.type = InferenceRules.USub(node.operand.type)
+            node.type = InferenceRulesStrict.USub(node.operand.type)
         elif(isinstance(node.op, ast.Not)):
-            node.type = InferenceRules.NotOp(node.operand.type)
+            node.type = InferenceRulesStrict.NotOp(node.operand.type)
         else:
             raise Exception("unkown unary op")
     
@@ -132,9 +134,9 @@ class TypeCheck(ast.NodeVisitor):
         self.generic_visit(node) # set the types of the elements underneath
         
         if(isinstance(node.op, ast.Or)):
-            node.type = InferenceRules.BoolOr(*[v.type for v in node.values])
+            node.type = InferenceRulesStrict.BoolOr(*[v.type for v in node.values])
         elif (isinstance(node.op, ast.And)):
-            node.type = InferenceRules.BoolAnd(*[v.type for v in node.values])
+            node.type = InferenceRulesStrict.BoolAnd(*[v.type for v in node.values])
         else:
             raise Exception("unkown boolOp")
             
@@ -148,11 +150,11 @@ class TypeCheck(ast.NodeVisitor):
         right_type = node.comparators[0].type
         
         if(isinstance(op, ast.Is)):
-            node.type = InferenceRules.IsExpr(left_type, right_type)
+            node.type = InferenceRulesStrict.IsExpr(left_type, right_type)
         elif(isinstance(op, ast.Eq)):
-            node.type = InferenceRules.Equals(left_type, right_type)
+            node.type = InferenceRulesStrict.Equals(left_type, right_type)
         elif(isinstance(op, ast.NotEq)):
-            node.type = InferenceRules.NotEquals(left_type, right_type)
+            node.type = InferenceRulesStrict.NotEquals(left_type, right_type)
         else:
             raise Exception(f"Unknown comparison operator - {op}")
     
@@ -196,7 +198,7 @@ class TypeCheck(ast.NodeVisitor):
     def visit_Subscript(self, node):
         self.generic_visit(node)
         
-        node.type = InferenceRules.Subscript(node.value.type, node.slice.type)
+        node.type = InferenceRulesStrict.Subscript(node.value.type, node.slice.type)
             
 
             

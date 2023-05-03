@@ -3,7 +3,7 @@ import ast
 from .python_types import List, Dict, Int, Bool
 
 
-class InferenceRules:
+class InferenceRulesStrict:
     """ 
     Rules that determine the resulting type based on the expression
     """
