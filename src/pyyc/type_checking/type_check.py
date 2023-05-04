@@ -6,6 +6,7 @@ from .python_types import Int, Bool, List, Dict
 class TypeCheck(ast.NodeVisitor):
     
     def __init__(self):
+        # print("TypeCheck initialised")
         super(TypeCheck, self).__init__()
         self.variable_types = {}
         self.this_type = None
@@ -50,15 +51,18 @@ class TypeCheck(ast.NodeVisitor):
     def visit_AnnAssign(self, node):
         # print("visiting AnnAssign")
         old_this_type = self.this_type
+        # print(f"{old_this_type = }")
         self.this_type = self.get_annotation_type(node.annotation)
         # print(f"{self.this_type = }")
         self.visit(node.target)
         self.this_type = old_this_type
+        # print(f"{self.this_type = }")
         
-        self.visit(node.value)
+        if(node.value is not None):
+            self.visit(node.value)
         
-        if(node.target.type != node.value.type):
-            raise TypeError(f"assigning {node.value.type} to {node.target.type}.")
+            if(node.target.type != node.value.type):
+                raise TypeError(f"assigning {node.value.type} to {node.target.type}.")
         node.type = node.target.type
     
     
@@ -93,7 +97,7 @@ class TypeCheck(ast.NodeVisitor):
             node.type = this_type
         else:
             raise TypeError(f"No type found for variable {node.id}")
-            
+
     def visit_Constant(self, node):
         # TODO: Change below.
         if(type(node.value) ==int):
@@ -112,6 +116,10 @@ class TypeCheck(ast.NodeVisitor):
             node.type = InferenceRules.NotOp(node.operand.type)
         else:
             raise Exception("unkown unary op")
+        # if(isinstance(node.operand, ast.Constant)):
+        #     print("node.operand = ", node.operand.value)
+        # elif(isinstance(node.operand, ast.Name)):
+        #     print("node.operand = ", node.operand.id)
     
     def visit_Call(self, node):
         # self.visit(node.func)
@@ -125,6 +133,7 @@ class TypeCheck(ast.NodeVisitor):
         
         
         if(len(node.args) >0):
+            # print("node.args[0] = ", node.args[0])
             self.visit(node.args[0])
             
     

@@ -1,12 +1,12 @@
-x = 1
-y = 2
-z = 0
+x:int = 1
+y:int = 2
+z:int = 0
 
 while int(x != 10):
     while int(y != 0):
-        temp = x
-        temp2 = y
-        product = 0
+        temp:int = x
+        temp2:int = y
+        product:int = 0
         
         while int(temp != 0):
             product = product + temp2

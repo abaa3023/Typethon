@@ -1,16 +1,16 @@
-x = 5
-y = 10
-z = 0
+x:int = 5
+y:int = 10
+z:int = 0
 
 while int(x != 0):
     x = x + -1
-    y_copy = y
-    inner_loop_done = 0
+    y_copy:int = y
+    inner_loop_done:int = 0
     
     while int(y_copy != 0) and int(not inner_loop_done):
         y_copy = y_copy + -1
         if int(y_copy == 4):
-            z = z + 1
+            z:int = z + 1
             if int(x == 3):
                 z = z + 1
                 y = y + -1

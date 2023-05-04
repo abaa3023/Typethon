@@ -182,7 +182,11 @@ def checkComplexityAndRecurse(ASTnode,cur_body):
 def ReduceAndRename(operand,cur_body):
     if checkComplexityAndRecurse(operand, cur_body):
         new_var_name = add_new_node(operand, cur_body)
-        return new_name_node(new_var_name,Load())
+        # new_var_name.type = operand.type
+        name_node = new_name_node(new_var_name,Load())
+        if(getattr(operand, 'type', None)):
+            name_node.type = operand.type
+        return name_node
     else:
         return operand
 
@@ -391,7 +395,7 @@ def flatten(n, cur_body):
 
 def main(tree):
     
-    print(ast.dump(tree,annotate_fields=True, include_attributes=False,indent=5))
+    # print(ast.dump(tree,annotate_fields=True, include_attributes=False,indent=5))
     newbody = [] # Body of the new flattened tree
     # Recurse to flatten the tree
     flat_tree = fix_missing_locations(flatten(tree,newbody))

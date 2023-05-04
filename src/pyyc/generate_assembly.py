@@ -8,6 +8,7 @@ from basicblock_class import *
 
 library_function_calls = {"print":"print_any",
                           "eval":"eval_input_pyobj",
+                          "input":"input_pyobj",
                           "is_int":"is_int",
                           "is_bool":"is_bool",
                           "is_big":"is_big",
