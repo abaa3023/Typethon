@@ -21,7 +21,7 @@ reserved = {    # dictionary defines keywords and associated token types
 #TODO - Need INDENT AND DEDENT
 #tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'COLON', 'IF', 'ELSE', 'WHILE', 'INT_WORD', 'NOT', 'AND', 'OR', 'EQUAL_EQUAL', 'NOT_EQUAL', 'INDENT', 'DEDENT'] + list(reserved.values()) #include reserved token types with other tokens
 
-tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'EQUAL_EQUAL','NOT_EQUAL', 'COLON', 'INDENT'] + list(reserved.values()) #include reserved token types with other tokens
+tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'EQUAL_EQUAL','NOT_EQUAL', 'COLON', 'INDENT', 'LIST'] + list(reserved.values()) #include reserved token types with other tokens
 
 #p0
 t_PRINT = r'print'
