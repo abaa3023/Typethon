@@ -1,4 +1,4 @@
 # print(input() + input()) # this should be an error?
-x:bool=bool(input())
-y:bool=bool(input())
+x:int=int(input())
+y:int=int(input())
 print(x+y)

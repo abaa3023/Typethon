@@ -1,4 +1,4 @@
-x:int = 1 + eval(input())
+x:int = 1 + int(input())
 y:int = x + x
 z:int = y + y
 w:int = z + z
