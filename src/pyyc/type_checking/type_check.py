@@ -75,7 +75,8 @@ class TypeCheck(ast.NodeVisitor):
         self.visit(node.targets[0])
         self.visit(node.value)
         
-        node.targets[0].type = self.type_dict[node.targets[0].id]
+        if(not isinstance(node.targets[0], ast.Subscript)):
+            node.targets[0].type = self.type_dict[node.targets[0].id]
         
         if(node.targets[0].type != node.value.type):
             raise TypeError(f"assigning {node.value.type} to {node.targets[0].type}.")
