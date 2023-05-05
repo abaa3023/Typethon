@@ -242,7 +242,10 @@ def tree_to_str(flattened_tree,prefix = 0):
             elif isinstance(src,UnaryOp) and isinstance(src.op,USub):
                 local_if_count = 0
                 if isinstance(src.operand,Constant):
-                    explicate_prog.append(assignString(dest,inject_int_str('-' + str(handle_constant(src.operand)))))
+                    if(remove_boxing):
+                        explicate_prog.append(assignString(dest,'-' + str(handle_constant(src.operand))))
+                    else:
+                        explicate_prog.append(assignString(dest,inject_int_str('-' + str(handle_constant(src.operand)))))
                     
                 elif isinstance(src.operand,Name):
                     if(isinstance(src.operand.type, Int)):
@@ -451,6 +454,8 @@ def tree_to_str(flattened_tree,prefix = 0):
                 if node.value.func.id == 'print':
                     if(isinstance(node.value.args[0].type, Int)):
                         explicate_prog.append('print_int_nl(' + box_value(node.value.args[0]) + ')')
+                    elif (isinstance(node.value.args[0].type, Bool)):
+                        explicate_prog.append('print_bool_nl(' + box_value(node.value.args[0]) + ')')                        
                     else:
                         explicate_prog.append('print(' + box_value(node.value.args[0]) + ')')
                     
