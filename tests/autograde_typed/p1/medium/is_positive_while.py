@@ -1,5 +1,5 @@
-x = 12
-positivity_counter = 0
+x:int = 12
+positivity_counter:int = 0
 while (x != 0):
     x = x + -1
     positivity_counter = positivity_counter + 1

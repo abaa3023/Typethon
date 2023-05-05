@@ -1,3 +1,3 @@
-x = [1, 2]
-y = [3, 4]
+x:list[int] = [1, 2]
+y:list[int] = [3, 4]
 print(x + y)
