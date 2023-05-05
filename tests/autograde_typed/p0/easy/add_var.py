@@ -1,3 +1,3 @@
 x:int = 1
-y:int = 2
+y:bool = False
 print(x + y)
