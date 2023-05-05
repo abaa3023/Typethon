@@ -246,9 +246,15 @@ def tree_to_str(flattened_tree,prefix = 0):
                     
                 elif isinstance(src.operand,Name):
                     if(isinstance(src.operand.type, Int)):
-                        operand = 'project_int(' + src.operand.id + ')'
+                        if(remove_boxing):
+                            operand = src.operand.id
+                        else:
+                            operand = 'project_int(' + src.operand.id + ')'
                         sub_call = '-' + operand
-                        statement = assignString(dest,inject_int_str(sub_call))
+                        if(remove_boxing):
+                            statement = assignString(dest,sub_call)
+                        else:
+                            statement = assignString(dest,inject_int_str(sub_call))
                         append_list_with_prefix(explicate_prog,statement,local_if_count)
                     elif(isinstance(src.operand.type, Bool)):
                         operand = 'project_bool(' + src.operand.id + ')'
