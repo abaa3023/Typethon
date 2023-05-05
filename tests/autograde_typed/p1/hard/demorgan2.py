@@ -1,4 +1,4 @@
-a = False
-b = True
-x = not (a and b) == (not a) or (not b)
+a:bool = False
+b:bool = True
+x:bool = not (a and b) == (not a) or (not b)
 print(x)
