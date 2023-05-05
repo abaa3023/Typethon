@@ -1,4 +1,4 @@
-x = eval(input())
+x:int = int(input())
 while (int(x != 23)):
     print(42)
     x = x + 1

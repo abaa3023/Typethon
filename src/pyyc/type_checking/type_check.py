@@ -10,6 +10,7 @@ class TypeCheck(ast.NodeVisitor):
         super(TypeCheck, self).__init__()
         self.variable_types = {}
         self.this_type = None
+        self.type_dict={}
     
     
     def get_annotation_type(self, node):
@@ -66,12 +67,15 @@ class TypeCheck(ast.NodeVisitor):
             if(node.target.type != node.value.type):
                 raise TypeError(f"assigning {node.value.type} to {node.target.type}.")
         node.type = node.target.type
+        self.type_dict[node.target.id]=node.type
     
     
     def visit_Assign(self, node):
+        
         self.visit(node.targets[0])
         self.visit(node.value)
         
+        node.targets[0].type = self.type_dict[node.targets[0].id]
         
         if(node.targets[0].type != node.value.type):
             raise TypeError(f"assigning {node.value.type} to {node.targets[0].type}.")
@@ -127,7 +131,7 @@ class TypeCheck(ast.NodeVisitor):
         # self.visit(node.func)
         # print("inside call")
         # self.generic_visit(node)
-        if(isinstance(node.parent, ast.AnnAssign)):
+        if(isinstance(node.parent, ast.AnnAssign) or isinstance(node.parent, ast.UnaryOp) or isinstance(node.parent, ast.Assign) or isinstance(node.parent, ast.BinOp)):
             if(node.func.id == 'input'):
                 node.type = node.parent.target.type
             elif(node.func.id == 'int'):
