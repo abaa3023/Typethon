@@ -1,6 +1,7 @@
 #!/usr/bin/env python3.10
 import sys
 import ast
+import addparent
 import flatten
 import explicate
 import x86_ir
@@ -25,6 +26,7 @@ def compile(src_file):
     print(prog)
     
     tree = ast.parse(prog)
+    addparent.add_Parent(tree)
     # tree = createASTFromMyParser(src_file)
     
     print("------------------Tree of original code--------------")
