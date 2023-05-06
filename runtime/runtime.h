@@ -118,30 +118,34 @@ big_pyobj* project_big(pyobj val);
 
 int is_true(pyobj v); // TODO: Convert to unboxed versions
 int is_true_int_bool(int val);
-void print_any(pyobj p);
+void print_any(pyobj p); // TODO: Convert to print_list, print_dict
+void print_list_nl(list * l, int type_encoding);
+// void print_dict(
+
 pyobj input_int();
 pyobj input_pyobj();
 pyobj eval_pyobj(pyobj x);
 pyobj eval_input_pyobj();
 
-big_pyobj* create_list(pyobj length); // TODO: Convert to unboxed as below
-// list* create_list(int length); 
+// big_pyobj* create_list(pyobj length); // TODO: Convert to unboxed as below
+list* create_list(int length); 
+
 big_pyobj* create_dict(); // TODO: Convert to unboxed as below
 // dict create_list(int length); 
 // QUESTION: Should it. be dict or dict*
 pyobj set_subscript(pyobj c, pyobj key, pyobj val);// TODO: Convert to unboxed for dict and list
-// pyobj set_subscript_list(list c, int key, void * val); 
+void set_subscript_list(list *c, int key, pyobj val); 
 // QUESTION: What's the type of the val
 
 // pyobj set_subscript_dict(dict c, void * key, void * val); 
 
 pyobj get_subscript(pyobj c, pyobj key); // TODO: Convert to unboxed for dict and list
-// void * get_subscript_list(list *c, int key);
+pyobj get_subscript_list(list *c, int key);
 // void * get_subscript_list(list *c, int key);
 
 
 big_pyobj* add(big_pyobj* a, big_pyobj* b); // TODO: Convert to list_add 
-// list* add_list(list* a, list* b);
+list* my_list_add(list *a, list *b);
 // dict add is an error.
 int equal(big_pyobj* a, big_pyobj* b); // TODO: Convert to list_equal and dict_equal
 // int list_equal(list *a, list *b);

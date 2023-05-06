@@ -31,7 +31,11 @@ library_function_calls = {"print":"print_any",
                           "int":"eval",
                           "print_int_nl": "print_int_nl",
                           "print_bool_nl": "print_bool_nl",
-                          "is_true_int_bool": "is_true_int_bool"
+                          "is_true_int_bool": "is_true_int_bool",
+                          "set_subscript_list":"set_subscript_list",
+                          "print_list_nl":"print_list_nl",
+                          "get_subscript_list":"get_subscript_list",
+                          "my_list_add":"my_list_add"
                          }
 
 def register_prefix(reg):

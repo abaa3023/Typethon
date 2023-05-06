@@ -131,6 +131,7 @@ static void print_int(int x) {
 void print_int_nl(int x) {
   printf("%d\n", x);
 }
+
 static void print_bool(int b) {
   if (b)
     printf ("True");
@@ -237,16 +238,24 @@ static big_pyobj* list_to_big(list l) {
   return v;
 }
 
-big_pyobj* create_list(pyobj length) {
-  list l;
-  l.len = project_int(length); /* this should be checked */
-  l.data = (pyobj*)malloc(sizeof(pyobj) * l.len);
-  return list_to_big(l);
+// big_pyobj* create_list(pyobj length) {
+//   list l;
+//   l.len = project_int(length); /* this should be checked */
+//   l.data = (pyobj*)malloc(sizeof(pyobj) * l.len);
+//   return list_to_big(l);
+// }
+
+list * create_list(int length){
+    list * l = (list *) malloc(sizeof(list));
+    l->data = (pyobj *) malloc(sizeof(pyobj) * length);
+    l-> len = length;
+    return l;
 }
 
-static pyobj make_list(pyobj length) {
-  return inject_big(create_list(length));
-}
+
+// static pyobj make_list(pyobj length) {
+//   return inject_big(create_list(length));
+// }
 
 
 static char is_in_list(list ls, pyobj b)
@@ -620,6 +629,46 @@ static void print_float(double in)
     printf( ( (*p)  ? "%s" : "%s.0" ), outstr);
 }
 
+
+static void print_list_noline(list *l, int of_what_encoding){
+    int type1 = of_what_encoding % 10;
+    printf("[");
+    if(type1 == 1){
+        // print ints.
+        for(int i =0; i< l->len;i++){
+            print_int(l->data[i]); // prints without nl
+            if(i < l->len -1)
+                printf(", ");
+        }
+    }
+    else if(type1 == 2){
+        //print bools
+        for(int i =0; i< l->len;i++){
+            print_bool(l->data[i]); // prints without nl
+            if(i < l->len -1)
+                printf(", ");
+        }
+    }
+    else if(type1 == 3){
+        int inner_list_type = of_what_encoding / 10; 
+        for(int i =0; i< l->len;i++){
+            print_list_noline(l->data[i], inner_list_type);
+            if(i < l->len -1)
+                printf(", ");
+        }
+    }
+    else{
+        printf("unkown type");
+        exit(-1);
+    }
+    
+    printf("]");
+}
+void print_list_nl(list * l, int of_what_encoding){
+    print_list_noline(l, of_what_encoding);
+    printf("\n");
+}
+
 static pyobj *current_list;
 static void print_list(pyobj ls)
 {
@@ -663,6 +712,20 @@ static list list_add(list a, list b)
     c.data[i] = a.data[i];
   for (i = 0; i != b.len; ++i)
     c.data[a.len + i] = b.data[i];
+  return c;
+}
+
+list* my_list_add(list *a, list *b)
+{
+  list *c;
+  c = (list*) malloc(sizeof(list));
+  c->len = a->len + b->len;
+  c->data = (pyobj*)malloc(sizeof(pyobj) * c->len); 
+  int i;
+  for (i = 0; i != a->len; ++i)
+    c->data[i] = a->data[i];
+  for (i = 0; i != b->len; ++i)
+    c->data[a->len + i] = b->data[i];
   return c;
 }
 
@@ -737,6 +800,34 @@ pyobj set_subscript(pyobj c, pyobj key, pyobj val)
     assert(0);
   }
   assert(0);
+}
+
+void set_subscript_list(list *c, int key, pyobj val)
+{
+    int i = key;
+    if (0 <= i && i < c->len)
+        c->data[i] = val;
+    else if (0 <= c->len + i && c->len + i < c->len)
+      c->data[c->len + i] = val;
+    else {
+      printf("ERROR: list_nth index larger than list");
+      exit(1);
+    }
+
+
+}
+
+pyobj get_subscript_list(list *c, int key){
+    int i = key;
+    if (0 <= i && i < c->len)
+        return c->data[i];
+    else if (0 <= c->len + i && c->len + i < c->len)
+      return c->data[c->len + i];
+    else {
+      printf("ERROR: list_nth index larger than list");
+      exit(1);
+    }
+    
 }
 
 static pyobj subscript(big_pyobj* c, pyobj key)

@@ -29,6 +29,9 @@ def getVal(astNode):
 def set_subscript_str(dest,key,val):
     return "set_subscript(" + dest + ", " + box_value(key) + ", " + box_value(val) + ")"
 
+def set_subscript_list_str(dest,key,val):
+    return "set_subscript_list(" + dest + ", " + box_value(key) + ", " + box_value(val) + ")"
+
 def inject_int_str(val):
     return 'inject_int(' + str(val) + ')'
 
@@ -60,9 +63,14 @@ def box_value(ASTNode):
         return ASTNode.id
     
     elif isinstance(ASTNode,Subscript):
-        return 'get_subscript(' + ASTNode.value.id + ", " + box_value(ASTNode.slice) + ')'
+        fn = 'get_subscript'
+        if(isinstance(ASTNode.value.type, List)):
+            fn = 'get_subscript_list'
+        return fn + '(' + ASTNode.value.id + ", " + box_value(ASTNode.slice) + ')'
     
     elif isinstance(ASTNode,ast.List):
+        if(remove_boxing):
+            return 'create_list(' + box_value(ASTNode.listlen) + ')'
         return inject_big_str('create_list(' + box_value(ASTNode.listlen) + ')')
     
     elif isinstance(ASTNode,ast.Dict):
@@ -85,6 +93,8 @@ def assignString(dest,value):
         return dest.id + ' = ' + box_value(value)
     
     elif isinstance(dest,Subscript):
+        if(isinstance(dest.value.type, List)):
+            return set_subscript_list_str(dest.value.id, dest.slice, value)
         return set_subscript_str(dest.value.id, dest.slice, value)
     
     elif isinstance(dest,str):
@@ -124,10 +134,23 @@ def tree_to_str(flattened_tree,prefix = 0):
                 
                 if((isinstance(src.left.type, List)) or (isinstance(src.left.type, Dict))):
                     if((isinstance(src.right.type, List)) or (isinstance(src.right.type, Dict))):
-                        left = 'project_big(' + left_var + ')'
-                        right = 'project_big(' + right_var + ')'
-                        add_call = 'add('+ left + ',' + right + ')'
-                        statement = assignString(dest,inject_big_str(add_call))
+                        if(remove_boxing):
+                            left = left_var
+                            right = right_var
+                            if(isinstance(src.right.type, List)):
+                                fn = 'my_list_add'
+                            else:
+                                raise Exception("Dictionaries can;t be addded")
+                            add_call = fn + '('+ left + ',' + right + ')'
+                        else:
+                            left = 'project_big(' + left_var + ')'
+                            right = 'project_big(' + right_var + ')'
+                            add_call = 'add('+ left + ',' + right + ')'
+                        
+                        if(remove_boxing):
+                            statement = assignString(dest,add_call)
+                        else:
+                            statement = assignString(dest,inject_big_str(add_call))
                         append_list_with_prefix(explicate_prog,statement,local_if_count)
                 else:
                     if((isinstance(src.right.type, List)) or (isinstance(src.right.type, Dict))):
@@ -398,7 +421,7 @@ def tree_to_str(flattened_tree,prefix = 0):
                     # arg = gen_new_var("explicate_")
                     
                     
-                    print("src.args[0].type = ", src.args[0].type)
+                    # print("src.args[0].type = ", src.args[0].type)
                     if(isinstance(src.args[0].type, Int) or
                       isinstance(src.args[0].type, Bool)):
                         explicate_prog.append(assignString(dest,src.args[0]))
@@ -432,7 +455,7 @@ def tree_to_str(flattened_tree,prefix = 0):
                     
                     print("len(src.elts) = ", len(src.elts))
                     for i in range(len(src.elts)):
-                        explicate_prog.append(set_subscript_str(temp_var,inject_int_str(i),src.elts[i]))
+                        explicate_prog.append(set_subscript_list_str(temp_var,str(i),src.elts[i]))
                     
             elif isinstance(src,ast.Dict):
                 print("Dict enter")
@@ -457,6 +480,7 @@ def tree_to_str(flattened_tree,prefix = 0):
                 explicate_prog.append("if("+str(getVal(node.test))+"):")
             
             elif isinstance(node.test,Name):
+                print(f"{node.test.id = }")
                 if(isinstance(node.test.type, Int) or isinstance(node.test.type, Bool)):
                     value = "is_true_int_bool(" + node.test.id + ")"
                 else:
@@ -489,7 +513,12 @@ def tree_to_str(flattened_tree,prefix = 0):
                     if(isinstance(node.value.args[0].type, Int)):
                         explicate_prog.append('print_int_nl(' + box_value(node.value.args[0]) + ')')
                     elif (isinstance(node.value.args[0].type, Bool)):
-                        explicate_prog.append('print_bool_nl(' + box_value(node.value.args[0]) + ')')                        
+                        explicate_prog.append('print_bool_nl(' + box_value(node.value.args[0]) + ')')
+                    elif(isinstance(node.value.args[0].type, List)):
+                        coder = Encode()
+                        coder.do(node.value.args[0].type.of_what)
+                        type_str = coder.code_str()
+                        explicate_prog.append('print_list_nl(' + box_value(node.value.args[0]) +',' + type_str+ ')')
                     else:
                         explicate_prog.append('print(' + box_value(node.value.args[0]) + ')')
                     
