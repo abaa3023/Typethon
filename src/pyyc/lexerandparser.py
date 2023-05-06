@@ -21,7 +21,7 @@ reserved = {    # dictionary defines keywords and associated token types
 #TODO - Need INDENT AND DEDENT
 #tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'COLON', 'IF', 'ELSE', 'WHILE', 'INT_WORD', 'NOT', 'AND', 'OR', 'EQUAL_EQUAL', 'NOT_EQUAL', 'INDENT', 'DEDENT'] + list(reserved.values()) #include reserved token types with other tokens
 
-tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'EQUAL_EQUAL','NOT_EQUAL', 'COLON', 'INDENT', 'LIST'] + list(reserved.values()) #include reserved token types with other tokens
+tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'EQUAL_EQUAL','NOT_EQUAL', 'COLON', 'INDENT', 'LIST', 'LBRACK', 'RBRACK'] + list(reserved.values()) #include reserved token types with other tokens
 
 #p0
 t_PRINT = r'print'
@@ -44,7 +44,11 @@ t_WHILE = r'while'
 t_COLON = r'\:'
 t_IF = r'if'
 t_ELSE = r'else'
+#t_INDENT = r'\s+'
 #t_INDENT = r'\t'
+t_INDENT = r'[\t ][\t ]+'
+t_LBRACK = r'{'
+t_RBRACK = r'}'
 
 #TODO
 #t_COLON = r'\:'
@@ -75,26 +79,33 @@ def t_INT(t):
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += t.value.count('\n')
+# def t_NEWLINE(t):
+#     r'\n[\t ]*'
+#     t.lexer.lineno += 1
+#     t.value = t.lexer.lexdata[t.lexer.lexpos:]
+#     t.value = t.value.lstrip('\n')
+#     t.value = len(t.value.expandtabs(4))
+#     return t
     
 def t_comment(t):
     r'\#.*'
     pass
 
 # Define the INDENT token rule
-def t_INDENT(t):
-    r'\n[ \t]*'
-    # Get the whitespace at the beginning of the line
-    whitespace = t.value[len('\n'):]
+# def t_INDENT(t):
+#     r'\n[ \t]*'
+#     # Get the whitespace at the beginning of the line
+#     whitespace = t.value[len('\n'):]
     
-    # If the whitespace is longer than the previous whitespace,
-    # return an INDENT token with the length of the new whitespace
-    if len(whitespace) > lexer.last_whitespace:
-        t.value = len(whitespace)
-        lexer.last_whitespace = len(whitespace)
-        return t
+#     # If the whitespace is longer than the previous whitespace,
+#     # return an INDENT token with the length of the new whitespace
+#     if len(whitespace) > lexer.last_whitespace:
+#         t.value = len(whitespace)
+#         lexer.last_whitespace = len(whitespace)
+#         return t
     
 # Define a rule to ignore whitespace
-t_ignore = ' \t'
+#t_ignore = ' \t'
 
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
@@ -180,13 +191,33 @@ def p_if_else_expression(t):
 def p_if_expression(t):
     'expression : IF expression COLON suites'
     t[0] = If(test=t[2], body=t[4], orelse=[])
+
+# def p_stmts(p):
+#     '''stmts : stmts stmt'''
+#     t[0] = t[1] + [t[2]]
+
+# def p_stmts_stmt(p):
+#     '''stmts : expression '''
+#     t[0] = [t[1]]
+
+# def p_stmt_if(p):
+#     '''expression : IF LPAREN expression RPAREN COLON expression'''
+#     t[0] = If(test=t[3], body=t[6], orelse=[])
+
+# def p_stmt_ifelse(p):
+#     '''expression : IF LPAREN expression RPAREN COLON stmts ELSE COLON stmts'''
+#     t[0] = If(test=t[3], body=t[6], orelse=t[10])
+
+# def p_stmt_while(p):
+#     '''expression : WHILE LPAREN expression RPAREN COLON stmts'''
+#     t[0] = While(test=t[3], body=t[6], orelse=[])
     
-def p_suites_is_statement(t):
-    'statement : suites'
-    t[0] = t[1]
+# def p_suites_is_statement(t):
+#     'statement : suites'
+#     t[0] = t[1]
 
 # def p_suites_is_expression(t):
-#     'expression : suites'
+#     'expression : suite'
 #     t[0] = t[1]
     
 def p_suite_indent(t):

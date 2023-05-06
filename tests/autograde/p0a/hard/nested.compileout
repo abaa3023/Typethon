@@ -1,13 +1,92 @@
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
 Syntax error at 'int'
+Illegal character ' '
+Illegal character ' '
 Syntax error at ':'
-Syntax error at 'int'
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Syntax error at '    '
+Illegal character ' '
+Illegal character ' '
+Syntax error at '    '
+Illegal character ' '
+Illegal character ' '
+Syntax error at '    '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
 Syntax error at ':'
-Syntax error at 'z'
-Syntax error at 'z'
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Syntax error at '        '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
 Syntax error at 'else'
-Syntax error at 'z'
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
 Syntax error at 'else'
-Syntax error at 'y'
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Syntax error at '                '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Syntax error at '                '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Syntax error at '                '
+Illegal character ' '
+Illegal character ' '
+Syntax error at '    '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -216,13 +295,26 @@ Module(
 ------------------Tree with my parser--------------
 Module(
     body=[
-        Name(id='y_copy', ctx=Load()),
-        Expr(
-            value=Call(
-                func=Name(id='print', ctx=Load()),
+        If(
+            test=Call(
+                func=Name(id='int', ctx=Load()),
                 args=[
-                    Name(id='z', ctx=Load())],
-                keywords=[]))],
+                    UnaryOp(
+                        op=Not(),
+                        operand=Name(id='inner_loop_done', ctx=Load()))],
+                keywords=[]),
+            body=[
+                Assign(
+                    targets=[
+                        Name(id='y', ctx=Store())],
+                    value=Name(id='y_copy', ctx=Load())),
+                Expr(
+                    value=Call(
+                        func=Name(id='print', ctx=Load()),
+                        args=[
+                            Name(id='z', ctx=Load())],
+                        keywords=[]))],
+            orelse=[])],
     type_ignores=[])
 --------------Original code----------------
 x = 5
@@ -260,37 +352,161 @@ print(z)
 
 Module(
      body=[
-          Name(id='y_copy', ctx=Load()),
-          Expr(
-               value=Call(
-                    func=Name(id='print', ctx=Load()),
+          If(
+               test=Call(
+                    func=Name(id='int', ctx=Load()),
                     args=[
-                         Name(id='z', ctx=Load())],
-                    keywords=[]))],
+                         UnaryOp(
+                              op=Not(),
+                              operand=Name(id='inner_loop_done', ctx=Load()))],
+                    keywords=[]),
+               body=[
+                    Assign(
+                         targets=[
+                              Name(id='y', ctx=Store())],
+                         value=Name(id='y_copy', ctx=Load())),
+                    Expr(
+                         value=Call(
+                              func=Name(id='print', ctx=Load()),
+                              args=[
+                                   Name(id='z', ctx=Load())],
+                              keywords=[]))],
+               orelse=[])],
      type_ignores=[])
 Module(
      body=[
-          Expr(
+          If(
+               test=Name(id='inner_loop_done', ctx=Load()),
+               body=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp0', ctx=Store())],
+                         value=Constant(value=False))],
+               orelse=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp0', ctx=Store())],
+                         value=Constant(value=True))]),
+          Assign(
+               targets=[
+                    Name(id='new_temp1', ctx=Store())],
                value=Call(
-                    func=Name(id='print', ctx=Load()),
+                    func=Name(id='int', ctx=Load()),
                     args=[
-                         Name(id='z', ctx=Load())],
-                    keywords=[]))],
+                         Name(id='new_temp0', ctx=Load())],
+                    keywords=[])),
+          If(
+               test=Name(id='new_temp1', ctx=Load()),
+               body=[
+                    Assign(
+                         targets=[
+                              Name(id='y', ctx=Store())],
+                         value=Name(id='y_copy', ctx=Load())),
+                    Expr(
+                         value=Call(
+                              func=Name(id='print', ctx=Load()),
+                              args=[
+                                   Name(id='z', ctx=Load())],
+                              keywords=[]))],
+               orelse=[])],
      type_ignores=[])
 --------------Code after flattening-------
-print(z)
+if inner_loop_done:
+    new_temp0 = False
+else:
+    new_temp0 = True
+new_temp1 = int(new_temp0)
+if new_temp1:
+    y = y_copy
+    print(z)
+<ast.Constant object at 0x7f157221c2e0>
+<ast.Constant object at 0x7f157221c430>
+inject_int(project_bool(explicate_2))
+<ast.Name object at 0x7f15721cca30>
 
-print(z)
+if(is_true(inner_loop_done)):
+
+	new_temp0 = inject_bool(0)
+else:
+
+	new_temp0 = inject_bool(1)
+explicate_2 = new_temp0
+if(is_bool(explicate_2)):
+	new_temp1 = inject_int(project_bool(explicate_2))
+if(is_true(new_temp1)):
+
+	y = y_copy
+	print(z)
 --------------Explicate code-------
-print(z)
+if is_true(inner_loop_done):
+    new_temp0 = inject_bool(0)
+else:
+    new_temp0 = inject_bool(1)
+explicate_2 = new_temp0
+if is_bool(explicate_2):
+    new_temp1 = inject_int(project_bool(explicate_2))
+if is_true(new_temp1):
+    y = y_copy
+    print(z)
 
 
 --- explicated flattened python ---
-print(z)
+new_temp3 = is_true(inner_loop_done)
+if new_temp3:
+    new_temp4 = inject_bool(0)
+    new_temp0 = new_temp4
+else:
+    new_temp5 = inject_bool(1)
+    new_temp0 = new_temp5
+explicate_2 = new_temp0
+new_temp6 = is_bool(explicate_2)
+if new_temp6:
+    new_temp7 = project_bool(explicate_2)
+    new_temp8 = inject_int(new_temp7)
+    new_temp1 = new_temp8
+new_temp9 = is_true(new_temp1)
+if new_temp9:
+    y = y_copy
+    print(z)
 
 
 --- x86 IR ---
+call  is_true inner_loop_done
+movl  eax ,  new_temp3
+if1
+cmp 0, new_temp3
+je else1
+then1
+call  inject_bool 0
+movl  eax ,  new_temp4
+movl  new_temp4 ,  new_temp0
+else1
+call  inject_bool 1
+movl  eax ,  new_temp5
+movl  new_temp5 ,  new_temp0
+end if1
+movl  new_temp0 ,  explicate_2
+call  is_bool explicate_2
+movl  eax ,  new_temp6
+if2
+cmp 0, new_temp6
+je end if2
+then2
+call  project_bool explicate_2
+movl  eax ,  new_temp7
+call  inject_int new_temp7
+movl  eax ,  new_temp8
+movl  new_temp8 ,  new_temp1
+end if2
+call  is_true new_temp1
+movl  eax ,  new_temp9
+if3
+cmp 0, new_temp9
+je end if3
+then3
+movl  y_copy ,  y
 call  print z
+end if3
 
 
 --- Control Flow Graph ---
@@ -305,12 +521,12 @@ call  print z
 --------------Interference----------------
 
 
-Interference Graph:  {'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'y_copy': {'new_temp9', 'eax', 'new_temp0', 'new_temp7', 'explicate_2', 'new_temp8', 'new_temp5', 'new_temp3', 'new_temp6', 'new_temp4', 'ecx', 'new_temp1', 'edx'}, 'eax': {'y_copy', 'explicate_2', 'z', 'new_temp1'}, 'ecx': {'y_copy', 'explicate_2', 'z', 'new_temp1'}, 'edx': {'y_copy', 'explicate_2', 'z', 'new_temp1'}, 'z': {'new_temp9', 'eax', 'new_temp0', 'new_temp7', 'explicate_2', 'new_temp8', 'new_temp5', 'new_temp3', 'new_temp6', 'new_temp4', 'y', 'ecx', 'new_temp1', 'edx'}, 'new_temp1': {'eax', 'new_temp0', 'z', 'explicate_2', 'new_temp5', 'new_temp3', 'new_temp6', 'new_temp4', 'ecx', 'edx', 'y_copy'}, 'new_temp3': {'y_copy', 'z', 'new_temp1'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp4': {'y_copy', 'z', 'new_temp1'}, 'new_temp0': {'z', 'new_temp1', 'y_copy'}, 'new_temp5': {'y_copy', 'z', 'new_temp1'}, 'explicate_2': {'new_temp6', 'eax', 'ecx', 'z', 'new_temp1', 'edx', 'y_copy'}, 'new_temp6': {'y_copy', 'explicate_2', 'z', 'new_temp1'}, 'new_temp7': {'y_copy', 'z'}, 'new_temp8': {'y_copy', 'z'}, 'new_temp9': {'y_copy', 'z'}, 'y': {'z'}}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'y_copy': 4, 'new_temp1': 5, 'explicate_2': 6, 'z': 4, 'new_temp6': 1, 'new_temp4': 1, 'new_temp3': 1, 'new_temp5': 1, 'new_temp0': 1, 'new_temp7': 1, 'new_temp8': 1, 'new_temp9': 1, 'y': 1}
 Spilled set:
  set()
 
@@ -323,5 +539,5 @@ continue_looping
 
 
 
-Homes for CFG0:  {}
-z
+Homes for CFG0:  {'y_copy': 'edi', 'new_temp1': 'ebx', 'explicate_2': 'esi', 'z': 'edi', 'new_temp6': 'eax', 'new_temp4': 'eax', 'new_temp3': 'eax', 'new_temp5': 'eax', 'new_temp0': 'eax', 'new_temp7': 'eax', 'new_temp8': 'eax', 'new_temp9': 'eax', 'y': 'eax'}
+inner_loop_done

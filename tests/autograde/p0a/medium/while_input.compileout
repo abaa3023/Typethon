@@ -1,4 +1,4 @@
-Syntax error at 'print'
+Illegal character ' '
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -23,28 +23,176 @@ Module(
 ------------------Tree with my parser--------------
 Module(
     body=[
-        Constant(value=1)],
+        While(
+            test=Call(
+                func=Name(id='eval', ctx=Load()),
+                args=[
+                    Call(
+                        func=Name(id='input', ctx=Load()),
+                        args=[],
+                        keywords=[])],
+                keywords=[]),
+            body=[
+                Expr(
+                    value=Call(
+                        func=Name(id='print', ctx=Load()),
+                        args=[
+                            Constant(value=1)],
+                        keywords=[]))],
+            orelse=[])],
     type_ignores=[])
 --------------Original code----------------
 while (eval(input())):
     print(1)
 Module(
      body=[
-          Constant(value=1)],
+          While(
+               test=Call(
+                    func=Name(id='eval', ctx=Load()),
+                    args=[
+                         Call(
+                              func=Name(id='input', ctx=Load()),
+                              args=[],
+                              keywords=[])],
+                    keywords=[]),
+               body=[
+                    Expr(
+                         value=Call(
+                              func=Name(id='print', ctx=Load()),
+                              args=[
+                                   Constant(value=1)],
+                              keywords=[]))],
+               orelse=[])],
      type_ignores=[])
-Module(body=[], type_ignores=[])
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='new_temp0', ctx=Store())],
+               value=Call(
+                    func=Name(id='eval', ctx=Load()),
+                    args=[
+                         Call(
+                              func=Name(id='input', ctx=Load()),
+                              args=[],
+                              keywords=[])],
+                    keywords=[])),
+          While(
+               test=Name(id='new_temp0', ctx=Load()),
+               body=[
+                    Expr(
+                         value=Call(
+                              func=Name(id='print', ctx=Load()),
+                              args=[
+                                   Constant(value=1)],
+                              keywords=[])),
+                    Assign(
+                         targets=[
+                              Name(id='new_temp0', ctx=Store())],
+                         value=Call(
+                              func=Name(id='eval', ctx=Load()),
+                              args=[
+                                   Call(
+                                        func=Name(id='input', ctx=Load()),
+                                        args=[],
+                                        keywords=[])],
+                              keywords=[]))],
+               orelse=[])],
+     type_ignores=[])
 --------------Code after flattening-------
+new_temp0 = eval(input())
+while new_temp0:
+    print(1)
+    new_temp0 = eval(input())
+eval(input())
+eval(input())
 
+new_temp0 = eval(input())
+while(is_true(new_temp0)):
 
+	print(inject_int(1))
+	new_temp0 = eval(input())
 --------------Explicate code-------
-
+new_temp0 = eval(input())
+while is_true(new_temp0):
+    print(inject_int(1))
+    new_temp0 = eval(input())
 
 
 --- explicated flattened python ---
-
+new_temp1 = eval(input())
+new_temp0 = new_temp1
+new_temp4 = is_true(new_temp0)
+while new_temp4:
+    new_temp2 = inject_int(1)
+    print(new_temp2)
+    new_temp3 = eval(input())
+    new_temp0 = new_temp3
+    new_temp4 = is_true(new_temp0)
 
 
 --- x86 IR ---
+call  eval None
+movl  eax ,  new_temp1
+movl  new_temp1 ,  new_temp0
+call  is_true new_temp0
+movl  eax ,  new_temp4
+While1
+cmp 0, new_temp4
+je endl While1
+call  inject_int 1
+movl  eax ,  new_temp2
+call  print new_temp2
+call  eval None
+movl  eax ,  new_temp3
+movl  new_temp3 ,  new_temp0
+call  is_true new_temp0
+movl  eax ,  new_temp4
+jmp While1
+endl While1
 
 
 --- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp1': set(), 'new_temp0': set(), 'new_temp4': set(), 'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp2': set(), 'new_temp3': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp3': 1, 'new_temp1': 1, 'new_temp0': 1, 'new_temp4': 1, 'new_temp2': 1}
+Spilled set:
+ set()
+
+
+--------------Spilling----------------
+unspillable_set
+ set()
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {'new_temp3': 'eax', 'new_temp1': 'eax', 'new_temp0': 'eax', 'new_temp4': 'eax', 'new_temp2': 'eax'}
+new_temp1
+new_temp1
+new_temp0
+new_temp0
+new_temp4
+new_temp4
+new_temp2
+new_temp2
+new_temp3
+new_temp3
+new_temp0
+new_temp0
+new_temp4

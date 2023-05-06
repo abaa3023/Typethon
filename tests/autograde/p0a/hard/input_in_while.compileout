@@ -1,5 +1,12 @@
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
 Syntax error at 'int'
+Illegal character ' '
 Syntax error at ':'
+Illegal character ' '
+Illegal character ' '
+Syntax error at '    '
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -30,117 +37,27 @@ Module(
             orelse=[])],
     type_ignores=[])
 ------------------Tree with my parser--------------
-Module(
-    body=[
-        Assign(
-            targets=[
-                Name(id='x', ctx=Store())],
-            value=Call(
-                func=Name(id='eval', ctx=Load()),
-                args=[
-                    Call(
-                        func=Name(id='input', ctx=Load()),
-                        args=[],
-                        keywords=[])],
-                keywords=[]))],
-    type_ignores=[])
+Module(body=[], type_ignores=[])
 --------------Original code----------------
 x = 0
 while int(not x):
     x = eval(input())
     
 
-Module(
-     body=[
-          Assign(
-               targets=[
-                    Name(id='x', ctx=Store())],
-               value=Call(
-                    func=Name(id='eval', ctx=Load()),
-                    args=[
-                         Call(
-                              func=Name(id='input', ctx=Load()),
-                              args=[],
-                              keywords=[])],
-                    keywords=[]))],
-     type_ignores=[])
-Module(
-     body=[
-          Assign(
-               targets=[
-                    Name(id='new_temp0', ctx=Store())],
-               value=Call(
-                    func=Name(id='eval', ctx=Load()),
-                    args=[
-                         Call(
-                              func=Name(id='input', ctx=Load()),
-                              args=[],
-                              keywords=[])],
-                    keywords=[])),
-          Assign(
-               targets=[
-                    Name(id='x', ctx=Store())],
-               value=Name(id='new_temp0', ctx=Load()))],
-     type_ignores=[])
+Module(body=[], type_ignores=[])
+Module(body=[], type_ignores=[])
 --------------Code after flattening-------
-new_temp0 = eval(input())
-x = new_temp0
-eval(input())
-<ast.Name object at 0x7fd97f3c2cb0>
 
-new_temp0 = eval(input())
-x = new_temp0
+
 --------------Explicate code-------
-new_temp0 = eval(input())
-x = new_temp0
+
 
 
 --- explicated flattened python ---
-new_temp1 = eval(input())
-new_temp0 = new_temp1
-x = new_temp0
+
 
 
 --- x86 IR ---
-call  eval None
-movl  eax ,  new_temp1
-movl  new_temp1 ,  new_temp0
-movl  new_temp0 ,  x
 
 
 --- Control Flow Graph ---
-
-
--------------- Reset Liveness----------------
-
-
--------------- Liveness----------------
-
-
---------------Interference----------------
-
-
-Interference Graph:  {'new_temp1': set(), 'new_temp0': set(), 'x': set(), 'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
-
-
---------------Coloring----------------
-Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp1': 1, 'new_temp0': 1, 'x': 1}
-Spilled set:
- set()
-
-
---------------Spilling----------------
-unspillable_set
- set()
-continue_looping
- False
-
-
-
-Homes for CFG0:  {'new_temp1': 'eax', 'new_temp0': 'eax', 'x': 'eax'}
-new_temp1
-new_temp1
-new_temp0
-new_temp0
-x

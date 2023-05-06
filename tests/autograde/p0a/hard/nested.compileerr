@@ -1,3 +1,11 @@
+WARNING: Token 'LBRACK' defined, but not used
+WARNING: Token 'LIST' defined, but not used
+WARNING: Token 'RBRACK' defined, but not used
+WARNING: There are 3 unused tokens
+WARNING: Token 'LBRACK' defined, but not used
+WARNING: Token 'LIST' defined, but not used
+WARNING: Token 'RBRACK' defined, but not used
+WARNING: There are 3 unused tokens
 Traceback (most recent call last):
   File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/compile.py", line 125, in <module>
     main()
@@ -17,4 +25,4 @@ Traceback (most recent call last):
     assembly_src.append(push_template(assembly_prefix(arg)))
   File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/generate_assembly.py", line 147, in assembly_prefix
     return register_prefix(homes[operand])
-KeyError: 'z'
+KeyError: 'inner_loop_done'

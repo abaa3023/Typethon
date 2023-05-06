@@ -1,3 +1,7 @@
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
+Illegal character ' '
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -66,7 +70,7 @@ Module(
 --------------Code after flattening-------
 x = 1
 print(x)
-<ast.Constant object at 0x7f611d83a950>
+<ast.Constant object at 0x7f865f8a67d0>
 
 x = inject_int(1)
 print(x)
