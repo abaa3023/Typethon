@@ -10,9 +10,11 @@ class TypeCheck(ast.NodeVisitor):
         super(TypeCheck, self).__init__()
         self.variable_types = {}
         self.this_type = None
+        self.type_dict={}
     
     
     def get_annotation_type(self, node):
+        # print("node = ", node.id)
         # return the correct type
         # this is just a name node.
         if(isinstance(node, ast.Name)):
@@ -23,6 +25,7 @@ class TypeCheck(ast.NodeVisitor):
             else:
                 # return node.id #TODO: Change this to the type_class ascociated with node.id
                 raise Exception(f"Unkown annotaion name - {node.id}")
+        
         elif(isinstance(node, ast.Subscript)):
             if (isinstance(node.value, ast.Name)):
                 sub_type = node.value.id
@@ -64,12 +67,16 @@ class TypeCheck(ast.NodeVisitor):
             if(node.target.type != node.value.type):
                 raise TypeError(f"assigning {node.value.type} to {node.target.type}.")
         node.type = node.target.type
+        self.type_dict[node.target.id]=node.type
     
     
     def visit_Assign(self, node):
+        
         self.visit(node.targets[0])
         self.visit(node.value)
         
+        if(not isinstance(node.targets[0], ast.Subscript)):
+            node.targets[0].type = self.type_dict[node.targets[0].id]
         
         if(node.targets[0].type != node.value.type):
             raise TypeError(f"assigning {node.value.type} to {node.targets[0].type}.")
@@ -125,12 +132,17 @@ class TypeCheck(ast.NodeVisitor):
         # self.visit(node.func)
         # print("inside call")
         # self.generic_visit(node)
-        
-        if(node.func.id == 'int'):
-            node.type = Int()
-        elif(node.func.id == 'bool'):
-            node.type = Bool()
-        
+        if(isinstance(node.parent, ast.AnnAssign) or isinstance(node.parent, ast.UnaryOp) or isinstance(node.parent, ast.Assign) or isinstance(node.parent, ast.BinOp)):
+            if(node.func.id == 'input'):
+                node.type = node.parent.target.type
+            elif(node.func.id == 'int'):
+                node.type = Int()
+            elif(node.func.id == 'bool'):
+                node.type = Bool()
+            elif(node.func.id == 'list'):
+                node.type = List()
+            elif(node.func.id == 'dict'):
+                node.type = Dict()
         
         if(len(node.args) >0):
             # print("node.args[0] = ", node.args[0])
@@ -201,6 +213,8 @@ class TypeCheck(ast.NodeVisitor):
                 raise TypeError(f"Incosistently typed list: {list_type}& {ele_type}")
             
         node.type = List(list_type)
+        print("list_type = ", list_type)
+        print("node type = ", node.type)
     
     def visit_Subscript(self, node):
         self.generic_visit(node)

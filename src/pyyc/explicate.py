@@ -62,10 +62,11 @@ def box_value(ASTNode):
     elif isinstance(ASTNode,Subscript):
         return 'get_subscript(' + ASTNode.value.id + ", " + box_value(ASTNode.slice) + ')'
     
-    elif isinstance(ASTNode,List):
+    elif isinstance(ASTNode,ast.List):
         return inject_big_str('create_list(' + box_value(ASTNode.listlen) + ')')
     
-    elif isinstance(ASTNode,Dict):
+    elif isinstance(ASTNode,ast.Dict):
+        print("ASTNode = ", ASTNode)
         return inject_big_str('create_dict()')
             
     elif isinstance(ASTNode,Call):
@@ -81,7 +82,6 @@ def box_value(ASTNode):
 
 def assignString(dest,value):
     if isinstance(dest,Name):
-        # print(value)
         return dest.id + ' = ' + box_value(value)
     
     elif isinstance(dest,Subscript):
@@ -131,7 +131,6 @@ def tree_to_str(flattened_tree,prefix = 0):
                         append_list_with_prefix(explicate_prog,statement,local_if_count)
                 else:
                     if((isinstance(src.right.type, List)) or (isinstance(src.right.type, Dict))):
-                        # throw error
                         pass
                     else:
                         if(isinstance(src.left.type, Int)):
@@ -419,11 +418,9 @@ def tree_to_str(flattened_tree,prefix = 0):
 #                     append_list_with_prefix(explicate_prog,statement,local_if_count)
 #                     local_if_count = endif(local_if_count)
                 else:
-                    # print("dest under Call = ", dest)
-                    # print("src under Call = ", src)
                     explicate_prog.append(assignString(dest,src))
                 
-            elif isinstance(src,List):
+            elif isinstance(src,ast.List):
                 explicate_prog.append(assignString(dest,src))
                 if len(src.elts) > 0:
                     if isinstance(dest, Subscript):
@@ -432,11 +429,14 @@ def tree_to_str(flattened_tree,prefix = 0):
 
                     elif isinstance(dest, Name):
                         temp_var = dest.id
-
+                    
+                    print("len(src.elts) = ", len(src.elts))
                     for i in range(len(src.elts)):
                         explicate_prog.append(set_subscript_str(temp_var,inject_int_str(i),src.elts[i]))
                     
-            elif isinstance(src,Dict):
+            elif isinstance(src,ast.Dict):
+                print("Dict enter")
+                print("len(src.keys) = ", len(src.keys))
                 explicate_prog.append(assignString(dest,src))
                 if len(src.keys) > 0:
                     if isinstance(dest, Subscript):
@@ -445,7 +445,7 @@ def tree_to_str(flattened_tree,prefix = 0):
 
                     elif isinstance(dest, Name):
                         temp_var = dest.id
-
+                    print("temp_var = ", temp_var)
                     for i in range(len(src.keys)):
                         explicate_prog.append(set_subscript_str(temp_var,src.keys[i],src.values[i]))
                             

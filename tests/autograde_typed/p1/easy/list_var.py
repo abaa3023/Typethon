@@ -4,7 +4,7 @@ c:int = 3
 
 
 x:list[int] = [a, b, c]
-y:list[int] = [1,[]]
+y:list[int] = [1]
 # z:list[list[int]] = [x, y]
 
 # x[0] = 1

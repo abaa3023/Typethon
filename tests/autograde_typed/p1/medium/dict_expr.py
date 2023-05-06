@@ -1,3 +1,3 @@
-x = 1
-y = 2
-z = { x + y : x + -y}
+x:int = 1
+y:int = 2
+z:dict[int,int] = { x + y : x + -y}
