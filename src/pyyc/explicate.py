@@ -475,7 +475,10 @@ def tree_to_str(flattened_tree,prefix = 0):
             
             elif isinstance(node.test,Name):
                 # istrue(pyobj)
-                value = "is_true(" + node.test.id + ")"
+                if(isinstance(node.test.type, Int) or isinstance(node.test.type, Bool)):
+                    value = "is_true_int_bool(" + node.test.id + ")"
+                else:
+                    value = "is_true(" + node.test.id + ")"
                 explicate_prog.append("while(" + value + "):")
                 
             explicate_prog.append(tree_to_str(node.body,prefix + 1))
