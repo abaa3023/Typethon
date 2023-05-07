@@ -10,7 +10,7 @@ START0:
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, %edi
  pushl $(1)
  call inject_int
  addl $(4), %esp
@@ -20,16 +20,16 @@ START0:
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, %edi
+ movl %eax, %ebx
  pushl $(0)
  call inject_int
  addl $(4), %esp
- pushl %ebx
- pushl %eax
  pushl %edi
+ pushl %eax
+ pushl %ebx
  call set_subscript
  addl $(12), %esp
- pushl %edi
+ pushl %ebx
  call is_true
  addl $(4), %esp
  cmpl $(0), %eax
@@ -40,7 +40,7 @@ IF1:
  addl $(4), %esp
  jmp BB1
 E1:
- movl %edi, %eax
+ movl %ebx, %eax
 BB1:
  pushl %eax
  call print_any

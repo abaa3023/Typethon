@@ -1,4 +1,3 @@
-Syntax error at '='
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -39,10 +38,33 @@ Module(
 ------------------Tree with my parser--------------
 Module(
     body=[
-        Subscript(
-            value=Name(id='x', ctx=Load()),
-            slice=Constant(value=1),
-            ctx=Load()),
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Dict(
+                keys=[
+                    Constant(value=1)],
+                values=[
+                    Constant(value=2)])),
+        Assign(
+            targets=[
+                Name(id='y', ctx=Store())],
+            value=List(
+                elts=[
+                    Constant(value=1),
+                    Constant(value=2),
+                    Name(id='x', ctx=Load())],
+                ctx=Load())),
+        Assign(
+            targets=[
+                Subscript(
+                    value=Name(id='y', ctx=Load()),
+                    slice=Constant(value=2),
+                    ctx=Load())],
+            value=Subscript(
+                value=Name(id='x', ctx=Load()),
+                slice=Constant(value=1),
+                ctx=Load())),
         Expr(
             value=Call(
                 func=Name(id='print', ctx=Load()),
@@ -57,10 +79,33 @@ y[2] = x[1]
 print(y)
 Module(
      body=[
-          Subscript(
-               value=Name(id='x', ctx=Load()),
-               slice=Constant(value=1),
-               ctx=Load()),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Dict(
+                    keys=[
+                         Constant(value=1)],
+                    values=[
+                         Constant(value=2)])),
+          Assign(
+               targets=[
+                    Name(id='y', ctx=Store())],
+               value=List(
+                    elts=[
+                         Constant(value=1),
+                         Constant(value=2),
+                         Name(id='x', ctx=Load())],
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Name(id='y', ctx=Load()),
+                         slice=Constant(value=2),
+                         ctx=Load())],
+               value=Subscript(
+                    value=Name(id='x', ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -70,6 +115,45 @@ Module(
      type_ignores=[])
 Module(
      body=[
+          Assign(
+               targets=[
+                    Name(id='new_temp0', ctx=Store())],
+               value=Dict(
+                    keys=[
+                         Constant(value=1)],
+                    values=[
+                         Constant(value=2)])),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Name(id='new_temp0', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp1', ctx=Store())],
+               value=List(
+                    elts=[
+                         Constant(value=1),
+                         Constant(value=2),
+                         Name(id='x', ctx=Load())],
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='y', ctx=Store())],
+               value=Name(id='new_temp1', ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp2', ctx=Store())],
+               value=Subscript(
+                    value=Name(id='x', ctx=Load()),
+                    slice=Constant(value=1),
+                    ctx=Load())),
+          Assign(
+               targets=[
+                    Subscript(
+                         value=Name(id='y', ctx=Load()),
+                         slice=Constant(value=2),
+                         ctx=Load())],
+               value=Name(id='new_temp2', ctx=Load())),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -78,18 +162,114 @@ Module(
                     keywords=[]))],
      type_ignores=[])
 --------------Code after flattening-------
+new_temp0 = {1: 2}
+x = new_temp0
+new_temp1 = [1, 2, x]
+y = new_temp1
+new_temp2 = x[1]
+y[2] = new_temp2
 print(y)
+<ast.Dict object at 0x7f831f0d4040>
+<ast.Name object at 0x7f831f0f8700>
+<ast.List object at 0x7f831f11fe50>
+<ast.Name object at 0x7f831f0f88b0>
+<ast.Subscript object at 0x7f831f0f8400>
 
+new_temp0 = inject_big(create_dict())
+set_subscript(new_temp0, inject_int(1), inject_int(2))
+x = new_temp0
+new_temp1 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp1, inject_int(0), inject_int(1))
+set_subscript(new_temp1, inject_int(1), inject_int(2))
+set_subscript(new_temp1, inject_int(2), x)
+y = new_temp1
+new_temp2 = get_subscript(x, inject_int(1))
+set_subscript(y, inject_int(2), new_temp2)
 print(y)
 --------------Explicate code-------
+new_temp0 = inject_big(create_dict())
+set_subscript(new_temp0, inject_int(1), inject_int(2))
+x = new_temp0
+new_temp1 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp1, inject_int(0), inject_int(1))
+set_subscript(new_temp1, inject_int(1), inject_int(2))
+set_subscript(new_temp1, inject_int(2), x)
+y = new_temp1
+new_temp2 = get_subscript(x, inject_int(1))
+set_subscript(y, inject_int(2), new_temp2)
 print(y)
 
 
 --- explicated flattened python ---
+new_temp3 = create_dict()
+new_temp4 = inject_big(new_temp3)
+new_temp0 = new_temp4
+new_temp5 = inject_int(1)
+new_temp6 = inject_int(2)
+set_subscript(new_temp0, new_temp5, new_temp6)
+x = new_temp0
+new_temp7 = inject_int(3)
+new_temp8 = create_list(new_temp7)
+new_temp9 = inject_big(new_temp8)
+new_temp1 = new_temp9
+new_temp10 = inject_int(0)
+new_temp11 = inject_int(1)
+set_subscript(new_temp1, new_temp10, new_temp11)
+new_temp12 = inject_int(1)
+new_temp13 = inject_int(2)
+set_subscript(new_temp1, new_temp12, new_temp13)
+new_temp14 = inject_int(2)
+set_subscript(new_temp1, new_temp14, x)
+y = new_temp1
+new_temp15 = inject_int(1)
+new_temp16 = get_subscript(x, new_temp15)
+new_temp2 = new_temp16
+new_temp17 = inject_int(2)
+set_subscript(y, new_temp17, new_temp2)
 print(y)
 
 
 --- x86 IR ---
+call  create_dict 
+movl  eax ,  new_temp3
+call  inject_big new_temp3
+movl  eax ,  new_temp4
+movl  new_temp4 ,  new_temp0
+call  inject_int 1
+movl  eax ,  new_temp5
+call  inject_int 2
+movl  eax ,  new_temp6
+call  set_subscript new_temp0,new_temp5,new_temp6
+movl  new_temp0 ,  x
+call  inject_int 3
+movl  eax ,  new_temp7
+call  create_list new_temp7
+movl  eax ,  new_temp8
+call  inject_big new_temp8
+movl  eax ,  new_temp9
+movl  new_temp9 ,  new_temp1
+call  inject_int 0
+movl  eax ,  new_temp10
+call  inject_int 1
+movl  eax ,  new_temp11
+call  set_subscript new_temp1,new_temp10,new_temp11
+call  inject_int 1
+movl  eax ,  new_temp12
+call  inject_int 2
+movl  eax ,  new_temp13
+call  set_subscript new_temp1,new_temp12,new_temp13
+call  inject_int 2
+movl  eax ,  new_temp14
+call  set_subscript new_temp1,new_temp14,x
+movl  new_temp1 ,  y
+call  inject_int 1
+movl  eax ,  new_temp15
+call  get_subscript x,new_temp15
+movl  eax ,  new_temp16
+movl  new_temp16 ,  new_temp2
+call  inject_int 2
+movl  eax ,  new_temp17
+call  set_subscript y,new_temp17,new_temp2
 call  print y
 
 
@@ -105,12 +285,12 @@ call  print y
 --------------Interference----------------
 
 
-Interference Graph:  {'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'new_temp3': set(), 'new_temp4': set(), 'new_temp0': {'new_temp6', 'new_temp5', 'eax', 'edx', 'ecx'}, 'eax': {'y', 'new_temp5', 'new_temp12', 'x', 'new_temp1', 'new_temp0', 'new_temp10', 'new_temp2'}, 'ecx': {'y', 'new_temp5', 'new_temp12', 'x', 'new_temp1', 'new_temp0', 'new_temp10', 'new_temp2'}, 'edx': {'y', 'new_temp5', 'new_temp12', 'x', 'new_temp1', 'new_temp0', 'new_temp10', 'new_temp2'}, 'new_temp5': {'eax', 'ecx', 'new_temp6', 'new_temp0', 'edx'}, 'new_temp6': {'new_temp0', 'new_temp5'}, 'x': {'y', 'new_temp11', 'new_temp15', 'eax', 'new_temp14', 'new_temp12', 'ecx', 'new_temp1', 'new_temp8', 'new_temp13', 'edx', 'new_temp9', 'new_temp10', 'new_temp7'}, 'new_temp7': {'x'}, 'new_temp8': {'x'}, 'new_temp9': {'x'}, 'new_temp1': {'new_temp11', 'eax', 'new_temp14', 'new_temp12', 'ecx', 'x', 'new_temp13', 'edx', 'new_temp10'}, 'new_temp10': {'x', 'new_temp1', 'new_temp11', 'eax', 'edx', 'ecx'}, 'new_temp11': {'x', 'new_temp10', 'new_temp1'}, 'new_temp12': {'x', 'new_temp1', 'new_temp13', 'eax', 'edx', 'ecx'}, 'new_temp13': {'x', 'new_temp12', 'new_temp1'}, 'new_temp14': {'x', 'new_temp1'}, 'y': {'new_temp16', 'new_temp15', 'eax', 'new_temp17', 'ecx', 'x', 'edx', 'new_temp2'}, 'new_temp15': {'y', 'x'}, 'new_temp16': {'y'}, 'new_temp2': {'y', 'eax', 'new_temp17', 'ecx', 'edx'}, 'new_temp17': {'y', 'new_temp2'}, 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 4, 'new_temp5': 5, 'x': 4, 'new_temp12': 5, 'new_temp1': 6, 'new_temp10': 5, 'y': 5, 'new_temp2': 4, 'new_temp13': 1, 'new_temp11': 1, 'new_temp6': 1, 'new_temp17': 1, 'new_temp14': 1, 'new_temp15': 1, 'new_temp7': 1, 'new_temp9': 1, 'new_temp8': 1, 'new_temp16': 1, 'new_temp3': 1, 'new_temp4': 1}
 Spilled set:
  set()
 
@@ -123,5 +303,50 @@ continue_looping
 
 
 
-Homes for CFG0:  {}
+Homes for CFG0:  {'new_temp0': 'edi', 'new_temp5': 'ebx', 'x': 'edi', 'new_temp12': 'ebx', 'new_temp1': 'esi', 'new_temp10': 'ebx', 'y': 'ebx', 'new_temp2': 'edi', 'new_temp13': 'eax', 'new_temp11': 'eax', 'new_temp6': 'eax', 'new_temp17': 'eax', 'new_temp14': 'eax', 'new_temp15': 'eax', 'new_temp7': 'eax', 'new_temp9': 'eax', 'new_temp8': 'eax', 'new_temp16': 'eax', 'new_temp3': 'eax', 'new_temp4': 'eax'}
+new_temp3
+new_temp3
+new_temp4
+new_temp4
+new_temp0
+new_temp5
+new_temp6
+new_temp6
+new_temp5
+new_temp0
+new_temp0
+x
+new_temp7
+new_temp7
+new_temp8
+new_temp8
+new_temp9
+new_temp9
+new_temp1
+new_temp10
+new_temp11
+new_temp11
+new_temp10
+new_temp1
+new_temp12
+new_temp13
+new_temp13
+new_temp12
+new_temp1
+new_temp14
+x
+new_temp14
+new_temp1
+new_temp1
+y
+new_temp15
+new_temp15
+x
+new_temp16
+new_temp16
+new_temp2
+new_temp17
+new_temp2
+new_temp17
+y
 y

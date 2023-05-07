@@ -242,21 +242,31 @@ def p_elements(t):
     '''elements : individual_element 
         | individual_element COMMA elements'''
     new_node = None
-    try:
-        if isinstance(t[1],List) or isinstance(t[1],Dict) or isinstance(t[1],Constant) or isinstance(t[1],Name):
-            new_node = t[1]
-        else:
-            x = int(t[1])
-            #not an ID
-            new_node = Constant(value=t[1], ctx=Load())
-    except ValueError or TypeError:
-        #Is an ID
-        if t[1] == 'True' or t[1] == 'False':
-            new_node = Constant(value=bool(t[1]), ctx=Load())
-        elif isinstance(t[1], list) or isinstance(t[1],dict):
-            new_node = t[1]
-        else:
-            new_node = Name(id=t[1], ctx=Load())
+    
+    if isinstance(t[1],int):
+        new_node = Constant(value=t[1], ctx=Load())
+    elif isinstance(t[1],str) and t[1] == 'True' or t[1] == 'False':
+        new_node = Constant(value=bool(t[1]), ctx=Load())
+    elif isinstance(t[1],str):
+        new_node = Name(id=t[1], ctx=Load())
+    else:
+        new_node = t[1]
+
+    # try:
+    #     if isinstance(t[1],List) or isinstance(t[1],Dict) or isinstance(t[1],Constant) or isinstance(t[1],Name):
+    #         new_node = t[1]
+    #     else:
+    #         x = int(t[1])
+    #         #not an ID
+    #         new_node = Constant(value=t[1], ctx=Load())
+    # except ValueError or TypeError:
+    #     #Is an ID
+    #     if t[1] == 'True' or t[1] == 'False':
+    #         new_node = Constant(value=bool(t[1]), ctx=Load())
+    #     elif isinstance(t[1], list) or isinstance(t[1],dict):
+    #         new_node = t[1]
+    #     else:
+    #         new_node = Name(id=t[1], ctx=Load())
     if len(t) == 2:
         # print(type(t[1]))
         # raise Exception("wefawef")
@@ -264,15 +274,6 @@ def p_elements(t):
     else:
         t[0] = [new_node] + t[3]
     
-    
-# def p_individual_element(t):
-#     '''individual_element : INT
-#                           | BOOL
-#                           | expr_list
-#                           | ID
-#                           | dict
-#                           | subscript'''
-#     t[0] = t[1]
 def p_individual_element(t):
     'individual_element : expression'
     t[0] = t[1]
@@ -281,6 +282,10 @@ def p_list_subscript_expression(t):
     'expression : subscript'
     t[0] = t[1]
 
+def p_list_subscript_equals(t):
+    'assignment : subscript EQUALS expression'
+    t[0] = Assign(targets=[t[1]],value=t[3], ctx=Load())
+    
 #Grammar rules for handling dictionaries
 def p_dict_expression(t):
     'expression : dict'

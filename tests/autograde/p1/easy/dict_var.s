@@ -9,7 +9,7 @@ START0:
  pushl $(1)
  call inject_int
  addl $(4), %esp
- movl %eax, %esi
+ movl %eax, %ebx
  pushl $(2)
  call inject_int
  addl $(4), %esp
@@ -18,13 +18,13 @@ START0:
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, %esi
  pushl %edi
- pushl %esi
  pushl %ebx
+ pushl %esi
  call set_subscript
  addl $(12), %esp
- movl %ebx, %eax
+ movl %esi, %eax
  pushl %eax
  call print_any
  addl $(4), %esp

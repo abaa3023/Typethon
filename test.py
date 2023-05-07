@@ -4,7 +4,8 @@
 # x = [[12, 13, 14], 2, 3]
 # print(x[0][1])
 
-print([] and 1)
+x = [1 + 2, 3 + 4]
+print(x)
 
 # x = 1
 # y = True

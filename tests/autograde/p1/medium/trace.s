@@ -2,7 +2,7 @@
 main:
  pushl %ebp
  movl %esp , %ebp
- subl $(52), %esp
+ subl $(16), %esp
  pushl %edi
  pushl %ebx
  pushl %esi
@@ -62,41 +62,41 @@ START0:
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, %edi
+ movl %eax, -16(%ebp)
  pushl $(0)
  call inject_int
  addl $(4), %esp
- movl %eax, -52(%ebp)
+ movl %eax, %edi
  pushl $(4)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl -52(%ebp)
  pushl %edi
+ pushl -16(%ebp)
  call set_subscript
  addl $(12), %esp
  pushl $(1)
  call inject_int
  addl $(4), %esp
- movl %eax, -40(%ebp)
+ movl %eax, %edi
  pushl $(5)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl -40(%ebp)
  pushl %edi
+ pushl -16(%ebp)
  call set_subscript
  addl $(12), %esp
  pushl $(2)
  call inject_int
  addl $(4), %esp
- movl %eax, -36(%ebp)
+ movl %eax, %edi
  pushl $(6)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl -36(%ebp)
  pushl %edi
+ pushl -16(%ebp)
  call set_subscript
  addl $(12), %esp
  pushl $(3)
@@ -112,36 +112,36 @@ START0:
  pushl $(0)
  call inject_int
  addl $(4), %esp
- movl %eax, -12(%ebp)
+ movl %eax, %edi
  pushl $(7)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl -12(%ebp)
+ pushl %edi
  pushl -4(%ebp)
  call set_subscript
  addl $(12), %esp
  pushl $(1)
  call inject_int
  addl $(4), %esp
- movl %eax, -28(%ebp)
+ movl %eax, %edi
  pushl $(8)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl -28(%ebp)
+ pushl %edi
  pushl -4(%ebp)
  call set_subscript
  addl $(12), %esp
  pushl $(2)
  call inject_int
  addl $(4), %esp
- movl %eax, -24(%ebp)
+ movl %eax, %edi
  pushl $(9)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl -24(%ebp)
+ pushl %edi
  pushl -4(%ebp)
  call set_subscript
  addl $(12), %esp
@@ -154,21 +154,21 @@ START0:
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, -16(%ebp)
+ movl %eax, %edi
  pushl $(0)
  call inject_int
  addl $(4), %esp
  pushl %ebx
  pushl %eax
- pushl -16(%ebp)
+ pushl %edi
  call set_subscript
  addl $(12), %esp
  pushl $(1)
  call inject_int
  addl $(4), %esp
- pushl %edi
- pushl %eax
  pushl -16(%ebp)
+ pushl %eax
+ pushl %edi
  call set_subscript
  addl $(12), %esp
  pushl $(2)
@@ -176,15 +176,15 @@ START0:
  addl $(4), %esp
  pushl -4(%ebp)
  pushl %eax
- pushl -16(%ebp)
+ pushl %edi
  call set_subscript
  addl $(12), %esp
- movl -16(%ebp), %ebx
+ movl %edi, -12(%ebp)
  pushl $(0)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl %ebx
+ pushl -12(%ebp)
  call get_subscript
  addl $(8), %esp
  movl %eax, %edi
@@ -195,7 +195,15 @@ START0:
  pushl %edi
  call get_subscript
  addl $(8), %esp
- movl %eax, -48(%ebp)
+ movl %eax, %edi
+ pushl $(1)
+ call inject_int
+ addl $(4), %esp
+ pushl %eax
+ pushl -12(%ebp)
+ call get_subscript
+ addl $(8), %esp
+ movl %eax, %ebx
  pushl $(1)
  call inject_int
  addl $(4), %esp
@@ -203,48 +211,37 @@ START0:
  pushl %ebx
  call get_subscript
  addl $(8), %esp
- movl %eax, %edi
- pushl $(1)
- call inject_int
- addl $(4), %esp
- pushl %eax
+ movl %eax, %ebx
  pushl %edi
- call get_subscript
- addl $(8), %esp
- movl %eax, %ecx
- movl -48(%ebp), %eax
- movl %eax, -20(%ebp)
- movl %ecx, %edi
- pushl -20(%ebp)
  call is_big
  addl $(4), %esp
  cmpl $(0), %eax
  je E1
 IF1:
- pushl %edi
+ pushl %ebx
  call is_big
  addl $(4), %esp
  cmpl $(0), %eax
  je BB3
 IF2:
- pushl -20(%ebp)
- call project_big
- addl $(4), %esp
- movl %eax, -32(%ebp)
  pushl %edi
  call project_big
  addl $(4), %esp
+ movl %eax, %edi
+ pushl %ebx
+ call project_big
+ addl $(4), %esp
  pushl %eax
- pushl -32(%ebp)
+ pushl %edi
  call add
  addl $(8), %esp
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, -44(%ebp)
+ movl %eax, -8(%ebp)
  jmp BB3
 E1:
- pushl %edi
+ pushl %ebx
  call is_big
  addl $(4), %esp
  cmpl $(0), %eax
@@ -255,52 +252,50 @@ IF3:
  addl $(4), %esp
  jmp BB3
 E3:
- pushl -20(%ebp)
+ pushl %edi
  call is_int
  addl $(4), %esp
  cmpl $(0), %eax
  je E4
 IF4:
- pushl -20(%ebp)
+ pushl %edi
  call project_int
  addl $(4), %esp
- movl %eax, -8(%ebp)
+ movl %eax, %edi
  jmp BB1
 E4:
- pushl -20(%ebp)
+ pushl %edi
  call project_bool
  addl $(4), %esp
- movl %eax, -8(%ebp)
+ movl %eax, %edi
 BB1:
- pushl %edi
+ pushl %ebx
  call is_int
  addl $(4), %esp
  cmpl $(0), %eax
  je E5
 IF5:
- pushl %edi
+ pushl %ebx
  call project_int
  addl $(4), %esp
- movl %eax, %ecx
  jmp BB2
 E5:
- pushl %edi
+ pushl %ebx
  call project_bool
  addl $(4), %esp
- movl %eax, %ecx
 BB2:
- movl -8(%ebp), %eax
- addl %ecx, %eax
- pushl %eax
+ movl %edi, %ecx
+ addl %eax, %ecx
+ pushl %ecx
  call inject_int
  addl $(4), %esp
- movl %eax, -44(%ebp)
+ movl %eax, -8(%ebp)
 BB3:
  pushl $(2)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl %ebx
+ pushl -12(%ebp)
  call get_subscript
  addl $(8), %esp
  movl %eax, %edi
@@ -311,7 +306,7 @@ BB3:
  pushl %edi
  call get_subscript
  addl $(8), %esp
- movl -44(%ebp), %edi
+ movl -8(%ebp), %edi
  movl %eax, %ebx
  pushl %edi
  call is_big
