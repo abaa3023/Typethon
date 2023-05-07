@@ -4,6 +4,7 @@ import ply.lex as lex
 import ply.yacc as yacc
 import ast
 from ast import *
+import re
 
 # Lexer using ply.lex
 reserved = {    # dictionary defines keywords and associated token types
@@ -15,13 +16,15 @@ reserved = {    # dictionary defines keywords and associated token types
     'not' : 'NOT',
     'while' : 'WHILE',
     'if' : 'IF',
-    'else' : 'ELSE'
+    'else' : 'ELSE',
+    'or' : 'OR',
+    'is' : 'IS'
  }
 
 #TODO - Need INDENT AND DEDENT
 #tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'COLON', 'IF', 'ELSE', 'WHILE', 'INT_WORD', 'NOT', 'AND', 'OR', 'EQUAL_EQUAL', 'NOT_EQUAL', 'INDENT', 'DEDENT'] + list(reserved.values()) #include reserved token types with other tokens
 
-tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'EQUAL_EQUAL','NOT_EQUAL', 'COLON', 'INDENT', 'LIST', 'LBRACK', 'RBRACK'] + list(reserved.values()) #include reserved token types with other tokens
+tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'EQUAL_EQUAL','NOT_EQUAL', 'COLON', 'INDENT', 'BOOL','LSQUARE','RSQUARE','COMMA','LIST','LCURLY','RCURLY','DICT'] + list(reserved.values()) #include reserved token types with other tokens
 
 #p0
 t_PRINT = r'print'
@@ -46,9 +49,7 @@ t_IF = r'if'
 t_ELSE = r'else'
 #t_INDENT = r'\s+'
 #t_INDENT = r'\t'
-t_INDENT = r'[\t ][\t ]+'
-t_LBRACK = r'{'
-t_RBRACK = r'}'
+#t_INDENT = r'[\t][\t ]+'
 
 #TODO
 #t_COLON = r'\:'
@@ -60,6 +61,19 @@ t_RBRACK = r'}'
 # t_AND = r'\and'
 # t_OR = r'\or'
 # t_NOT_EQUAL = r'\!='
+
+
+#p1: 
+t_OR = r'or'
+t_IS = r'is'
+t_LSQUARE = r'\['
+t_RSQUARE = r'\]'
+t_BOOL = r'true|false'
+t_COMMA = r'\,'
+t_LCURLY = r'\{'
+t_RCURLY = r'\}'
+
+#t_SUBSCRIPT
 
 
 def t_ID(t):
@@ -105,7 +119,26 @@ def t_comment(t):
 #         return t
     
 # Define a rule to ignore whitespace
-#t_ignore = ' \t'
+#t_whitespace = r'[ \t]+'
+t_ignore = ' \t'
+t_INDENT = r'\s\s\s\s|\t'
+
+
+# def t_IGNORE(t):
+#     r'[ \t]+'
+#     if re.match(r'^\s\s\s\s|\t', t.value):
+#         t.type = 'INDENT'
+#         return t
+#     else:
+#         t.value = ''
+#         pass
+
+# def t_INDENT(t):
+#     r'^\s\s\s\s|\t'
+#     return t
+
+#t_ignore = '(?<=\S) (?=\S)'
+#t_ignore = '(?<=\S)\s(?!\s*$)|(?<=^\s)\s(?!\s*$)'
 
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
@@ -158,6 +191,87 @@ def p_empty_statement(t):
 def p_express_is_statement(t):
     'statement : expression'
     t[0] = t[1]
+    
+    
+#----------------------------P1 EXPRESSIONS-----------------------------
+#Grammar rules for lists
+def p_expr_expr_list(t):
+    'expression : expr_list'
+    t[0] = t[1]
+    
+def p_expr_list(t):
+    'expr_list : LSQUARE elements RSQUARE'
+    t[0] = List(elts=t[2],ctx=Load())
+    
+
+def p_elements(t):
+    '''elements : individual_element 
+        | individual_element COMMA elements'''
+    if len(t) == 2:
+        t[0] = [Constant(value=t[1])]
+    else:
+        t[0] = [Constant(value=t[1])] + t[3]
+    
+    
+def p_individual_element(t):
+    '''individual_element : INT
+                          | BOOL
+                          | LIST
+                          | ID
+                          | subscript'''
+    t[0] = t[1]
+
+def p_list_subscript_expression(t):
+    'expression : subscript'
+    t[0] = t[1]
+
+#Grammar rules for handling dictionaries
+def p_dict_expression(t):
+    'expression : dict'
+    t[0] = t[1]
+    
+def p_dictionary(t):
+    ' dict : LCURLY key_value_pair RCURLY '
+    dictionary = dict(t[2])
+    keys = [x for x in dictionary.keys()]
+    values = [y for y in dictionary.values()]
+    t[0] = Dict(keys=keys, values=values)
+        
+        
+def p_key_value_pair(t):
+    '''key_value_pair : dict_item
+                | dict_item COMMA key_value_pair'''
+    #If there is ONE statement (t[0] + t[1]) where t[0] is the BODY of Module
+    if len(t) == 2:
+        #If that ONE statement is NOT None (This happens in a 0byte file)
+        if t[1] is not None:
+            t[0] = [t[1]]
+        else:
+            #If t[1] is None, then we just want an empty list in Body
+            t[0] = []
+    else:
+        # 'statements' can be recursively handled by this grammar rule so we put t[1] statement in body
+        # and t[2] is statements so we just add that which would get handled again by this Grammar Rule.
+        #This is essentially how we handle the simple_statements+ syntax seen in EBNF.
+        #print(ast.dump(t[1][1]))
+        key = t[1][0]
+        value = t[1][1]
+        print(t[3])
+        t[0] = [t[1]] + t[3]
+        
+
+def p_dict_item(t):
+    'dict_item : expression COLON expression'
+    t[0] = (t[1], t[3])
+
+    
+# #Grammar for handling subscriptions for lists and dictionaries
+
+def p_subscript(t):
+    'subscript : ID LSQUARE expression RSQUARE'
+    t[0] = Subscript(value=Name(id=t[1],ctx=Load()), slice=t[3], ctx=Load())
+    
+#--------------------------------------------------------------------
      
 #p0a STUFF ---------------------------------------------
 def p_int_func_expression(t):
@@ -191,6 +305,43 @@ def p_if_else_expression(t):
 def p_if_expression(t):
     'expression : IF expression COLON suites'
     t[0] = If(test=t[2], body=t[4], orelse=[])
+    
+def p_while_expression2(t):
+    'expression : INDENT WHILE LPAR expression RPAR COLON suites'
+    t[0] = While(test=t[3], body=t[6], orelse=[])
+    
+def p_if_else_expression2(t):
+    'expression : INDENT IF expression COLON suites INDENT ELSE COLON suites'
+    t[0] = If(test=t[2], body=t[4], orelse=t[7])
+    
+def p_if_expression2(t):
+    'expression : INDENT IF expression COLON suites'
+    t[0] = If(test=t[2], body=t[4], orelse=[])
+    
+    
+def p_while_expression3(t):
+    'expression : INDENT INDENT WHILE LPAR expression RPAR COLON suites'
+    t[0] = While(test=t[3], body=t[6], orelse=[])
+    
+def p_if_else_expression3(t):
+    'expression : INDENT INDENT IF expression COLON suites INDENT INDENT ELSE COLON suites'
+    t[0] = If(test=t[2], body=t[4], orelse=t[7])
+    
+def p_if_expression3(t):
+    'expression : INDENT INDENT IF expression COLON suites'
+    t[0] = If(test=t[2], body=t[4], orelse=[])
+    
+def p_while_expression4(t):
+    'expression : INDENT INDENT INDENT WHILE LPAR expression RPAR COLON suites'
+    t[0] = While(test=t[3], body=t[6], orelse=[])
+    
+def p_if_else_expression4(t):
+    'expression : INDENT INDENT INDENT IF expression COLON suites INDENT INDENT INDENT ELSE COLON suites'
+    t[0] = If(test=t[2], body=t[4], orelse=t[7])
+    
+def p_if_expression4(t):
+    'expression : INDENT INDENT INDENT IF expression COLON suites'
+    t[0] = If(test=t[2], body=t[4], orelse=[])
 
 # def p_stmts(p):
 #     '''stmts : stmts stmt'''
@@ -223,6 +374,19 @@ def p_if_expression(t):
 def p_suite_indent(t):
     'suite : INDENT expression'
     t[0] = t[2]
+
+def p_suite_indent2(t):
+    'suite : INDENT INDENT expression'
+    t[0] = t[2]
+
+def p_suite_indent3(t):
+    'suite : INDENT INDENT INDENT expression'
+    t[0] = t[2]
+    
+def p_suite_indent4(t):
+    'suite : INDENT INDENT INDENT INDENT expression'
+    t[0] = t[2]
+    
     
 def p_suite(t):
     '''suites : suite
