@@ -28,7 +28,18 @@ library_function_calls = {"print":"print_any",
                           "equal":"equal",
                           "not_equal":"not_equal",
                           "error_pyobj":"error_pyobj",
-                          "int":"eval"
+                          "int":"eval",
+                          "print_int_nl": "print_int_nl",
+                          "print_bool_nl": "print_bool_nl",
+                          "is_true_int_bool": "is_true_int_bool",
+                          "set_subscript_list":"set_subscript_list",
+                          "print_list_nl":"print_list_nl",
+                          "get_subscript_list":"get_subscript_list",
+                          "my_list_add":"my_list_add",
+                          "create_dict_known":"create_dict_known",
+                          "set_subscript_dict_known":"set_subscript_dict_known",
+                          "print_dict_nl":"print_dict_nl",
+                          "get_subscript_dict":"get_subscript_dict"
                          }
 
 def register_prefix(reg):

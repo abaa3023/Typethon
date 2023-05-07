@@ -38,3 +38,32 @@ class Bool(Type):
 
 class Int(Type):
     pass
+
+
+class Encode:
+#     encoding = {
+#         Int: 1,
+#         Bool: 2,
+#         List: 3,
+#         Dict: 4
+#     }
+    
+    def __init__(self):
+        self.code = []
+    
+    def do(self, t):
+        if(isinstance(t, List)):
+            self.code.append(3)
+            self.do(t.of_what)
+        elif(isinstance(t, Dict)):
+            self.code.append(4)
+            self.do(t.key_type)
+            self.do(t.value_type)
+        elif(isinstance(t, Int)):
+            self.code.append(1)
+        elif(isinstance(t, Bool)):
+            self.code.append(2)
+        else:
+            raise Exception("uknown type")
+    def code_str(self):
+        return ''.join([str(i) for i in self.code[::-1]])
