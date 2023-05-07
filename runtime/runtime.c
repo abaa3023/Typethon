@@ -967,10 +967,6 @@ void print_any(pyobj p) {
   printf("\n");
 }
 
-int is_true_int_bool(int val){
-    return val !=0;
-}
-
 int is_true(pyobj v)
 {
   switch (tag(v)) {

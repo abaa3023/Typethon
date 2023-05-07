@@ -116,6 +116,7 @@ big_pyobj* project_big(pyobj val);
 
 /* Operations */
 
+
 int is_true(pyobj v); // TODO: Convert to unboxed versions
 int is_true_int_bool(int val);
 void print_any(pyobj p); // TODO: Convert to print_list, print_dict
@@ -127,6 +128,7 @@ pyobj input_int();
 pyobj input_pyobj();
 pyobj eval_pyobj(pyobj x);
 pyobj eval_input_pyobj();
+
 
 // big_pyobj* create_list(pyobj length); // TODO: Convert to unboxed as below
 list* create_list(int length); 
@@ -150,10 +152,8 @@ list* my_list_add(list *a, list *b);
 int equal(big_pyobj* a, big_pyobj* b); // TODO: Convert to list_equal and dict_equal
 // int list_equal(list *a, list *b);
 // int dict_equal(dict *a, dict *b);
-int not_equal(big_pyobj* x, big_pyobj* y);
-// int list_not_equal(list *a, list *b);
-// int dict_not_equal(dict *a, dict *b);
 
+int not_equal(big_pyobj* x, big_pyobj* y);
 
 big_pyobj* create_closure(void* fun_ptr, pyobj free_vars);
 void* get_fun_ptr(pyobj);
