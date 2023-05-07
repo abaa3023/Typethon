@@ -1,6 +1,10 @@
-x = 42 if eval(input()) else [1,2,3]
-print(x)
+# x = 42 if eval(input()) else [1,2,3]
+# print(x)
 
+# x = [[12, 13, 14], 2, 3]
+# print(x[0][1])
+
+print([] and 1)
 
 # x = 1
 # y = True

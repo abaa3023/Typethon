@@ -1,4 +1,3 @@
-Syntax error at ']'
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -15,23 +14,177 @@ Module(
                 keywords=[]))],
     type_ignores=[])
 ------------------Tree with my parser--------------
-Module(body=[], type_ignores=[])
+Module(
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Compare(
+                        left=List(elts=[], ctx=Load()),
+                        ops=[
+                            Is()],
+                        comparators=[
+                            Constant(value=0)])],
+                keywords=[]))],
+    type_ignores=[])
 --------------Original code----------------
 print([] is 0)
-Module(body=[], type_ignores=[])
-Module(body=[], type_ignores=[])
+Module(
+     body=[
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Compare(
+                              left=List(elts=[], ctx=Load()),
+                              ops=[
+                                   Is()],
+                              comparators=[
+                                   Constant(value=0)])],
+                    keywords=[]))],
+     type_ignores=[])
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='new_temp0', ctx=Store())],
+               value=List(elts=[], ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp1', ctx=Store())],
+               value=Compare(
+                    left=Name(id='new_temp0', ctx=Load()),
+                    ops=[
+                         Is()],
+                    comparators=[
+                         Constant(value=0)])),
+          Assign(
+               targets=[
+                    Name(id='new_temp2', ctx=Store())],
+               value=Name(id='new_temp1', ctx=Store())),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='new_temp2', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
 --------------Code after flattening-------
+new_temp0 = []
+new_temp1 = new_temp0 is 0
+new_temp2 = new_temp1
+print(new_temp2)
+<ast.List object at 0x7f635515f4c0>
+inject_bool(explicate_3==explicate_4)
+<ast.Name object at 0x7f6355178100>
 
-
+new_temp0 = inject_big(create_list(inject_int(0)))
+explicate_3 = new_temp0
+explicate_4 = inject_int(0)
+new_temp1 = inject_bool(explicate_3==explicate_4)
+new_temp2 = new_temp1
+print(new_temp2)
 --------------Explicate code-------
-
+new_temp0 = inject_big(create_list(inject_int(0)))
+explicate_3 = new_temp0
+explicate_4 = inject_int(0)
+new_temp1 = inject_bool(explicate_3 == explicate_4)
+new_temp2 = new_temp1
+print(new_temp2)
 
 
 --- explicated flattened python ---
-
+new_temp5 = inject_int(0)
+new_temp6 = create_list(new_temp5)
+new_temp7 = inject_big(new_temp6)
+new_temp0 = new_temp7
+explicate_3 = new_temp0
+new_temp8 = inject_int(0)
+explicate_4 = new_temp8
+new_temp9 = explicate_3 == explicate_4
+new_temp10 = new_temp9
+new_temp11 = inject_bool(new_temp10)
+new_temp1 = new_temp11
+new_temp2 = new_temp1
+print(new_temp2)
 
 
 --- x86 IR ---
+call  inject_int 0
+movl  eax ,  new_temp5
+call  create_list new_temp5
+movl  eax ,  new_temp6
+call  inject_big new_temp6
+movl  eax ,  new_temp7
+movl  new_temp7 ,  new_temp0
+movl  new_temp0 ,  explicate_3
+call  inject_int 0
+movl  eax ,  new_temp8
+movl  new_temp8 ,  explicate_4
+int_compare  explicate_3 Eq explicate_4 ,  new_temp9
+movl  new_temp9 ,  new_temp10
+call  inject_bool new_temp10
+movl  eax ,  new_temp11
+movl  new_temp11 ,  new_temp1
+movl  new_temp1 ,  new_temp2
+call  print new_temp2
 
 
 --- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp5': set(), 'new_temp6': set(), 'new_temp7': set(), 'new_temp0': set(), 'explicate_3': {'eax', 'ecx', 'edx', 'explicate_4', 'new_temp8'}, 'eax': {'explicate_3', 'new_temp9'}, 'ecx': {'explicate_3'}, 'edx': {'explicate_3'}, 'new_temp8': {'explicate_3'}, 'explicate_4': {'explicate_3'}, 'new_temp9': {'eax'}, 'new_temp10': set(), 'new_temp11': set(), 'new_temp1': set(), 'new_temp2': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'explicate_3': 4, 'new_temp9': 2, 'new_temp8': 1, 'explicate_4': 1, 'new_temp6': 1, 'new_temp5': 1, 'new_temp10': 1, 'new_temp0': 1, 'new_temp1': 1, 'new_temp11': 1, 'new_temp7': 1, 'new_temp2': 1}
+Spilled set:
+ set()
+
+
+--------------Spilling----------------
+unspillable_set
+ set()
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {'explicate_3': 'edi', 'new_temp9': 'ecx', 'new_temp8': 'eax', 'explicate_4': 'eax', 'new_temp6': 'eax', 'new_temp5': 'eax', 'new_temp10': 'eax', 'new_temp0': 'eax', 'new_temp1': 'eax', 'new_temp11': 'eax', 'new_temp7': 'eax', 'new_temp2': 'eax'}
+new_temp5
+new_temp5
+new_temp6
+new_temp6
+new_temp7
+new_temp7
+new_temp0
+new_temp0
+explicate_3
+new_temp8
+new_temp8
+explicate_4
+explicate_3
+explicate_4
+new_temp9
+new_temp9
+new_temp9
+new_temp9
+new_temp10
+new_temp10
+new_temp11
+new_temp11
+new_temp1
+new_temp1
+new_temp2
+new_temp2

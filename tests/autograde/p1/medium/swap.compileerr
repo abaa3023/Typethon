@@ -3,8 +3,10 @@ WARNING: Token 'BOOL' multiply defined
 WARNING: Token 'BOOL' multiply defined
 WARNING: Token 'BOOL' multiply defined
 WARNING: Token 'DICT' defined, but not used
-WARNING: There is 1 unused token
+WARNING: Token 'LIST' defined, but not used
+WARNING: There are 2 unused tokens
 WARNING: Token 'BOOL' multiply defined
 WARNING: Token 'BOOL' multiply defined
 WARNING: Token 'DICT' defined, but not used
-WARNING: There is 1 unused token
+WARNING: Token 'LIST' defined, but not used
+WARNING: There are 2 unused tokens

@@ -1,4 +1,3 @@
-Syntax error at ']'
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -15,23 +14,194 @@ Module(
                 keywords=[]))],
     type_ignores=[])
 ------------------Tree with my parser--------------
-Module(body=[], type_ignores=[])
+Module(
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Compare(
+                        left=List(elts=[], ctx=Load()),
+                        ops=[
+                            Is()],
+                        comparators=[
+                            Dict(keys=[], values=[])])],
+                keywords=[]))],
+    type_ignores=[])
 --------------Original code----------------
 print([] is {})
-Module(body=[], type_ignores=[])
-Module(body=[], type_ignores=[])
+Module(
+     body=[
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Compare(
+                              left=List(elts=[], ctx=Load()),
+                              ops=[
+                                   Is()],
+                              comparators=[
+                                   Dict(keys=[], values=[])])],
+                    keywords=[]))],
+     type_ignores=[])
+Module(
+     body=[
+          Assign(
+               targets=[
+                    Name(id='new_temp0', ctx=Store())],
+               value=List(elts=[], ctx=Load())),
+          Assign(
+               targets=[
+                    Name(id='new_temp1', ctx=Store())],
+               value=Dict(keys=[], values=[])),
+          Assign(
+               targets=[
+                    Name(id='new_temp2', ctx=Store())],
+               value=Compare(
+                    left=Name(id='new_temp0', ctx=Load()),
+                    ops=[
+                         Is()],
+                    comparators=[
+                         Name(id='new_temp1', ctx=Load())])),
+          Assign(
+               targets=[
+                    Name(id='new_temp3', ctx=Store())],
+               value=Name(id='new_temp2', ctx=Store())),
+          Expr(
+               value=Call(
+                    func=Name(id='print', ctx=Load()),
+                    args=[
+                         Name(id='new_temp3', ctx=Load())],
+                    keywords=[]))],
+     type_ignores=[])
 --------------Code after flattening-------
+new_temp0 = []
+new_temp1 = {}
+new_temp2 = new_temp0 is new_temp1
+new_temp3 = new_temp2
+print(new_temp3)
+<ast.List object at 0x7f05732bb4c0>
+<ast.Dict object at 0x7f0573263070>
+inject_bool(explicate_4==explicate_5)
+<ast.Name object at 0x7f05732ec250>
 
-
+new_temp0 = inject_big(create_list(inject_int(0)))
+new_temp1 = inject_big(create_dict())
+explicate_4 = new_temp0
+explicate_5 = new_temp1
+new_temp2 = inject_bool(explicate_4==explicate_5)
+new_temp3 = new_temp2
+print(new_temp3)
 --------------Explicate code-------
-
+new_temp0 = inject_big(create_list(inject_int(0)))
+new_temp1 = inject_big(create_dict())
+explicate_4 = new_temp0
+explicate_5 = new_temp1
+new_temp2 = inject_bool(explicate_4 == explicate_5)
+new_temp3 = new_temp2
+print(new_temp3)
 
 
 --- explicated flattened python ---
-
+new_temp6 = inject_int(0)
+new_temp7 = create_list(new_temp6)
+new_temp8 = inject_big(new_temp7)
+new_temp0 = new_temp8
+new_temp9 = create_dict()
+new_temp10 = inject_big(new_temp9)
+new_temp1 = new_temp10
+explicate_4 = new_temp0
+explicate_5 = new_temp1
+new_temp11 = explicate_4 == explicate_5
+new_temp12 = new_temp11
+new_temp13 = inject_bool(new_temp12)
+new_temp2 = new_temp13
+new_temp3 = new_temp2
+print(new_temp3)
 
 
 --- x86 IR ---
+call  inject_int 0
+movl  eax ,  new_temp6
+call  create_list new_temp6
+movl  eax ,  new_temp7
+call  inject_big new_temp7
+movl  eax ,  new_temp8
+movl  new_temp8 ,  new_temp0
+call  create_dict 
+movl  eax ,  new_temp9
+call  inject_big new_temp9
+movl  eax ,  new_temp10
+movl  new_temp10 ,  new_temp1
+movl  new_temp0 ,  explicate_4
+movl  new_temp1 ,  explicate_5
+int_compare  explicate_4 Eq explicate_5 ,  new_temp11
+movl  new_temp11 ,  new_temp12
+call  inject_bool new_temp12
+movl  eax ,  new_temp13
+movl  new_temp13 ,  new_temp2
+movl  new_temp2 ,  new_temp3
+call  print new_temp3
 
 
 --- Control Flow Graph ---
+
+
+-------------- Reset Liveness----------------
+
+
+-------------- Liveness----------------
+
+
+--------------Interference----------------
+
+
+Interference Graph:  {'new_temp6': set(), 'new_temp7': set(), 'new_temp8': set(), 'new_temp0': {'eax', 'ecx', 'edx', 'new_temp10', 'new_temp9', 'new_temp1'}, 'eax': {'new_temp11', 'new_temp0'}, 'ecx': {'new_temp0'}, 'edx': {'new_temp0'}, 'new_temp9': {'new_temp0'}, 'new_temp10': {'new_temp0'}, 'new_temp1': {'new_temp0', 'explicate_4'}, 'explicate_4': {'explicate_5', 'new_temp1'}, 'explicate_5': {'explicate_4'}, 'new_temp11': {'eax'}, 'new_temp12': set(), 'new_temp13': set(), 'new_temp2': set(), 'new_temp3': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+
+
+--------------Coloring----------------
+Colored graph:
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 4, 'new_temp9': 1, 'new_temp1': 1, 'new_temp10': 1, 'explicate_4': 2, 'explicate_5': 1, 'new_temp11': 2, 'new_temp7': 1, 'new_temp6': 1, 'new_temp12': 1, 'new_temp3': 1, 'new_temp8': 1, 'new_temp2': 1, 'new_temp13': 1}
+Spilled set:
+ set()
+
+
+--------------Spilling----------------
+unspillable_set
+ set()
+continue_looping
+ False
+
+
+
+Homes for CFG0:  {'new_temp0': 'edi', 'new_temp9': 'eax', 'new_temp1': 'eax', 'new_temp10': 'eax', 'explicate_4': 'ecx', 'explicate_5': 'eax', 'new_temp11': 'ecx', 'new_temp7': 'eax', 'new_temp6': 'eax', 'new_temp12': 'eax', 'new_temp3': 'eax', 'new_temp8': 'eax', 'new_temp2': 'eax', 'new_temp13': 'eax'}
+new_temp6
+new_temp6
+new_temp7
+new_temp7
+new_temp8
+new_temp8
+new_temp0
+new_temp9
+new_temp9
+new_temp10
+new_temp10
+new_temp1
+new_temp0
+explicate_4
+new_temp1
+explicate_5
+explicate_4
+explicate_5
+new_temp11
+new_temp11
+new_temp11
+new_temp11
+new_temp12
+new_temp12
+new_temp13
+new_temp13
+new_temp2
+new_temp2
+new_temp3
+new_temp3

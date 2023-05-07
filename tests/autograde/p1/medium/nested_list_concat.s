@@ -2,6 +2,7 @@
 main:
  pushl %ebp
  movl %esp , %ebp
+ subl $(12), %esp
  pushl %edi
  pushl %ebx
  pushl %esi
@@ -9,11 +10,110 @@ START0:
  pushl $(1)
  call inject_int
  addl $(4), %esp
+ pushl %eax
+ call create_list
+ addl $(4), %esp
+ pushl %eax
+ call inject_big
+ addl $(4), %esp
+ movl %eax, %ebx
+ pushl $(0)
+ call inject_int
+ addl $(4), %esp
  movl %eax, %edi
+ pushl $(2)
+ call inject_int
+ addl $(4), %esp
+ pushl %eax
+ pushl %edi
+ pushl %ebx
+ call set_subscript
+ addl $(12), %esp
+ pushl $(2)
+ call inject_int
+ addl $(4), %esp
+ pushl %eax
+ call create_list
+ addl $(4), %esp
+ pushl %eax
+ call inject_big
+ addl $(4), %esp
+ movl %eax, %edi
+ pushl $(0)
+ call inject_int
+ addl $(4), %esp
+ movl %eax, -4(%ebp)
+ pushl $(1)
+ call inject_int
+ addl $(4), %esp
+ pushl %eax
+ pushl -4(%ebp)
+ pushl %edi
+ call set_subscript
+ addl $(12), %esp
+ pushl $(1)
+ call inject_int
+ addl $(4), %esp
+ pushl %ebx
+ pushl %eax
+ pushl %edi
+ call set_subscript
+ addl $(12), %esp
+ movl %edi, -12(%ebp)
+ pushl $(1)
+ call inject_int
+ addl $(4), %esp
+ pushl %eax
+ call create_list
+ addl $(4), %esp
+ pushl %eax
+ call inject_big
+ addl $(4), %esp
+ movl %eax, %edi
+ pushl $(0)
+ call inject_int
+ addl $(4), %esp
+ movl %eax, %ebx
+ pushl $(4)
+ call inject_int
+ addl $(4), %esp
+ pushl %eax
+ pushl %ebx
+ pushl %edi
+ call set_subscript
+ addl $(12), %esp
+ pushl $(2)
+ call inject_int
+ addl $(4), %esp
+ pushl %eax
+ call create_list
+ addl $(4), %esp
+ pushl %eax
+ call inject_big
+ addl $(4), %esp
+ movl %eax, %ebx
+ pushl $(0)
+ call inject_int
+ addl $(4), %esp
+ movl %eax, -8(%ebp)
  pushl $(3)
  call inject_int
  addl $(4), %esp
- movl %edi, %ebx
+ pushl %eax
+ pushl -8(%ebp)
+ pushl %ebx
+ call set_subscript
+ addl $(12), %esp
+ pushl $(1)
+ call inject_int
+ addl $(4), %esp
+ pushl %edi
+ pushl %eax
+ pushl %ebx
+ call set_subscript
+ addl $(12), %esp
+ movl %ebx, %eax
+ movl -12(%ebp), %ebx
  movl %eax, %edi
  pushl %ebx
  call is_big

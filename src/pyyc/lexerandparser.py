@@ -142,6 +142,22 @@ t_INDENT = r'\s\s\s\s|\t'
 #t_ignore = '(?<=\S) (?=\S)'
 #t_ignore = '(?<=\S)\s(?!\s*$)|(?<=^\s)\s(?!\s*$)'
 
+
+# # Define a rule to handle lists
+# def t_LIST(t):
+#     # r'[([^]]*)]'
+#     r'\[(?:\s*(?:\d+)\s*,?)*\]'
+#     #t.value = t.lexer.lexmatch.group(1).split(',')
+#     return t
+
+# #Define a rule to handle dictionaries
+
+# def t_DICT(t):
+#     # r'{([^}]*)}'
+#     r'\{(?:\s*(?:[^\{\}:,]+)\s*:\s*(?:[^\{\}:,]+)\s*,?)*\}'
+#     # t.value = dict(item.split(':') for item in t.lexer.lexermatch.group(1).split(','))
+#     return t
+
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
@@ -217,19 +233,28 @@ def p_expr_list(t):
     'expr_list : LSQUARE elements RSQUARE'
     t[0] = List(elts=t[2],ctx=Load())
     
+def p_empty_list(t):
+    'expr_list : LSQUARE RSQUARE'
+    t[0] = List(elts=[], ctx=Load())
+    
 
 def p_elements(t):
     '''elements : individual_element 
         | individual_element COMMA elements'''
     new_node = None
     try:
-        x = int(t[1])
-        #not an ID
-        new_node = Constant(value=t[1], ctx=Load())
-    except ValueError:
+        if isinstance(t[1],List) or isinstance(t[1],Dict) or isinstance(t[1],Constant) or isinstance(t[1],Name):
+            new_node = t[1]
+        else:
+            x = int(t[1])
+            #not an ID
+            new_node = Constant(value=t[1], ctx=Load())
+    except ValueError or TypeError:
         #Is an ID
         if t[1] == 'True' or t[1] == 'False':
             new_node = Constant(value=bool(t[1]), ctx=Load())
+        elif isinstance(t[1], list) or isinstance(t[1],dict):
+            new_node = t[1]
         else:
             new_node = Name(id=t[1], ctx=Load())
     if len(t) == 2:
@@ -240,12 +265,16 @@ def p_elements(t):
         t[0] = [new_node] + t[3]
     
     
+# def p_individual_element(t):
+#     '''individual_element : INT
+#                           | BOOL
+#                           | expr_list
+#                           | ID
+#                           | dict
+#                           | subscript'''
+#     t[0] = t[1]
 def p_individual_element(t):
-    '''individual_element : INT
-                          | BOOL
-                          | LIST
-                          | ID
-                          | subscript'''
+    'individual_element : expression'
     t[0] = t[1]
 
 def p_list_subscript_expression(t):
@@ -263,7 +292,10 @@ def p_dictionary(t):
     keys = [x for x in dictionary.keys()]
     values = [y for y in dictionary.values()]
     t[0] = Dict(keys=keys, values=values)
-        
+
+def p_empty_dict(t):
+    'dict : LCURLY RCURLY'
+    t[0] = Dict(keys=[], values=[])
         
 def p_key_value_pair(t):
     '''key_value_pair : dict_item
@@ -297,6 +329,14 @@ def p_dict_item(t):
 def p_subscript(t):
     'subscript : ID LSQUARE expression RSQUARE'
     t[0] = Subscript(value=Name(id=t[1],ctx=Load()), slice=t[3], ctx=Load())
+    
+def p_subscript2(t):
+    'subscript : ID LSQUARE expression RSQUARE LSQUARE expression RSQUARE'
+    t[0] = Subscript(value=Subscript(value=Name(id=t[1],ctx=Load()), slice=t[3], ctx=Load()), slice=t[6], ctx=Load())
+    
+def p_subscript3(t):
+    'subscript : ID LSQUARE expression RSQUARE LSQUARE expression RSQUARE LSQUARE expression RSQUARE'
+    t[0] = Subscript(value=Subscript(value=Subscript(value=Name(id=t[1],ctx=Load()), slice=t[3], ctx=Load()), slice=t[6], ctx=Load()), slice=t[9], ctx=Load())
     
 #--------------------------------------------------------------------
      

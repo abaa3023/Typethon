@@ -10,20 +10,19 @@ START0:
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, %edi
  pushl $(1)
  call inject_int
  addl $(4), %esp
- movl %eax, %edi
+ movl %eax, %ebx
  pushl $(2)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl %edi
  pushl %ebx
+ pushl %edi
  call set_subscript
  addl $(12), %esp
- movl %ebx, %edi
  call create_dict
  pushl %eax
  call inject_big
