@@ -20,13 +20,23 @@ reserved = {    # dictionary defines keywords and associated token types
     'or' : 'OR',
     'is' : 'IS',
     'True' : 'BOOL',
-    'False' : 'BOOL'
+    'False' : 'BOOL',
+    'Int' : 'VARTYPE',
+    'Bool' : 'VARTYPE',
+    'List<Int>' : 'VARTYPE',
+    'List<Bool>' : 'VARTYPE',
+    'Dict<Int,Bool>' : 'VARTYPE',
+    'Dict<Int,Int>' : 'VARTYPE',
+    'Dict<Bool,Bool>' : 'VARTYPE',
+    'List<List<Int>>' : 'VARTYPE',
+    'List<List<Bool>>' : 'VARTYPE'
+     
  }
 
 #TODO - Need INDENT AND DEDENT
 #tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'COLON', 'IF', 'ELSE', 'WHILE', 'INT_WORD', 'NOT', 'AND', 'OR', 'EQUAL_EQUAL', 'NOT_EQUAL', 'INDENT', 'DEDENT'] + list(reserved.values()) #include reserved token types with other tokens
 
-tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'EQUAL_EQUAL','NOT_EQUAL', 'COLON', 'INDENT', 'BOOL','LSQUARE','RSQUARE','COMMA','LIST','LCURLY','RCURLY','DICT'] + list(reserved.values()) #include reserved token types with other tokens
+tokens = ['INT','PLUS','MINUS','LPAR','RPAR', 'EQUALS', 'ID', 'EQUAL_EQUAL','NOT_EQUAL', 'COLON', 'INDENT', 'BOOL','LSQUARE','RSQUARE','COMMA','LIST','LCURLY','RCURLY','DICT', 'VARTYPE'] + list(reserved.values()) #include reserved token types with other tokens
 
 #p0
 t_PRINT = r'print'
@@ -75,7 +85,11 @@ t_COMMA = r'\,'
 t_LCURLY = r'\{'
 t_RCURLY = r'\}'
 
-#t_SUBSCRIPT
+#custom
+# t_VARTYPE = r'(Int|Bool|List\<LInt\>|List\<LBool\>|Dict\<DInt,DBool\>|Dict\<DInt,DInt\>|Dict\<DBool,DBool\>|List\<List\<LInt\>\>|List\<List\<LBool\>\>)'
+t_VARTYPE = r'(Int|Bool|List<Int>|List\<Bool\>|Dict\<Int,Bool\>|Dict\<Int,Int\>|Dict\<Bool,Bool\>|List\<List\<Int\>\>|List\<List\<Bool\>\>)'
+
+annotation_dict = {'Int' : 'int', 'Bool':'bool', 'List<Int>' : ['list','int'], 'List<Bool>' : ['list','bool'], 'List<List<Int>>' : ['list','list','int'], 'List<List<Bool>>' : ['list','list','bool'],  'Dict<Int,Bool>' : ['dict', 'int', 'bool'], 'Dict<Int,Int>' : ['dict','int','int'], 'Dict<Bool,Bool>' : ['dict','bool','bool']}
 
 
 def t_ID(t):
@@ -514,6 +528,32 @@ def p_assignment_expression(t):
 def p_assignment(t):
     'assignment : ID EQUALS expression'
     t[0] = Assign(targets=[Name(id=t[1], ctx=Store())], value=t[3])
+    
+    
+    
+#annotation_dict = {'Int' : 'int', 'Bool':'bool', 'List<Int>' : ['list','int'], 'List<Bool>' : ['list','bool'], 'List<List<Int>>' : ['list','list','int'], 'List<List<Bool>>' : ['list','list','bool'],  'Dict<Int,Bool>' : ['dict', 'int', 'bool'], 'Dict<Int,Int>' : ['dict','int','int'], 'Dict<Bool,Bool>' : ['dict','bool','bool']}   
+def p_assignment(t):
+    'assignment : VARTYPE ID EQUALS expression'
+    
+    annotation = annotation_dict[t[1]]
+    annotation_ast_obj = None
+    #print(annotation)
+    #print(t[1])
+    #raise Exception("fawefa")
+    if isinstance(annotation,list):
+        if len(annotation) == 2:
+            #is list
+            annotation_ast_obj = Subscript(value=name(id=annotation[0],ctx=Load()), slice = Name(id=annotation[1],ctx=Load()))
+        else:
+            #is dict or list of list
+            if annotation[0] == 'dict':
+                annotation_ast_obj = Subscript(value=name(id=annotation[0],ctx=Load()), slice = Tuple(elts=[Name(id=annotation[1],ctx=Load()), Name(id=annotation[2],ctx=Load())], ctx=Load()))
+            else:
+                annotation_ast_obj = Subscript(value=name(id=annotation[0],ctx=Load()), slice = Subscript(value=Name(id=annotation[1],ctx=Load()), slice=Name(id=annotation[2],ctx=Load()),ctx=Load()))
+    else:
+        annotation_ast_obj = Name(id=annotation,ctx=Load())
+    
+    t[0] = AnnAssign(targets=[Name(id=t[2], ctx=Store())], annotation=annotation_ast_obj, value=t[4])
     
 def p_bool_expression(t):
     'expression : BOOL'
