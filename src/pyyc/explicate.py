@@ -69,6 +69,8 @@ def box_value(ASTNode):
         fn = 'get_subscript'
         if(isinstance(ASTNode.value.type, List)):
             fn = 'get_subscript_list'
+        elif(isinstance(ASTNode.value.type, Dict)):
+            fn = 'get_subscript_dict'
         return fn + '(' + ASTNode.value.id + ", " + box_value(ASTNode.slice) + ')'
     
     elif isinstance(ASTNode,ast.List):
