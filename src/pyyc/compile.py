@@ -28,17 +28,21 @@ def compile(src_file):
     
     #tree1 = ast.parse(prog)
     tree = createASTFromMyParser(src_file)
-    addparent.add_Parent(tree)
+
     # tree = createASTFromMyParser(src_file)
     
     print("------------------Tree of original code--------------")
     print(ast.dump(tree,indent=4))
     
-
-    
-    
     print("------------------CORRECT TREE--------------------")
     #print(ast.dump(tree1,indent=4))
+    
+    #raise Exception("im done")
+    
+    
+    addparent.add_Parent(tree)
+    
+    tree = ast.fix_missing_locations(tree)
     
     #Type check after parse
     TypeCheck().visit(tree)

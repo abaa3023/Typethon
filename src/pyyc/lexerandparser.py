@@ -87,7 +87,7 @@ t_RCURLY = r'\}'
 
 #custom
 # t_VARTYPE = r'(Int|Bool|List\<LInt\>|List\<LBool\>|Dict\<DInt,DBool\>|Dict\<DInt,DInt\>|Dict\<DBool,DBool\>|List\<List\<LInt\>\>|List\<List\<LBool\>\>)'
-t_VARTYPE = r'(Int|Bool|List<Int>|List\<Bool\>|Dict\<Int,Bool\>|Dict\<Int,Int\>|Dict\<Bool,Bool\>|List\<List\<Int\>\>|List\<List\<Bool\>\>)'
+t_VARTYPE = r'(Int|Bool|List\<Int\>|List\<Bool\>|Dict\<Int,Bool\>|Dict\<Int,Int\>|Dict\<Bool,Bool\>|List\<List\<Int\>\>|List\<List\<Bool\>\>)'
 
 annotation_dict = {'Int' : 'int', 'Bool':'bool', 'List<Int>' : ['list','int'], 'List<Bool>' : ['list','bool'], 'List<List<Int>>' : ['list','list','int'], 'List<List<Bool>>' : ['list','list','bool'],  'Dict<Int,Bool>' : ['dict', 'int', 'bool'], 'Dict<Int,Int>' : ['dict','int','int'], 'Dict<Bool,Bool>' : ['dict','bool','bool']}
 
@@ -537,12 +537,15 @@ def p_assignment(t):
     
     annotation = annotation_dict[t[1]]
     annotation_ast_obj = None
-    #print(annotation)
-    #print(t[1])
-    #raise Exception("fawefa")
+    # print(annotation)
+    # print(t[1])
+    # raise Exception("fawefa")
+ 
     if isinstance(annotation,list):
         if len(annotation) == 2:
             #is list
+            # print("I MADE IT HERE")
+            # raise Exception("efawefa")
             annotation_ast_obj = Subscript(value=name(id=annotation[0],ctx=Load()), slice = Name(id=annotation[1],ctx=Load()))
         else:
             #is dict or list of list
@@ -553,7 +556,7 @@ def p_assignment(t):
     else:
         annotation_ast_obj = Name(id=annotation,ctx=Load())
     
-    t[0] = AnnAssign(target=[Name(id=t[2], ctx=Store())], annotation=annotation_ast_obj, value=t[4])
+    t[0] = AnnAssign(target=Name(id=t[2], ctx=Store()), annotation=annotation_ast_obj, value=t[4])
     
 def p_bool_expression(t):
     'expression : BOOL'

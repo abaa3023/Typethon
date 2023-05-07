@@ -4,8 +4,8 @@
 
 # x:list[int] = [0,1,2]
 # print(x)
-Int x = 1
 
+Int x = 1
 print(x)
 
 # x = [[12, 13, 14], 2, 3]
