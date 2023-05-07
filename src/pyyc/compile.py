@@ -15,6 +15,7 @@ import generate_assembly
 # from lexerandparser import createASTFromMyParser
 from type_checking.type_check import TypeCheck
 from type_checking.remove_ann_assign import RemoveAnnAssign
+from lexerandparser import createASTFromMyParser
 
 def compile(src_file):
     
@@ -25,7 +26,8 @@ def compile(src_file):
     print('--------------Original code----------------')
     print(prog)
     
-    tree = ast.parse(prog)
+    #tree = ast.parse(prog)
+    tree = createASTFromMyParser(src_file)
     addparent.add_Parent(tree)
     # tree = createASTFromMyParser(src_file)
     
