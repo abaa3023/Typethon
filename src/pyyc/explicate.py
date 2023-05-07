@@ -29,6 +29,9 @@ def getVal(astNode):
 def set_subscript_str(dest,key,val):
     return "set_subscript(" + dest + ", " + box_value(key) + ", " + box_value(val) + ")"
 
+def set_subscript_dict_str(dest,key,val):
+    return "set_subscript_dict_known(" + dest + ", " + box_value(key) + ", " + box_value(val) + ")"
+
 def set_subscript_list_str(dest,key,val):
     return "set_subscript_list(" + dest + ", " + box_value(key) + ", " + box_value(val) + ")"
 
@@ -75,6 +78,8 @@ def box_value(ASTNode):
     
     elif isinstance(ASTNode,ast.Dict):
         print("ASTNode = ", ASTNode)
+        if(isinstance(ASTNode.type, Dict)):
+            return 'create_dict_known()'
         return inject_big_str('create_dict()')
             
     elif isinstance(ASTNode,Call):
@@ -95,6 +100,8 @@ def assignString(dest,value):
     elif isinstance(dest,Subscript):
         if(isinstance(dest.value.type, List)):
             return set_subscript_list_str(dest.value.id, dest.slice, value)
+        elif(isinstance(dest.value.type, Dict)):
+            return set_subscript_dict_str(dest.value.id, dest.slice, value)
         return set_subscript_str(dest.value.id, dest.slice, value)
     
     elif isinstance(dest,str):
@@ -470,7 +477,11 @@ def tree_to_str(flattened_tree,prefix = 0):
                         temp_var = dest.id
                     print("temp_var = ", temp_var)
                     for i in range(len(src.keys)):
-                        explicate_prog.append(set_subscript_str(temp_var,src.keys[i],src.values[i]))
+                        if(remove_boxing):
+                             explicate_prog.append(set_subscript_dict_str(temp_var,src.keys[i],src.values[i]))
+                            
+                        else:
+                            explicate_prog.append(set_subscript_str(temp_var,src.keys[i],src.values[i]))
                             
             else:
                 explicate_prog.append(assignString(dest,src))
@@ -519,6 +530,16 @@ def tree_to_str(flattened_tree,prefix = 0):
                         coder.do(node.value.args[0].type.of_what)
                         type_str = coder.code_str()
                         explicate_prog.append('print_list_nl(' + box_value(node.value.args[0]) +',' + type_str+ ')')
+                    elif(isinstance(node.value.args[0].type, Dict)):
+                        keycoder = Encode()
+                        keycoder.do(node.value.args[0].type.key_type)
+                        keytype_str = keycoder.code_str()
+                        valcoder = Encode()
+                        valcoder.do(node.value.args[0].type.value_type)
+                        valtype_str = valcoder.code_str()
+                        
+                        
+                        explicate_prog.append('print_dict_nl(' + box_value(node.value.args[0]) +',' + keytype_str+ ','+ valtype_str+ ')')
                     else:
                         explicate_prog.append('print(' + box_value(node.value.args[0]) + ')')
                     

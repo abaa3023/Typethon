@@ -14,7 +14,9 @@ static void print_float(double in);
 static void print_list(pyobj pyobj_list);
 static void print_dict(pyobj dict);
 static list list_add(list x, list y);
-
+static void print_unboxed_pyobj(pyobj a, int encoding);
+static void print_dict_noline(dict d, int key_encoding, int value_encoding);
+static void print_list_noline(list *l, int of_what_encoding);
 int tag(pyobj val) {
   return val & MASK;
 }
@@ -174,6 +176,51 @@ static void print_pyobj(pyobj x) {
   default:
     assert(0);
   }
+}
+
+static int pow10(int n){
+    int ans = 1;
+    while(n>0){
+        ans = ans * 10;
+        n--;
+    }
+    return ans;
+}
+static int size_type_code(int code){
+    if(code == 1 || code ==2)
+        return 1;
+    else if(code == 3){
+        return 1+size_type_code(code/10);
+    }
+    else if(code == 4){
+        int key_size = size_type_code(code/10);
+        
+        return 1+ key_size + size_type_code(code/pow10(key_size + 1));
+    }
+    printf("unknown type");
+    exit(-1);
+    return 0;
+}
+
+static void print_unboxed_pyobj(pyobj a, int encoding){
+    int t = encoding %10;
+    if(t == 1){
+        print_int(a);
+    }
+    else if(t==2){
+        print_bool(a);
+    }
+    else if(t==3){
+        print_list_noline(a, encoding /10);
+    }
+    else if(t==4){
+        print_dict_noline(a, encoding /10, encoding / size_type_code(encoding/10));
+        // TODO: correct encoding /100
+    }
+    else{
+        printf("Uknwon type");
+        exit(-1);
+   }
 }
 
 // For idiomatic purposes only.
@@ -342,6 +389,52 @@ static void print_dict(pyobj dict)
     }
 }
 
+static void print_dict_noline(dict d, int key_encoding, int value_encoding){
+    int key_type = key_encoding % 10;
+    int value_type = value_encoding % 10;
+
+    
+    int max = hashtable_count(d);
+    struct hashtable_itr *itr = hashtable_iterator(d);
+    int i = 0;
+    printf("{");
+    if (max) {
+        do {
+            pyobj k = *(pyobj *)hashtable_iterator_key(itr);
+            pyobj v = *(pyobj *)hashtable_iterator_value(itr);
+            printf("key ->%d\n ", k);
+            printf("val ->%d\n ", v);
+            print_unboxed_pyobj(k, key_type);
+            printf(": ");
+            print_unboxed_pyobj(v, value_type);
+		// if (is_in_list(printing_list, v)
+		// || equal_pyobj(v,dict)) {
+		// printf("{...}");
+		// }
+		// else {
+		// /* tally this dictionary in our list of printing dicts */
+		// list a;
+		// a.len = 1;
+		// a.data = (pyobj*)malloc(sizeof(pyobj) * a.len);
+		// a.data[0] = dict;
+		// /* Yuk, concatenating (adding) lists is slow! */
+		// printing_list = list_add(printing_list, a);
+		// print_pyobj(v);
+		// }
+            if(i != max - 1)
+                printf(", ");
+            i++;
+        } while (hashtable_iterator_advance(itr));
+    }
+    printf("}");
+    
+}
+
+void print_dict_nl(dict d, int key_encoding, int value_encoding){
+    print_dict_noline(d, key_encoding, value_encoding);
+    printf("\n");
+}
+
 
 /* This hash function was chosen more or less at random -Jeremy */
 static int hash32shift(int key)
@@ -397,6 +490,13 @@ static unsigned int hash_any(void* o)
     printf("unrecognized tag in hash_any\n");
     *(int*)0 = 42;
   }
+}
+
+static unsigned int hash_any_known(void* o)
+{
+  pyobj obj = *(pyobj*)o;
+  return hash32shift(obj);
+  // return (int) obj;
 }
 
 
@@ -540,6 +640,11 @@ static int equal_any(void* a, void* b)
   return equal_pyobj(*(pyobj*)a, *(pyobj*)b);
 }
 
+static int equal_any_known(void* a, void* b)
+{
+  return *(pyobj*)a==*(pyobj*)b;
+}
+
 big_pyobj* create_dict()
 {
   big_pyobj* v = (big_pyobj*)malloc(sizeof(big_pyobj));
@@ -547,6 +652,12 @@ big_pyobj* create_dict()
   v->u.d = create_hashtable(4, hash_any, equal_any);
   return v;
 }
+
+dict create_dict_known(){
+    dict d = create_hashtable(4, hash_any_known, equal_any_known);
+    return d;
+}
+
 
 static pyobj make_dict() { return inject_big(create_dict()); }
 
@@ -563,6 +674,21 @@ static pyobj* dict_subscript(dict d, pyobj key)
     hashtable_insert(d, k, v);
 return v;
   }
+}
+
+void set_subscript_dict_known(dict d, pyobj key, pyobj val){
+    void* p = hashtable_search(d, &key);
+    printf("setting %d: %d", key, val);
+    if(p){
+
+        pyobj *ptr = (pyobj *) p;
+        printf("key found as %d", *ptr);
+        *ptr = val;
+    }
+    else{
+        printf("key not found");
+        hashtable_insert(d, &key, &val);
+    }
 }
 
 static pyobj* list_subscript(list ls, pyobj n)
@@ -629,37 +755,13 @@ static void print_float(double in)
     printf( ( (*p)  ? "%s" : "%s.0" ), outstr);
 }
 
-
 static void print_list_noline(list *l, int of_what_encoding){
-    int type1 = of_what_encoding % 10;
     printf("[");
-    if(type1 == 1){
-        // print ints.
-        for(int i =0; i< l->len;i++){
-            print_int(l->data[i]); // prints without nl
-            if(i < l->len -1)
-                printf(", ");
-        }
-    }
-    else if(type1 == 2){
-        //print bools
-        for(int i =0; i< l->len;i++){
-            print_bool(l->data[i]); // prints without nl
-            if(i < l->len -1)
-                printf(", ");
-        }
-    }
-    else if(type1 == 3){
-        int inner_list_type = of_what_encoding / 10; 
-        for(int i =0; i< l->len;i++){
-            print_list_noline(l->data[i], inner_list_type);
-            if(i < l->len -1)
-                printf(", ");
-        }
-    }
-    else{
-        printf("unkown type");
-        exit(-1);
+    
+    for(int i =0; i< l->len;i++){
+        print_unboxed_pyobj(l->data[i], of_what_encoding); // prints without nl
+        if(i < l->len -1)
+            printf(", ");
     }
     
     printf("]");

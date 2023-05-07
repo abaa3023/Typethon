@@ -35,7 +35,10 @@ library_function_calls = {"print":"print_any",
                           "set_subscript_list":"set_subscript_list",
                           "print_list_nl":"print_list_nl",
                           "get_subscript_list":"get_subscript_list",
-                          "my_list_add":"my_list_add"
+                          "my_list_add":"my_list_add",
+                          "create_dict_known":"create_dict_known",
+                          "set_subscript_dict_known":"set_subscript_dict_known",
+                          "print_dict_nl":"print_dict_nl"
                          }
 
 def register_prefix(reg):
