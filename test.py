@@ -1,3 +1,11 @@
+x = 42 if eval(input()) else [1,2,3]
+print(x)
+
+
+# x = 1
+# y = True
+# print(x == y)
+
 # x = 5
 # y = 10
 # z = 0
@@ -10,9 +18,11 @@
 # y = x[1]
 # print(y)
 
-x = 1
-y = x or 1
-print(y)
+# a = 1
+# b = 2
+# c = 3
+# x = [a, b, c]
+# print(x)
 
 # while int(x != 0):
 #     x = x + -1

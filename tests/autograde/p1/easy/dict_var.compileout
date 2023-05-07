@@ -1,6 +1,3 @@
-Illegal character '{'
-Syntax error at ':'
-Illegal character '}'
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -30,7 +27,22 @@ Module(
 ------------------Tree with my parser--------------
 Module(
     body=[
-        Name(id='y', ctx=Load()),
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=Constant(value=1)),
+        Assign(
+            targets=[
+                Name(id='y', ctx=Store())],
+            value=Constant(value=2)),
+        Assign(
+            targets=[
+                Name(id='z', ctx=Store())],
+            value=Dict(
+                keys=[
+                    Name(id='x', ctx=Load())],
+                values=[
+                    Name(id='y', ctx=Load())])),
         Expr(
             value=Call(
                 func=Name(id='print', ctx=Load()),
@@ -45,7 +57,22 @@ z = { x : y}
 print(z)
 Module(
      body=[
-          Name(id='y', ctx=Load()),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Constant(value=1)),
+          Assign(
+               targets=[
+                    Name(id='y', ctx=Store())],
+               value=Constant(value=2)),
+          Assign(
+               targets=[
+                    Name(id='z', ctx=Store())],
+               value=Dict(
+                    keys=[
+                         Name(id='x', ctx=Load())],
+                    values=[
+                         Name(id='y', ctx=Load())])),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -55,6 +82,26 @@ Module(
      type_ignores=[])
 Module(
      body=[
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Constant(value=1)),
+          Assign(
+               targets=[
+                    Name(id='y', ctx=Store())],
+               value=Constant(value=2)),
+          Assign(
+               targets=[
+                    Name(id='new_temp0', ctx=Store())],
+               value=Dict(
+                    keys=[
+                         Name(id='x', ctx=Load())],
+                    values=[
+                         Name(id='y', ctx=Load())])),
+          Assign(
+               targets=[
+                    Name(id='z', ctx=Store())],
+               value=Name(id='new_temp0', ctx=Load())),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -63,18 +110,58 @@ Module(
                     keywords=[]))],
      type_ignores=[])
 --------------Code after flattening-------
+x = 1
+y = 2
+new_temp0 = {x: y}
+z = new_temp0
 print(z)
+<ast.Constant object at 0x7f60923af190>
+<ast.Constant object at 0x7f60923ac0d0>
+<ast.Dict object at 0x7f60923fb8b0>
+<ast.Name object at 0x7f60923fbc40>
 
+x = inject_int(1)
+y = inject_int(2)
+new_temp0 = inject_big(create_dict())
+set_subscript(new_temp0, x, y)
+z = new_temp0
 print(z)
 --------------Explicate code-------
+x = inject_int(1)
+y = inject_int(2)
+new_temp0 = inject_big(create_dict())
+set_subscript(new_temp0, x, y)
+z = new_temp0
 print(z)
 
 
 --- explicated flattened python ---
+new_temp1 = inject_int(1)
+x = new_temp1
+new_temp2 = inject_int(2)
+y = new_temp2
+new_temp3 = create_dict()
+new_temp4 = inject_big(new_temp3)
+new_temp0 = new_temp4
+set_subscript(new_temp0, x, y)
+z = new_temp0
 print(z)
 
 
 --- x86 IR ---
+call  inject_int 1
+movl  eax ,  new_temp1
+movl  new_temp1 ,  x
+call  inject_int 2
+movl  eax ,  new_temp2
+movl  new_temp2 ,  y
+call  create_dict 
+movl  eax ,  new_temp3
+call  inject_big new_temp3
+movl  eax ,  new_temp4
+movl  new_temp4 ,  new_temp0
+call  set_subscript new_temp0,x,y
+movl  new_temp0 ,  z
 call  print z
 
 
@@ -90,12 +177,12 @@ call  print z
 --------------Interference----------------
 
 
-Interference Graph:  {'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'new_temp1': set(), 'x': {'new_temp0', 'eax', 'ecx', 'new_temp3', 'y', 'edx', 'new_temp2', 'new_temp4'}, 'eax': {'y', 'new_temp0', 'x'}, 'ecx': {'y', 'new_temp0', 'x'}, 'edx': {'y', 'new_temp0', 'x'}, 'new_temp2': {'x'}, 'y': {'edx', 'new_temp0', 'x', 'eax', 'new_temp4', 'ecx', 'new_temp3'}, 'new_temp3': {'y', 'x'}, 'new_temp4': {'y', 'x'}, 'new_temp0': {'y', 'edx', 'x', 'eax', 'ecx'}, 'z': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'y': 4, 'x': 5, 'new_temp0': 6, 'new_temp4': 1, 'new_temp3': 1, 'new_temp2': 1, 'new_temp1': 1, 'z': 1}
 Spilled set:
  set()
 
@@ -108,5 +195,21 @@ continue_looping
 
 
 
-Homes for CFG0:  {}
+Homes for CFG0:  {'y': 'edi', 'x': 'ebx', 'new_temp0': 'esi', 'new_temp4': 'eax', 'new_temp3': 'eax', 'new_temp2': 'eax', 'new_temp1': 'eax', 'z': 'eax'}
+new_temp1
+new_temp1
+x
+new_temp2
+new_temp2
+y
+new_temp3
+new_temp3
+new_temp4
+new_temp4
+new_temp0
+y
+x
+new_temp0
+new_temp0
+z
 z

@@ -10,7 +10,10 @@ START0:
  call inject_int
  addl $(4), %esp
  movl %eax, %ebx
- movl $(True), %edi
+ pushl $(1)
+ call inject_bool
+ addl $(4), %esp
+ movl %eax, %edi
  pushl %ebx
  call is_big
  addl $(4), %esp

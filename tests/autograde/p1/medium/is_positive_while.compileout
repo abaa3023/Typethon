@@ -1,5 +1,5 @@
 Syntax error at 'x'
-Syntax error at 'print'
+Syntax error at ':'
 Syntax error at 'else'
 ------------------CORRECT TREE--------------------
 Module(

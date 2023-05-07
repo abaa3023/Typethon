@@ -1,4 +1,3 @@
-Syntax error at 'or'
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -43,15 +42,38 @@ Module(
 ------------------Tree with my parser--------------
 Module(
     body=[
-        BoolOp(
-            op=And(),
-            values=[
-                UnaryOp(
-                    op=Not(),
-                    operand=Name(id='a', ctx=Load())),
-                UnaryOp(
-                    op=Not(),
-                    operand=Name(id='b', ctx=Load()))]),
+        Assign(
+            targets=[
+                Name(id='a', ctx=Store())],
+            value=Constant(value=True)),
+        Assign(
+            targets=[
+                Name(id='b', ctx=Store())],
+            value=Constant(value=True)),
+        Assign(
+            targets=[
+                Name(id='x', ctx=Store())],
+            value=UnaryOp(
+                op=Not(),
+                operand=Compare(
+                    left=Compare(
+                        left=Name(id='a', ctx=Load()),
+                        ops=[
+                            Or()],
+                        comparators=[
+                            Name(id='b', ctx=Load())]),
+                    ops=[
+                        Eq()],
+                    comparators=[
+                        BoolOp(
+                            op=And(),
+                            values=[
+                                UnaryOp(
+                                    op=Not(),
+                                    operand=Name(id='a', ctx=Load())),
+                                UnaryOp(
+                                    op=Not(),
+                                    operand=Name(id='b', ctx=Load()))])]))),
         Expr(
             value=Call(
                 func=Name(id='print', ctx=Load()),
@@ -66,15 +88,38 @@ x = not (a or b) == (not a) and (not b)
 print(x)
 Module(
      body=[
-          BoolOp(
-               op=And(),
-               values=[
-                    UnaryOp(
-                         op=Not(),
-                         operand=Name(id='a', ctx=Load())),
-                    UnaryOp(
-                         op=Not(),
-                         operand=Name(id='b', ctx=Load()))]),
+          Assign(
+               targets=[
+                    Name(id='a', ctx=Store())],
+               value=Constant(value=True)),
+          Assign(
+               targets=[
+                    Name(id='b', ctx=Store())],
+               value=Constant(value=True)),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=UnaryOp(
+                    op=Not(),
+                    operand=Compare(
+                         left=Compare(
+                              left=Name(id='a', ctx=Load()),
+                              ops=[
+                                   Or()],
+                              comparators=[
+                                   Name(id='b', ctx=Load())]),
+                         ops=[
+                              Eq()],
+                         comparators=[
+                              BoolOp(
+                                   op=And(),
+                                   values=[
+                                        UnaryOp(
+                                             op=Not(),
+                                             operand=Name(id='a', ctx=Load())),
+                                        UnaryOp(
+                                             op=Not(),
+                                             operand=Name(id='b', ctx=Load()))])]))),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -84,42 +129,96 @@ Module(
      type_ignores=[])
 Module(
      body=[
+          Assign(
+               targets=[
+                    Name(id='a', ctx=Store())],
+               value=Constant(value=True)),
+          Assign(
+               targets=[
+                    Name(id='b', ctx=Store())],
+               value=Constant(value=True)),
+          Assign(
+               targets=[
+                    Name(id='new_temp0', ctx=Store())],
+               value=Compare(
+                    left=Name(id='a', ctx=Load()),
+                    ops=[
+                         Or()],
+                    comparators=[
+                         Name(id='b', ctx=Load())])),
+          Assign(
+               targets=[
+                    Name(id='new_temp1', ctx=Store())],
+               value=Name(id='new_temp0', ctx=Store())),
           If(
                test=Name(id='a', ctx=Load()),
                body=[
                     Assign(
                          targets=[
-                              Name(id='new_temp0', ctx=Store())],
+                              Name(id='new_temp2', ctx=Store())],
                          value=Constant(value=False))],
                orelse=[
                     Assign(
                          targets=[
-                              Name(id='new_temp0', ctx=Store())],
+                              Name(id='new_temp2', ctx=Store())],
                          value=Constant(value=True))]),
           If(
-               test=Name(id='new_temp0', ctx=Load()),
+               test=Name(id='new_temp2', ctx=Load()),
                body=[
                     If(
                          test=Name(id='b', ctx=Load()),
                          body=[
                               Assign(
                                    targets=[
-                                        Name(id='new_temp1', ctx=Store())],
+                                        Name(id='new_temp3', ctx=Store())],
                                    value=Constant(value=False))],
                          orelse=[
                               Assign(
                                    targets=[
-                                        Name(id='new_temp1', ctx=Store())],
+                                        Name(id='new_temp3', ctx=Store())],
                                    value=Constant(value=True))]),
                     Assign(
                          targets=[
-                              Name(id='new_temp2', ctx=Store())],
-                         value=Name(id='new_temp1', ctx=Load()))],
+                              Name(id='new_temp4', ctx=Store())],
+                         value=Name(id='new_temp3', ctx=Load()))],
                orelse=[
                     Assign(
                          targets=[
-                              Name(id='new_temp2', ctx=Store())],
-                         value=Name(id='new_temp0', ctx=Load()))]),
+                              Name(id='new_temp4', ctx=Store())],
+                         value=Name(id='new_temp2', ctx=Load()))]),
+          Assign(
+               targets=[
+                    Name(id='new_temp5', ctx=Store())],
+               value=Name(id='new_temp4', ctx=Store())),
+          Assign(
+               targets=[
+                    Name(id='new_temp6', ctx=Store())],
+               value=Compare(
+                    left=Name(id='new_temp1', ctx=Load()),
+                    ops=[
+                         Eq()],
+                    comparators=[
+                         Name(id='new_temp5', ctx=Load())])),
+          Assign(
+               targets=[
+                    Name(id='new_temp7', ctx=Store())],
+               value=Name(id='new_temp6', ctx=Store())),
+          If(
+               test=Name(id='new_temp7', ctx=Load()),
+               body=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp8', ctx=Store())],
+                         value=Constant(value=False))],
+               orelse=[
+                    Assign(
+                         targets=[
+                              Name(id='new_temp8', ctx=Store())],
+                         value=Constant(value=True))]),
+          Assign(
+               targets=[
+                    Name(id='x', ctx=Store())],
+               value=Name(id='new_temp8', ctx=Load())),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -128,155 +227,3 @@ Module(
                     keywords=[]))],
      type_ignores=[])
 --------------Code after flattening-------
-if a:
-    new_temp0 = False
-else:
-    new_temp0 = True
-if new_temp0:
-    if b:
-        new_temp1 = False
-    else:
-        new_temp1 = True
-    new_temp2 = new_temp1
-else:
-    new_temp2 = new_temp0
-print(x)
-<ast.Constant object at 0x7f92b1917070>
-<ast.Constant object at 0x7f92b1917130>
-<ast.Constant object at 0x7f92b1917250>
-<ast.Constant object at 0x7f92b1917310>
-<ast.Name object at 0x7f92b19173d0>
-<ast.Name object at 0x7f92b19171f0>
-
-if(is_true(a)):
-
-	new_temp0 = inject_bool(0)
-else:
-
-	new_temp0 = inject_bool(1)
-if(is_true(new_temp0)):
-
-	if(is_true(b)):
-	
-		new_temp1 = inject_bool(0)
-	else:
-	
-		new_temp1 = inject_bool(1)
-	new_temp2 = new_temp1
-else:
-
-	new_temp2 = new_temp0
-print(x)
---------------Explicate code-------
-if is_true(a):
-    new_temp0 = inject_bool(0)
-else:
-    new_temp0 = inject_bool(1)
-if is_true(new_temp0):
-    if is_true(b):
-        new_temp1 = inject_bool(0)
-    else:
-        new_temp1 = inject_bool(1)
-    new_temp2 = new_temp1
-else:
-    new_temp2 = new_temp0
-print(x)
-
-
---- explicated flattened python ---
-new_temp3 = is_true(a)
-if new_temp3:
-    new_temp4 = inject_bool(0)
-    new_temp0 = new_temp4
-else:
-    new_temp5 = inject_bool(1)
-    new_temp0 = new_temp5
-new_temp6 = is_true(new_temp0)
-if new_temp6:
-    new_temp7 = is_true(b)
-    if new_temp7:
-        new_temp8 = inject_bool(0)
-        new_temp1 = new_temp8
-    else:
-        new_temp9 = inject_bool(1)
-        new_temp1 = new_temp9
-    new_temp2 = new_temp1
-else:
-    new_temp2 = new_temp0
-print(x)
-
-
---- x86 IR ---
-call  is_true a
-movl  eax ,  new_temp3
-if1
-cmp 0, new_temp3
-je else1
-then1
-call  inject_bool 0
-movl  eax ,  new_temp4
-movl  new_temp4 ,  new_temp0
-else1
-call  inject_bool 1
-movl  eax ,  new_temp5
-movl  new_temp5 ,  new_temp0
-end if1
-call  is_true new_temp0
-movl  eax ,  new_temp6
-if2
-cmp 0, new_temp6
-je else2
-then2
-call  is_true b
-movl  eax ,  new_temp7
-if3
-cmp 0, new_temp7
-je else3
-then3
-call  inject_bool 0
-movl  eax ,  new_temp8
-movl  new_temp8 ,  new_temp1
-else3
-call  inject_bool 1
-movl  eax ,  new_temp9
-movl  new_temp9 ,  new_temp1
-end if3
-movl  new_temp1 ,  new_temp2
-else2
-movl  new_temp0 ,  new_temp2
-end if2
-call  print x
-
-
---- Control Flow Graph ---
-
-
--------------- Reset Liveness----------------
-
-
--------------- Liveness----------------
-
-
---------------Interference----------------
-
-
-Interference Graph:  {'b': {'new_temp4', 'new_temp6', 'new_temp0', 'edx', 'ecx', 'new_temp3', 'new_temp5', 'eax'}, 'eax': {'new_temp0', 'b', 'x'}, 'ecx': {'new_temp0', 'b', 'x'}, 'edx': {'new_temp0', 'b', 'x'}, 'x': {'new_temp1', 'new_temp4', 'new_temp6', 'new_temp7', 'new_temp9', 'new_temp0', 'edx', 'new_temp8', 'new_temp2', 'ecx', 'new_temp3', 'new_temp5', 'eax'}, 'new_temp3': {'b', 'x'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp4': {'b', 'x'}, 'new_temp0': {'edx', 'x', 'new_temp6', 'ecx', 'b', 'eax'}, 'new_temp5': {'b', 'x'}, 'new_temp6': {'new_temp0', 'b', 'x'}, 'new_temp7': {'x'}, 'new_temp2': {'x'}, 'new_temp8': {'x'}, 'new_temp1': {'x'}, 'new_temp9': {'x'}}
-
-
---------------Coloring----------------
-Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'b': 4, 'new_temp0': 5, 'x': 4, 'new_temp6': 1, 'new_temp8': 1, 'new_temp5': 1, 'new_temp3': 1, 'new_temp2': 1, 'new_temp4': 1, 'new_temp9': 1, 'new_temp1': 1, 'new_temp7': 1}
-Spilled set:
- set()
-
-
---------------Spilling----------------
-unspillable_set
- set()
-continue_looping
- False
-
-
-
-Homes for CFG0:  {'b': 'edi', 'new_temp0': 'ebx', 'x': 'edi', 'new_temp6': 'eax', 'new_temp8': 'eax', 'new_temp5': 'eax', 'new_temp3': 'eax', 'new_temp2': 'eax', 'new_temp4': 'eax', 'new_temp9': 'eax', 'new_temp1': 'eax', 'new_temp7': 'eax'}
-a

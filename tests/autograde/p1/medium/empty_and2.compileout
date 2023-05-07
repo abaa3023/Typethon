@@ -1,6 +1,4 @@
-Illegal character '{'
-Illegal character '}'
-Syntax error at 'and'
+Syntax error at '}'
 ------------------CORRECT TREE--------------------
 Module(
     body=[

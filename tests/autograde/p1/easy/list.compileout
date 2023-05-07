@@ -1,7 +1,3 @@
-Illegal character '['
-Illegal character ','
-Illegal character ','
-Illegal character ']'
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -27,9 +23,12 @@ Module(
         Assign(
             targets=[
                 Name(id='x', ctx=Store())],
-            value=Constant(value=1)),
-        Constant(value=2),
-        Constant(value=3),
+            value=List(
+                elts=[
+                    Constant(value=1),
+                    Constant(value=2),
+                    Constant(value=3)],
+                ctx=Load())),
         Expr(
             value=Call(
                 func=Name(id='print', ctx=Load()),
@@ -45,9 +44,12 @@ Module(
           Assign(
                targets=[
                     Name(id='x', ctx=Store())],
-               value=Constant(value=1)),
-          Constant(value=2),
-          Constant(value=3),
+               value=List(
+                    elts=[
+                         Constant(value=1),
+                         Constant(value=2),
+                         Constant(value=3)],
+                    ctx=Load())),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -59,8 +61,17 @@ Module(
      body=[
           Assign(
                targets=[
+                    Name(id='new_temp0', ctx=Store())],
+               value=List(
+                    elts=[
+                         Constant(value=1),
+                         Constant(value=2),
+                         Constant(value=3)],
+                    ctx=Load())),
+          Assign(
+               targets=[
                     Name(id='x', ctx=Store())],
-               value=Constant(value=1)),
+               value=Name(id='new_temp0', ctx=Load())),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -69,26 +80,68 @@ Module(
                     keywords=[]))],
      type_ignores=[])
 --------------Code after flattening-------
-x = 1
+new_temp0 = [1, 2, 3]
+x = new_temp0
 print(x)
-<ast.Constant object at 0x7fea1ee7a2f0>
+<ast.List object at 0x7f4bb649e2f0>
+<ast.Name object at 0x7f4bb648d4e0>
 
-x = inject_int(1)
+new_temp0 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp0, inject_int(0), inject_int(1))
+set_subscript(new_temp0, inject_int(1), inject_int(2))
+set_subscript(new_temp0, inject_int(2), inject_int(3))
+x = new_temp0
 print(x)
 --------------Explicate code-------
-x = inject_int(1)
+new_temp0 = inject_big(create_list(inject_int(3)))
+set_subscript(new_temp0, inject_int(0), inject_int(1))
+set_subscript(new_temp0, inject_int(1), inject_int(2))
+set_subscript(new_temp0, inject_int(2), inject_int(3))
+x = new_temp0
 print(x)
 
 
 --- explicated flattened python ---
-new_temp0 = inject_int(1)
+new_temp1 = inject_int(3)
+new_temp2 = create_list(new_temp1)
+new_temp3 = inject_big(new_temp2)
+new_temp0 = new_temp3
+new_temp4 = inject_int(0)
+new_temp5 = inject_int(1)
+set_subscript(new_temp0, new_temp4, new_temp5)
+new_temp6 = inject_int(1)
+new_temp7 = inject_int(2)
+set_subscript(new_temp0, new_temp6, new_temp7)
+new_temp8 = inject_int(2)
+new_temp9 = inject_int(3)
+set_subscript(new_temp0, new_temp8, new_temp9)
 x = new_temp0
 print(x)
 
 
 --- x86 IR ---
+call  inject_int 3
+movl  eax ,  new_temp1
+call  create_list new_temp1
+movl  eax ,  new_temp2
+call  inject_big new_temp2
+movl  eax ,  new_temp3
+movl  new_temp3 ,  new_temp0
+call  inject_int 0
+movl  eax ,  new_temp4
 call  inject_int 1
-movl  eax ,  new_temp0
+movl  eax ,  new_temp5
+call  set_subscript new_temp0,new_temp4,new_temp5
+call  inject_int 1
+movl  eax ,  new_temp6
+call  inject_int 2
+movl  eax ,  new_temp7
+call  set_subscript new_temp0,new_temp6,new_temp7
+call  inject_int 2
+movl  eax ,  new_temp8
+call  inject_int 3
+movl  eax ,  new_temp9
+call  set_subscript new_temp0,new_temp8,new_temp9
 movl  new_temp0 ,  x
 call  print x
 
@@ -105,12 +158,12 @@ call  print x
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp0': set(), 'x': set(), 'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'new_temp1': set(), 'new_temp2': set(), 'new_temp3': set(), 'new_temp0': {'new_temp4', 'eax', 'new_temp8', 'new_temp5', 'new_temp9', 'new_temp7', 'new_temp6', 'edx', 'ecx'}, 'eax': {'new_temp4', 'new_temp0', 'new_temp8', 'new_temp6'}, 'ecx': {'new_temp4', 'new_temp0', 'new_temp8', 'new_temp6'}, 'edx': {'new_temp4', 'new_temp0', 'new_temp8', 'new_temp6'}, 'new_temp4': {'eax', 'new_temp5', 'new_temp0', 'edx', 'ecx'}, 'new_temp5': {'new_temp4', 'new_temp0'}, 'new_temp6': {'eax', 'new_temp7', 'new_temp0', 'edx', 'ecx'}, 'new_temp7': {'new_temp0', 'new_temp6'}, 'new_temp8': {'eax', 'new_temp9', 'new_temp0', 'edx', 'ecx'}, 'new_temp9': {'new_temp0', 'new_temp8'}, 'x': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'x': 1, 'new_temp0': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 4, 'new_temp6': 5, 'new_temp8': 5, 'new_temp4': 5, 'new_temp7': 1, 'new_temp9': 1, 'new_temp5': 1, 'new_temp2': 1, 'x': 1, 'new_temp3': 1, 'new_temp1': 1}
 Spilled set:
  set()
 
@@ -123,7 +176,28 @@ continue_looping
 
 
 
-Homes for CFG0:  {'x': 'eax', 'new_temp0': 'eax'}
+Homes for CFG0:  {'new_temp0': 'edi', 'new_temp6': 'ebx', 'new_temp8': 'ebx', 'new_temp4': 'ebx', 'new_temp7': 'eax', 'new_temp9': 'eax', 'new_temp5': 'eax', 'new_temp2': 'eax', 'x': 'eax', 'new_temp3': 'eax', 'new_temp1': 'eax'}
+new_temp1
+new_temp1
+new_temp2
+new_temp2
+new_temp3
+new_temp3
+new_temp0
+new_temp4
+new_temp5
+new_temp5
+new_temp4
+new_temp0
+new_temp6
+new_temp7
+new_temp7
+new_temp6
+new_temp0
+new_temp8
+new_temp9
+new_temp9
+new_temp8
 new_temp0
 new_temp0
 x

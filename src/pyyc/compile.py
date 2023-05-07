@@ -32,7 +32,7 @@ def compile(src_file):
     print('--------------Original code----------------')
     print(prog)
 
-    raise Exception("im done")
+    #raise Exception("im done")
     
     flatten_tree = flatten.main(tree)
     

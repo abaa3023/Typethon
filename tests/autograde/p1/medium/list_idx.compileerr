@@ -1,3 +1,13 @@
+WARNING: Token 'BOOL' multiply defined
+WARNING: Token 'BOOL' multiply defined
+WARNING: Token 'BOOL' multiply defined
+WARNING: Token 'BOOL' multiply defined
+WARNING: Token 'DICT' defined, but not used
+WARNING: There is 1 unused token
+WARNING: Token 'BOOL' multiply defined
+WARNING: Token 'BOOL' multiply defined
+WARNING: Token 'DICT' defined, but not used
+WARNING: There is 1 unused token
 Traceback (most recent call last):
   File "/home/jovyan/FinalProject_CompilerConstruction/Typethon/src/pyyc/compile.py", line 125, in <module>
     main()

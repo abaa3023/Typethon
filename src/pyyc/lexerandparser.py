@@ -18,7 +18,9 @@ reserved = {    # dictionary defines keywords and associated token types
     'if' : 'IF',
     'else' : 'ELSE',
     'or' : 'OR',
-    'is' : 'IS'
+    'is' : 'IS',
+    'True' : 'BOOL',
+    'False' : 'BOOL'
  }
 
 #TODO - Need INDENT AND DEDENT
@@ -68,7 +70,7 @@ t_OR = r'or'
 t_IS = r'is'
 t_LSQUARE = r'\['
 t_RSQUARE = r'\]'
-t_BOOL = r'true|false'
+t_BOOL = r'True|False'
 t_COMMA = r'\,'
 t_LCURLY = r'\{'
 t_RCURLY = r'\}'
@@ -219,10 +221,23 @@ def p_expr_list(t):
 def p_elements(t):
     '''elements : individual_element 
         | individual_element COMMA elements'''
+    new_node = None
+    try:
+        x = int(t[1])
+        #not an ID
+        new_node = Constant(value=t[1], ctx=Load())
+    except ValueError:
+        #Is an ID
+        if t[1] == 'True' or t[1] == 'False':
+            new_node = Constant(value=bool(t[1]), ctx=Load())
+        else:
+            new_node = Name(id=t[1], ctx=Load())
     if len(t) == 2:
-        t[0] = [Constant(value=t[1])]
+        # print(type(t[1]))
+        # raise Exception("wefawef")
+        t[0] = [new_node]
     else:
-        t[0] = [Constant(value=t[1])] + t[3]
+        t[0] = [new_node] + t[3]
     
     
 def p_individual_element(t):
@@ -317,6 +332,10 @@ def p_if_else_expression(t):
 def p_if_expression(t):
     'expression : IF expression COLON suites'
     t[0] = If(test=t[2], body=t[4], orelse=[])
+    
+def p_if_else_turnary_expression(t):
+    'expression : expression IF expression ELSE expression'
+    t[0] = IfExp(test=t[3], body=t[1], orelse=t[5])
     
 def p_while_expression2(t):
     'expression : INDENT WHILE LPAR expression RPAR COLON suites'
@@ -447,6 +466,10 @@ def p_assignment_expression(t):
 def p_assignment(t):
     'assignment : ID EQUALS expression'
     t[0] = Assign(targets=[Name(id=t[1], ctx=Store())], value=t[3])
+    
+def p_bool_expression(t):
+    'expression : BOOL'
+    t[0] = Constant(value=bool(t[1]))
     
 def p_plus_expression(t):
     'expression : expression PLUS expression'

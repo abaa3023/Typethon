@@ -1,13 +1,5 @@
-Illegal character '['
-Illegal character ','
-Illegal character '['
-Illegal character ']'
-Illegal character ']'
-Illegal character '['
-Illegal character ','
-Illegal character '['
-Illegal character ']'
-Illegal character ']'
+Syntax error at '['
+Syntax error at '['
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -46,16 +38,6 @@ Module(
 ------------------Tree with my parser--------------
 Module(
     body=[
-        Assign(
-            targets=[
-                Name(id='x', ctx=Store())],
-            value=Constant(value=1)),
-        Constant(value=2),
-        Assign(
-            targets=[
-                Name(id='y', ctx=Store())],
-            value=Constant(value=3)),
-        Constant(value=4),
         Expr(
             value=Call(
                 func=Name(id='print', ctx=Load()),
@@ -72,16 +54,6 @@ y = [3, [4]]
 print(x + y)
 Module(
      body=[
-          Assign(
-               targets=[
-                    Name(id='x', ctx=Store())],
-               value=Constant(value=1)),
-          Constant(value=2),
-          Assign(
-               targets=[
-                    Name(id='y', ctx=Store())],
-               value=Constant(value=3)),
-          Constant(value=4),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -94,14 +66,6 @@ Module(
      type_ignores=[])
 Module(
      body=[
-          Assign(
-               targets=[
-                    Name(id='x', ctx=Store())],
-               value=Constant(value=1)),
-          Assign(
-               targets=[
-                    Name(id='y', ctx=Store())],
-               value=Constant(value=3)),
           Assign(
                targets=[
                     Name(id='new_temp0', ctx=Store())],
@@ -117,17 +81,11 @@ Module(
                     keywords=[]))],
      type_ignores=[])
 --------------Code after flattening-------
-x = 1
-y = 3
 new_temp0 = x + y
 print(new_temp0)
-<ast.Constant object at 0x7f3c13a3ab30>
-<ast.Constant object at 0x7f3c13a3ab00>
 inject_big(add(project_big(explicate_1),project_big(explicate_2)))
 inject_int(explicate_3+explicate_4)
 
-x = inject_int(1)
-y = inject_int(3)
 explicate_1 = x
 explicate_2 = y
 if(is_big(explicate_1)):
@@ -148,8 +106,6 @@ else:
 		new_temp0 = inject_int(explicate_3+explicate_4)
 print(new_temp0)
 --------------Explicate code-------
-x = inject_int(1)
-y = inject_int(3)
 explicate_1 = x
 explicate_2 = y
 if is_big(explicate_1):
@@ -171,119 +127,109 @@ print(new_temp0)
 
 
 --- explicated flattened python ---
-new_temp5 = inject_int(1)
-x = new_temp5
-new_temp6 = inject_int(3)
-y = new_temp6
 explicate_1 = x
 explicate_2 = y
-new_temp7 = is_big(explicate_1)
-if new_temp7:
-    new_temp8 = is_big(explicate_2)
-    if new_temp8:
-        new_temp9 = project_big(explicate_1)
-        new_temp10 = project_big(explicate_2)
-        new_temp11 = add(new_temp9, new_temp10)
-        new_temp12 = inject_big(new_temp11)
-        new_temp0 = new_temp12
+new_temp5 = is_big(explicate_1)
+if new_temp5:
+    new_temp6 = is_big(explicate_2)
+    if new_temp6:
+        new_temp7 = project_big(explicate_1)
+        new_temp8 = project_big(explicate_2)
+        new_temp9 = add(new_temp7, new_temp8)
+        new_temp10 = inject_big(new_temp9)
+        new_temp0 = new_temp10
 else:
-    new_temp13 = is_big(explicate_2)
-    if new_temp13:
+    new_temp11 = is_big(explicate_2)
+    if new_temp11:
         error_pyobj(0)
     else:
-        new_temp14 = is_int(explicate_1)
-        if new_temp14:
-            new_temp15 = project_int(explicate_1)
-            explicate_3 = new_temp15
+        new_temp12 = is_int(explicate_1)
+        if new_temp12:
+            new_temp13 = project_int(explicate_1)
+            explicate_3 = new_temp13
         else:
-            new_temp16 = project_bool(explicate_1)
-            explicate_3 = new_temp16
-        new_temp17 = is_int(explicate_2)
-        if new_temp17:
-            new_temp18 = project_int(explicate_2)
-            explicate_4 = new_temp18
+            new_temp14 = project_bool(explicate_1)
+            explicate_3 = new_temp14
+        new_temp15 = is_int(explicate_2)
+        if new_temp15:
+            new_temp16 = project_int(explicate_2)
+            explicate_4 = new_temp16
         else:
-            new_temp19 = project_bool(explicate_2)
-            explicate_4 = new_temp19
-        new_temp20 = explicate_3 + explicate_4
-        new_temp21 = inject_int(new_temp20)
-        new_temp0 = new_temp21
+            new_temp17 = project_bool(explicate_2)
+            explicate_4 = new_temp17
+        new_temp18 = explicate_3 + explicate_4
+        new_temp19 = inject_int(new_temp18)
+        new_temp0 = new_temp19
 print(new_temp0)
 
 
 --- x86 IR ---
-call  inject_int 1
-movl  eax ,  new_temp5
-movl  new_temp5 ,  x
-call  inject_int 3
-movl  eax ,  new_temp6
-movl  new_temp6 ,  y
 movl  x ,  explicate_1
 movl  y ,  explicate_2
 call  is_big explicate_1
-movl  eax ,  new_temp7
+movl  eax ,  new_temp5
 if1
-cmp 0, new_temp7
+cmp 0, new_temp5
 je else1
 then1
 call  is_big explicate_2
-movl  eax ,  new_temp8
+movl  eax ,  new_temp6
 if2
-cmp 0, new_temp8
+cmp 0, new_temp6
 je end if2
 then2
 call  project_big explicate_1
-movl  eax ,  new_temp9
+movl  eax ,  new_temp7
 call  project_big explicate_2
+movl  eax ,  new_temp8
+call  add new_temp7,new_temp8
+movl  eax ,  new_temp9
+call  inject_big new_temp9
 movl  eax ,  new_temp10
-call  add new_temp9,new_temp10
-movl  eax ,  new_temp11
-call  inject_big new_temp11
-movl  eax ,  new_temp12
-movl  new_temp12 ,  new_temp0
+movl  new_temp10 ,  new_temp0
 end if2
 else1
 call  is_big explicate_2
-movl  eax ,  new_temp13
+movl  eax ,  new_temp11
 if2
-cmp 0, new_temp13
+cmp 0, new_temp11
 je else2
 then2
 call  error_pyobj 0
 else2
 call  is_int explicate_1
-movl  eax ,  new_temp14
+movl  eax ,  new_temp12
 if3
-cmp 0, new_temp14
+cmp 0, new_temp12
 je else3
 then3
 call  project_int explicate_1
-movl  eax ,  new_temp15
-movl  new_temp15 ,  explicate_3
+movl  eax ,  new_temp13
+movl  new_temp13 ,  explicate_3
 else3
 call  project_bool explicate_1
-movl  eax ,  new_temp16
-movl  new_temp16 ,  explicate_3
+movl  eax ,  new_temp14
+movl  new_temp14 ,  explicate_3
 end if3
 call  is_int explicate_2
-movl  eax ,  new_temp17
+movl  eax ,  new_temp15
 if4
-cmp 0, new_temp17
+cmp 0, new_temp15
 je else4
 then4
 call  project_int explicate_2
-movl  eax ,  new_temp18
-movl  new_temp18 ,  explicate_4
+movl  eax ,  new_temp16
+movl  new_temp16 ,  explicate_4
 else4
 call  project_bool explicate_2
-movl  eax ,  new_temp19
-movl  new_temp19 ,  explicate_4
+movl  eax ,  new_temp17
+movl  new_temp17 ,  explicate_4
 end if4
-movl  explicate_3 ,  new_temp20
-addl  explicate_4 ,  new_temp20
-call  inject_int new_temp20
-movl  eax ,  new_temp21
-movl  new_temp21 ,  new_temp0
+movl  explicate_3 ,  new_temp18
+addl  explicate_4 ,  new_temp18
+call  inject_int new_temp18
+movl  eax ,  new_temp19
+movl  new_temp19 ,  new_temp0
 end if2
 end if1
 call  print new_temp0
@@ -301,12 +247,12 @@ call  print new_temp0
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp0': {'new_temp8', 'y', 'edx', 'ecx', 'new_temp6', 'new_temp7', 'new_temp13', 'x', 'eax', 'new_temp5', 'explicate_1', 'explicate_2'}, 'eax': {'new_temp0', 'new_temp9', 'x', 'explicate_3', 'explicate_1', 'explicate_2'}, 'ecx': {'new_temp0', 'new_temp9', 'x', 'explicate_3', 'explicate_1', 'explicate_2'}, 'edx': {'new_temp0', 'new_temp9', 'x', 'explicate_3', 'explicate_1', 'explicate_2'}, 'new_temp5': {'new_temp0'}, 'x': {'y', 'edx', 'new_temp0', 'ecx', 'new_temp6', 'eax'}, 'new_temp6': {'x', 'new_temp0'}, 'y': {'x', 'explicate_1', 'new_temp0'}, 'explicate_1': {'new_temp8', 'y', 'edx', 'new_temp0', 'ecx', 'new_temp7', 'new_temp13', 'eax', 'explicate_2', 'new_temp14'}, 'explicate_2': {'new_temp8', 'new_temp17', 'edx', 'new_temp0', 'ecx', 'new_temp7', 'new_temp13', 'new_temp9', 'new_temp15', 'new_temp16', 'eax', 'explicate_3', 'explicate_1', 'new_temp14'}, 'new_temp7': {'explicate_1', 'new_temp0', 'explicate_2'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp8': {'explicate_1', 'new_temp0', 'explicate_2'}, 'new_temp13': {'explicate_1', 'new_temp0', 'explicate_2'}, 'new_temp9': {'edx', 'ecx', 'eax', 'explicate_2', 'new_temp10'}, 'new_temp10': {'new_temp9'}, 'new_temp11': set(), 'new_temp12': set(), 'new_temp14': {'explicate_1', 'explicate_2'}, 'new_temp15': {'explicate_2'}, 'explicate_3': {'new_temp17', 'edx', 'ecx', 'new_temp18', 'eax', 'explicate_2', 'explicate_4', 'new_temp19'}, 'new_temp16': {'explicate_2'}, 'new_temp17': {'explicate_2', 'explicate_3'}, 'new_temp18': {'explicate_3'}, 'explicate_4': {'explicate_3', 'new_temp20'}, 'new_temp19': {'explicate_3'}, 'new_temp20': {'explicate_4'}, 'new_temp21': set()}
+Interference Graph:  {'y': {'explicate_1'}, 'new_temp0': {'edx', 'ecx', 'new_temp11', 'new_temp6', 'eax', 'explicate_1', 'new_temp5', 'explicate_2'}, 'explicate_1': {'edx', 'new_temp0', 'ecx', 'y', 'new_temp11', 'new_temp12', 'new_temp6', 'eax', 'new_temp5', 'explicate_2'}, 'explicate_2': {'edx', 'new_temp7', 'new_temp0', 'ecx', 'new_temp11', 'new_temp12', 'new_temp6', 'eax', 'new_temp13', 'explicate_1', 'new_temp5', 'new_temp14', 'explicate_3', 'new_temp15'}, 'eax': {'new_temp7', 'new_temp0', 'explicate_1', 'explicate_3', 'explicate_2'}, 'ecx': {'new_temp7', 'new_temp0', 'explicate_1', 'explicate_3', 'explicate_2'}, 'edx': {'new_temp7', 'new_temp0', 'explicate_1', 'explicate_3', 'explicate_2'}, 'new_temp5': {'new_temp0', 'explicate_2', 'explicate_1'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp6': {'explicate_2', 'new_temp0', 'explicate_1'}, 'new_temp11': {'explicate_2', 'new_temp0', 'explicate_1'}, 'new_temp7': {'edx', 'ecx', 'new_temp8', 'eax', 'explicate_2'}, 'new_temp8': {'new_temp7'}, 'new_temp9': set(), 'new_temp10': set(), 'new_temp12': {'explicate_2', 'explicate_1'}, 'new_temp13': {'explicate_2'}, 'explicate_3': {'edx', 'new_temp17', 'ecx', 'explicate_4', 'eax', 'new_temp16', 'explicate_2', 'new_temp15'}, 'new_temp14': {'explicate_2'}, 'new_temp15': {'explicate_3', 'explicate_2'}, 'new_temp16': {'explicate_3'}, 'explicate_4': {'explicate_3', 'new_temp18'}, 'new_temp17': {'explicate_3'}, 'new_temp18': {'explicate_4'}, 'new_temp19': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'explicate_2': 4, 'explicate_1': 5, 'new_temp0': 6, 'explicate_3': 5, 'x': 4, 'new_temp9': 5, 'y': 1, 'new_temp8': 1, 'new_temp13': 1, 'new_temp7': 1, 'new_temp6': 1, 'new_temp14': 1, 'new_temp17': 1, 'new_temp10': 1, 'new_temp19': 1, 'explicate_4': 1, 'new_temp5': 1, 'new_temp20': 2, 'new_temp16': 1, 'new_temp15': 1, 'new_temp18': 1, 'new_temp12': 1, 'new_temp21': 1, 'new_temp11': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 4, 'explicate_1': 5, 'explicate_2': 6, 'new_temp7': 4, 'explicate_3': 4, 'new_temp5': 1, 'new_temp6': 1, 'new_temp11': 1, 'new_temp15': 1, 'new_temp12': 1, 'new_temp14': 1, 'new_temp16': 1, 'new_temp13': 1, 'new_temp8': 1, 'explicate_4': 1, 'new_temp18': 2, 'y': 1, 'new_temp17': 1, 'new_temp9': 1, 'new_temp19': 1, 'new_temp10': 1}
 Spilled set:
  set()
 
@@ -319,65 +265,5 @@ continue_looping
 
 
 
-Homes for CFG0:  {'explicate_2': 'edi', 'explicate_1': 'ebx', 'new_temp0': 'esi', 'explicate_3': 'ebx', 'x': 'edi', 'new_temp9': 'ebx', 'y': 'eax', 'new_temp8': 'eax', 'new_temp13': 'eax', 'new_temp7': 'eax', 'new_temp6': 'eax', 'new_temp14': 'eax', 'new_temp17': 'eax', 'new_temp10': 'eax', 'new_temp19': 'eax', 'explicate_4': 'eax', 'new_temp5': 'eax', 'new_temp20': 'ecx', 'new_temp16': 'eax', 'new_temp15': 'eax', 'new_temp18': 'eax', 'new_temp12': 'eax', 'new_temp21': 'eax', 'new_temp11': 'eax'}
-new_temp5
-new_temp5
+Homes for CFG0:  {'new_temp0': 'edi', 'explicate_1': 'ebx', 'explicate_2': 'esi', 'new_temp7': 'edi', 'explicate_3': 'edi', 'new_temp5': 'eax', 'new_temp6': 'eax', 'new_temp11': 'eax', 'new_temp15': 'eax', 'new_temp12': 'eax', 'new_temp14': 'eax', 'new_temp16': 'eax', 'new_temp13': 'eax', 'new_temp8': 'eax', 'explicate_4': 'eax', 'new_temp18': 'ecx', 'y': 'eax', 'new_temp17': 'eax', 'new_temp9': 'eax', 'new_temp19': 'eax', 'new_temp10': 'eax'}
 x
-new_temp6
-new_temp6
-y
-x
-explicate_1
-y
-explicate_2
-explicate_1
-new_temp7
-new_temp7
-explicate_2
-new_temp8
-new_temp8
-explicate_1
-new_temp9
-explicate_2
-new_temp10
-new_temp10
-new_temp9
-new_temp11
-new_temp11
-new_temp12
-new_temp12
-new_temp0
-explicate_2
-new_temp13
-new_temp13
-explicate_1
-new_temp14
-new_temp14
-explicate_1
-new_temp15
-new_temp15
-explicate_3
-explicate_1
-new_temp16
-new_temp16
-explicate_3
-explicate_2
-new_temp17
-new_temp17
-explicate_2
-new_temp18
-new_temp18
-explicate_4
-explicate_2
-new_temp19
-new_temp19
-explicate_4
-explicate_3
-new_temp20
-explicate_4
-new_temp20
-new_temp20
-new_temp21
-new_temp21
-new_temp0
-new_temp0

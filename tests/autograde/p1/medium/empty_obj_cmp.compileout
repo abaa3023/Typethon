@@ -1,7 +1,4 @@
-Illegal character '['
-Illegal character ']'
-Illegal character '{'
-Illegal character '}'
+Syntax error at ']'
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -18,36 +15,23 @@ Module(
                 keywords=[]))],
     type_ignores=[])
 ------------------Tree with my parser--------------
-Module(
-    body=[
-        Expr(
-            value=Call(
-                func=Name(id='print', ctx=Load()),
-                args=[
-                    Name(id='is', ctx=Load())],
-                keywords=[]))],
-    type_ignores=[])
+Module(body=[], type_ignores=[])
 --------------Original code----------------
 print([] is {})
-Module(
-     body=[
-          Expr(
-               value=Call(
-                    func=Name(id='print', ctx=Load()),
-                    args=[
-                         Name(id='is', ctx=Load())],
-                    keywords=[]))],
-     type_ignores=[])
-Module(
-     body=[
-          Expr(
-               value=Call(
-                    func=Name(id='print', ctx=Load()),
-                    args=[
-                         Name(id='is', ctx=Load())],
-                    keywords=[]))],
-     type_ignores=[])
+Module(body=[], type_ignores=[])
+Module(body=[], type_ignores=[])
 --------------Code after flattening-------
-print(is)
 
-print(is)
+
+--------------Explicate code-------
+
+
+
+--- explicated flattened python ---
+
+
+
+--- x86 IR ---
+
+
+--- Control Flow Graph ---

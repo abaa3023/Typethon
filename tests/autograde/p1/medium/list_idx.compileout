@@ -1,15 +1,4 @@
-Illegal character '{'
-Syntax error at ':'
-Illegal character '}'
-Illegal character '['
-Illegal character ','
-Illegal character ','
-Illegal character ']'
-Illegal character '['
-Illegal character ']'
 Syntax error at '='
-Illegal character '['
-Illegal character ']'
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -50,8 +39,10 @@ Module(
 ------------------Tree with my parser--------------
 Module(
     body=[
-        Name(id='x', ctx=Load()),
-        Constant(value=1),
+        Subscript(
+            value=Name(id='x', ctx=Load()),
+            slice=Constant(value=1),
+            ctx=Load()),
         Expr(
             value=Call(
                 func=Name(id='print', ctx=Load()),
@@ -66,8 +57,10 @@ y[2] = x[1]
 print(y)
 Module(
      body=[
-          Name(id='x', ctx=Load()),
-          Constant(value=1),
+          Subscript(
+               value=Name(id='x', ctx=Load()),
+               slice=Constant(value=1),
+               ctx=Load()),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),

@@ -9,9 +9,10 @@ START0:
  pushl $(1)
  call inject_int
  addl $(4), %esp
- movl %eax, %ecx
- movl $(True), %eax
- movl %ecx, %edi
+ movl %eax, %edi
+ pushl $(1)
+ call inject_bool
+ addl $(4), %esp
  movl %eax, %ebx
  pushl %edi
  call is_big

@@ -1,8 +1,4 @@
-Illegal character '['
-Illegal character ','
-Illegal character '['
-Illegal character ']'
-Illegal character ']'
+Syntax error at '['
 ------------------CORRECT TREE--------------------
 Module(
     body=[
@@ -27,11 +23,6 @@ Module(
 ------------------Tree with my parser--------------
 Module(
     body=[
-        Assign(
-            targets=[
-                Name(id='x', ctx=Store())],
-            value=Constant(value=1)),
-        Constant(value=2),
         Expr(
             value=Call(
                 func=Name(id='print', ctx=Load()),
@@ -44,11 +35,6 @@ x = [1, [2]]
 print(x)
 Module(
      body=[
-          Assign(
-               targets=[
-                    Name(id='x', ctx=Store())],
-               value=Constant(value=1)),
-          Constant(value=2),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -58,10 +44,6 @@ Module(
      type_ignores=[])
 Module(
      body=[
-          Assign(
-               targets=[
-                    Name(id='x', ctx=Store())],
-               value=Constant(value=1)),
           Expr(
                value=Call(
                     func=Name(id='print', ctx=Load()),
@@ -70,27 +52,18 @@ Module(
                     keywords=[]))],
      type_ignores=[])
 --------------Code after flattening-------
-x = 1
 print(x)
-<ast.Constant object at 0x7fd7c2936980>
 
-x = inject_int(1)
 print(x)
 --------------Explicate code-------
-x = inject_int(1)
 print(x)
 
 
 --- explicated flattened python ---
-new_temp0 = inject_int(1)
-x = new_temp0
 print(x)
 
 
 --- x86 IR ---
-call  inject_int 1
-movl  eax ,  new_temp0
-movl  new_temp0 ,  x
 call  print x
 
 
@@ -106,12 +79,12 @@ call  print x
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp0': set(), 'x': set(), 'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'x': 1, 'new_temp0': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6}
 Spilled set:
  set()
 
@@ -124,8 +97,5 @@ continue_looping
 
 
 
-Homes for CFG0:  {'x': 'eax', 'new_temp0': 'eax'}
-new_temp0
-new_temp0
-x
+Homes for CFG0:  {}
 x
