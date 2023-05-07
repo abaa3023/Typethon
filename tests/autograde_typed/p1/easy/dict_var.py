@@ -9,8 +9,13 @@
 
 
 
+# x:int = 1
+
+# y= 10
+
+# z = x+y
+
 x:int = 1
-
-y= 10
-
-z = x+y
+y:int = 2
+z:dict[int, int] = { x : y}
+print(z)

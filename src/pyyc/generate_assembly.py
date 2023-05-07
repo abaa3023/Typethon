@@ -8,6 +8,7 @@ from basicblock_class import *
 
 library_function_calls = {"print":"print_any",
                           "eval":"eval_input_pyobj",
+                          "input":"input_pyobj",
                           "is_int":"is_int",
                           "is_bool":"is_bool",
                           "is_big":"is_big",
@@ -27,6 +28,7 @@ library_function_calls = {"print":"print_any",
                           "equal":"equal",
                           "not_equal":"not_equal",
                           "error_pyobj":"error_pyobj",
+                          "int":"eval"
                          }
 
 def register_prefix(reg):
@@ -170,6 +172,7 @@ def generate_assembly(ir_list,homes,spilled_set, save_callee_saved_registers):
             if arg_count > 0 and ir.args[0] is not None:
                 for arg in reversed(ir.args):
                      assembly_src.append(push_template(assembly_prefix(arg)))
+            print("ir.func_name = ", ir.func_name)
             f_name = library_function_calls.get(ir.func_name, None)
             assembly_src.append(call_template(f_name))
             

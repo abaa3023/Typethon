@@ -1,7 +1,7 @@
-x = 1
-y = 2
-z = 0
-loop_condition = 1
+x:int = 1
+y:int = 2
+z:int = 0
+loop_condition:int = 1
 
 while int(x != 5):
     if (int(x == 1) or int(x == 4)):

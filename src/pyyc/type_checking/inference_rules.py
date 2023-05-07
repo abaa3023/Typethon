@@ -1,6 +1,6 @@
 import ast
 
-from python_types import List, Dict, Int, Bool
+from .python_types import List, Dict, Int, Bool
 
 
 class InferenceRules:
@@ -16,7 +16,7 @@ class InferenceRules:
             if (type2 == Int()):
                 return Int()
             elif (type2 == Bool()):
-                return Int()
+                raise TypeError(type1, type2)
             else:
                 raise TypeError(Int, type2)
         elif(type1 == Bool()):

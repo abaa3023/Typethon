@@ -1,6 +1,7 @@
 #!/usr/bin/env python3.10
 import sys
 import ast
+import addparent
 import flatten
 import explicate
 import x86_ir
@@ -11,7 +12,9 @@ import graph_color
 import spill_ir
 import variable_homes
 import generate_assembly
-from lexerandparser import createASTFromMyParser
+# from lexerandparser import createASTFromMyParser
+from type_checking.type_check import TypeCheck
+from type_checking.remove_ann_assign import RemoveAnnAssign
 
 def compile(src_file):
     
@@ -19,20 +22,25 @@ def compile(src_file):
     with open(src_file) as f:
         prog = f.read()
         
-        
-    #tree1 = ast.parse(prog)
-    tree = createASTFromMyParser(src_file)
-    
-    
-    print("------------------CORRECT TREE--------------------")
-    #print(ast.dump(tree1,indent=4))
-    print("------------------Tree with my parser--------------")
-    print(ast.dump(tree,indent=4))
-    
     print('--------------Original code----------------')
     print(prog)
-
-    #raise Exception("im done")
+    
+    tree = ast.parse(prog)
+    addparent.add_Parent(tree)
+    # tree = createASTFromMyParser(src_file)
+    
+    print("------------------Tree of original code--------------")
+    print(ast.dump(tree,indent=4))
+    
+    TypeCheck().visit(tree)
+    
+    tree = RemoveAnnAssign().visit(tree)
+    
+    
+    # print("------------------CORRECT TREE--------------------")
+    # print(ast.dump(tree1,indent=4))
+    print("------------------Tree after removing AnnAssign--------------")
+    print(ast.dump(tree,indent=4))
     
     flatten_tree = flatten.main(tree)
     
@@ -40,7 +48,7 @@ def compile(src_file):
     print(ast.unparse(flatten_tree))
     
     explicated_code = explicate.tree_to_str(flatten_tree.body)
-    print(explicated_code)
+    # print(explicated_code)
     explicated_tree = ast.parse(explicated_code)
     
     print('--------------Explicate code-------')
