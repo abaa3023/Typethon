@@ -194,6 +194,18 @@ def p_express_is_statement(t):
     
     
 #----------------------------P1 EXPRESSIONS-----------------------------
+#Grammar for IS and OR
+
+def p_expression_compare(t):
+    '''expression : expression IS expression
+                  | expression OR expression'''
+    # p[0] = ('COMPARE', p[2], p[1], p[3])
+    op = Is()
+    if t[2] == 'or':
+        op = Or()
+        
+    t[0] = Compare(left=t[1], ops=[op], comparators=[t[3]])
+
 #Grammar rules for lists
 def p_expr_expr_list(t):
     'expression : expr_list'
