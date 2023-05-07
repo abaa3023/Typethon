@@ -41,7 +41,7 @@ START0:
  pushl %ebx
  call set_subscript
  addl $(12), %esp
- movl %ebx, -4(%ebp)
+ movl %ebx, %esi
  pushl $(2)
  call inject_int
  addl $(4), %esp
@@ -77,7 +77,7 @@ START0:
  call set_subscript
  addl $(12), %esp
  movl %edi, %eax
- movl -4(%ebp), %edi
+ movl %esi, %edi
  movl %eax, %ebx
  pushl %edi
  call is_big
@@ -105,7 +105,7 @@ IF2:
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, %esi
+ movl %eax, -4(%ebp)
  jmp BB3
 E1:
  pushl %ebx
@@ -156,9 +156,9 @@ BB2:
  pushl %ecx
  call inject_int
  addl $(4), %esp
- movl %eax, %esi
+ movl %eax, -4(%ebp)
 BB3:
- pushl %esi
+ pushl -4(%ebp)
  call print_any
  addl $(4), %esp
 END0:

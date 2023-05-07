@@ -4,7 +4,9 @@
 # x = [[12, 13, 14], 2, 3]
 # print(x[0][1])
 
-x = [1 + 2, 3 + 4]
+a = True
+b = False
+x = not (a or b) == (not a) and (not b)
 print(x)
 
 # x = 1

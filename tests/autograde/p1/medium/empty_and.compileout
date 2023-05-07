@@ -78,10 +78,10 @@ else:
     new_temp1 = new_temp0
 new_temp2 = new_temp1
 print(new_temp2)
-<ast.List object at 0x7fc00de28040>
-<ast.Constant object at 0x7fc00de2b550>
-<ast.Name object at 0x7fc00de4c250>
-<ast.Name object at 0x7fc00de4c4c0>
+<ast.List object at 0x7fcabbb38070>
+<ast.Constant object at 0x7fcabbb3b5b0>
+<ast.Name object at 0x7fcabbb54280>
+<ast.Name object at 0x7fcabbb544f0>
 
 new_temp0 = inject_big(create_list(inject_int(0)))
 if(is_true(new_temp0)):
@@ -153,12 +153,12 @@ call  print new_temp2
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp3': set(), 'new_temp4': set(), 'new_temp5': set(), 'new_temp0': {'new_temp6', 'ecx', 'eax', 'edx'}, 'eax': {'new_temp0'}, 'ecx': {'new_temp0'}, 'edx': {'new_temp0'}, 'new_temp6': {'new_temp0'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp7': set(), 'new_temp1': set(), 'new_temp2': set()}
+Interference Graph:  {'new_temp3': set(), 'new_temp4': set(), 'new_temp5': set(), 'new_temp0': {'edx', 'ecx', 'eax', 'new_temp6'}, 'eax': {'new_temp0'}, 'ecx': {'new_temp0'}, 'edx': {'new_temp0'}, 'new_temp6': {'new_temp0'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp7': set(), 'new_temp1': set(), 'new_temp2': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 4, 'new_temp6': 1, 'new_temp7': 1, 'new_temp3': 1, 'new_temp5': 1, 'new_temp2': 1, 'new_temp4': 1, 'new_temp1': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 4, 'new_temp6': 1, 'new_temp1': 1, 'new_temp2': 1, 'new_temp4': 1, 'new_temp7': 1, 'new_temp5': 1, 'new_temp3': 1}
 Spilled set:
  set()
 
@@ -171,7 +171,7 @@ continue_looping
 
 
 
-Homes for CFG0:  {'new_temp0': 'edi', 'new_temp6': 'eax', 'new_temp7': 'eax', 'new_temp3': 'eax', 'new_temp5': 'eax', 'new_temp2': 'eax', 'new_temp4': 'eax', 'new_temp1': 'eax'}
+Homes for CFG0:  {'new_temp0': 'edi', 'new_temp6': 'eax', 'new_temp1': 'eax', 'new_temp2': 'eax', 'new_temp4': 'eax', 'new_temp7': 'eax', 'new_temp5': 'eax', 'new_temp3': 'eax'}
 new_temp3
 new_temp3
 new_temp4

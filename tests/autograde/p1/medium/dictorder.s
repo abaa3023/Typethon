@@ -39,7 +39,7 @@ START0:
  call inject_int
  addl $(4), %esp
  movl %eax, %edi
- pushl $(1)
+ pushl $(0)
  call inject_bool
  addl $(4), %esp
  pushl %eax
@@ -59,7 +59,7 @@ START0:
  pushl %ebx
  call set_subscript
  addl $(12), %esp
- pushl $(1)
+ pushl $(0)
  call inject_bool
  addl $(4), %esp
  movl %eax, %edi

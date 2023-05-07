@@ -49,7 +49,7 @@ Module(
         Assign(
             targets=[
                 Name(id='b', ctx=Store())],
-            value=Constant(value=True)),
+            value=Constant(value=False)),
         Assign(
             targets=[
                 Name(id='x', ctx=Store())],
@@ -95,7 +95,7 @@ Module(
           Assign(
                targets=[
                     Name(id='b', ctx=Store())],
-               value=Constant(value=True)),
+               value=Constant(value=False)),
           Assign(
                targets=[
                     Name(id='x', ctx=Store())],
@@ -136,7 +136,7 @@ Module(
           Assign(
                targets=[
                     Name(id='b', ctx=Store())],
-               value=Constant(value=True)),
+               value=Constant(value=False)),
           Assign(
                targets=[
                     Name(id='new_temp0', ctx=Store())],

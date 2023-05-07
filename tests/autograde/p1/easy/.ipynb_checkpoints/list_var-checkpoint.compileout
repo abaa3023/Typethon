@@ -137,11 +137,11 @@ c = 3
 new_temp0 = [a, b, c]
 x = new_temp0
 print(x)
-<ast.Constant object at 0x7f07dcd5fac0>
-<ast.Constant object at 0x7f07dcd5c0d0>
-<ast.Constant object at 0x7f07dcda7e50>
-<ast.List object at 0x7f07dcd801c0>
-<ast.Name object at 0x7f07dcd80730>
+<ast.Constant object at 0x7f8170697af0>
+<ast.Constant object at 0x7f8170694100>
+<ast.Constant object at 0x7f81706dfe80>
+<ast.List object at 0x7f81706b81f0>
+<ast.Name object at 0x7f81706b8760>
 
 a = inject_int(1)
 b = inject_int(2)
@@ -227,14 +227,14 @@ call  print x
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp1': set(), 'a': {'new_temp2', 'new_temp4', 'new_temp3', 'edx', 'eax', 'new_temp6', 'new_temp7', 'b', 'c', 'new_temp5', 'ecx', 'new_temp0'}, 'eax': {'new_temp0', 'b', 'a', 'c'}, 'ecx': {'new_temp0', 'b', 'a', 'c'}, 'edx': {'new_temp0', 'b', 'a', 'c'}, 'new_temp2': {'a'}, 'b': {'new_temp8', 'new_temp4', 'new_temp3', 'edx', 'eax', 'new_temp6', 'new_temp7', 'a', 'c', 'new_temp5', 'ecx', 'new_temp0'}, 'new_temp3': {'b', 'a'}, 'c': {'new_temp8', 'new_temp4', 'new_temp9', 'edx', 'eax', 'new_temp6', 'new_temp7', 'b', 'a', 'new_temp5', 'ecx', 'new_temp0'}, 'new_temp4': {'b', 'a', 'c'}, 'new_temp5': {'b', 'a', 'c'}, 'new_temp6': {'b', 'a', 'c'}, 'new_temp0': {'new_temp8', 'new_temp9', 'edx', 'eax', 'new_temp7', 'b', 'a', 'c', 'ecx'}, 'new_temp7': {'b', 'a', 'c', 'new_temp0'}, 'new_temp8': {'b', 'c', 'new_temp0'}, 'new_temp9': {'c', 'new_temp0'}, 'x': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
+Interference Graph:  {'new_temp1': set(), 'a': {'new_temp4', 'c', 'new_temp7', 'eax', 'edx', 'ecx', 'new_temp5', 'new_temp0', 'new_temp3', 'new_temp6', 'b', 'new_temp2'}, 'eax': {'c', 'b', 'a', 'new_temp0'}, 'ecx': {'c', 'b', 'a', 'new_temp0'}, 'edx': {'c', 'b', 'a', 'new_temp0'}, 'new_temp2': {'a'}, 'b': {'c', 'new_temp8', 'new_temp7', 'eax', 'edx', 'a', 'ecx', 'new_temp5', 'new_temp0', 'new_temp3', 'new_temp6', 'new_temp4'}, 'new_temp3': {'b', 'a'}, 'c': {'new_temp8', 'new_temp7', 'eax', 'a', 'edx', 'b', 'ecx', 'new_temp5', 'new_temp0', 'new_temp9', 'new_temp6', 'new_temp4'}, 'new_temp4': {'c', 'b', 'a'}, 'new_temp5': {'c', 'b', 'a'}, 'new_temp6': {'c', 'b', 'a'}, 'new_temp0': {'c', 'new_temp8', 'new_temp7', 'eax', 'a', 'edx', 'ecx', 'new_temp9', 'b'}, 'new_temp7': {'c', 'b', 'a', 'new_temp0'}, 'new_temp8': {'c', 'b', 'new_temp0'}, 'new_temp9': {'c', 'new_temp0'}, 'x': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp0': 4, 'c': 5, 'a': 6, 'b': 7, 'new_temp7': 1, 'new_temp5': 1, 'new_temp6': 1, 'new_temp9': 1, 'new_temp4': 1, 'new_temp8': 1, 'new_temp3': 1, 'new_temp2': 1, 'new_temp1': 1, 'x': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'b': 4, 'new_temp0': 5, 'a': 6, 'c': 7, 'new_temp7': 1, 'new_temp4': 1, 'new_temp6': 1, 'new_temp3': 1, 'new_temp5': 1, 'new_temp8': 1, 'new_temp9': 1, 'new_temp2': 1, 'x': 1, 'new_temp1': 1}
 Spilled set:
- {'b'}
+ {'c'}
 
 
 --------------Spilling----------------
@@ -245,15 +245,15 @@ continue_looping
 
 
 
-Homes for CFG0:  {'b': -4, 'new_temp0': 'edi', 'c': 'ebx', 'a': 'esi', 'new_temp7': 'eax', 'new_temp5': 'eax', 'new_temp6': 'eax', 'new_temp9': 'eax', 'new_temp4': 'eax', 'new_temp8': 'eax', 'new_temp3': 'eax', 'new_temp2': 'eax', 'new_temp1': 'eax', 'x': 'eax'}
+Homes for CFG0:  {'c': -4, 'b': 'edi', 'new_temp0': 'ebx', 'a': 'esi', 'new_temp7': 'eax', 'new_temp4': 'eax', 'new_temp6': 'eax', 'new_temp3': 'eax', 'new_temp5': 'eax', 'new_temp8': 'eax', 'new_temp9': 'eax', 'new_temp2': 'eax', 'x': 'eax', 'new_temp1': 'eax'}
 new_temp1
 new_temp1
 a
 new_temp2
 new_temp2
+b
 new_temp3
 new_temp3
-c
 new_temp4
 new_temp4
 new_temp5
@@ -266,10 +266,10 @@ a
 new_temp7
 new_temp0
 new_temp8
+b
 new_temp8
 new_temp0
 new_temp9
-c
 new_temp9
 new_temp0
 new_temp0

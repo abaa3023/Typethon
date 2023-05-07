@@ -27,44 +27,44 @@ E1:
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, %edi
+ movl %eax, %ebx
  pushl $(0)
  call inject_int
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, %edi
  pushl $(1)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl %ebx
  pushl %edi
+ pushl %ebx
  call set_subscript
  addl $(12), %esp
  pushl $(1)
  call inject_int
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, %edi
  pushl $(2)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl %ebx
  pushl %edi
+ pushl %ebx
  call set_subscript
  addl $(12), %esp
  pushl $(2)
  call inject_int
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, %edi
  pushl $(3)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl %ebx
  pushl %edi
+ pushl %ebx
  call set_subscript
  addl $(12), %esp
- movl %edi, %eax
+ movl %ebx, %eax
 BB1:
  pushl %eax
  call print_any

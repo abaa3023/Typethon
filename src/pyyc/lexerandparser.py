@@ -246,7 +246,10 @@ def p_elements(t):
     if isinstance(t[1],int):
         new_node = Constant(value=t[1], ctx=Load())
     elif isinstance(t[1],str) and t[1] == 'True' or t[1] == 'False':
-        new_node = Constant(value=bool(t[1]), ctx=Load())
+        val = True
+        if t[1] == 'False':
+            val = False
+        new_node = Constant(value=val, ctx=Load())
     elif isinstance(t[1],str):
         new_node = Name(id=t[1], ctx=Load())
     else:
@@ -514,7 +517,10 @@ def p_assignment(t):
     
 def p_bool_expression(t):
     'expression : BOOL'
-    t[0] = Constant(value=bool(t[1]))
+    val = True
+    if t[1] == 'False':
+        val = False
+    t[0] = Constant(value=val)
     
 def p_plus_expression(t):
     'expression : expression PLUS expression'

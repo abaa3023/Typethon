@@ -15,41 +15,41 @@ START0:
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, %edi
+ movl %eax, %ebx
  pushl $(0)
  call inject_int
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, %edi
  pushl $(12)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl %ebx
  pushl %edi
+ pushl %ebx
  call set_subscript
  addl $(12), %esp
  pushl $(1)
  call inject_int
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, %edi
  pushl $(13)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl %ebx
  pushl %edi
+ pushl %ebx
  call set_subscript
  addl $(12), %esp
  pushl $(2)
  call inject_int
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, %edi
  pushl $(14)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl %ebx
  pushl %edi
+ pushl %ebx
  call set_subscript
  addl $(12), %esp
  pushl $(3)
@@ -61,40 +61,39 @@ START0:
  pushl %eax
  call inject_big
  addl $(4), %esp
- movl %eax, %ebx
+ movl %eax, %edi
  pushl $(0)
  call inject_int
  addl $(4), %esp
- pushl %edi
- pushl %eax
  pushl %ebx
+ pushl %eax
+ pushl %edi
  call set_subscript
  addl $(12), %esp
  pushl $(1)
  call inject_int
  addl $(4), %esp
- movl %eax, %edi
+ movl %eax, %ebx
  pushl $(2)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl %edi
  pushl %ebx
+ pushl %edi
  call set_subscript
  addl $(12), %esp
  pushl $(2)
  call inject_int
  addl $(4), %esp
- movl %eax, %edi
+ movl %eax, %ebx
  pushl $(3)
  call inject_int
  addl $(4), %esp
  pushl %eax
- pushl %edi
  pushl %ebx
+ pushl %edi
  call set_subscript
  addl $(12), %esp
- movl %ebx, %edi
  pushl $(0)
  call inject_int
  addl $(4), %esp
