@@ -26,7 +26,7 @@ def compile(src_file):
     print('--------------Original code----------------')
     print(prog)
     
-    #tree = ast.parse(prog)
+    #tree1 = ast.parse(prog)
     tree = createASTFromMyParser(src_file)
     addparent.add_Parent(tree)
     # tree = createASTFromMyParser(src_file)
@@ -34,13 +34,19 @@ def compile(src_file):
     print("------------------Tree of original code--------------")
     print(ast.dump(tree,indent=4))
     
+
+    
+    
+    print("------------------CORRECT TREE--------------------")
+    #print(ast.dump(tree1,indent=4))
+    
+    #Type check after parse
     TypeCheck().visit(tree)
     
     tree = RemoveAnnAssign().visit(tree)
     
     
-    # print("------------------CORRECT TREE--------------------")
-    # print(ast.dump(tree1,indent=4))
+    
     print("------------------Tree after removing AnnAssign--------------")
     print(ast.dump(tree,indent=4))
     
@@ -48,6 +54,9 @@ def compile(src_file):
     
     print('--------------Code after flattening-------')
     print(ast.unparse(flatten_tree))
+    
+    
+
     
     explicated_code = explicate.tree_to_str(flatten_tree.body)
     # print(explicated_code)

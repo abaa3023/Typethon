@@ -2,7 +2,10 @@
 # print(x)
 
 
-x:list[int] = [0,1,2]
+# x:list[int] = [0,1,2]
+# print(x)
+Int x = 1
+
 print(x)
 
 # x = [[12, 13, 14], 2, 3]

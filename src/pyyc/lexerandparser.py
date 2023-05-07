@@ -553,7 +553,7 @@ def p_assignment(t):
     else:
         annotation_ast_obj = Name(id=annotation,ctx=Load())
     
-    t[0] = AnnAssign(targets=[Name(id=t[2], ctx=Store())], annotation=annotation_ast_obj, value=t[4])
+    t[0] = AnnAssign(target=[Name(id=t[2], ctx=Store())], annotation=annotation_ast_obj, value=t[4])
     
 def p_bool_expression(t):
     'expression : BOOL'
