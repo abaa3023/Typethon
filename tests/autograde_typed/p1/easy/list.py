@@ -1,2 +1,2 @@
-x:list[int] = [1, 2, 3]
+x:list[int] = []
 print(x)
