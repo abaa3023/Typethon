@@ -1,26 +1,49 @@
 --------------Original code----------------
 print(------2)
+------------------Tree of original code--------------
 Module(
-     body=[
-          Expr(
-               value=Call(
-                    func=Name(id='print', ctx=Load()),
-                    args=[
-                         UnaryOp(
-                              op=USub(),
-                              operand=UnaryOp(
-                                   op=USub(),
-                                   operand=UnaryOp(
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    UnaryOp(
+                        op=USub(),
+                        operand=UnaryOp(
+                            op=USub(),
+                            operand=UnaryOp(
+                                op=USub(),
+                                operand=UnaryOp(
+                                    op=USub(),
+                                    operand=UnaryOp(
                                         op=USub(),
                                         operand=UnaryOp(
-                                             op=USub(),
-                                             operand=UnaryOp(
-                                                  op=USub(),
-                                                  operand=UnaryOp(
-                                                       op=USub(),
-                                                       operand=Constant(value=2)))))))],
-                    keywords=[]))],
-     type_ignores=[])
+                                            op=USub(),
+                                            operand=Constant(value=2)))))))],
+                keywords=[]))],
+    type_ignores=[])
+------------------Tree after removing AnnAssign--------------
+Module(
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    UnaryOp(
+                        op=USub(),
+                        operand=UnaryOp(
+                            op=USub(),
+                            operand=UnaryOp(
+                                op=USub(),
+                                operand=UnaryOp(
+                                    op=USub(),
+                                    operand=UnaryOp(
+                                        op=USub(),
+                                        operand=UnaryOp(
+                                            op=USub(),
+                                            operand=Constant(value=2)))))))],
+                keywords=[]))],
+    type_ignores=[])
 Module(
      body=[
           Assign(
@@ -74,67 +97,13 @@ new_temp3 = -new_temp2
 new_temp4 = -new_temp3
 new_temp5 = -new_temp4
 print(new_temp5)
-inject_int(-2)
-inject_int(-project_int(new_temp0))
-inject_int(-project_bool(new_temp0))
-inject_int(-project_int(new_temp1))
-inject_int(-project_bool(new_temp1))
-inject_int(-project_int(new_temp2))
-inject_int(-project_bool(new_temp2))
-inject_int(-project_int(new_temp3))
-inject_int(-project_bool(new_temp3))
-inject_int(-project_int(new_temp4))
-inject_int(-project_bool(new_temp4))
-
-new_temp0 = inject_int(-2)
-if(is_int(new_temp0)):
-	new_temp1 = inject_int(-project_int(new_temp0))
-else:
-	if(is_bool(new_temp0)):
-		new_temp1 = inject_int(-project_bool(new_temp0))
-if(is_int(new_temp1)):
-	new_temp2 = inject_int(-project_int(new_temp1))
-else:
-	if(is_bool(new_temp1)):
-		new_temp2 = inject_int(-project_bool(new_temp1))
-if(is_int(new_temp2)):
-	new_temp3 = inject_int(-project_int(new_temp2))
-else:
-	if(is_bool(new_temp2)):
-		new_temp3 = inject_int(-project_bool(new_temp2))
-if(is_int(new_temp3)):
-	new_temp4 = inject_int(-project_int(new_temp3))
-else:
-	if(is_bool(new_temp3)):
-		new_temp4 = inject_int(-project_bool(new_temp3))
-if(is_int(new_temp4)):
-	new_temp5 = inject_int(-project_int(new_temp4))
-else:
-	if(is_bool(new_temp4)):
-		new_temp5 = inject_int(-project_bool(new_temp4))
-print(new_temp5)
 --------------Explicate code-------
 new_temp0 = inject_int(-2)
-if is_int(new_temp0):
-    new_temp1 = inject_int(-project_int(new_temp0))
-elif is_bool(new_temp0):
-    new_temp1 = inject_int(-project_bool(new_temp0))
-if is_int(new_temp1):
-    new_temp2 = inject_int(-project_int(new_temp1))
-elif is_bool(new_temp1):
-    new_temp2 = inject_int(-project_bool(new_temp1))
-if is_int(new_temp2):
-    new_temp3 = inject_int(-project_int(new_temp2))
-elif is_bool(new_temp2):
-    new_temp3 = inject_int(-project_bool(new_temp2))
-if is_int(new_temp3):
-    new_temp4 = inject_int(-project_int(new_temp3))
-elif is_bool(new_temp3):
-    new_temp4 = inject_int(-project_bool(new_temp3))
-if is_int(new_temp4):
-    new_temp5 = inject_int(-project_int(new_temp4))
-elif is_bool(new_temp4):
-    new_temp5 = inject_int(-project_bool(new_temp4))
+new_temp1 = inject_int(-project_int(new_temp0))
+new_temp2 = inject_int(-project_int(new_temp1))
+new_temp3 = inject_int(-project_int(new_temp2))
+new_temp4 = inject_int(-project_int(new_temp3))
+new_temp5 = inject_int(-project_int(new_temp4))
 print(new_temp5)
 
 
@@ -142,71 +111,26 @@ print(new_temp5)
 new_temp6 = -2
 new_temp7 = inject_int(new_temp6)
 new_temp0 = new_temp7
-new_temp8 = is_int(new_temp0)
-if new_temp8:
-    new_temp9 = project_int(new_temp0)
-    new_temp10 = -new_temp9
-    new_temp11 = inject_int(new_temp10)
-    new_temp1 = new_temp11
-else:
-    new_temp12 = is_bool(new_temp0)
-    if new_temp12:
-        new_temp13 = project_bool(new_temp0)
-        new_temp14 = -new_temp13
-        new_temp15 = inject_int(new_temp14)
-        new_temp1 = new_temp15
-new_temp16 = is_int(new_temp1)
-if new_temp16:
-    new_temp17 = project_int(new_temp1)
-    new_temp18 = -new_temp17
-    new_temp19 = inject_int(new_temp18)
-    new_temp2 = new_temp19
-else:
-    new_temp20 = is_bool(new_temp1)
-    if new_temp20:
-        new_temp21 = project_bool(new_temp1)
-        new_temp22 = -new_temp21
-        new_temp23 = inject_int(new_temp22)
-        new_temp2 = new_temp23
-new_temp24 = is_int(new_temp2)
-if new_temp24:
-    new_temp25 = project_int(new_temp2)
-    new_temp26 = -new_temp25
-    new_temp27 = inject_int(new_temp26)
-    new_temp3 = new_temp27
-else:
-    new_temp28 = is_bool(new_temp2)
-    if new_temp28:
-        new_temp29 = project_bool(new_temp2)
-        new_temp30 = -new_temp29
-        new_temp31 = inject_int(new_temp30)
-        new_temp3 = new_temp31
-new_temp32 = is_int(new_temp3)
-if new_temp32:
-    new_temp33 = project_int(new_temp3)
-    new_temp34 = -new_temp33
-    new_temp35 = inject_int(new_temp34)
-    new_temp4 = new_temp35
-else:
-    new_temp36 = is_bool(new_temp3)
-    if new_temp36:
-        new_temp37 = project_bool(new_temp3)
-        new_temp38 = -new_temp37
-        new_temp39 = inject_int(new_temp38)
-        new_temp4 = new_temp39
-new_temp40 = is_int(new_temp4)
-if new_temp40:
-    new_temp41 = project_int(new_temp4)
-    new_temp42 = -new_temp41
-    new_temp43 = inject_int(new_temp42)
-    new_temp5 = new_temp43
-else:
-    new_temp44 = is_bool(new_temp4)
-    if new_temp44:
-        new_temp45 = project_bool(new_temp4)
-        new_temp46 = -new_temp45
-        new_temp47 = inject_int(new_temp46)
-        new_temp5 = new_temp47
+new_temp8 = project_int(new_temp0)
+new_temp9 = -new_temp8
+new_temp10 = inject_int(new_temp9)
+new_temp1 = new_temp10
+new_temp11 = project_int(new_temp1)
+new_temp12 = -new_temp11
+new_temp13 = inject_int(new_temp12)
+new_temp2 = new_temp13
+new_temp14 = project_int(new_temp2)
+new_temp15 = -new_temp14
+new_temp16 = inject_int(new_temp15)
+new_temp3 = new_temp16
+new_temp17 = project_int(new_temp3)
+new_temp18 = -new_temp17
+new_temp19 = inject_int(new_temp18)
+new_temp4 = new_temp19
+new_temp20 = project_int(new_temp4)
+new_temp21 = -new_temp20
+new_temp22 = inject_int(new_temp21)
+new_temp5 = new_temp22
 print(new_temp5)
 
 
@@ -216,151 +140,41 @@ negl  new_temp6
 call  inject_int new_temp6
 movl  eax ,  new_temp7
 movl  new_temp7 ,  new_temp0
-call  is_int new_temp0
-movl  eax ,  new_temp8
-if1
-cmp 0, new_temp8
-je else1
-then1
 call  project_int new_temp0
-movl  eax ,  new_temp9
-movl  new_temp9 ,  new_temp10
-negl  new_temp10
-call  inject_int new_temp10
-movl  eax ,  new_temp11
-movl  new_temp11 ,  new_temp1
-else1
-call  is_bool new_temp0
-movl  eax ,  new_temp12
-if2
-cmp 0, new_temp12
-je end if2
-then2
-call  project_bool new_temp0
-movl  eax ,  new_temp13
-movl  new_temp13 ,  new_temp14
-negl  new_temp14
-call  inject_int new_temp14
-movl  eax ,  new_temp15
-movl  new_temp15 ,  new_temp1
-end if2
-end if1
-call  is_int new_temp1
-movl  eax ,  new_temp16
-if2
-cmp 0, new_temp16
-je else2
-then2
+movl  eax ,  new_temp8
+movl  new_temp8 ,  new_temp9
+negl  new_temp9
+call  inject_int new_temp9
+movl  eax ,  new_temp10
+movl  new_temp10 ,  new_temp1
 call  project_int new_temp1
+movl  eax ,  new_temp11
+movl  new_temp11 ,  new_temp12
+negl  new_temp12
+call  inject_int new_temp12
+movl  eax ,  new_temp13
+movl  new_temp13 ,  new_temp2
+call  project_int new_temp2
+movl  eax ,  new_temp14
+movl  new_temp14 ,  new_temp15
+negl  new_temp15
+call  inject_int new_temp15
+movl  eax ,  new_temp16
+movl  new_temp16 ,  new_temp3
+call  project_int new_temp3
 movl  eax ,  new_temp17
 movl  new_temp17 ,  new_temp18
 negl  new_temp18
 call  inject_int new_temp18
 movl  eax ,  new_temp19
-movl  new_temp19 ,  new_temp2
-else2
-call  is_bool new_temp1
-movl  eax ,  new_temp20
-if3
-cmp 0, new_temp20
-je end if3
-then3
-call  project_bool new_temp1
-movl  eax ,  new_temp21
-movl  new_temp21 ,  new_temp22
-negl  new_temp22
-call  inject_int new_temp22
-movl  eax ,  new_temp23
-movl  new_temp23 ,  new_temp2
-end if3
-end if2
-call  is_int new_temp2
-movl  eax ,  new_temp24
-if3
-cmp 0, new_temp24
-je else3
-then3
-call  project_int new_temp2
-movl  eax ,  new_temp25
-movl  new_temp25 ,  new_temp26
-negl  new_temp26
-call  inject_int new_temp26
-movl  eax ,  new_temp27
-movl  new_temp27 ,  new_temp3
-else3
-call  is_bool new_temp2
-movl  eax ,  new_temp28
-if4
-cmp 0, new_temp28
-je end if4
-then4
-call  project_bool new_temp2
-movl  eax ,  new_temp29
-movl  new_temp29 ,  new_temp30
-negl  new_temp30
-call  inject_int new_temp30
-movl  eax ,  new_temp31
-movl  new_temp31 ,  new_temp3
-end if4
-end if3
-call  is_int new_temp3
-movl  eax ,  new_temp32
-if4
-cmp 0, new_temp32
-je else4
-then4
-call  project_int new_temp3
-movl  eax ,  new_temp33
-movl  new_temp33 ,  new_temp34
-negl  new_temp34
-call  inject_int new_temp34
-movl  eax ,  new_temp35
-movl  new_temp35 ,  new_temp4
-else4
-call  is_bool new_temp3
-movl  eax ,  new_temp36
-if5
-cmp 0, new_temp36
-je end if5
-then5
-call  project_bool new_temp3
-movl  eax ,  new_temp37
-movl  new_temp37 ,  new_temp38
-negl  new_temp38
-call  inject_int new_temp38
-movl  eax ,  new_temp39
-movl  new_temp39 ,  new_temp4
-end if5
-end if4
-call  is_int new_temp4
-movl  eax ,  new_temp40
-if5
-cmp 0, new_temp40
-je else5
-then5
+movl  new_temp19 ,  new_temp4
 call  project_int new_temp4
-movl  eax ,  new_temp41
-movl  new_temp41 ,  new_temp42
-negl  new_temp42
-call  inject_int new_temp42
-movl  eax ,  new_temp43
-movl  new_temp43 ,  new_temp5
-else5
-call  is_bool new_temp4
-movl  eax ,  new_temp44
-if6
-cmp 0, new_temp44
-je end if6
-then6
-call  project_bool new_temp4
-movl  eax ,  new_temp45
-movl  new_temp45 ,  new_temp46
-negl  new_temp46
-call  inject_int new_temp46
-movl  eax ,  new_temp47
-movl  new_temp47 ,  new_temp5
-end if6
-end if5
+movl  eax ,  new_temp20
+movl  new_temp20 ,  new_temp21
+negl  new_temp21
+call  inject_int new_temp21
+movl  eax ,  new_temp22
+movl  new_temp22 ,  new_temp5
 call  print new_temp5
 
 
@@ -376,14 +190,14 @@ call  print new_temp5
 --------------Interference----------------
 
 
-Interference Graph:  {'new_temp2': {'new_temp0', 'new_temp8', 'new_temp24', 'new_temp1', 'new_temp9', 'new_temp20', 'new_temp3', 'new_temp4', 'eax', 'new_temp5', 'edx', 'new_temp28', 'new_temp11', 'new_temp14', 'new_temp10', 'new_temp13', 'new_temp15', 'new_temp16', 'ecx', 'new_temp12', 'new_temp6', 'new_temp7'}, 'new_temp1': {'new_temp0', 'new_temp8', 'edx', 'new_temp2', 'new_temp12', 'new_temp20', 'new_temp3', 'new_temp4', 'new_temp16', 'ecx', 'eax', 'new_temp6', 'new_temp5', 'new_temp7'}, 'new_temp3': {'new_temp0', 'new_temp8', 'new_temp22', 'new_temp24', 'new_temp1', 'new_temp9', 'new_temp20', 'new_temp4', 'new_temp17', 'new_temp36', 'eax', 'new_temp32', 'new_temp5', 'edx', 'new_temp2', 'new_temp21', 'new_temp11', 'new_temp28', 'new_temp14', 'new_temp18', 'new_temp10', 'new_temp23', 'new_temp19', 'new_temp13', 'new_temp15', 'new_temp16', 'ecx', 'new_temp12', 'new_temp6', 'new_temp7'}, 'new_temp4': {'new_temp22', 'new_temp12', 'new_temp24', 'new_temp9', 'new_temp25', 'new_temp3', 'new_temp44', 'new_temp32', 'new_temp40', 'new_temp21', 'new_temp14', 'new_temp29', 'new_temp10', 'new_temp23', 'new_temp19', 'new_temp15', 'ecx', 'new_temp6', 'new_temp0', 'new_temp8', 'new_temp31', 'new_temp1', 'new_temp20', 'new_temp27', 'new_temp26', 'new_temp17', 'new_temp36', 'new_temp5', 'edx', 'new_temp2', 'new_temp28', 'new_temp11', 'new_temp18', 'new_temp30', 'new_temp13', 'new_temp16', 'eax', 'new_temp7'}, 'new_temp5': {'new_temp22', 'new_temp12', 'new_temp24', 'new_temp9', 'new_temp25', 'new_temp3', 'new_temp38', 'new_temp44', 'new_temp32', 'new_temp34', 'new_temp40', 'new_temp35', 'new_temp21', 'new_temp14', 'new_temp29', 'new_temp10', 'new_temp23', 'new_temp19', 'new_temp15', 'new_temp39', 'ecx', 'new_temp6', 'new_temp0', 'new_temp8', 'new_temp31', 'new_temp1', 'new_temp20', 'new_temp27', 'new_temp26', 'new_temp33', 'new_temp37', 'new_temp4', 'new_temp17', 'new_temp36', 'edx', 'new_temp2', 'new_temp28', 'new_temp11', 'new_temp18', 'new_temp30', 'new_temp13', 'new_temp16', 'eax', 'new_temp7'}, 'new_temp6': {'new_temp2', 'new_temp1', 'new_temp3', 'new_temp4', 'new_temp5'}, 'eax': {'new_temp0', 'new_temp2', 'new_temp1', 'new_temp3', 'new_temp4', 'new_temp5'}, 'ecx': {'new_temp0', 'new_temp2', 'new_temp1', 'new_temp3', 'new_temp4', 'new_temp5'}, 'edx': {'new_temp0', 'new_temp2', 'new_temp1', 'new_temp3', 'new_temp4', 'new_temp5'}, 'new_temp7': {'new_temp3', 'new_temp2', 'new_temp4', 'new_temp1', 'new_temp5'}, 'new_temp0': {'new_temp8', 'new_temp2', 'edx', 'new_temp12', 'new_temp1', 'new_temp3', 'new_temp4', 'ecx', 'eax', 'new_temp5'}, 'new_temp8': {'new_temp0', 'new_temp3', 'new_temp2', 'new_temp4', 'new_temp1', 'new_temp5'}, 'edi': set(), 'ebx': set(), 'esi': set(), 'new_temp9': {'new_temp3', 'new_temp2', 'new_temp4', 'new_temp5'}, 'new_temp10': {'new_temp2', 'new_temp3', 'new_temp4', 'new_temp5'}, 'new_temp11': {'new_temp3', 'new_temp2', 'new_temp4', 'new_temp5'}, 'new_temp12': {'new_temp0', 'new_temp3', 'new_temp2', 'new_temp4', 'new_temp1', 'new_temp5'}, 'new_temp16': {'new_temp3', 'new_temp2', 'new_temp4', 'new_temp1', 'new_temp5'}, 'new_temp13': {'new_temp3', 'new_temp2', 'new_temp4', 'new_temp5'}, 'new_temp14': {'new_temp2', 'new_temp3', 'new_temp4', 'new_temp5'}, 'new_temp15': {'new_temp3', 'new_temp2', 'new_temp4', 'new_temp5'}, 'new_temp17': {'new_temp3', 'new_temp4', 'new_temp5'}, 'new_temp18': {'new_temp3', 'new_temp4', 'new_temp5'}, 'new_temp19': {'new_temp3', 'new_temp4', 'new_temp5'}, 'new_temp20': {'new_temp3', 'new_temp2', 'new_temp4', 'new_temp1', 'new_temp5'}, 'new_temp24': {'new_temp3', 'new_temp2', 'new_temp4', 'new_temp5'}, 'new_temp21': {'new_temp3', 'new_temp4', 'new_temp5'}, 'new_temp22': {'new_temp3', 'new_temp4', 'new_temp5'}, 'new_temp23': {'new_temp3', 'new_temp4', 'new_temp5'}, 'new_temp25': {'new_temp4', 'new_temp5'}, 'new_temp26': {'new_temp4', 'new_temp5'}, 'new_temp27': {'new_temp4', 'new_temp5'}, 'new_temp28': {'new_temp3', 'new_temp2', 'new_temp4', 'new_temp5'}, 'new_temp32': {'new_temp3', 'new_temp4', 'new_temp5'}, 'new_temp29': {'new_temp4', 'new_temp5'}, 'new_temp30': {'new_temp4', 'new_temp5'}, 'new_temp31': {'new_temp4', 'new_temp5'}, 'new_temp33': {'new_temp5'}, 'new_temp34': {'new_temp5'}, 'new_temp35': {'new_temp5'}, 'new_temp36': {'new_temp3', 'new_temp4', 'new_temp5'}, 'new_temp40': {'new_temp4', 'new_temp5'}, 'new_temp37': {'new_temp5'}, 'new_temp38': {'new_temp5'}, 'new_temp39': {'new_temp5'}, 'new_temp41': set(), 'new_temp42': set(), 'new_temp43': set(), 'new_temp44': {'new_temp4', 'new_temp5'}, 'new_temp45': set(), 'new_temp46': set(), 'new_temp47': set()}
+Interference Graph:  {'new_temp6': set(), 'new_temp7': set(), 'new_temp0': set(), 'new_temp8': set(), 'new_temp9': set(), 'new_temp10': set(), 'new_temp1': set(), 'new_temp11': set(), 'new_temp12': set(), 'new_temp13': set(), 'new_temp2': set(), 'new_temp14': set(), 'new_temp15': set(), 'new_temp16': set(), 'new_temp3': set(), 'new_temp17': set(), 'new_temp18': set(), 'new_temp19': set(), 'new_temp4': set(), 'new_temp20': set(), 'new_temp21': set(), 'new_temp22': set(), 'new_temp5': set(), 'eax': set(), 'ecx': set(), 'edx': set(), 'edi': set(), 'ebx': set(), 'esi': set()}
 
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp2': 4, 'new_temp5': 5, 'new_temp4': 6, 'new_temp1': 7, 'new_temp0': 7, 'new_temp3': 7, 'new_temp7': 1, 'new_temp12': 1, 'new_temp16': 1, 'new_temp13': 1, 'new_temp11': 1, 'new_temp28': 1, 'new_temp20': 1, 'new_temp8': 1, 'new_temp6': 1, 'new_temp15': 1, 'new_temp10': 1, 'new_temp14': 1, 'new_temp9': 1, 'new_temp24': 1, 'new_temp19': 1, 'new_temp23': 1, 'new_temp30': 1, 'new_temp18': 1, 'new_temp29': 1, 'new_temp21': 1, 'new_temp40': 1, 'new_temp32': 1, 'new_temp36': 1, 'new_temp17': 1, 'new_temp44': 1, 'new_temp26': 1, 'new_temp27': 1, 'new_temp25': 1, 'new_temp22': 1, 'new_temp31': 1, 'new_temp34': 1, 'new_temp39': 1, 'new_temp37': 1, 'new_temp33': 1, 'new_temp38': 1, 'new_temp35': 1, 'new_temp46': 1, 'new_temp42': 1, 'new_temp43': 1, 'new_temp47': 1, 'new_temp41': 1, 'new_temp45': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp14': 1, 'new_temp21': 1, 'new_temp17': 1, 'new_temp5': 1, 'new_temp10': 1, 'new_temp16': 1, 'new_temp22': 1, 'new_temp12': 1, 'new_temp4': 1, 'new_temp3': 1, 'new_temp11': 1, 'new_temp2': 1, 'new_temp15': 1, 'new_temp0': 1, 'new_temp18': 1, 'new_temp6': 1, 'new_temp8': 1, 'new_temp20': 1, 'new_temp1': 1, 'new_temp7': 1, 'new_temp19': 1, 'new_temp9': 1, 'new_temp13': 1}
 Spilled set:
- {'new_temp0', 'new_temp3', 'new_temp1'}
+ set()
 
 
 --------------Spilling----------------
@@ -394,114 +208,68 @@ continue_looping
 
 
 
-Homes for CFG0:  {'new_temp0': -4, 'new_temp3': -8, 'new_temp1': -12, 'new_temp2': 'edi', 'new_temp5': 'ebx', 'new_temp4': 'esi', 'new_temp7': 'eax', 'new_temp12': 'eax', 'new_temp16': 'eax', 'new_temp13': 'eax', 'new_temp11': 'eax', 'new_temp28': 'eax', 'new_temp20': 'eax', 'new_temp8': 'eax', 'new_temp6': 'eax', 'new_temp15': 'eax', 'new_temp10': 'eax', 'new_temp14': 'eax', 'new_temp9': 'eax', 'new_temp24': 'eax', 'new_temp19': 'eax', 'new_temp23': 'eax', 'new_temp30': 'eax', 'new_temp18': 'eax', 'new_temp29': 'eax', 'new_temp21': 'eax', 'new_temp40': 'eax', 'new_temp32': 'eax', 'new_temp36': 'eax', 'new_temp17': 'eax', 'new_temp44': 'eax', 'new_temp26': 'eax', 'new_temp27': 'eax', 'new_temp25': 'eax', 'new_temp22': 'eax', 'new_temp31': 'eax', 'new_temp34': 'eax', 'new_temp39': 'eax', 'new_temp37': 'eax', 'new_temp33': 'eax', 'new_temp38': 'eax', 'new_temp35': 'eax', 'new_temp46': 'eax', 'new_temp42': 'eax', 'new_temp43': 'eax', 'new_temp47': 'eax', 'new_temp41': 'eax', 'new_temp45': 'eax'}
+Homes for CFG0:  {'new_temp14': 'eax', 'new_temp21': 'eax', 'new_temp17': 'eax', 'new_temp5': 'eax', 'new_temp10': 'eax', 'new_temp16': 'eax', 'new_temp22': 'eax', 'new_temp12': 'eax', 'new_temp4': 'eax', 'new_temp3': 'eax', 'new_temp11': 'eax', 'new_temp2': 'eax', 'new_temp15': 'eax', 'new_temp0': 'eax', 'new_temp18': 'eax', 'new_temp6': 'eax', 'new_temp8': 'eax', 'new_temp20': 'eax', 'new_temp1': 'eax', 'new_temp7': 'eax', 'new_temp19': 'eax', 'new_temp9': 'eax', 'new_temp13': 'eax'}
 new_temp6
 new_temp6
 new_temp6
+ir.func_name =  inject_int
 new_temp7
 new_temp7
+new_temp0
+new_temp0
+ir.func_name =  project_int
 new_temp8
 new_temp8
 new_temp9
 new_temp9
+new_temp9
+ir.func_name =  inject_int
 new_temp10
 new_temp10
-new_temp10
+new_temp1
+new_temp1
+ir.func_name =  project_int
 new_temp11
 new_temp11
 new_temp12
 new_temp12
+new_temp12
+ir.func_name =  inject_int
 new_temp13
 new_temp13
-new_temp14
+new_temp2
+new_temp2
+ir.func_name =  project_int
 new_temp14
 new_temp14
 new_temp15
 new_temp15
+new_temp15
+ir.func_name =  inject_int
 new_temp16
 new_temp16
+new_temp3
+new_temp3
+ir.func_name =  project_int
 new_temp17
 new_temp17
 new_temp18
 new_temp18
 new_temp18
+ir.func_name =  inject_int
 new_temp19
 new_temp19
-new_temp2
+new_temp4
+new_temp4
+ir.func_name =  project_int
 new_temp20
 new_temp20
 new_temp21
 new_temp21
+new_temp21
+ir.func_name =  inject_int
 new_temp22
 new_temp22
-new_temp22
-new_temp23
-new_temp23
-new_temp2
-new_temp2
-new_temp24
-new_temp24
-new_temp2
-new_temp25
-new_temp25
-new_temp26
-new_temp26
-new_temp26
-new_temp27
-new_temp27
-new_temp2
-new_temp28
-new_temp28
-new_temp2
-new_temp29
-new_temp29
-new_temp30
-new_temp30
-new_temp30
-new_temp31
-new_temp31
-new_temp32
-new_temp32
-new_temp33
-new_temp33
-new_temp34
-new_temp34
-new_temp34
-new_temp35
-new_temp35
-new_temp4
-new_temp36
-new_temp36
-new_temp37
-new_temp37
-new_temp38
-new_temp38
-new_temp38
-new_temp39
-new_temp39
-new_temp4
-new_temp4
-new_temp40
-new_temp40
-new_temp4
-new_temp41
-new_temp41
-new_temp42
-new_temp42
-new_temp42
-new_temp43
-new_temp43
-new_temp5
-new_temp4
-new_temp44
-new_temp44
-new_temp4
-new_temp45
-new_temp45
-new_temp46
-new_temp46
-new_temp46
-new_temp47
-new_temp47
 new_temp5
 new_temp5
+ir.func_name =  print

@@ -1,16 +1,29 @@
 --------------Original code----------------
 print(-1)
+------------------Tree of original code--------------
 Module(
-     body=[
-          Expr(
-               value=Call(
-                    func=Name(id='print', ctx=Load()),
-                    args=[
-                         UnaryOp(
-                              op=USub(),
-                              operand=Constant(value=1))],
-                    keywords=[]))],
-     type_ignores=[])
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    UnaryOp(
+                        op=USub(),
+                        operand=Constant(value=1))],
+                keywords=[]))],
+    type_ignores=[])
+------------------Tree after removing AnnAssign--------------
+Module(
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    UnaryOp(
+                        op=USub(),
+                        operand=Constant(value=1))],
+                keywords=[]))],
+    type_ignores=[])
 Module(
      body=[
           Assign(
@@ -28,10 +41,6 @@ Module(
      type_ignores=[])
 --------------Code after flattening-------
 new_temp0 = -1
-print(new_temp0)
-inject_int(-1)
-
-new_temp0 = inject_int(-1)
 print(new_temp0)
 --------------Explicate code-------
 new_temp0 = inject_int(-1)
@@ -71,7 +80,7 @@ Interference Graph:  {'new_temp1': set(), 'new_temp2': set(), 'new_temp0': set()
 
 --------------Coloring----------------
 Colored graph:
- {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp1': 1, 'new_temp2': 1, 'new_temp0': 1}
+ {'eax': 1, 'ecx': 2, 'edx': 3, 'edi': 4, 'ebx': 5, 'esi': 6, 'new_temp2': 1, 'new_temp0': 1, 'new_temp1': 1}
 Spilled set:
  set()
 
@@ -84,11 +93,13 @@ continue_looping
 
 
 
-Homes for CFG0:  {'new_temp1': 'eax', 'new_temp2': 'eax', 'new_temp0': 'eax'}
+Homes for CFG0:  {'new_temp2': 'eax', 'new_temp0': 'eax', 'new_temp1': 'eax'}
 new_temp1
 new_temp1
 new_temp1
+ir.func_name =  inject_int
 new_temp2
 new_temp2
 new_temp0
 new_temp0
+ir.func_name =  print

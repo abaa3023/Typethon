@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "runtime.h"
 
@@ -151,7 +152,7 @@ static void print_pyobj(pyobj x) {
     print_int(project_int(x));
     break;
   case BOOL_TAG:
-    print_bool(project_bool(x));
+    print_bool(x);
     break;
   case FLOAT_TAG:
     print_float(project_float(x));
@@ -178,6 +179,10 @@ static void print_pyobj(pyobj x) {
 // For idiomatic purposes only.
 int eval(int x) {
   return x;
+}
+
+bool bool_eval(int x) {
+  return (bool)x;
 }
 
 int input() {

@@ -1,14 +1,25 @@
 --------------Original code----------------
 print(1)
+------------------Tree of original code--------------
 Module(
-     body=[
-          Expr(
-               value=Call(
-                    func=Name(id='print', ctx=Load()),
-                    args=[
-                         Constant(value=1)],
-                    keywords=[]))],
-     type_ignores=[])
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Constant(value=1)],
+                keywords=[]))],
+    type_ignores=[])
+------------------Tree after removing AnnAssign--------------
+Module(
+    body=[
+        Expr(
+            value=Call(
+                func=Name(id='print', ctx=Load()),
+                args=[
+                    Constant(value=1)],
+                keywords=[]))],
+    type_ignores=[])
 Module(
      body=[
           Expr(
@@ -20,8 +31,6 @@ Module(
      type_ignores=[])
 --------------Code after flattening-------
 print(1)
-
-print(inject_int(1))
 --------------Explicate code-------
 print(inject_int(1))
 
@@ -68,5 +77,7 @@ continue_looping
 
 
 Homes for CFG0:  {'new_temp0': 'eax'}
+ir.func_name =  inject_int
 new_temp0
 new_temp0
+ir.func_name =  print

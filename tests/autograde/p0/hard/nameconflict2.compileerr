@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/home/jovyan/typethon/src/pyyc/compile.py", line 133, in <module>
+    main()
+  File "/home/jovyan/typethon/src/pyyc/compile.py", line 123, in main
+    asm = compile(sys.argv[1])
+  File "/home/jovyan/typethon/src/pyyc/compile.py", line 35, in compile
+    TypeCheck().visit(tree)
+  File "/opt/conda/lib/python3.10/ast.py", line 412, in visit
+    return visitor(node)
+  File "/opt/conda/lib/python3.10/ast.py", line 420, in generic_visit
+    self.visit(item)
+  File "/opt/conda/lib/python3.10/ast.py", line 412, in visit
+    return visitor(node)
+  File "/home/jovyan/typethon/src/pyyc/type_checking/type_check.py", line 75, in visit_Assign
+    self.visit(node.targets[0])
+  File "/opt/conda/lib/python3.10/ast.py", line 412, in visit
+    return visitor(node)
+  File "/home/jovyan/typethon/src/pyyc/type_checking/type_check.py", line 106, in visit_Name
+    raise TypeError(f"No type found for variable {node.id}")
+TypeError: No type found for variable z

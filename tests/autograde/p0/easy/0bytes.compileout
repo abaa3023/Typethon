@@ -1,9 +1,11 @@
 --------------Original code----------------
 
+------------------Tree of original code--------------
+Module(body=[], type_ignores=[])
+------------------Tree after removing AnnAssign--------------
 Module(body=[], type_ignores=[])
 Module(body=[], type_ignores=[])
 --------------Code after flattening-------
-
 
 --------------Explicate code-------
 

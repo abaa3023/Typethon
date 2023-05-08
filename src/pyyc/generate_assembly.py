@@ -28,7 +28,8 @@ library_function_calls = {"print":"print_any",
                           "equal":"equal",
                           "not_equal":"not_equal",
                           "error_pyobj":"error_pyobj",
-                          "int":"eval"
+                          "int":"eval",
+                          "bool":"bool_eval"
                          }
 
 def register_prefix(reg):
