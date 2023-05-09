@@ -205,7 +205,13 @@ class TypeCheck(ast.NodeVisitor):
     def visit_List(self, node):
         self.generic_visit(node)
         
-        list_type = None
+        list_type=None
+        if(isinstance(node.parent, ast.AnnAssign)):
+            if(isinstance(node.parent.annotation.slice, ast.Name)):
+                if(node.parent.annotation.slice.id=='int'):
+                    list_type = Int()
+                elif(node.parent.annotation.slice.id=='bool'):
+                    list_type = Bool()
         
         for ele in node.elts:
             ele_type = ele.type
