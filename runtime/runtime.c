@@ -152,7 +152,7 @@ static void print_pyobj(pyobj x) {
     print_int(project_int(x));
     break;
   case BOOL_TAG:
-    print_bool(x);
+    print_bool(project_bool(x));
     break;
   case FLOAT_TAG:
     print_float(project_float(x));
@@ -181,8 +181,21 @@ int eval(int x) {
   return x;
 }
 
-bool bool_eval(int x) {
-  return (bool)x;
+pyobj bool_eval(pyobj x) {
+  // return (bool)x;
+  switch (tag(x)) {
+      case INT_TAG:
+        int val = project_int(x);
+        if(val !=0)
+            return inject_bool(1); // return True
+        return inject_bool(0); // Return False
+        break;
+      case BOOL_TAG:
+          return x;
+          break;
+      default:       
+          assert(0);
+  }
 }
 
 int input() {

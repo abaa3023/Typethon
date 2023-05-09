@@ -132,17 +132,20 @@ class TypeCheck(ast.NodeVisitor):
         # self.visit(node.func)
         # print("inside call")
         # self.generic_visit(node)
-        if(isinstance(node.parent, ast.AnnAssign) or isinstance(node.parent, ast.UnaryOp) or isinstance(node.parent, ast.Assign) or isinstance(node.parent, ast.BinOp)):
-            if(node.func.id == 'input'):
+        # if(isinstance(node.parent, ast.AnnAssign) or isinstance(node.parent, ast.UnaryOp) or isinstance(node.parent, ast.Assign) or isinstance(node.parent, ast.BinOp)):
+        if(node.func.id == 'input'):
+            try:
                 node.type = node.parent.target.type
-            elif(node.func.id == 'int'):
-                node.type = Int()
-            elif(node.func.id == 'bool'):
-                node.type = Bool()
-            elif(node.func.id == 'list'):
-                node.type = List()
-            elif(node.func.id == 'dict'):
-                node.type = Dict()
+            except:
+                print("couldn't assign type")
+        elif(node.func.id == 'int'):
+            node.type = Int()
+        elif(node.func.id == 'bool'):
+            node.type = Bool()
+        elif(node.func.id == 'list'):
+            node.type = List()
+        elif(node.func.id == 'dict'):
+            node.type = Dict()
         
         if(len(node.args) >0):
             # print("node.args[0] = ", node.args[0])
