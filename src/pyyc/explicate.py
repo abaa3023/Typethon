@@ -362,21 +362,42 @@ def tree_to_str(flattened_tree,prefix = 0):
                     
                     # print("arg's type = ", src.args[0].type)
                     
-                    value = "is_bool(" + arg + ")"
-                    local_if_count = addif(explicate_prog,value,local_if_count)
+                    print(f"{ast.dump(src.args[0])=}")
+                    arg0_type = getattr(src.args[0], 'type', None)
                     
-                    projected_arg = 'project_bool(' + arg + ')'
-                    statement = assignString(dest,inject_int_str(projected_arg))
-                    append_list_with_prefix(explicate_prog,statement,local_if_count)
-                    local_if_count = endif(local_if_count)
+                    if(arg0_type == None):
+                        value = "is_bool(" + arg + ")"
+                        local_if_count = addif(explicate_prog,value,local_if_count)
                     
-                    value = "is_int(" + arg + ")"
-                    local_if_count = addif(explicate_prog,value,local_if_count)
+                        projected_arg = 'project_bool(' + arg + ')'
+                        statement = assignString(dest,inject_int_str(projected_arg))
+                        append_list_with_prefix(explicate_prog,statement,local_if_count)
+                        local_if_count = endif(local_if_count)
+                        value = "is_int(" + arg + ")"
+                        local_if_count = addif(explicate_prog,value,local_if_count)
+
+                        projected_arg = 'project_int(' + arg + ')'
+                        statement = assignString(dest,inject_int_str(projected_arg))
+                        append_list_with_prefix(explicate_prog,statement,local_if_count)
+                        local_if_count = endif(local_if_count)                        
+                    elif(isinstance(arg0_type, Bool)):
+                    # value = "is_bool(" + arg + ")"
+                    # local_if_count = addif(explicate_prog,value,local_if_count)
                     
-                    projected_arg = 'project_int(' + arg + ')'
-                    statement = assignString(dest,inject_int_str(projected_arg))
-                    append_list_with_prefix(explicate_prog,statement,local_if_count)
-                    local_if_count = endif(local_if_count)
+                        projected_arg = 'project_bool(' + arg + ')'
+                        statement = assignString(dest,inject_int_str(projected_arg))
+                        append_list_with_prefix(explicate_prog,statement,local_if_count)
+                        local_if_count = endif(local_if_count)
+                    elif(isinstance(arg0_type, Int)):
+                        # value = "is_int(" + arg + ")"
+                        # local_if_count = addif(explicate_prog,value,local_if_count)
+
+                        projected_arg = 'project_int(' + arg + ')'
+                        statement = assignString(dest,inject_int_str(projected_arg))
+                        append_list_with_prefix(explicate_prog,statement,local_if_count)
+                        local_if_count = endif(local_if_count)
+                    else:
+                        raise Exception("incompatible type")
                     
                 else:
                     explicate_prog.append(assignString(dest,src))
