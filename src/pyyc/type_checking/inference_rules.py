@@ -16,16 +16,16 @@ class InferenceRules:
             if (type2 == Int()):
                 return Int()
             elif (type2 == Bool()):
-                raise TypeError(type1, type2)
+                raise TypeError(f"cannot add {type1}, {type2}")
             else:
-                raise TypeError(Int, type2)
+                raise TypeError(f"cannot add {type1}, {type2}")
         elif(type1 == Bool()):
             if(type2 == Bool()):
                 return Int() # addition of two bools gives an int.
             elif (type2 == Int()):
                 return Int()
             else:
-                raise TypeError(Bool, type2)
+                raise TypeError(f"cannot add {type1}, {type2}")
         
         elif(isinstance(type1, List)):
             if(isinstance(type2, List)):
@@ -33,11 +33,11 @@ class InferenceRules:
                 if type1 == type2:
                     return type1
                 else:
-                    raise TypeError(type1, type2) 
+                    raise TypeError(f"cannot add lists of differing types: {type1}, {type2}")
             else:
-                raise TypeError(type1, type2)
+                raise TypeError(f"cannot add {type1}, {type2}")
         elif (isinstance(type1, Dict)):
-            raise TypeError(type1, type2)
+            raise TypeError(f"cannot add {type1}, {type2}")
         
         
     
@@ -48,7 +48,7 @@ class InferenceRules:
         if(type1 == Int() or type1 == Bool()):
             return Int()
         else:
-            raise TypeError(type1)
+            raise TypeError(f"cannot perform unary subtraction on {type1}")
     
     
     def Subscript(type1, type2):
@@ -61,16 +61,16 @@ class InferenceRules:
                 # Subscripting a list of <whats>, we should get a <what>.
                 return type1.of_what
             else:
-                raise TypeError(type1, type2)
+                raise TypeError(f"cannot perform subcript: {type1}[{type2}]")
             
         elif(isinstance(type1, Dict)):
             if(type2 == type1.key_type):
                 return type1.value_type
             else:
-                raise TypeError(type1, type2)
+                raise TypeError(f"cannot perform subcript: {type1}[{type2}]")
             
         else:
-            raise TypeError(type1, type2)
+            raise TypeError(f"cannot perform subcript: {type1}[{type2}]")
     
     
     def NotOp(type1):
@@ -95,7 +95,7 @@ class InferenceRules:
         type1 = types[0]
         for t in types[1:]:
             if (t!=type1):
-                raise TypeError(f"Boolean And had conflicting types {type1} & {t}")
+                raise TypeError(f"Boolean And has conflicting types {type1} & {t}")
         return type1
     
     def BoolOr(*types):
@@ -109,7 +109,7 @@ class InferenceRules:
         type1 = types[0]
         for t in types[1:]:
             if (t!=type1):
-                raise TypeError(f"Boolean Or had conflicting types {type1} & {t}")
+                raise TypeError(f"Boolean Or has conflicting types {type1} & {t}")
         return type1
     
     def Equals(type1, type2):
@@ -137,7 +137,7 @@ class InferenceRules:
         if (type1 == type3):
             return type1
         else:
-            return TypeError()
+            raise TypeError(f"If expression has multiple types: {type1}, {type3}")
         
     def IsExpr(type1, type2):
         """

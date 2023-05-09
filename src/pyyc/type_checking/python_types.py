@@ -3,7 +3,7 @@ class Type:
         return type(self) == type(type2)
     
     def __str__(self):
-        return str(type(self))
+        return str(type(self).__name__)
 
 class Dict(Type):
     """ Dictionaries -> {key_type: value_type} """
