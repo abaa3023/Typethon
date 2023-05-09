@@ -193,6 +193,11 @@ pyobj bool_eval(pyobj x) {
       case BOOL_TAG:
           return x;
           break;
+    case BIG_TAG:
+         if(is_true(x))
+          return inject_bool(1);
+         return inject_bool(0);
+         break;
       default:       
           assert(0);
   }
