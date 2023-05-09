@@ -1,1 +1,1 @@
-print([{}] and 2)
+print(bool([{}]) and bool(2))
