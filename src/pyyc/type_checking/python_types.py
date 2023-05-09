@@ -25,8 +25,11 @@ class List(Type):
     def __init__(self, of_what):
         self.of_what = of_what
     
+    # list1 == list2
     def __eq__(self, type2):
         if(type(type2) == List):
+            if(type2.of_what == None or self.of_what == None):
+                return True
             return self.of_what == type2.of_what
         return False
     
