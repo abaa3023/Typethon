@@ -112,6 +112,8 @@ def tree_to_str(flattened_tree,prefix = 0):
                 right_var = gen_new_var("explicate_")
                 explicate_prog.append(assignString(right_var,src.right))
                 
+                # dispatching at compile time
+                # checks if tpe is big, if yes uses runtime add function
                 if((isinstance(src.left.type, List)) or (isinstance(src.left.type, Dict))):
                     if((isinstance(src.right.type, List)) or (isinstance(src.right.type, Dict))):
                         left = 'project_big(' + left_var + ')'
@@ -122,6 +124,8 @@ def tree_to_str(flattened_tree,prefix = 0):
                 else:
                     if((isinstance(src.right.type, List)) or (isinstance(src.right.type, Dict))):
                         pass
+                    # if not big, checks for int or bool type
+                    # adds only of same types
                     else:
                         if(isinstance(src.left.type, Int)):
                             left = gen_new_var("explicate_")
@@ -148,88 +152,14 @@ def tree_to_str(flattened_tree,prefix = 0):
                         statement = assignString(dest,inject_int_str(add_call))
                         append_list_with_prefix(explicate_prog,statement,local_if_count)
                         
-                
-#                 if(isinstance(src.left.type, Int)):
-#                     left = gen_new_var("explicate_")
-#                     left_assn = 'project_int(' + left_var + ')'
-#                     statement = assignString(left,left_assn)
-#                     append_list_with_prefix(explicate_prog,statement,local_if_count)
-#                 if(isinstance(src.right.type, Int)):
-#                     right = gen_new_var("explicate_")
-#                     right_assn = 'project_int(' + right_var + ')'
-#                     statement = assignString(right,right_assn)
-#                     append_list_with_prefix(explicate_prog,statement,local_if_count)
-                
-#                 add_call = left + '+' + right
-#                 statement = assignString(dest,inject_int_str(add_call))
-#                 append_list_with_prefix(explicate_prog,statement,local_if_count)
-
-#                 value = "is_big(" + left_var + ")"
-#                 local_if_count = addif(explicate_prog,value,local_if_count)
-
-#                 value = "is_big(" + right_var + ")"
-#                 local_if_count = addif(explicate_prog,value,local_if_count)
-
-#                 
-
-
-#                 local_if_count = endif(local_if_count)
-
-#                 addelse(explicate_prog,local_if_count)
-
-#                 value = "is_big(" + right_var + ")"
-#                 local_if_count = addif(explicate_prog,value,local_if_count)
-                
-#                 statement = 'error_pyobj(0)'
-#                 append_list_with_prefix(explicate_prog,statement,local_if_count)
-                
-#                 addelse(explicate_prog,local_if_count)
-                
-#                 value = "is_int(" + left_var + ")"
-#                 local_if_count = addif(explicate_prog,value,local_if_count)
-                
-#                 left = gen_new_var("explicate_")
-#                 left_assn = 'project_int(' + left_var + ')'
-#                 statement = assignString(left,left_assn)
-#                 append_list_with_prefix(explicate_prog,statement,local_if_count)
-                
-#                 addelse(explicate_prog,local_if_count)
-                
-#                 left_assn = 'project_bool(' + left_var + ')'
-#                 statement = assignString(left,left_assn)
-#                 append_list_with_prefix(explicate_prog,statement,local_if_count)
-                
-#                 local_if_count = endif(local_if_count)
-                
-#                 value = "is_int(" + right_var + ")"
-#                 local_if_count = addif(explicate_prog,value,local_if_count)
-                
-#                 right = gen_new_var("explicate_")
-#                 right_assn = 'project_int(' + right_var + ')'
-#                 statement = assignString(right,right_assn)
-#                 append_list_with_prefix(explicate_prog,statement,local_if_count)
-                
-#                 addelse(explicate_prog,local_if_count)
-                
-#                 right_assn = 'project_bool(' + right_var + ')'
-#                 statement = assignString(right,right_assn)
-#                 append_list_with_prefix(explicate_prog,statement,local_if_count)
-                
-#                 local_if_count = endif(local_if_count)
-                
-#                 add_call = left + '+' + right
-#                 statement = assignString(dest,inject_int_str(add_call))
-#                 append_list_with_prefix(explicate_prog,statement,local_if_count)
-                
-#                 local_if_count = endif(local_if_count)
-                
-#                 local_if_count = endif(local_if_count)
-                
+            
             elif isinstance(src,UnaryOp) and isinstance(src.op,USub):
                 local_if_count = 0
+                # adds '-' if UnaryOp 
                 if isinstance(src.operand,Constant):
                     explicate_prog.append(assignString(dest,inject_int_str('-' + str(handle_constant(src.operand)))))
-                    
+                
+                # dispatches project_int or project_bool based on variable Type
                 elif isinstance(src.operand,Name):
                     if(isinstance(src.operand.type, Int)):
                         operand = 'project_int(' + src.operand.id + ')'
@@ -241,31 +171,6 @@ def tree_to_str(flattened_tree,prefix = 0):
                         sub_call = '-' + operand
                         statement = assignString(dest,inject_int_str(sub_call))
                         append_list_with_prefix(explicate_prog,statement,local_if_count)
-                        
-                    
-#                     local_if_count = 0
-                    
-#                     value = "is_int(" + src.operand.id + ")"
-#                     local_if_count = addif(explicate_prog,value,local_if_count)
-                    
-#                     operand = 'project_int(' + src.operand.id + ')'
-#                     sub_call = '-' + operand
-#                     statement = assignString(dest,inject_int_str(sub_call))
-#                     append_list_with_prefix(explicate_prog,statement,local_if_count)
-                    
-#                     addelse(explicate_prog,local_if_count)
-                    
-#                     value = "is_bool(" + src.operand.id + ")"
-#                     local_if_count = addif(explicate_prog,value,local_if_count)
-                    
-#                     operand = 'project_bool(' + src.operand.id + ')'
-#                     sub_call = '-' + operand
-#                     statement = assignString(dest,inject_int_str(sub_call))
-#                     append_list_with_prefix(explicate_prog,statement,local_if_count)
-                    
-#                     local_if_count = endif(local_if_count)
-                    
-#                     local_if_count = endif(local_if_count)
                     
 
             
@@ -358,10 +263,6 @@ def tree_to_str(flattened_tree,prefix = 0):
                     arg = gen_new_var("explicate_")
                     explicate_prog.append(assignString(arg,src.args[0]))
                     
-                    # print("src.args[0].type = ", src.args[0].type)
-                    
-                    # print("arg's type = ", src.args[0].type)
-                    
                     print(f"{ast.dump(src.args[0])=}")
                     arg0_type = getattr(src.args[0], 'type', None)
                     
@@ -381,16 +282,12 @@ def tree_to_str(flattened_tree,prefix = 0):
                         append_list_with_prefix(explicate_prog,statement,local_if_count)
                         local_if_count = endif(local_if_count)                        
                     elif(isinstance(arg0_type, Bool)):
-                    # value = "is_bool(" + arg + ")"
-                    # local_if_count = addif(explicate_prog,value,local_if_count)
                     
                         projected_arg = 'project_bool(' + arg + ')'
                         statement = assignString(dest,inject_int_str(projected_arg))
                         append_list_with_prefix(explicate_prog,statement,local_if_count)
                         local_if_count = endif(local_if_count)
                     elif(isinstance(arg0_type, Int)):
-                        # value = "is_int(" + arg + ")"
-                        # local_if_count = addif(explicate_prog,value,local_if_count)
 
                         projected_arg = 'project_int(' + arg + ')'
                         statement = assignString(dest,inject_int_str(projected_arg))
@@ -412,13 +309,10 @@ def tree_to_str(flattened_tree,prefix = 0):
                     elif isinstance(dest, Name):
                         temp_var = dest.id
                     
-                    print("len(src.elts) = ", len(src.elts))
                     for i in range(len(src.elts)):
                         explicate_prog.append(set_subscript_str(temp_var,inject_int_str(i),src.elts[i]))
                     
             elif isinstance(src,ast.Dict):
-                print("Dict enter")
-                print("len(src.keys) = ", len(src.keys))
                 explicate_prog.append(assignString(dest,src))
                 if len(src.keys) > 0:
                     if isinstance(dest, Subscript):
@@ -427,7 +321,6 @@ def tree_to_str(flattened_tree,prefix = 0):
 
                     elif isinstance(dest, Name):
                         temp_var = dest.id
-                    print("temp_var = ", temp_var)
                     for i in range(len(src.keys)):
                         explicate_prog.append(set_subscript_str(temp_var,src.keys[i],src.values[i]))
                             

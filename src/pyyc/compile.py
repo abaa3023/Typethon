@@ -34,6 +34,7 @@ def compile(src_file):
     
     TypeCheck().visit(tree)
     
+    # unifies AnnAssign to Assign
     tree = RemoveAnnAssign().visit(tree)
     
     

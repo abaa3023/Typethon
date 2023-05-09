@@ -2,7 +2,7 @@
 
 import ast
 from ast import *
-
+# add parent to each node
 def add_Parent(tree):
     for node in ast.walk(tree):
         if isinstance(node, Module):
